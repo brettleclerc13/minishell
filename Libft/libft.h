@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 14:44:49 by ehouot            #+#    #+#             */
-/*   Updated: 2023/06/10 15:07:06 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/06/28 18:25:45 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,19 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }					t_list;
+
+typedef struct s_split
+{
+	char	c1;
+	char	c2;
+}				t_split;
+
+typedef struct s_split_count
+{
+	int	j;
+	int	z;
+	int	a;
+}				t_split_count;
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -67,6 +80,7 @@ char	**ft_split(char const *s, char c);
 
 //Adding
 void	ft_error(char *message);
+char	**ft_split_bash(char const *s, char c1, char c2);
 
 //Bonus Part:
 t_list	*ft_lstnew(void *content);

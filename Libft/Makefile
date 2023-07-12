@@ -6,7 +6,7 @@
 #    By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 20:15:35 by ehouot            #+#    #+#              #
-#    Updated: 2023/06/10 14:26:28 by ehouot           ###   ########.fr        #
+#    Updated: 2023/06/28 17:31:09 by ehouot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRC 		= ft_isalpha.c \
 				ft_itoa.c \
 				ft_strtrim.c \
 				ft_split.c \
+				ft_split_bash.c \
 				ft_error.c \
 
 SRC_BONUS	= ft_lstnew.c \

@@ -1,9 +1,14 @@
 LIBFT_PATH	=	./Libft/
-READLINE	=	/Users/ehouot/.brew/opt/readline
+BUILTIN_PATH=	./builtin/
+READLINE	=	/Users/ehouot/.brew/opt
+
+SRC_BUILTIN	=	$(addprefix $(BUILTIN_PATH), built_exit.c \
+ 					)
 
 SRC 		= 	./main.c \
+				./parsing.c \
 
-OBJ		= ${SRC:.c=.o}
+OBJ		= ${SRC:.c=.o} ${SRC_BUILTIN:.c=.o}
 
 HEADER		= ./
 
@@ -32,7 +37,7 @@ debug:
 	${MAKE} DEBUG=1
 
 clean:
-			@$(RM) $(OBJ) $(OBJ)
+			@$(RM) $(OBJ)
 			@${MAKE} clean -C ${LIBFT_PATH}
 
 fclean: 	clean
