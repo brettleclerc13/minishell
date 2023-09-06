@@ -7,6 +7,7 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
 /*   Updated: 2023/06/27 13:46:40 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/07/10 08:41:48 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +30,32 @@
 
 # include "./Libft/libft.h"
 
+typedef struct s_lex
+{
+	char	*content;
+	int		token;
+	void	*next;
+}				t_lex;
+
+enum	e_token
+{
+	WORD,
+	STRING,
+	LEFT_CHEV,
+	RIGHT_CHEV,
+	DOUBLE_L_CHEV,
+	DOUBLE_R_CHEV,
+	PIPE,
+	COMMENT,
+};
+
 /* -- MINISHELL -- */
 
 int		main(int argc, char **argv, char **envp);
+void	parsing(char *input);
+
+/* -- BUILTIN -- */
+
+void	ft_exit(void);
 
 #endif
