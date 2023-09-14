@@ -6,10 +6,10 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/06/27 13:46:40 by ehouot           ###   ########.fr       */
-/*   Updated: 2023/07/10 08:41:48 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/09/13 10:33:16 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -51,7 +51,6 @@ enum	e_token
 
 /* -- MINISHELL -- */
 
-int		main(int argc, char **argv, char **envp);
 void	parsing(char *input);
 
 /* -- BUILTIN -- */
