@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:15:00 by ehouot            #+#    #+#             */
-/*   Updated: 2023/09/15 00:50:08 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/09/19 10:37:30 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ char	**ft_split_bash(char const *s, char c1, char c2)
 	while (i < nb_words)
 	{
 		dest[i] = malloc (ft_count_size(s, c1, c2, i) + 1);
-		if (!dest)
+		if (!dest[i])
 			ft_error("Malloc problem");
 		dest[i] = ft_fill(dest[i], s, c, i);
 		i++;

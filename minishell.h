@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/09/13 10:33:16 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/09/20 06:45:06 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ enum	e_token
 {
 	WORD,
 	STRING,
+	FUNCTION,
 	LEFT_CHEV,
 	RIGHT_CHEV,
 	DOUBLE_L_CHEV,
@@ -52,6 +53,12 @@ enum	e_token
 /* -- MINISHELL -- */
 
 void	parsing(char *input);
+
+/* -- LEXER -- */
+
+t_lex	*lexer(char **args, t_lex *list);
+t_lex	*ft_lstnew_lex(void *content);
+void	ft_lstadd_back_lex(t_lex **lst, t_lex *new);
 
 /* -- BUILTIN -- */
 
