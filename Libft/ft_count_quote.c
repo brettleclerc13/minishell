@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_count_quote.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/27 15:34:36 by ehouot            #+#    #+#             */
-/*   Updated: 2023/09/22 18:19:24 by ehouot           ###   ########.fr       */
+/*   Created: 2023/09/15 00:31:48 by ehouot            #+#    #+#             */
+/*   Updated: 2023/09/15 00:32:08 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	parsing(char *input)
+void	ft_count_quote(char const *s)
 {
-	char	**arguments;
-	t_lex	*list;
-	int		i;
+	int	i;
+	int	cpt;
 
-	i = 0;
-	list = NULL;
-	arguments = ft_split_bash(input, ' ', '	');
-	list = lexer(arguments, list);
-	while (list)
+	i = -1;
+	cpt = 0;
+	while (s[++i])
 	{
-		i++;
-		printf("list[%d] : %s \n", i, list->content);
-		list = list->next;
+		if (s[i] == '"')
+			cpt++;
 	}
-	// while (*arguments) 
-	// {
-    // 	free(*arguments);
-    // 	arguments++;
-	// }
-	// free(arguments);
+	if (cpt % 2 != 0)
+		ft_error("simple \" is not supported");
 }

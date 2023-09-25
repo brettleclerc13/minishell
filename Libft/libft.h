@@ -6,10 +6,10 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 14:44:49 by ehouot            #+#    #+#             */
-/*   Updated: 2023/06/10 15:07:06 by ehouot           ###   ########.fr       */
-/*   Updated: 2023/06/28 18:25:45 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/09/18 13:09:09 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef LIBFT_H
 # define LIBFT_H
@@ -22,6 +22,7 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <errno.h>
+# include <stdint.h>
 
 typedef struct s_list
 {
@@ -37,9 +38,9 @@ typedef struct s_split
 
 typedef struct s_split_count
 {
-	int	j;
-	int	z;
-	int	a;
+	int	char_num;
+	int	size;
+	int	index;
 }				t_split_count;
 
 int		ft_isalpha(int c);
@@ -82,6 +83,7 @@ char	**ft_split(char const *s, char c);
 //Adding
 void	ft_error(char *message);
 char	**ft_split_bash(char const *s, char c1, char c2);
+void	ft_count_quote(char const *s); // Usefull for ft_split_bash
 
 //Bonus Part:
 t_list	*ft_lstnew(void *content);

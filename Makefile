@@ -1,18 +1,20 @@
 LIBFT_PATH	=	./Libft/
 BUILTIN_PATH=	./builtin/
-READLINE	=	/Users/ehouot/.brew/opt
+READLINE	=	/usr/include/readline
 
 SRC_BUILTIN	=	$(addprefix $(BUILTIN_PATH), built_exit.c \
  					)
 
 SRC 		= 	./main.c \
 				./parsing.c \
+				./lexer.c \
+				./ft_lst_utils_lex.c \
 
 OBJ		= ${SRC:.c=.o} ${SRC_BUILTIN:.c=.o}
 
 HEADER		= ./
 
-CC 			= gcc
+CC 			= clang
 
 RM 			= rm -f
 
@@ -31,7 +33,7 @@ all:		$(NAME)
 
 $(NAME):	$(OBJ)
 			@${MAKE} -C ${LIBFT_PATH}
-			@$(CC) $(CFLAGS) $(OBJ) -L ${READLINE} -lreadline ${LIBFT_PATH}libft.a -I $(HEADER) -o $(NAME)
+			@$(CC) $(CFLAGS) $(OBJ) ${LIBFT_PATH}libft.a -L ${READLINE} -lreadline -I $(HEADER) -o $(NAME)
 
 debug:
 	${MAKE} DEBUG=1
