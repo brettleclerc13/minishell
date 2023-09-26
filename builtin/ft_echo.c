@@ -6,18 +6,12 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 18:10:35 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/09/26 10:37:07 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/09/26 16:35:11 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //#include "minishell.h"
-#include <stdbool.h>
-#include <stdarg.h>
-#include <stdio.h>
-
-typedef int bool;
-#define true 1
-#define false 0
+#include "builtin.h"
 
 static bool is_newline(char **argv, int *i)
 {
@@ -52,12 +46,5 @@ int	ft_echo(char **argv)
 	}
 	if (newline == false)
 		printf("\n");
-	return (0);
-}
-
-int	main(int argc, char **argv)
-{
-	if (argc > 1)
-		ft_echo(argv);
 	return (0);
 }
