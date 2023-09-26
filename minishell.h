@@ -6,7 +6,11 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/09/25 18:47:04 by brettlecler      ###   ########.fr       */
+=======
+/*   Updated: 2023/09/26 12:38:34 by ehouot           ###   ########.fr       */
+>>>>>>> refs/remotes/origin/main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +34,6 @@
 
 # include "./Libft/libft.h"
 
-typedef struct s_lex
-{
-	char	*content;
-	int		token;
-	void	*next;
-}				t_lex;
-
 enum	e_token
 {
 	WORD,
@@ -47,8 +44,15 @@ enum	e_token
 	DOUBLE_L_CHEV,
 	DOUBLE_R_CHEV,
 	PIPE,
-	COMMENT,
+	DOLLAR,
 };
+
+typedef struct s_lex
+{
+	char			*content;
+	enum e_token	token;
+	void			*next;
+}				t_lex;
 
 /* -- MINISHELL -- */
 
@@ -56,7 +60,8 @@ void	parsing(char *input);
 
 /* -- LEXER -- */
 
-t_lex	*lexer(char **args, t_lex *list);
+void	*lexer(char **args, t_lex **list);
+bool	lex_dollar(char **args, t_lex **list, int *i);
 t_lex	*ft_lstnew_lex(void *content);
 void	ft_lstadd_back_lex(t_lex **lst, t_lex *new);
 
@@ -64,5 +69,9 @@ void	ft_lstadd_back_lex(t_lex **lst, t_lex *new);
 
 void	ft_exit(void);
 int		ft_echo(char **argv);
+
+/* -- DEBUGGING -- */
+
+void    print_list(t_lex *list);
 
 #endif

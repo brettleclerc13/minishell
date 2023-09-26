@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   lexer_plus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/27 15:34:36 by ehouot            #+#    #+#             */
-/*   Updated: 2023/09/26 12:06:09 by ehouot           ###   ########.fr       */
+/*   Created: 2023/09/25 19:07:30 by ehouot            #+#    #+#             */
+/*   Updated: 2023/09/26 13:03:30 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	parsing(char *input)
+bool	lex_dollar(char **args, t_lex **list, int *i)
 {
-	char	**arguments;
-	t_lex	*list;
-	t_lex	*tmp;
+	t_lex	*new;
 
-	list = NULL;
-	tmp = list;
-	arguments = ft_split_bash(input, ' ', '	');
-	lexer(arguments, &list);
-	print_list(list);
-	// while (*arguments)
-	// {
-    // 	free(*arguments);
-    // 	arguments++;
-	// }
-	// free(arguments);
+	if (args[*i][0] == '$')
+	{
+		new = ft_lstnew_lex(args[*i]);
+		ft_lstadd_back_lex(list, new);
+		(*list)->token = DOLLAR;
+		(*i)++;
+		return (true);
+	}
+	return (false);
 }

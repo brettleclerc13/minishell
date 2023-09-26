@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   help_function.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/27 15:34:36 by ehouot            #+#    #+#             */
-/*   Updated: 2023/09/26 12:06:09 by ehouot           ###   ########.fr       */
+/*   Created: 2023/09/26 12:01:13 by ehouot            #+#    #+#             */
+/*   Updated: 2023/09/26 12:04:05 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	parsing(char *input)
-{
-	char	**arguments;
-	t_lex	*list;
-	t_lex	*tmp;
+// HELPING FUNCTION FOR DEBUGGING //
 
-	list = NULL;
-	tmp = list;
-	arguments = ft_split_bash(input, ' ', '	');
-	lexer(arguments, &list);
-	print_list(list);
-	// while (*arguments)
-	// {
-    // 	free(*arguments);
-    // 	arguments++;
-	// }
-	// free(arguments);
+void    print_list(t_lex *list)
+{
+	int i;
+
+	i = -1;
+	while (list)
+	{
+		i++;
+		printf("list[%d] : %s \n", i, list->content);
+		list = list->next;
+	}
 }
