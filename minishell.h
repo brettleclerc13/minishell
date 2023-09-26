@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/09/20 06:45:06 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/09/26 12:38:34 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,6 @@
 
 # include "./Libft/libft.h"
 
-typedef struct s_lex
-{
-	char	*content;
-	int		token;
-	void	*next;
-}				t_lex;
-
 enum	e_token
 {
 	WORD,
@@ -47,8 +40,15 @@ enum	e_token
 	DOUBLE_L_CHEV,
 	DOUBLE_R_CHEV,
 	PIPE,
-	COMMENT,
+	DOLLAR,
 };
+
+typedef struct s_lex
+{
+	char			*content;
+	enum e_token	token;
+	void			*next;
+}				t_lex;
 
 /* -- MINISHELL -- */
 
@@ -56,12 +56,17 @@ void	parsing(char *input);
 
 /* -- LEXER -- */
 
-t_lex	*lexer(char **args, t_lex *list);
+void	*lexer(char **args, t_lex **list);
+bool	lex_dollar(char **args, t_lex **list, int *i);
 t_lex	*ft_lstnew_lex(void *content);
 void	ft_lstadd_back_lex(t_lex **lst, t_lex *new);
 
 /* -- BUILTIN -- */
 
 void	ft_exit(void);
+
+/* -- DEBUGGING -- */
+
+void    print_list(t_lex *list);
 
 #endif
