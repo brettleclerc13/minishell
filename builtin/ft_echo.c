@@ -6,14 +6,18 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 18:10:35 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/09/25 19:12:50 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/09/26 10:37:07 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //#include "minishell.h"
-# include <stdbool.h>
-# include <stdarg.h>
-# include <stdio.h>
+#include <stdbool.h>
+#include <stdarg.h>
+#include <stdio.h>
+
+typedef int bool;
+#define true 1
+#define false 0
 
 static bool is_newline(char **argv, int *i)
 {
