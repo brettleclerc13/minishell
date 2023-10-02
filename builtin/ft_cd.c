@@ -6,25 +6,12 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:53:41 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/02 11:51:54 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/02 19:06:08 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //#include "minishell.h"
 #include "builtin.h"
-
-char	*get_env_value(char *var, char **envp)
-{
-	int	i;
-	int	str_len;
-	
-	i = -1;
-	str_len = ft_strlen(var);
-	while (envp[++i])
-		if (!ft_strncmp(envp[i], var, str_len))
-			return (envp[i] + str_len + 1);
-	return (NULL);
-}
 
 int	ft_cd_contd(char *dir, char *cwd, char **envp)
 {
@@ -35,9 +22,13 @@ int	ft_cd_contd(char *dir, char *cwd, char **envp)
 		return (1);
 	}
 	if (!get_env_value("OLD_PWD=", envp))
+	{
 		add_env_value("OLD_PWD=", cwd, envp);
+	}
 	else
+	{
 		update_env_value("OLD_PWD=", cwd, envp);
+	}
 	update_env_value("PWD=", dir, envp);
 	return (0);
 }
@@ -56,6 +47,7 @@ int	ft_cd(int argc, char **argv, char **envp)
 	if (argc == 2)
 	{
 		dir = get_env_value("HOME=", envp);
+		printf("dir: %s\n", dir);
 		if (!dir)
 		{
 			ft_putstr_fd("cd: Home directory not listed in env\n", 2);

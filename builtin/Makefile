@@ -2,6 +2,7 @@ LIBFT_PATH =../Libft/
 
 SRC =		./main.c \
 	  		./ft_cd.c \
+			./envp.c \
 	  		./ft_echo.c
 
 OBJ =		$(SRC:.c=.o)
