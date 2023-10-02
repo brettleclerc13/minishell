@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 13:45:40 by ehouot            #+#    #+#             */
-/*   Updated: 2023/09/26 14:06:03 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/10/02 09:22:32 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static bool	lex_string(char **args, t_lex **list, int *i, int j)
 	return (false);
 }
 
-void	*lexer(char **args, t_lex **list)
+void	*lexer(char **args, char **envp, t_lex **list)
 {
 	int		i;
 	int		j;
@@ -96,6 +96,7 @@ void	*lexer(char **args, t_lex **list)
 
 	i = 0;
 	tmp = *list;
+	(void)envp;
 	while (args[i])
 	{
 		j = 0;

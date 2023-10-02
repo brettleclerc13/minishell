@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/09/25 18:47:04 by brettlecler      ###   ########.fr       */
-=======
-/*   Updated: 2023/09/26 12:38:34 by ehouot           ###   ########.fr       */
->>>>>>> refs/remotes/origin/main
+/*   Updated: 2023/10/02 11:01:13 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +52,18 @@ typedef struct s_lex
 
 /* -- MINISHELL -- */
 
-void	parsing(char *input);
+void	parsing(char *input, char **envp);
 
 /* -- LEXER -- */
 
-void	*lexer(char **args, t_lex **list);
+void	*lexer(char **args, char **envp, t_lex **list);
 bool	lex_dollar(char **args, t_lex **list, int *i);
 t_lex	*ft_lstnew_lex(void *content);
 void	ft_lstadd_back_lex(t_lex **lst, t_lex *new);
+
+/* -- LEXER -- */
+
+void	parser(t_lex **list);
 
 /* -- BUILTIN -- */
 
@@ -73,5 +73,7 @@ int		ft_echo(char **argv);
 /* -- DEBUGGING -- */
 
 void    print_list(t_lex *list);
+void    print_token(t_lex *list);
+
 
 #endif

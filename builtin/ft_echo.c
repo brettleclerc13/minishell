@@ -3,21 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 18:10:35 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/09/26 10:37:07 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/02 09:23:21 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "minishell.h"
-#include <stdbool.h>
-#include <stdarg.h>
-#include <stdio.h>
-
-typedef int bool;
-#define true 1
-#define false 0
+#include "minishell.h"
 
 static bool is_newline(char **argv, int *i)
 {
@@ -52,12 +45,5 @@ int	ft_echo(char **argv)
 	}
 	if (newline == false)
 		printf("\n");
-	return (0);
-}
-
-int	main(int argc, char **argv)
-{
-	if (argc > 1)
-		ft_echo(argv);
 	return (0);
 }

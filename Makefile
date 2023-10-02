@@ -3,6 +3,7 @@ BUILTIN_PATH=	./builtin/
 READLINE	=	/usr/include/readline
 
 SRC_BUILTIN	=	$(addprefix $(BUILTIN_PATH), built_exit.c \
+					ft_echo.c \
  					)
 
 SRC 		= 	./main.c \
@@ -11,6 +12,7 @@ SRC 		= 	./main.c \
 				./lexer_plus.c \
 				./ft_lst_utils_lex.c \
 				./help_function.c \
+				./parser.c \
 
 OBJ		= ${SRC:.c=.o} ${SRC_BUILTIN:.c=.o}
 
