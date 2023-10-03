@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/02 11:01:13 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/10/02 12:19:28 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	ft_lstadd_back_lex(t_lex **lst, t_lex *new);
 
 /* -- LEXER -- */
 
-void	parser(t_lex **list);
+void	parser(t_lex **list, char **envp);
 
 /* -- BUILTIN -- */
 
