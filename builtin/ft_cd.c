@@ -6,34 +6,38 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:53:41 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/02 19:06:08 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/03 11:20:33 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //#include "minishell.h"
 #include "builtin.h"
 
-int	ft_cd_contd(char *dir, char *cwd, char **envp)
+int	ft_cd_contd(char *dir, char *cwd, t_struct *mshell)
 {
+	int	i;
+
+	i = -1;
 	if (chdir(dir))
 	{
 		ft_putstr_fd("cd error: ", 2);
 		perror(dir);
 		return (1);
 	}
-	if (!get_env_value("OLD_PWD=", envp))
-	{
-		add_env_value("OLD_PWD=", cwd, envp);
-	}
+	if (!get_env_value("OLD_PWD=", mshell->envp))
+		mshell->envp = add_env_value("OLD_PWD=", cwd, mshell->envp);
 	else
-	{
-		update_env_value("OLD_PWD=", cwd, envp);
-	}
-	update_env_value("PWD=", dir, envp);
+		update_env_value("OLDPWD=", cwd, mshell->envp);
+	printf("dir: %s\n", dir);
+	update_env_value("PWD=", dir, mshell->envp);
+	printf("\033[0;32m__________________\033[0m\n");
+	printf("\033[0;32m__________________\033[0m\n");
+	while (mshell->envp[++i] && mshell->envp)
+		printf("%s\n", mshell->envp[i]);
 	return (0);
 }
 
-int	ft_cd(int argc, char **argv, char **envp)
+int	ft_cd(int argc, char **argv, t_struct *mshell)
 {
 	char	*dir;
 	char	cwd[PATH_MAX];
@@ -46,8 +50,7 @@ int	ft_cd(int argc, char **argv, char **envp)
 	}
 	if (argc == 2)
 	{
-		dir = get_env_value("HOME=", envp);
-		printf("dir: %s\n", dir);
+		dir = ft_strdup(get_env_value("HOME=", mshell->envp));
 		if (!dir)
 		{
 			ft_putstr_fd("cd: Home directory not listed in env\n", 2);
@@ -56,7 +59,7 @@ int	ft_cd(int argc, char **argv, char **envp)
 	}
 	else
 		dir = argv[2];
-	if (ft_cd_contd(dir, cwd, envp))
+	if (ft_cd_contd(dir, cwd, mshell))
 		return (1);
 	return (0);
 }

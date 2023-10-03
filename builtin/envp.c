@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 17:01:46 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/02 19:14:41 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/03 10:54:55 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	ft_arrayfree(char **array)
 	while (array[++i])
 		free(array[i]);
 	free(array);
-	printf("Checkfree\n");
 }
 
 char	**ft_arrayadd(char *newline, char **array)
@@ -30,15 +29,15 @@ char	**ft_arrayadd(char *newline, char **array)
 	char **tmp;
 	int	i;
 
+	if (!array)
+		return (NULL);
 	i = -1;
 	tmp = ft_calloc(ft_arraylen(array) + 2, sizeof(char *));
 	if (!tmp)
 		return (NULL);
-	while (array[++i] && array)
+	while (array[++i])
 		tmp[i] = ft_strdup(array[i]);
-	tmp[i++] = ft_strdup(newline);
-	tmp[i] = "\0";
-	printf("Checkadd\n");
+	tmp[i] = ft_strdup(newline);
 	return (tmp);
 }
 
@@ -58,7 +57,7 @@ char	**ft_arraydup(char **array)
 	int	i;
 
 	i = -1;
-	tmp = ft_calloc(ft_arraylen(array), sizeof(char *));
+	tmp = ft_calloc(ft_arraylen(array) + 1, sizeof(char *));
 	if (!tmp)
 		return (NULL);
 	while (array[++i] && array)

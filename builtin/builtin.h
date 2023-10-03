@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 15:58:50 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/02 17:58:46 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/03 11:11:28 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,15 @@
 
 # include "../Libft/libft.h"
 
+typedef struct	s_struct
+{
+	char		**envp;
+}	t_struct;
+
 /*BULTINS*/
 int		ft_echo(char **argv);
-int		ft_cd(int argc, char **argv, char **envp);
-int		ft_cd_contd(char *dir, char *cwd, char **envp);
+int		ft_cd(int argc, char **argv, t_struct *mshell);
+int		ft_cd_contd(char *dir, char *cwd, t_struct *mshell);
 
 /*ENVP MANIPULATIONS*/
 char	**add_env_value(char *var, char *value, char **envp);

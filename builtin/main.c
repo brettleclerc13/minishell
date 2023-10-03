@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 16:00:23 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/02 19:13:50 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/03 11:09:34 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,20 @@
 //cd main
 int	main(int argc, char **argv, char **envp)
 {
-	int		i;
-	char	**tmp_envp;
+	t_struct	mshell;
+	int			i;
 
-	i = -1;
-	tmp_envp = ft_arraydup(envp);
-	printf("array len: %d\n", ft_arraylen(tmp_envp));
-	ft_cd(argc, argv, tmp_envp);
-	while (tmp_envp[++i])
-		printf("%s\n", tmp_envp[i]);
+	i = 0;
+	mshell.envp = ft_arraydup(envp);
+	printf("\033[0;32m__________________\033[0m\n");
+	printf("\033[0;32m__________________\033[0m\n");
+	ft_cd(argc, argv, &mshell);
+	printf("\033[0;32m__________________\033[0m\n");
+	printf("\033[0;32m__________________\033[0m\n");
+	while (mshell.envp[i] && mshell.envp)
+	{
+		printf("%s\n", mshell.envp[i]);
+		i++;
+	}
 	return (0);
 }
