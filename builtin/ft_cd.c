@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:53:41 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/03 11:20:33 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/03 14:36:17 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,20 @@
 
 int	ft_cd_contd(char *dir, char *cwd, t_struct *mshell)
 {
-	int	i;
-
-	i = -1;
 	if (chdir(dir))
 	{
 		ft_putstr_fd("cd error: ", 2);
 		perror(dir);
+		free(dir);
 		return (1);
 	}
-	if (!get_env_value("OLD_PWD=", mshell->envp))
-		mshell->envp = add_env_value("OLD_PWD=", cwd, mshell->envp);
+	if (!get_env_value("OLDPWD=", mshell->envp))
+		mshell->envp = add_env_value("OLDPWD=", cwd, mshell->envp);
 	else
 		update_env_value("OLDPWD=", cwd, mshell->envp);
 	printf("dir: %s\n", dir);
 	update_env_value("PWD=", dir, mshell->envp);
-	printf("\033[0;32m__________________\033[0m\n");
-	printf("\033[0;32m__________________\033[0m\n");
-	while (mshell->envp[++i] && mshell->envp)
-		printf("%s\n", mshell->envp[i]);
+	free(dir);
 	return (0);
 }
 
@@ -58,7 +53,7 @@ int	ft_cd(int argc, char **argv, t_struct *mshell)
 		}
 	}
 	else
-		dir = argv[2];
+		dir = ft_strdup(argv[2]);
 	if (ft_cd_contd(dir, cwd, mshell))
 		return (1);
 	return (0);

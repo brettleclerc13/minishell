@@ -6,11 +6,18 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 17:01:46 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/03 10:54:55 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/04 17:54:59 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
+
+void	ft_update_shlvl(char **envp)
+{
+	int	i;
+
+	
+}
 
 void	ft_arrayfree(char **array)
 {
