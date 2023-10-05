@@ -1,4 +1,5 @@
 LIBFT_PATH	=	./Libft/
+PIPEX_PATH	=	./pipex/
 BUILTIN_PATH=	./builtin/
 READLINE	=	/usr/include/readline
 

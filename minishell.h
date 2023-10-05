@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/02 12:19:28 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/10/05 12:39:32 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # include <readline/history.h>
 
 # include "./Libft/libft.h"
+# include "./pipex/pipex_bonus.h"
 
 enum	e_token
 {

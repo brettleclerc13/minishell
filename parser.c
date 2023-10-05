@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:17:25 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/02 15:26:46 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/10/04 16:54:56 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,23 @@ static bool	check_dollar(t_lex **list, char **envp)
 void	parser(t_lex **list, char **envp)
 {
 	t_lex	*tmp;
+	bool	pipe;
 
+	pipe = false;
 	tmp = (*list);
 	while (list)
 	{
+		if ((*list)->token  == WORD | (*list)->token == FUNCTION)
+		{
+			if ((*list)->)
+		}
+		if ((*list)->content == '|')
+		{
+			list = (*list)->next;
+			if (list->content == '|')
+			
+		}
+			
 		if ((*list)->token == WORD | (*list)->token == STRING | (*list)->token == DOLLAR)
 			check_dollar(list, envp);
 		list = (*list)->next;
