@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 15:58:50 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/03 11:11:28 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/06 08:45:21 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef struct	s_struct
 int		ft_echo(char **argv);
 int		ft_cd(int argc, char **argv, t_struct *mshell);
 int		ft_cd_contd(char *dir, char *cwd, t_struct *mshell);
+int		ft_pwd(void);
+int		ft_env(t_struct *mshell);
 
 /*ENVP MANIPULATIONS*/
 char	**add_env_value(char *var, char *value, char **envp);
@@ -42,5 +44,6 @@ char	**ft_arraydup(char **array);
 int		ft_arraylen(char **array);
 char	**ft_arrayadd(char *newline, char **array);
 void	ft_arrayfree(char **array);
+int		ft_update_shlvl(t_struct *mshell);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:53:41 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/03 14:36:17 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/06 08:44:30 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	ft_cd_contd(char *dir, char *cwd, t_struct *mshell)
 		mshell->envp = add_env_value("OLDPWD=", cwd, mshell->envp);
 	else
 		update_env_value("OLDPWD=", cwd, mshell->envp);
-	printf("dir: %s\n", dir);
 	update_env_value("PWD=", dir, mshell->envp);
 	free(dir);
 	return (0);

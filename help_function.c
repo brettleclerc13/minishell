@@ -1,38 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   help_function.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 14:39:24 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/02 11:53:51 by ehouot           ###   ########.fr       */
+/*   Created: 2023/09/26 12:01:13 by ehouot            #+#    #+#             */
+/*   Updated: 2023/10/02 11:01:52 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "minishell.h"
 
-int	main(int argc, char **argv, char **envp)
-{
-	char	*input;
-	
+// HELPING FUNCTION FOR DEBUGGING //
 
-	(void)argv;
-	if (argc == 1)
+void    print_list(t_lex *list)
+{
+	int i;
+
+	i = -1;
+	while (list)
 	{
-		while (1)
-		{
-			input = readline(COLOR_PROMPT COLOR_RESET"$ ");
-			if (input == NULL)
-				break ;
-			parsing(input, envp);
-			add_history(input);
-			free(input);
-		}
+		i++;
+		printf("list[%d] : %s \n", i, list->content);
+		list = list->next;
 	}
-	return (0);
 }
 
-// if (ft_strncmp(input, "exit", 5) == 0)
-				// ft_exit();
+void    print_token(t_lex *list)
+{
+	int i;
+
+	i = -1;
+	while (list)
+	{
+		i++;
+		printf("list[%d] : %u \n", i, list->token);
+		list = list->next;
+	}
+}

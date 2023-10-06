@@ -1,38 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   lexer_plus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 14:39:24 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/02 11:53:51 by ehouot           ###   ########.fr       */
+/*   Created: 2023/09/25 19:07:30 by ehouot            #+#    #+#             */
+/*   Updated: 2023/09/28 16:15:02 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+bool	lex_dollar(char **args, t_lex **list, int *i)
 {
-	char	*input;
-	
+	t_lex	*new;
 
-	(void)argv;
-	if (argc == 1)
+	if (args[*i][0] == '$')
 	{
-		while (1)
-		{
-			input = readline(COLOR_PROMPT COLOR_RESET"$ ");
-			if (input == NULL)
-				break ;
-			parsing(input, envp);
-			add_history(input);
-			free(input);
-		}
+		new = ft_lstnew_lex(args[*i]);
+		ft_lstadd_back_lex(list, new);
+		(*list)->token = DOLLAR;
+		(*i)++;
+		return (true);
 	}
-	return (0);
+	return (false);
 }
-
-// if (ft_strncmp(input, "exit", 5) == 0)
-				// ft_exit();

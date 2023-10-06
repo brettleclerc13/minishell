@@ -6,17 +6,39 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 17:01:46 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/04 17:54:59 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/06 08:43:24 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
-void	ft_update_shlvl(char **envp)
+int	ft_env(t_struct *mshell)
 {
 	int	i;
 
-	
+	i = -1;
+	if (!mshell->envp)
+	{
+		ft_putstr_fd("env: env not found", 2);
+		return (1);
+	}
+	while (mshell->envp[++i])
+		printf("%s\n", mshell->envp[i]);
+	return (0);
+}
+
+int	ft_update_shlvl(t_struct *mshell)
+{
+	char	*shlvl;
+
+	shlvl = get_env_value("SHLVL=", mshell->envp);
+	if (!shlvl)
+	{
+		ft_putstr_fd("env: Cannot retrieve shlvl in env", 2);
+		return (1);
+	}
+	update_env_value("SHLVL=", ft_itoa(ft_atoi(shlvl) + 1), mshell->envp);
+	return (0);	
 }
 
 void	ft_arrayfree(char **array)

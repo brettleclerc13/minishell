@@ -6,29 +6,26 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 15:34:36 by ehouot            #+#    #+#             */
-/*   Updated: 2023/09/22 18:19:24 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/10/02 12:22:59 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	parsing(char *input)
+void	parsing(char *input, char **envp)
 {
 	char	**arguments;
 	t_lex	*list;
-	int		i;
+	t_lex	*tmp;
 
-	i = 0;
 	list = NULL;
+	tmp = list;
 	arguments = ft_split_bash(input, ' ', '	');
-	list = lexer(arguments, list);
-	while (list)
-	{
-		i++;
-		printf("list[%d] : %s \n", i, list->content);
-		list = list->next;
-	}
-	// while (*arguments) 
+	lexer(arguments, envp, &list);
+	print_list(list);
+	parser(&list, envp);
+	print_list(list);
+	// while (*arguments)
 	// {
     // 	free(*arguments);
     // 	arguments++;
