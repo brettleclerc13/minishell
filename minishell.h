@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/05 12:39:32 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/10/06 16:23:18 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,15 @@
 # include <readline/history.h>
 
 # include "./Libft/libft.h"
-# include "./pipex/pipex_bonus.h"
+# include "./builtin/builtin.h"
+//# include "./pipex/pipex_bonus.h"
 
 enum	e_token
 {
 	WORD,
 	STRING,
 	FUNCTION,
+	BUILTIN,
 	LEFT_CHEV,
 	RIGHT_CHEV,
 	DOUBLE_L_CHEV,

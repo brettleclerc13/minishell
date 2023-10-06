@@ -1,5 +1,3 @@
-LIBFT_PATH =../Libft/
-
 SRC =		./main.c \
 	  		./ft_cd.c \
 			./envp.c \
@@ -8,7 +6,7 @@ SRC =		./main.c \
 
 OBJ =		$(SRC:.c=.o)
 
-NAME =		builtin
+NAME =		builtin.a
 
 HEADERS =	./
 
@@ -20,16 +18,13 @@ all:		$(NAME)
 			gcc $(FLAGS) -I $(HEADERS) -c $< -o $(<:.c=.o)
 
 $(NAME):	$(OBJ)
-			@${MAKE} -C ${LIBFT_PATH}
-			gcc $(OBJ) $(FLAGS) ${LIBFT_PATH}libft.a -I $(HEADERS) -o $(NAME)
+			ar rcs $(NAME) $(OBJ)
 
 clean:
 			rm -f $(OBJ)
-			@${MAKE} clean -C ${LIBFT_PATH}
 
 fclean:		clean
 			rm -f $(NAME)
-			@$(RM) $(NAME) ${LIBFT_PATH}libft.a
 
 re:			fclean all
 

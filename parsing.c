@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 15:34:36 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/02 12:22:59 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/10/06 09:14:11 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	parsing(char *input, char **envp)
 {
 	char	**arguments;
 	t_lex	*list;
-	t_lex	*tmp;
+	//t_lex	*tmp;
 
 	list = NULL;
-	tmp = list;
+	//tmp = list;
 	arguments = ft_split_bash(input, ' ', '	');
 	lexer(arguments, envp, &list);
 	print_list(list);

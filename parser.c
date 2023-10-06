@@ -3,34 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:17:25 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/04 16:54:56 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/10/06 09:29:53 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*get_env_value(char *var, char **envp)
-{
-	int	i;
-	int	str_len;
-
-	i = -1;
-	str_len = ft_strlen(var);
-	while (envp[++i])
-		if (!ft_strncmp(envp[i], var, str_len))
-			return (envp[i] + str_len + 1);
-	return (NULL);
-}
-
 static bool	check_dollar(t_lex **list, char **envp)
 {
-	int		i;
 	char	*str;
 
-	i = -1;
 	str = ft_strchr((*list)->content, '$');
 	if (!str)
 		return (false);
@@ -42,14 +27,14 @@ static bool	check_dollar(t_lex **list, char **envp)
 
 void	parser(t_lex **list, char **envp)
 {
-	t_lex	*tmp;
+	/*t_lex	*tmp;
 	bool	pipe;
 
 	pipe = false;
-	tmp = (*list);
+	tmp = (*list);*/
 	while (list)
 	{
-		if ((*list)->token  == WORD | (*list)->token == FUNCTION)
+		/*if ((*list)->token  == WORD | (*list)->token == FUNCTION)
 		{
 			if ((*list)->)
 		}
@@ -58,8 +43,7 @@ void	parser(t_lex **list, char **envp)
 			list = (*list)->next;
 			if (list->content == '|')
 			
-		}
-			
+		}*/
 		if ((*list)->token == WORD | (*list)->token == STRING | (*list)->token == DOLLAR)
 			check_dollar(list, envp);
 		list = (*list)->next;

@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 15:58:50 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/06 08:45:21 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/06 09:28:36 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define false 0
 
 # include "../Libft/libft.h"
+# include "../minishell.h"
 
 typedef struct	s_struct
 {
