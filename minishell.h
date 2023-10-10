@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/10 10:19:25 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/10 11:55:02 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,24 @@
 
 enum	e_token
 {
+	DOUBLE_L_CHEV,
+	DOUBLE_R_CHEV,
+	LEFT_CHEV,
+	RIGHT_CHEV,
+	PIPE,
+	SINGLE_QUOTE,
+	DOUBLE_QUOTE,
 	WORD,
 	STRING,
 	FUNCTION,
-	BUILTIN,
-	LEFT_CHEV,
-	RIGHT_CHEV,
-	DOUBLE_L_CHEV,
-	DOUBLE_R_CHEV,
-	PIPE,
 	DOLLAR,
 };
+
+typedef struct	s_separator
+{
+	char	*str;
+	int		num;
+}				t_sep;
 
 typedef struct s_lex
 {
@@ -63,8 +70,9 @@ void	*lexer(char **args, char **envp, t_lex **list);
 bool	lex_dollar(char **args, t_lex **list, int *i);
 t_lex	*ft_lstnew_lex(void *content);
 void	ft_lstadd_back_lex(t_lex **lst, t_lex *new);
+int		ft_split_word(char *args, t_lex **list);
 
-/* -- LEXER -- */
+/* -- PARSER -- */
 
 void	parser(t_lex **list, char **envp);
 
@@ -77,6 +85,6 @@ int		ft_echo(char **argv);
 
 void    print_list(t_lex *list);
 void    print_token(t_lex *list);
-
+void	print_tab(char *tab);
 
 #endif

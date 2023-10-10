@@ -10,6 +10,7 @@ SRC 		= 	./main.c \
 				./ft_lst_utils_lex.c \
 				./help_function.c \
 				./parser.c \
+				./ft_split_word.c \
 
 OBJ		= ${SRC:.c=.o}
 

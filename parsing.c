@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 15:34:36 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/10 09:37:53 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/10 12:40:09 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	parsing(char *input, char **envp)
 	lexer(arguments, envp, &list);
 	tmp = list;
 	print_list(tmp);
-	tmp = list;
+	//tmp = list;
 	//parser(&list, envp);
-	print_token(tmp);
+	//print_token(tmp);
 	// while (*arguments)
 	// {
     // 	free(*arguments);

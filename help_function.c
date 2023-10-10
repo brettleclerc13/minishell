@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 12:01:13 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/10 10:43:09 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/10 11:54:15 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ static void	print_token_contd(enum e_token token)
 		printf("STRING\n");
 	else if (token == FUNCTION)
 		printf("FUNCTION\n");
-	else if (token == BUILTIN)
-		printf("BUILTIN\n");
 	else if (token == LEFT_CHEV)
 		printf("LEFT_CHEV\n");
 	else if (token == RIGHT_CHEV)
@@ -65,4 +63,13 @@ void    print_token(t_lex *list)
 		print_token_contd(list->token);
 		list = list->next;
 	}
+}
+
+void	print_tab(char *tab)
+{
+	int	i;
+
+	i = -1;
+	while (tab[++i])
+		fprintf(stdout, "tab[%d] : %c\n", i, tab[i]);
 }
