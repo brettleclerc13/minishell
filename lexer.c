@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 13:45:40 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/06 16:22:58 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/10 09:31:03 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,27 +47,6 @@ static void	lex_word(char **args, t_lex **list, int *i)
 	ft_lstadd_back_lex(list, new);
 	(*list)->token = WORD;
 	(*i)++;
-}
-
-static bool	lex_builtin(char **args, t_lex **list, int *i)
-{
-	t_lex	*new;
-	
-	if (ft_strncmp(args[*i], "echo", 5) == 0
-		|| ft_strncmp(args[*i], "cd", 3) == 0
-		|| ft_strncmp(args[*i], "pwd", 4) == 0
-		|| ft_strncmp(args[*i], "export", 7) == 0
-		|| ft_strncmp(args[*i], "unset", 6) == 0
-		|| ft_strncmp(args[*i], "env", 4) == 0
-		|| ft_strncmp(args[*i], "exit", 5) == 0)
-	{
-		new = ft_lstnew_lex(args[*i]);
-		ft_lstadd_back_lex(list, new);
-		(*list)->token = BUILTIN;
-		(*i)++;
-		return (true);
-	}
-	return (false);
 }
 
 static bool	lex_function(char **args, t_lex **list, int *i)

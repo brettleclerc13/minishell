@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   help_function.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 12:01:13 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/02 11:01:52 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/10/10 10:43:09 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,32 @@ void    print_list(t_lex *list)
 	}
 }
 
+static void	print_token_contd(enum e_token token)
+{
+	if (token == WORD)
+		printf("WORD\n");
+	else if (token == STRING)
+		printf("STRING\n");
+	else if (token == FUNCTION)
+		printf("FUNCTION\n");
+	else if (token == BUILTIN)
+		printf("BUILTIN\n");
+	else if (token == LEFT_CHEV)
+		printf("LEFT_CHEV\n");
+	else if (token == RIGHT_CHEV)
+		printf("RIGHT_CHEV\n");
+	else if (token == DOUBLE_L_CHEV)
+		printf("DOUBLE_L_CHEV\n");
+	else if (token == DOUBLE_R_CHEV)
+		printf("DOUBLE_R_CHEV\n");
+	else if (token == PIPE)
+		printf("PIPE\n");
+	else if (token == DOLLAR)
+		printf("DOLLAR\n");
+	else
+		printf("No idea wtf is this?\n");
+}
+
 void    print_token(t_lex *list)
 {
 	int i;
@@ -35,7 +61,8 @@ void    print_token(t_lex *list)
 	while (list)
 	{
 		i++;
-		printf("list[%d] : %u \n", i, list->token);
+		printf("list[%d]->token : ", i);
+		print_token_contd(list->token);
 		list = list->next;
 	}
 }
