@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 13:45:40 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/02 09:22:32 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/10/10 09:35:16 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static bool	lex_sign(char **args, t_lex **list, int *i, int j)
 		save_tok = DOUBLE_L_CHEV;
 	else if (args[*i][j] == '>' && args[*i][j + 1] == '>')
 		save_tok = DOUBLE_R_CHEV;
-	if (save_tok >= 3 && save_tok <= 7)
+	if (save_tok >= 0 && save_tok <= 4)
 	{
 		new = ft_lstnew_lex(args[*i]);
 		ft_lstadd_back_lex(list, new);
@@ -43,9 +43,12 @@ static void	lex_word(char **args, t_lex **list, int *i)
 {
 	t_lex	*new;
 
-	new = ft_lstnew_lex(args[*i]);
-	ft_lstadd_back_lex(list, new);
-	(*list)->token = WORD;
+	if (!ft_split_word(args[*i], list))
+	{
+		new = ft_lstnew_lex(args[*i]);
+		ft_lstadd_back_lex(list, new);
+		(*list)->token = WORD;
+	}
 	(*i)++;
 }
 
@@ -59,7 +62,7 @@ static bool	lex_function(char **args, t_lex **list, int *i)
 		|| ft_strncmp(args[*i], "export", 7) == 0
 		|| ft_strncmp(args[*i], "unset", 6) == 0
 		|| ft_strncmp(args[*i], "env", 4) == 0
-		|| ft_strncmp(args[*i], "exit", 5) == 0) // add path
+		|| ft_strncmp(args[*i], "exit", 5) == 0)
 	{
 		new = ft_lstnew_lex(args[*i]);
 		ft_lstadd_back_lex(list, new);
@@ -78,9 +81,12 @@ static bool	lex_string(char **args, t_lex **list, int *i, int j)
 	{
 		if (args[*i][j] == ' ' || args[*i][j] == '	')
 		{
-			new = ft_lstnew_lex(args[*i]);
-			ft_lstadd_back_lex(list, new);
-			(*list)->token = STRING;
+			if (!ft_split_word(args[*i], list))
+			{	
+				new = ft_lstnew_lex(args[*i]);
+				ft_lstadd_back_lex(list, new);
+				(*list)->token = STRING;
+			}
 			(*i)++;
 			return (true);
 		}
