@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/10 09:36:13 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/10/12 17:02:41 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,14 @@ typedef struct s_lex
 	enum e_token	token;
 	void			*next;
 }				t_lex;
+
+typedef struct	s_split_word
+{
+	int				i;
+	int				start;
+	enum e_token	type;
+	int				skip;
+}				t_sp_wd;
 
 /* -- MINISHELL -- */
 

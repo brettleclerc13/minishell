@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 12:01:13 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/10 10:01:09 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/10/10 11:01:42 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,5 @@ void	print_tab(char *tab)
 
 	i = -1;
 	while (tab[++i])
-		fprintf(stdout, "tab[%d] : %c\n", i, tab[i]);
+		printf("tab[%d] : %c\n", i, tab[i]);
 }

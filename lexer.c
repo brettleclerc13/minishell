@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 13:45:40 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/10 09:35:16 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/10/10 11:06:30 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ static bool	lex_sign(char **args, t_lex **list, int *i, int j)
 	enum e_token	save_tok;
 
 	save_tok = -1;
-	if (args[*i][j] == '|')
+	if (args[*i][j] == '|' && !args[*i][j + 1])
 		save_tok = PIPE;
-	else if (args[*i][j] == '<')
+	else if (args[*i][j] == '<' && !args[*i][j + 1])
 		save_tok = LEFT_CHEV;
-	else if (args[*i][j] == '>')
+	else if (args[*i][j] == '>' && !args[*i][j + 1])
 		save_tok = RIGHT_CHEV;
-	else if (args[*i][j] == '<' && args[*i][j + 1] == '<')
+	else if (args[*i][j] == '<' && args[*i][j + 1] == '<' && !args[*i][j + 1])
 		save_tok = DOUBLE_L_CHEV;
-	else if (args[*i][j] == '>' && args[*i][j + 1] == '>')
+	else if (args[*i][j] == '>' && args[*i][j + 1] == '>' && !args[*i][j + 1])
 		save_tok = DOUBLE_R_CHEV;
 	if (save_tok >= 0 && save_tok <= 4)
 	{
