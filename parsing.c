@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 15:34:36 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/10 11:21:47 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/10/13 14:26:52 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	parsing(char *input, char **envp)
 	tmp = list;
 	arguments = ft_split_bash(input, ' ', '	');
 	lexer(arguments, envp, &list);
+	// print_list(list);
 	// print_token(list);
-	print_list(list);
-	
+	print_lst_tok(list);
 	// parser(&list, envp);
 	// print_list(list);
 	// while (*arguments)

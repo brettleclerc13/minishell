@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 13:45:40 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/10 11:06:30 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/10/14 08:21:06 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,8 @@ static bool	lex_sign(char **args, t_lex **list, int *i, int j)
 		save_tok = DOUBLE_R_CHEV;
 	if (save_tok >= 0 && save_tok <= 4)
 	{
-		new = ft_lstnew_lex(args[*i]);
+		new = ft_lstnew_lex(args[*i], save_tok);
 		ft_lstadd_back_lex(list, new);
-		(*list)->token = save_tok;
 		(*i)++;
 		return (true);
 	}
@@ -41,14 +40,7 @@ static bool	lex_sign(char **args, t_lex **list, int *i, int j)
 
 static void	lex_word(char **args, t_lex **list, int *i)
 {
-	t_lex	*new;
-
-	if (!ft_split_word(args[*i], list))
-	{
-		new = ft_lstnew_lex(args[*i]);
-		ft_lstadd_back_lex(list, new);
-		(*list)->token = WORD;
-	}
+	ft_split_word(args[*i], list);
 	(*i)++;
 }
 
@@ -64,9 +56,8 @@ static bool	lex_function(char **args, t_lex **list, int *i)
 		|| ft_strncmp(args[*i], "env", 4) == 0
 		|| ft_strncmp(args[*i], "exit", 5) == 0)
 	{
-		new = ft_lstnew_lex(args[*i]);
+		new = ft_lstnew_lex(args[*i], FUNCTION);
 		ft_lstadd_back_lex(list, new);
-		(*list)->token = FUNCTION;
 		(*i)++;
 		return (true);
 	}
@@ -83,9 +74,8 @@ static bool	lex_string(char **args, t_lex **list, int *i, int j)
 		{
 			if (!ft_split_word(args[*i], list))
 			{	
-				new = ft_lstnew_lex(args[*i]);
+				new = ft_lstnew_lex(args[*i], STRING);
 				ft_lstadd_back_lex(list, new);
-				(*list)->token = STRING;
 			}
 			(*i)++;
 			return (true);
