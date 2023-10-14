@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/10 11:55:02 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/13 13:30:32 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@
 # include <readline/history.h>
 
 # include "./Libft/libft.h"
-# include "./builtin/builtin.h"
 //# include "./pipex/pipex_bonus.h"
+# include "./pipex/pipex.h"
+# include "./builtin/builtin.h"
 
 enum	e_token
 {
@@ -60,9 +61,17 @@ typedef struct s_lex
 	void			*next;
 }				t_lex;
 
+typedef struct	s_split_word
+{
+	int				i;
+	int				start;
+	enum e_token	type;
+	int				skip;
+}				t_sp_wd;
+
 /* -- MINISHELL -- */
 
-void	parsing(char *input, char **envp);
+//void	parsing(char *input, char **envp);
 
 /* -- LEXER -- */
 

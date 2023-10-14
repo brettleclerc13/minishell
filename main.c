@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:39:24 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/10 15:38:56 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/13 13:22:44 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 int	main(int argc, char **argv, char **envp)
 {
+	t_struct	mshell;
 	char	*input;
 	
-
 	(void)argv;
 	if (argc == 1)
 	{
@@ -26,7 +26,10 @@ int	main(int argc, char **argv, char **envp)
 			input = readline(COLOR_PROMPT COLOR_RESET"$ ");
 			if (input == NULL)
 				break ;
-			parsing(input, envp);
+			mshell.envp = ft_arraydup(envp);
+			if (ft_update_shlvl(&mshell))
+				return (1);
+			parsing(input, &mshell);
 			add_history(input);
 			free(input);
 		}
