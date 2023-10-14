@@ -6,7 +6,11 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/10/14 11:29:44 by brettlecler      ###   ########.fr       */
+=======
+/*   Updated: 2023/10/14 11:54:31 by ehouot           ###   ########.fr       */
+>>>>>>> emilien
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +33,7 @@
 # include <readline/history.h>
 
 # include "./Libft/libft.h"
-//# include "./pipex/pipex_bonus.h"
+# include "./pipex42/pipex_bonus.h"
 
 enum	e_token
 {
