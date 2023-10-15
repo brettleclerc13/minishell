@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 12:01:13 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/10 11:54:15 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/15 15:50:11 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,18 @@ void    print_token(t_lex *list)
 		list = list->next;
 	}
 }
+void	print_lst_tok(t_lex *list)
+{
+	int i;
+
+	i = -1;
+	while (list)
+	{
+		i++;
+		printf("list[%d] : %s (%d) \n", i, list->content, list->token);
+		list = list->next;
+	}
+}
 
 void	print_tab(char *tab)
 {
@@ -71,5 +83,5 @@ void	print_tab(char *tab)
 
 	i = -1;
 	while (tab[++i])
-		fprintf(stdout, "tab[%d] : %c\n", i, tab[i]);
+		printf("tab[%d] : %c\n", i, tab[i]);
 }

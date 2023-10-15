@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:39:24 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/13 13:22:44 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/15 15:53:00 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int argc, char **argv, char **envp)
 			mshell.envp = ft_arraydup(envp);
 			if (ft_update_shlvl(&mshell))
 				return (1);
-			parsing(input, &mshell);
+			parsing(input, envp);
 			add_history(input);
 			free(input);
 		}

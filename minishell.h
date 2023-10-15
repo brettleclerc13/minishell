@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/13 13:30:32 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/15 15:55:22 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@
 # include <readline/history.h>
 
 # include "./Libft/libft.h"
-//# include "./pipex/pipex_bonus.h"
-# include "./pipex/pipex.h"
+# include "./pipex42/pipex_bonus.h"
 # include "./builtin/builtin.h"
 
 enum	e_token
@@ -71,13 +70,13 @@ typedef struct	s_split_word
 
 /* -- MINISHELL -- */
 
-//void	parsing(char *input, char **envp);
+void	parsing(char *input, char **envp);
 
 /* -- LEXER -- */
 
 void	*lexer(char **args, char **envp, t_lex **list);
 bool	lex_dollar(char **args, t_lex **list, int *i);
-t_lex	*ft_lstnew_lex(void *content);
+t_lex	*ft_lstnew_lex(void *content, enum e_token token);
 void	ft_lstadd_back_lex(t_lex **lst, t_lex *new);
 int		ft_split_word(char *args, t_lex **list);
 
@@ -95,5 +94,6 @@ int		ft_echo(char **argv);
 void    print_list(t_lex *list);
 void    print_token(t_lex *list);
 void	print_tab(char *tab);
+void	print_lst_tok(t_lex *list);
 
 #endif

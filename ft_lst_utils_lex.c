@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 17:46:42 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/09 15:25:43 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/10/14 08:15:14 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_lstadd_back_lex(t_lex **lst, t_lex *new)
 	tmp->next = new;
 }
 
-t_lex	*ft_lstnew_lex(void *content)
+t_lex	*ft_lstnew_lex(void *content, enum e_token token)
 {
 	t_lex	*new;
 
@@ -44,7 +44,7 @@ t_lex	*ft_lstnew_lex(void *content)
 	if (!new)
 		return (NULL);
 	new->content = content;
-    new->token = -1;
+    new->token = token;
 	new->next = NULL;
 	return (new);
 }

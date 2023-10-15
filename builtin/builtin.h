@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 15:58:50 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/13 13:31:20 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/15 15:55:41 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,6 @@ int		ft_update_shlvl(t_struct *mshell);
 int		ft_export(char **argv, t_struct *mshell);
 
 /* -- MINISHELL -- */
-void	parsing(char *input, t_struct *mshell);
+//void	parsing(char *input, t_struct *mshell);
 
 #endif
