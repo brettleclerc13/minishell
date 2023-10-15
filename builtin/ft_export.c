@@ -6,11 +6,11 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 08:10:41 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/14 11:26:24 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/15 19:45:56 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "minishell.h"
 
 void	ft_print_export_env(t_struct *mshell)
 {

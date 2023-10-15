@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/05 15:08:06 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/15 19:45:59 by brettlecler      ###   ########.fr       */
+/*   Created: 2023/10/15 20:16:19 by brettlecler       #+#    #+#             */
+/*   Updated: 2023/10/15 20:21:15 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_pwd(void)
+void	ft_execute(t_struct *mshell)
 {
-	char	pwd[PATH_MAX];
-
-	if (!getcwd(pwd, sizeof(pwd)))
-	{
-		ft_putstr_fd("pwd: Cannot retrieve cwd", 2);
-		perror(pwd);
-		return (1);
-	}
-	printf("%s\n", pwd);
-	return (0);
+	print_lst_tok(mshell->args);
 }

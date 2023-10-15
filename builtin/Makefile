@@ -1,5 +1,4 @@
-SRC =		./main.c \
-	  		./ft_cd.c \
+SRC =		./ft_cd.c \
 			./envp.c \
 			./ft_pwd.c \
 			./ft_export.c \
@@ -9,7 +8,7 @@ OBJ =		$(SRC:.c=.o)
 
 NAME =		builtin.a
 
-HEADERS =	./
+HEADERS =	./headers/
 
 FLAGS =		-Wall -Wextra -Werror
 

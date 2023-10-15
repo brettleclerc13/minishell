@@ -1,9 +1,9 @@
 LIBFT_PATH	=	./Libft/
 PIPEX_PATH	=	./pipex42/
-BUILTIN_PATH=	./builtin/
+BUILT_PATH	=	./builtin/
 READLINE	=	/usr/include/readline
 
-SRC 		= 	./main.c \
+SRC_MAIN 	= 	./main.c \
 				./parsing.c \
 				./lexer.c \
 				./lexer_plus.c \
@@ -11,10 +11,20 @@ SRC 		= 	./main.c \
 				./help_function.c \
 				./parser.c \
 				./ft_split_word.c \
+				./free.c \
+				./execute.c
+
+SRC_BUILTIN	=	${addprefix ${BUILT_PATH}, ./ft_cd.c \
+											./envp.c \
+											./ft_pwd.c \
+											./ft_export.c \
+	  										./ft_echo.c}
+
+SRC = ${SRC_MAIN} ${SRC_BUILTIN}
 
 OBJ		= ${SRC:.c=.o}
 
-HEADER		= ./
+HEADER		= ./headers
 
 CC 			= clang
 
@@ -35,8 +45,7 @@ all:		$(NAME)
 
 $(NAME):	$(OBJ)
 			@${MAKE} -C ${LIBFT_PATH}
-			@${MAKE} -C ${BUILTIN_PATH}
-			@$(CC) $(CFLAGS) $(OBJ) ${LIBFT_PATH}libft.a ${BUILTIN_PATH}builtin.a -L ${READLINE} -lreadline -I $(HEADER) -o $(NAME)
+			@$(CC) $(CFLAGS) $(OBJ) ${LIBFT_PATH}libft.a -L ${READLINE} -lreadline -I $(HEADER) -o $(NAME)
 
 debug:
 	${MAKE} DEBUG=1
@@ -44,10 +53,9 @@ debug:
 clean:
 			@$(RM) $(OBJ)
 			@${MAKE} clean -C ${LIBFT_PATH}
-			@${MAKE} clean -C ${BUILTIN_PATH}
 
 fclean: 	clean
-			@$(RM) $(NAME) ${LIBFT_PATH}libft.a ${BUILTIN_PATH}builtin.a
+			@$(RM) $(NAME) ${LIBFT_PATH}libft.a
 
 re:			fclean all
 

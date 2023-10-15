@@ -6,12 +6,11 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:53:41 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/06 08:44:30 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/15 19:45:45 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "minishell.h"
-#include "builtin.h"
+#include "minishell.h"
 
 int	ft_cd_contd(char *dir, char *cwd, t_struct *mshell)
 {

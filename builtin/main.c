@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 16:00:23 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/13 12:54:12 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/15 18:41:49 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	main(int argc, char **argv, char **envp)
 	t_struct	mshell;
 
 	argc = ft_atoi(ft_itoa(argc));
+	
 	mshell.envp = ft_arraydup(envp);
 	if (ft_update_shlvl(&mshell))
 		return (1);

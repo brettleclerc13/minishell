@@ -6,12 +6,11 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 18:10:35 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/06 08:24:25 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/15 19:45:52 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "minishell.h"
-#include "builtin.h"
+#include "minishell.h"
 
 static bool is_newline(char **argv, int *i)
 {
