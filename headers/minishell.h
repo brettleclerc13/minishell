@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/16 11:54:49 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/16 20:35:37 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,13 @@ int		ft_echo(char **argv);
 int		ft_cd(int argc, char **argv, t_struct *mshell);
 int		ft_cd_contd(char *dir, char *cwd, t_struct *mshell);
 int		ft_pwd(void);
-int		ft_env(t_struct *mshell);
+int		ft_env(char **envp);
 int		ft_export(char **argv, t_struct *mshell);
+
+/* -- BUILTIN FUNCTIONS -- */
+void	ft_print_export(char **envp);
+void	ft_sort_ascii(char **array);
+bool	ft_put_export_error(char *arg);
 
 /* -- ENVP MANIPULATIONS -- */
 char	**add_env_value(char *var, char *value, char **envp);

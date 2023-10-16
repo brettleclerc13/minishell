@@ -6,28 +6,11 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 08:10:41 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/15 19:45:56 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/16 20:45:23 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	ft_print_export_env(t_struct *mshell)
-{
-	int	i;
-
-	i = -1;
-	while (mshell->envp[++i])
-		printf("declare -x %s\n", mshell->envp[i]);
-}
-
-static bool	ft_put_export_error(char *arg)
-{
-	ft_putstr_fd("export : ", 2);
-	ft_putstr_fd(arg, 2);
-	ft_putstr_fd(": not a valid identifier\n", 2);
-	return (false);
-}
 
 static bool	ft_isenv(char *arg)
 {
@@ -64,6 +47,6 @@ int	ft_export(char **argv, t_struct *mshell)
 		//ft_add_env
 	}
 	if (i == 1)
-		ft_print_export_env(mshell);
+		ft_print_export(mshell->envp);
 	return (result);
 }

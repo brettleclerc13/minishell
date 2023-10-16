@@ -17,8 +17,10 @@ SRC_MAIN 	= 	./main.c \
 
 SRC_BUILTIN	=	${addprefix ${BUILT_PATH}, ./ft_cd.c \
 											./envp.c \
+											./ft_env.c \
 											./ft_pwd.c \
 											./ft_export.c \
+											./export_functions.c \
 	  										./ft_echo.c}
 
 SRC = ${SRC_MAIN} ${SRC_BUILTIN}

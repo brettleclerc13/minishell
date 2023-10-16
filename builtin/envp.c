@@ -6,26 +6,11 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 17:01:46 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/15 20:03:39 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/16 16:17:39 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	ft_env(t_struct *mshell)
-{
-	int	i;
-
-	i = -1;
-	if (!mshell->envp)
-	{
-		ft_putstr_fd("env: env not found", 2);
-		return (1);
-	}
-	while (mshell->envp[++i])
-		printf("%s\n", mshell->envp[i]);
-	return (0);
-}
 
 int	ft_update_shlvl(t_struct *mshell)
 {
