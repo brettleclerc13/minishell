@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:17:25 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/09 15:27:57 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/10/16 12:05:17 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,36 +40,38 @@
 // 	return (true);
 // }
 
-// void	check_double_pipe(t_lex **list, char **envp)
-// {
-// 	t_lex	*tmp;
-// 	int		i;
+void	check_double_pipe(t_lex **list, char **envp)
+{
+	t_lex	*tmp;
+	int		i;
 
-// 	tmp = *list;
-// 	if ((*list)->content == '|')
-// 	{
-// 		ft_error("Double pipe not supported\n"); // faire retourner le prompt
-// 	}
-// }
+	tmp = *list;
+	if ((*list)->content == '|')
+	{
+		tmp = tmp->next;
+		if (tmp->content == '|')
+			ft_error("Double pipe not supported\n"); // faire retourner le prompt
+	}
+}
 
-// void	parser(t_lex **list, char **envp)
-// {
-// 	t_lex	*tmp;
+void	parser(t_lex **list, char **envp)
+{
+	t_lex	*tmp;
 
-// 	tmp = (*list);
-// 	while (list)
-// 	{
-// 		if ((*list)->token == STRING | (*list)->token  == WORD)
-// 		{
-// 			check_string_word(list, envp);
-// 			continue;
-// 		}
-// 		if ((*list)->token  == WORD | (*list)->token == FUNCTION)
-// 		{
+	tmp = *list;
+	while (list)
+	{
+		if ((*list)->token == STRING | (*list)->token  == WORD)
+		{
+			check_string_word(list, envp);
+			continue;
+		}
+		if ((*list)->token  == WORD | (*list)->token == FUNCTION)
+		{
 			
-// 		}
-// 		if ((*list)->token == WORD | (*list)->token == STRING | (*list)->token == DOLLAR)
-// 			check_dollar(list, envp);
-// 		list = (*list)->next;
-// 	}
-// }
+		}
+		if ((*list)->token == WORD | (*list)->token == STRING | (*list)->token == DOLLAR)
+			check_dollar(list, envp);
+		list = (*list)->next;
+	}
+}
