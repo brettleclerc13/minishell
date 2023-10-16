@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 12:01:13 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/13 10:35:52 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/10/16 12:57:23 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void    print_token(t_lex *list)
 	while (list)
 	{
 		i++;
-		printf("list[%d] : %u \n", i, list->token);
+		printf("list[%d]->token : ", i);
+		print_token_contd(list->token);
 		list = list->next;
 	}
 }

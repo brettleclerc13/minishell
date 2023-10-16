@@ -1,13 +1,9 @@
 LIBFT_PATH	=	./Libft/
 PIPEX_PATH	=	./pipex42/
-BUILTIN_PATH=	./builtin/
+BUILT_PATH	=	./builtin/
 READLINE	=	/usr/include/readline
 
-SRC_BUILTIN	=	$(addprefix $(BUILTIN_PATH), built_exit.c \
-					ft_echo.c \
- 					)
-
-SRC 		= 	./main.c \
+SRC_MAIN 	= 	./main.c \
 				./parsing.c \
 				./lexer.c \
 				./lexer_plus.c \
@@ -15,10 +11,21 @@ SRC 		= 	./main.c \
 				./help_function.c \
 				./parser.c \
 				./ft_split_word.c \
+				./array_manipulation.c \
+				./init.c \
+				./execute.c
 
-OBJ		= ${SRC:.c=.o} ${SRC_BUILTIN:.c=.o}
+SRC_BUILTIN	=	${addprefix ${BUILT_PATH}, ./ft_cd.c \
+											./envp.c \
+											./ft_pwd.c \
+											./ft_export.c \
+	  										./ft_echo.c}
 
-HEADER		= ./
+SRC = ${SRC_MAIN} ${SRC_BUILTIN}
+
+OBJ		= ${SRC:.c=.o}
+
+HEADER		= ./headers
 
 CC 			= clang
 

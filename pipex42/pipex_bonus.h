@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 09:32:26 by ehouot            #+#    #+#             */
-/*   Updated: 2023/06/23 15:23:43 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/10/15 15:52:01 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <stdio.h>
 # include <errno.h>
 
-# include "./Libft/libft.h"
+# include "../Libft/libft.h"
 # include "./Get_next_line/get_next_line.h"
 
 typedef struct s_varb

@@ -1,42 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/17 18:28:53 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/03 14:36:50 by brettlecler      ###   ########.fr       */
+/*   Created: 2023/10/15 20:16:19 by brettlecler       #+#    #+#             */
+/*   Updated: 2023/10/16 12:30:34 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+int	ft_count_pipe(t_struct *mshell)
 {
-	size_t	i;
-	size_t	j;
-	char	*dest;
+	t_lex	*args;
+	int		pipe_count;
 
-	j = 0;
-	i = 0;
-	if (!s1 || !s2)
-		return (NULL);
-	dest = (char *) malloc (ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (!dest)
-		return (NULL);
-	if (s1[i])
+	pipe_count = 0;
+	args = mshell->args;
+	while (args)
 	{
-		while (i < ft_strlen(s1))
-		{
-			dest[i] = s1[i];
-			i++;
-		}
-	}
-	while (j < ft_strlen(s2))
-	{
-		dest[i++] = s2[j++];
-	}
-	dest[i] = '\0';
-	return (dest);
+		if (args->token == 4)
+			pipe_count++;
+		args = args->next;
+	}		
+	return(pipe_count);
+}
+
+void	ft_execute(t_struct *mshell)
+{
+	print_lst_tok(mshell->args);
+	printf("Nb of pipes: %d\n", mshell->pipe_count);
 }

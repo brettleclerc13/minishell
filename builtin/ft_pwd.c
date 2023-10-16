@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_exit.c                                       :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/27 14:05:09 by ehouot            #+#    #+#             */
-/*   Updated: 2023/06/27 15:23:40 by ehouot           ###   ########.fr       */
+/*   Created: 2023/10/05 15:08:06 by brettlecler       #+#    #+#             */
+/*   Updated: 2023/10/15 19:45:59 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_exit_without_arg()
+int	ft_pwd(void)
 {
-	
-}
+	char	pwd[PATH_MAX];
 
-void	ft_exit(void)
-{
-	
+	if (!getcwd(pwd, sizeof(pwd)))
+	{
+		ft_putstr_fd("pwd: Cannot retrieve cwd", 2);
+		perror(pwd);
+		return (1);
+	}
+	printf("%s\n", pwd);
+	return (0);
 }
