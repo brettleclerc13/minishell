@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/15 20:24:25 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/16 11:54:49 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,9 @@ typedef struct	s_struct
 {
 	char		**envp;
 	t_lex		*args;
-}	t_struct;
+	int			pipe_count;
+	char		**path;
+}				t_struct;
 
 typedef struct	s_split_word
 {
@@ -76,6 +78,7 @@ typedef struct	s_split_word
 /* -- MINISHELL -- */
 t_lex		*parsing(char *input, char **envp);
 t_struct	*before_loop_init(int argc, char **envp);
+char		**init_path(char **envp);
 
 /* -- LEXER -- */
 void	*lexer(char **args, char **envp, t_lex **list);
@@ -86,6 +89,7 @@ int		ft_split_word(char *args, t_lex **list);
 
 /* -- PARSER -- */
 void	parser(t_lex **list, char **envp);
+int		ft_count_pipe(t_struct *mshell);
 
 /* -- DEBUGGING -- */
 void    print_list(t_lex *list);

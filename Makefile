@@ -12,6 +12,7 @@ SRC_MAIN 	= 	./main.c \
 				./parser.c \
 				./ft_split_word.c \
 				./array_manipulation.c \
+				./init.c \
 				./execute.c
 
 SRC_BUILTIN	=	${addprefix ${BUILT_PATH}, ./ft_cd.c \
