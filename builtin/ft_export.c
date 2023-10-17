@@ -6,11 +6,41 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 08:10:41 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/17 09:29:52 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/17 20:13:35 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static char	**add_env_str(char *arg, char **envp)
+{
+	char	**new_envp;
+	
+	new_envp = ft_arrayadd(arg, envp);
+	ft_arrayfree(envp);
+	return (new_envp);
+}
+
+static void	ft_add_to_envp(char *arg, t_struct *mshell)
+{
+	char	*var;
+	char	*skip_var;
+	int		var_length;
+
+	var_length = 0;
+	skip_var = NULL;
+	var = NULL;
+	if (ft_strnstr(arg, "+=", ft_strlen(arg)))
+	{
+		skip_var = ft_strchr(arg, '+');
+		var_length = ft_strlen(arg) - ft_strlen(skip_var);
+		var = ft_substr(arg, 0, var_length);
+		mshell->envp = add_env_value(var, arg + (var_length + 1), mshell->envp);
+		free (var);
+	}
+	else
+		mshell->envp = add_env_str(arg, mshell->envp);
+}	
 
 static bool	ft_isenv(char *arg)
 {
@@ -44,7 +74,7 @@ int	ft_export(char **argv, t_struct *mshell)
 			result = 1;
 			continue ;
 		}
-		//ft_add_env
+		ft_add_to_envp(argv[i], mshell);
 	}
 	if (i == 1)
 		ft_print_export(mshell->envp);

@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/17 09:35:39 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/17 19:46:58 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ char	**add_env_value(char *var, char *value, char **envp);
 char	*get_env_value(char *var, char **envp);
 void	update_env_value(char *var, char *new_value, char **envp);
 int		ft_update_shlvl(t_struct *mshell);
+char	*ft_envjoin(char *s1, char *s2);
 
 /* -- ARRAY MANIPULATIONS -- */
 char	**ft_arraydup(char **array);

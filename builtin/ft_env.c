@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 16:17:25 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/16 16:20:12 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/17 19:53:37 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_env(char **envp)
 	}
 	while (envp[++i])
 	{
-		if (!ft_strchr(envp[i], '='))
+		if (ft_strchr(envp[i], '='))
 		printf("%s\n", envp[i]);
 	}
 	return (0);
