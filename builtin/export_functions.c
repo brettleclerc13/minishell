@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 20:33:16 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/16 20:41:00 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/17 10:58:24 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,21 +37,24 @@ void	ft_sort_ascii(char **array)
 void	ft_print_export(char **envp)
 {
 	char	*tmp;
-	char	*var_length;
+	char	*skip_var;
+	int		var_length;
 	int		i;
 
 	i = -1;
+	var_length = 0;
 	ft_sort_ascii(envp);
 	while (envp[++i])
 	{
-		var_length = ft_strchr(envp[i], '=');
-		if (!var_length)
+		skip_var = ft_strchr(envp[i], '=');
+		if (!skip_var)
 			printf("declare -x %s\n", envp[i]);
 		else
 		{
-			tmp = ft_strtrim(envp[i], "=");
+			var_length = (ft_strlen(envp[i]) - ft_strlen(skip_var)) + 1;
+			tmp = ft_substr(envp[i], 0, var_length);
 			printf("declare -x %s", tmp);
-			printf("\"%s\"\n", envp[i] + ft_strlen(var_length));
+			printf("\"%s\"\n", envp[i] + var_length);
 			free(tmp);
 		}
 	}

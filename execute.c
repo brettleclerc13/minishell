@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 20:16:19 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/16 22:12:40 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/17 11:00:36 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	**ft_convert_to_array(t_lex *args)
 	struct_len = 0;
 	while (tmp)
 	{
-		array[struct_len] = ft_strdup(tmp->content);
+		array[struct_len++] = ft_strdup(tmp->content);
 		tmp = tmp->next;
 	}
 	return (array);
@@ -58,8 +58,9 @@ void	ft_execute(t_struct *mshell)
 {
 	char	**args;
 	print_lst_tok(mshell->args);
-	printf("Nb of pipes: %d\n", mshell->pipe_count);
+	//printf("Nb of pipes: %d\n", mshell->pipe_count);
 	args = ft_convert_to_array(mshell->args);
+	//print_array(args);
 	ft_export(args, mshell);
 	ft_arrayfree(args);
 }

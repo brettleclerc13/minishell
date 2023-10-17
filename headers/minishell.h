@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/16 20:35:37 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/17 09:35:39 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,9 @@ int		ft_count_pipe(t_struct *mshell);
 /* -- DEBUGGING -- */
 void    print_list(t_lex *list);
 void    print_token(t_lex *list);
-void	print_tab(char *tab);
+void	print_string(char *tab);
 void	print_lst_tok(t_lex *list);
+void	print_array(char **array);
 
 /* -- BUILTINS -- */
 int		ft_echo(char **argv);
@@ -116,7 +117,7 @@ char	*get_env_value(char *var, char **envp);
 void	update_env_value(char *var, char *new_value, char **envp);
 int		ft_update_shlvl(t_struct *mshell);
 
-/* -- FREE -- */
+/* -- ARRAY MANIPULATIONS -- */
 char	**ft_arraydup(char **array);
 int		ft_arraylen(char **array);
 char	**ft_arrayadd(char *newline, char **array);

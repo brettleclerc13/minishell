@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 12:01:13 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/15 15:50:11 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/17 09:35:15 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,20 @@ void	print_lst_tok(t_lex *list)
 	}
 }
 
-void	print_tab(char *tab)
+void	print_string(char *tab)
 {
 	int	i;
 
 	i = -1;
 	while (tab[++i])
 		printf("tab[%d] : %c\n", i, tab[i]);
+}
+
+void	print_array(char **array)
+{
+	int	i;
+
+	i = -1;
+	while (array[++i])
+		printf("%s\n", array[i]);
 }
