@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/17 19:46:58 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/23 08:36:08 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,15 @@ typedef struct	s_split_word
 	int				skip;
 }				t_sp_wd;
 
+typedef struct	s_var
+{
+	char		*var;
+	int			symbol;
+	int			varlen;
+}			t_var;
+
 /* -- MINISHELL -- */
-t_lex		*parsing(char *input, char **envp);
+bool		parsing(char *input, t_struct *mshell);
 t_struct	*before_loop_init(int argc, char **envp);
 char		**init_path(char **envp);
 
@@ -106,7 +113,7 @@ int		ft_pwd(void);
 int		ft_env(char **envp);
 int		ft_export(char **argv, t_struct *mshell);
 
-/* -- BUILTIN FUNCTIONS -- */
+/* -- PRINT EXPORT -- */
 void	ft_print_export(char **envp);
 void	ft_sort_ascii(char **array);
 bool	ft_put_export_error(char *arg);
@@ -116,7 +123,14 @@ char	**add_env_value(char *var, char *value, char **envp);
 char	*get_env_value(char *var, char **envp);
 void	update_env_value(char *var, char *new_value, char **envp);
 int		ft_update_shlvl(t_struct *mshell);
-char	*ft_envjoin(char *s1, char *s2);
+char	**add_env_str(char *arg, char **envp);
+
+/* -- ENV VARIABLE MANIPULATIONS -- */
+bool	ft_isvar(char *arg);
+char	*get_env_var(char *line);
+int		ft_varcmp(char *var, char **envp);
+void	ft_create_var(char *arg, t_var *var);
+char	*ft_varjoin(char *s1, char *s2);
 
 /* -- ARRAY MANIPULATIONS -- */
 char	**ft_arraydup(char **array);

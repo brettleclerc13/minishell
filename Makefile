@@ -12,6 +12,7 @@ SRC_MAIN 	= 	./main.c \
 				./parser.c \
 				./ft_split_word.c \
 				./array_manipulation.c \
+				./var_manipulation.c \
 				./init.c \
 				./execute.c
 
@@ -20,7 +21,7 @@ SRC_BUILTIN	=	${addprefix ${BUILT_PATH}, ./ft_cd.c \
 											./ft_env.c \
 											./ft_pwd.c \
 											./ft_export.c \
-											./export_functions.c \
+											./print_export.c \
 	  										./ft_echo.c}
 
 SRC = ${SRC_MAIN} ${SRC_BUILTIN}

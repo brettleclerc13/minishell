@@ -6,35 +6,19 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 17:01:46 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/17 19:46:33 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/20 17:16:56 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_envjoin(char *s1, char *s2)
+char	**add_env_str(char *arg, char **envp)
 {
-	size_t	i;
-	size_t	j;
-	char	*dest;
+	char	**new_envp;
 
-	j = 0;
-	i = 0;
-	if (!s1)
-		return (NULL);
-	dest = ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, sizeof(char *));
-	if (!dest)
-		return (NULL);
-	while (i < ft_strlen(s1))
-	{
-		dest[i] = s1[i];
-		i++;
-	}
-	while (s2 && j < ft_strlen(s2))
-		dest[i++] = s2[j++];
-	dest[i] = '\0';
-	free(s1);
-	return (dest);
+	new_envp = ft_arrayadd(arg, envp);
+	ft_arrayfree(envp);
+	return (new_envp);
 }
 
 int	ft_update_shlvl(t_struct *mshell)

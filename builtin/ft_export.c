@@ -6,70 +6,47 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 08:10:41 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/17 20:13:35 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/20 17:59:47 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	**add_env_str(char *arg, char **envp)
+void	ft_add_to_envp(char *arg, t_struct *mshell)
 {
-	char	**new_envp;
-	
-	new_envp = ft_arrayadd(arg, envp);
-	ft_arrayfree(envp);
-	return (new_envp);
-}
+	t_var	var;
 
-static void	ft_add_to_envp(char *arg, t_struct *mshell)
-{
-	char	*var;
-	char	*skip_var;
-	int		var_length;
-
-	var_length = 0;
-	skip_var = NULL;
-	var = NULL;
-	if (ft_strnstr(arg, "+=", ft_strlen(arg)))
+	ft_create_var(arg, &var);
+	if (!ft_varcmp(var.var, mshell->envp))
 	{
-		skip_var = ft_strchr(arg, '+');
-		var_length = ft_strlen(arg) - ft_strlen(skip_var);
-		var = ft_substr(arg, 0, var_length);
-		mshell->envp = add_env_value(var, arg + (var_length + 1), mshell->envp);
-		free (var);
+		if (var.symbol == '+')
+			mshell->envp = add_env_value(var.var, arg + (var.varlen + 1), mshell->envp);
+		else
+			mshell->envp = add_env_str(arg, mshell->envp);
 	}
 	else
-		mshell->envp = add_env_str(arg, mshell->envp);
-}	
-
-static bool	ft_isenv(char *arg)
-{
-	int	i;
-
-	i = 0;
-	if (!arg)
-		return(ft_put_export_error(arg));
-	if (!ft_isalpha(arg[i]) && arg[i] != '_')
-		return (ft_put_export_error(arg));
-	while (arg[++i] && arg[i] != '=')
 	{
-		if ((!ft_isalnum(arg[i]) && arg[i] != '_') && \
-			!(arg[i] == '+' && arg[i + 1] == '='))
-			return(ft_put_export_error(arg));
+		if (var.symbol == '0')
+			mshell->envp = add_env_str(arg, mshell->envp);
+		else
+		{
+			var.var = ft_varjoin(var.var, "=");
+			mshell->envp = add_env_value(var.var, arg + var.varlen, mshell->envp);
+		}
 	}
-	return (true);
+	free(var.var);
 }
 
 int	ft_export(char **argv, t_struct *mshell)
 {
 	int	i;
 	int	result;	
-	
+
 	i = 0;
 	result = 0;
 	while (argv[++i])
 	{
-		if(!ft_isenv(argv[i]))
+		if (!ft_isvar(argv[i]))
 		{
 			result = 1;
 			continue ;
@@ -80,3 +57,39 @@ int	ft_export(char **argv, t_struct *mshell)
 		ft_print_export(mshell->envp);
 	return (result);
 }
+
+/*   ROUGH WORK   */
+// static void	ft_add_to_envp(char *arg, t_struct *mshell)
+// {
+// 	char	*var;
+// 	int		var_length;
+
+// 	var_length = 0;
+// 	var = NULL;
+// 	if (ft_strnstr(arg, "+=", ft_strlen(arg)))
+// 	{
+// 		var_length = ft_strlen(arg) - ft_strlen(ft_strchr(arg, '+'));
+// 		var = ft_retrieve_var(arg, '+');
+// 		if (get_env_value(var, mshell->envp))
+// 			update_env_value(var, arg + (var_length + 1), mshell->envp);
+// 		else
+// 			mshell->envp = add_env_value(var, arg + (var_length + 1), mshell->envp);
+// 		free (var);
+// 	}
+// 	else if (!ft_strchr(arg, '='))
+// 	{
+// 		if (get_env_value(arg, mshell->envp))
+// 			return ;
+// 		else
+// 			mshell->envp = add_env_str(arg, mshell->envp);
+// 	}
+// 	else
+// 	{
+// 		var = ft_retrieve_var(arg, '=');
+// 		if (get_env_value(var, mshell->envp))
+// 			update_env_value(var, arg + (var_length + 1), mshell->envp);
+// 		else
+// 			mshell->envp = add_env_str(arg, mshell->envp);
+// 		free (var);
+// 	}
+// }

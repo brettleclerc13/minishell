@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 11:38:35 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/16 11:55:13 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/23 08:44:46 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ t_struct	*before_loop_init(int argc, char **envp)
 		return (NULL);
 	mshell = malloc(sizeof(t_struct));
 	if (!mshell)
+		return (NULL);
+	mshell->args = malloc(sizeof(t_lex));
+	if (!mshell->args)
 		return (NULL);
 	mshell->pipe_count = 0;
 	mshell->envp = ft_arraydup(envp);

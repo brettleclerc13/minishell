@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 20:16:19 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/17 19:52:31 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/23 08:42:55 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ft_count_pipe(t_struct *mshell)
 		if (args->token == 4)
 			pipe_count++;
 		args = args->next;
-	}		
+	}	
 	return(pipe_count);
 }
 

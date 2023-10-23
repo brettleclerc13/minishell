@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:39:24 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/16 11:46:28 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/23 08:59:50 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int	main(int argc, char **argv, char **envp)
 		input = readline(COLOR_PROMPT COLOR_RESET"$ ");
 		if (input == NULL)
 			break ;
-		mshell->args = parsing(input, envp);
-		mshell->pipe_count = ft_count_pipe(mshell);
+		if (!parsing(input, mshell))
+			return (-1);
 		ft_execute(mshell);
 		add_history(input);
 		free(input);
