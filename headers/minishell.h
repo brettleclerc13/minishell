@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/23 08:36:08 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/23 09:56:08 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct	s_split_word
 typedef struct	s_var
 {
 	char		*var;
+	char		*envp_var;
 	int			symbol;
 	int			varlen;
 }			t_var;
@@ -124,11 +125,12 @@ char	*get_env_value(char *var, char **envp);
 void	update_env_value(char *var, char *new_value, char **envp);
 int		ft_update_shlvl(t_struct *mshell);
 char	**add_env_str(char *arg, char **envp);
+void	update_env(t_var *var, char *new_value, t_struct *mshell);
 
 /* -- ENV VARIABLE MANIPULATIONS -- */
 bool	ft_isvar(char *arg);
 char	*get_env_var(char *line);
-int		ft_varcmp(char *var, char **envp);
+int		ft_varcmp(t_var *var, char **envp);
 void	ft_create_var(char *arg, t_var *var);
 char	*ft_varjoin(char *s1, char *s2);
 

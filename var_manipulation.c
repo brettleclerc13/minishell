@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 17:11:30 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/20 17:52:49 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/23 10:39:00 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,23 +44,17 @@ char	*get_env_var(char *line)
 	}
 }
 
-int	ft_varcmp(char *var, char **envp)
+int	ft_varcmp(t_var *var, char **envp)
 {
-	char	*envp_var;
 	int		i;
 
-	envp_var = NULL;
 	i = 0;
 	while (envp[++i])
 	{
-		envp_var = get_env_var(envp[i]);
-		if (!ft_strcmp(var, envp_var))
-		{
-			printf("compared\n");
-			free(envp_var);
+		var->envp_var = get_env_var(envp[i]);
+		if (!ft_strcmp(var->var, var->envp_var))
 			return (1);
-		}
-		free(envp_var);
+		free(var->envp_var);
 	}
 	return (0);
 }
@@ -69,6 +63,7 @@ void	ft_create_var(char *arg, t_var *var)
 {
 	char	*skip_var;
 
+	var->envp_var = NULL;
 	if (!ft_strchr(arg, '='))
 	{
 		var->var = ft_strdup(arg);
@@ -82,10 +77,12 @@ void	ft_create_var(char *arg, t_var *var)
 		var->symbol = '+';
 	}
 	else
+	{
 		skip_var = ft_strchr(arg, '=');
+		var->symbol = '=';
+	}
 	var->varlen = ft_strlen(arg) - ft_strlen(skip_var);
 	var->var = ft_substr(arg, 0, var->varlen);
-	printf("var : %s\n", var->var);
 }
 
 char	*ft_varjoin(char *s1, char *s2)
@@ -109,6 +106,5 @@ char	*ft_varjoin(char *s1, char *s2)
 	while (s2 && j < ft_strlen(s2))
 		dest[i++] = s2[j++];
 	dest[i] = '\0';
-	free(s1);
 	return (dest);
 }

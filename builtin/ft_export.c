@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 08:10:41 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/20 17:59:47 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/23 10:23:53 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_add_to_envp(char *arg, t_struct *mshell)
 	t_var	var;
 
 	ft_create_var(arg, &var);
-	if (!ft_varcmp(var.var, mshell->envp))
+	if (!ft_varcmp(&var, mshell->envp))
 	{
 		if (var.symbol == '+')
 			mshell->envp = add_env_value(var.var, arg + (var.varlen + 1), mshell->envp);
@@ -26,13 +26,11 @@ void	ft_add_to_envp(char *arg, t_struct *mshell)
 	}
 	else
 	{
-		if (var.symbol == '0')
-			mshell->envp = add_env_str(arg, mshell->envp);
-		else
-		{
-			var.var = ft_varjoin(var.var, "=");
-			mshell->envp = add_env_value(var.var, arg + var.varlen, mshell->envp);
-		}
+		if (var.symbol == '+')
+			update_env(&var, arg + (var.varlen + 1), mshell);
+		if (var.symbol == '=')
+			update_env(&var, arg + var.varlen, mshell);
+		free(var.envp_var);
 	}
 	free(var.var);
 }

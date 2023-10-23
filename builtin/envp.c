@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 17:01:46 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/20 17:16:56 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/23 10:37:02 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,25 @@ void	update_env_value(char *var, char *new_value, char **envp)
 			envp[i] = ft_strjoin(tmp, new_value);
 			free(tmp);
 			return ;
+		}
+	}
+}
+
+void	update_env(t_var *var, char *new_value, t_struct *mshell)
+{
+	int		i;
+	
+	i = -1;
+	while (mshell->envp[++i])
+	{
+		if (!ft_strncmp(mshell->envp[i], var->var, var->varlen))
+		{
+			if (!ft_strcmp(var->var, var->envp_var))
+			{
+				free(mshell->envp[i]);
+				mshell->envp[i] = ft_varjoin(var->var, new_value);
+				return ;
+			}
 		}
 	}
 }
