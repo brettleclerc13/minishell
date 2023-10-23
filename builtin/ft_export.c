@@ -6,13 +6,13 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 08:10:41 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/23 10:23:53 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/23 16:37:53 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_add_to_envp(char *arg, t_struct *mshell)
+static void	ft_add_to_envp(char *arg, t_struct *mshell)
 {
 	t_var	var;
 
@@ -33,6 +33,24 @@ void	ft_add_to_envp(char *arg, t_struct *mshell)
 		free(var.envp_var);
 	}
 	free(var.var);
+}
+
+static bool	ft_isvar(char *arg)
+{
+	int	i;
+
+	i = 0;
+	if (!*arg)
+		return (ft_put_export_error(arg));
+	if (arg[0] && (!ft_isalpha(arg[i]) && arg[i] != '_'))
+		return (ft_put_export_error(arg));
+	while (arg[++i] && arg[i] != '=')
+	{
+		if ((!ft_isalnum(arg[i]) && arg[i] != '_') && \
+			!(arg[i] == '+' && arg[i + 1] == '='))
+			return (ft_put_export_error(arg));
+	}
+	return (true);
 }
 
 int	ft_export(char **argv, t_struct *mshell)

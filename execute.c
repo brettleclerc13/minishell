@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 20:16:19 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/23 08:42:55 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/23 17:02:59 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,7 @@ void	ft_execute(t_struct *mshell)
 		ft_export(args, mshell);
 	if (!ft_strcmp(args[0], "env"))
 		ft_env(mshell->envp);
+	if (!ft_strcmp(args[0], "unset"))
+		ft_unset(args, mshell);
 	ft_arrayfree(args);
 }

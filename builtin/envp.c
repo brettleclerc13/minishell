@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 17:01:46 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/23 10:37:02 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/23 16:57:09 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ char	**add_env_str(char *arg, char **envp)
 	char	**new_envp;
 
 	new_envp = ft_arrayadd(arg, envp);
-	ft_arrayfree(envp);
 	return (new_envp);
 }
 
@@ -96,6 +95,5 @@ char	**add_env_value(char *var, char *value, char **envp)
 	tmp = ft_strjoin(var, value);
 	new_envp = ft_arrayadd(tmp, envp);
 	free(tmp);
-	ft_arrayfree(envp);
 	return (new_envp);
 }

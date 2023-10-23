@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 20:33:16 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/20 17:14:25 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/23 15:18:52 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	ft_print_export(char **envp)
 
 bool	ft_put_export_error(char *arg)
 {
-	ft_putstr_fd("export : ", 2);
+	ft_putstr_fd("minishell: export: ", 2);
 	ft_putstr_fd(arg, 2);
 	ft_putstr_fd(": not a valid identifier\n", 2);
 	return (false);

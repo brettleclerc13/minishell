@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/23 09:56:08 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/23 17:01:02 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ int		ft_cd_contd(char *dir, char *cwd, t_struct *mshell);
 int		ft_pwd(void);
 int		ft_env(char **envp);
 int		ft_export(char **argv, t_struct *mshell);
+int		ft_unset(char **argv, t_struct *mshell);
 
 /* -- PRINT EXPORT -- */
 void	ft_print_export(char **envp);
@@ -128,7 +129,6 @@ char	**add_env_str(char *arg, char **envp);
 void	update_env(t_var *var, char *new_value, t_struct *mshell);
 
 /* -- ENV VARIABLE MANIPULATIONS -- */
-bool	ft_isvar(char *arg);
 char	*get_env_var(char *line);
 int		ft_varcmp(t_var *var, char **envp);
 void	ft_create_var(char *arg, t_var *var);
@@ -139,6 +139,7 @@ char	**ft_arraydup(char **array);
 int		ft_arraylen(char **array);
 char	**ft_arrayadd(char *newline, char **array);
 void	ft_arrayfree(char **array);
+char	**ft_arrayremove(char *removeline, char **array);
 
 /* -- EXECUTE -- */
 void	ft_execute(t_struct *mshell);

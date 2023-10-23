@@ -6,29 +6,11 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 17:11:30 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/23 10:39:00 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/23 16:44:47 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-bool	ft_isvar(char *arg)
-{
-	int	i;
-
-	i = 0;
-	if (!arg)
-		return (ft_put_export_error(arg));
-	if (!ft_isalpha(arg[i]) && arg[i] != '_')
-		return (ft_put_export_error(arg));
-	while (arg[++i] && arg[i] != '=')
-	{
-		if ((!ft_isalnum(arg[i]) && arg[i] != '_') && \
-			!(arg[i] == '+' && arg[i + 1] == '='))
-			return (ft_put_export_error(arg));
-	}
-	return (true);
-}
 
 char	*get_env_var(char *line)
 {
