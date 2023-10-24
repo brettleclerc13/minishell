@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/23 17:01:02 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/24 11:21:23 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct	s_struct
 	t_lex		*args;
 	int			pipe_count;
 	char		**path;
+	pid_t		child;
 }				t_struct;
 
 typedef struct	s_split_word
@@ -107,13 +108,14 @@ void	print_lst_tok(t_lex *list);
 void	print_array(char **array);
 
 /* -- BUILTINS -- */
-int		ft_echo(char **argv);
-int		ft_cd(int argc, char **argv, t_struct *mshell);
+int		ft_echo(char **args);
+int		ft_cd(char **args, t_struct *mshell);
 int		ft_cd_contd(char *dir, char *cwd, t_struct *mshell);
 int		ft_pwd(void);
 int		ft_env(char **envp);
-int		ft_export(char **argv, t_struct *mshell);
-int		ft_unset(char **argv, t_struct *mshell);
+int		ft_export(char **args, t_struct *mshell);
+int		ft_unset(char **args, t_struct *mshell);
+void	ft_exit(char **args, pid_t child);
 
 /* -- PRINT EXPORT -- */
 void	ft_print_export(char **envp);

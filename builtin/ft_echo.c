@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 18:10:35 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/15 19:45:52 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/24 11:06:11 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,16 @@ static bool is_newline(char **argv, int *i)
 	return (is_newline);
 }
 
-int	ft_echo(char **argv)
+int	ft_echo(char **args)
 {
 	bool	newline;
 	int		i;
 	
-	newline = is_newline(argv, &i);
-	while (argv[i])
+	newline = is_newline(args, &i);
+	while (args[i])
 	{
-		printf("%s", argv[i]);
-		if (argv[i + 1])
+		printf("%s", args[i]);
+		if (args[i + 1])
 			printf(" ");
 		i++;
 	}

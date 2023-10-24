@@ -23,7 +23,8 @@ SRC_BUILTIN	=	${addprefix ${BUILT_PATH}, ./ft_cd.c \
 											./ft_export.c \
 											./print_export.c \
 	  										./ft_echo.c \
-											./ft_unset.c}
+											./ft_unset.c \
+											./ft_exit.c}
 
 SRC = ${SRC_MAIN} ${SRC_BUILTIN}
 

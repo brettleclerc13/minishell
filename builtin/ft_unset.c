@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 11:56:07 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/23 17:19:51 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/24 11:03:36 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ bool	ft_put_unset_error(char *arg)
 	return (false);
 }
 
-static bool	ft_is_unset_arg(char *arg)
+static bool	ft_isunsetarg(char *arg)
 {
 	int	i;
 
@@ -56,7 +56,7 @@ static bool	ft_is_unset_arg(char *arg)
 	return (true);
 }
 
-int	ft_unset(char **argv, t_struct *mshell)
+int	ft_unset(char **args, t_struct *mshell)
 {
 	int	i;
 	int	result;
@@ -64,14 +64,14 @@ int	ft_unset(char **argv, t_struct *mshell)
 	i = 0;
 	mshell->envp = mshell->envp;
 	result = 0;
-	while (argv[++i])
+	while (args[++i])
 	{
-		if (!ft_is_unset_arg(argv[i]))
+		if (!ft_isunsetarg(args[i]))
 		{
 			result = 1;
 			continue ;
 		}
-		ft_remove_from_envp(argv[i], mshell);
+		ft_remove_from_envp(args[i], mshell);
 	}
 	return (result);
 }
