@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 17:26:36 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/24 11:52:21 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/24 18:08:33 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,28 @@
 
 static long int ft_atol(char *str)
 {
-	
+	int	i;
+	int	minus;
+	long int	result;
+
+	i = 0;
+	minus = 1;
+	result = 0;
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
+		i++;
+	if (str[i] == 45)
+	{
+		minus *= -1;
+		i++;
+	}
+	else if (str[i] == 43)
+		i++;
+	while (str[i] && (str[i] >= 48 && str[i] <= 57))
+	{
+		result = result * 10 + (str[i] - 48);
+		i++;
+	}
+	return (minus * result);
 }
 
 static bool	ft_isvalidarg(char *arg)
@@ -37,8 +58,10 @@ static bool	ft_isvalidarg(char *arg)
 			return (false);
 	}
 	if (ft_strlen(arg) == 19)
+	{
 		if ((positive && arg[i - 1] > '7') || (!positive && arg[i - 1] > 8))
 			return (false);
+	}
 	else if (ft_strlen(arg) > 19)
 		return (false);
 	return (true);

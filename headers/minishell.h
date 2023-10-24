@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/24 11:21:23 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/24 19:43:24 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,14 +108,16 @@ void	print_lst_tok(t_lex *list);
 void	print_array(char **array);
 
 /* -- BUILTINS -- */
-int		ft_echo(char **args);
+int		builtin_main(char **args, t_struct *mshell);
+bool	builtin_function(char *arg);
 int		ft_cd(char **args, t_struct *mshell);
 int		ft_cd_contd(char *dir, char *cwd, t_struct *mshell);
-int		ft_pwd(void);
+int		ft_echo(char **args);
 int		ft_env(char **envp);
-int		ft_export(char **args, t_struct *mshell);
-int		ft_unset(char **args, t_struct *mshell);
 void	ft_exit(char **args, pid_t child);
+int		ft_export(char **args, t_struct *mshell);
+int		ft_pwd(void);
+int		ft_unset(char **args, t_struct *mshell);
 
 /* -- PRINT EXPORT -- */
 void	ft_print_export(char **envp);

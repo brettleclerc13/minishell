@@ -16,7 +16,8 @@ SRC_MAIN 	= 	./main.c \
 				./init.c \
 				./execute.c
 
-SRC_BUILTIN	=	${addprefix ${BUILT_PATH}, ./ft_cd.c \
+SRC_BUILTIN	=	${addprefix ${BUILT_PATH}, ./builtin_main.c \
+											./ft_cd.c \
 											./envp.c \
 											./ft_env.c \
 											./ft_pwd.c \

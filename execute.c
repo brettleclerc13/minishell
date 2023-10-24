@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 20:16:19 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/23 17:02:59 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/24 19:44:30 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,8 @@ int	ft_count_pipe(t_struct *mshell)
 void	ft_execute(t_struct *mshell)
 {
 	char	**args;
-	print_lst_tok(mshell->args);
-	//printf("Nb of pipes: %d\n", mshell->pipe_count);
+
 	args = ft_convert_to_array(mshell->args);
-	//print_array(args);
-	if (!ft_strcmp(args[0], "export"))
-		ft_export(args, mshell);
-	if (!ft_strcmp(args[0], "env"))
-		ft_env(mshell->envp);
-	if (!ft_strcmp(args[0], "unset"))
-		ft_unset(args, mshell);
+	builtin_main();
 	ft_arrayfree(args);
 }
