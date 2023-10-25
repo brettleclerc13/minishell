@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_manipulation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 17:11:30 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/25 15:44:52 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/25 17:24:18 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,25 +41,6 @@ int	ft_varcmp(t_var *var, char **envp)
 	return (0);
 }
 
-bool	ft_varcmp_vtwo(char *var, char **envp)
-{
-	char	*envp_var;
-	int		i;
-
-	i = 0;
-	while (envp[++i])
-	{
-		envp_var = get_env_var(envp[i]);
-		if (!ft_strcmp(var, envp_var))
-		{
-			free(envp_var);
-			return (true);
-		}
-		free(envp_var);
-	}
-	return (false);
-}
-
 void	ft_create_var(char *arg, t_var *var)
 {
 	char	*skip_var;
@@ -84,6 +65,25 @@ void	ft_create_var(char *arg, t_var *var)
 	}
 	var->varlen = ft_strlen(arg) - ft_strlen(skip_var);
 	var->var = ft_substr(arg, 0, var->varlen);
+}
+
+bool	ft_varcmp_vtwo(char *var, char **envp)
+{
+	char    *envp_var;
+	int      i;
+
+    i = -1;
+    while (envp[++i])
+    {
+        envp_var = get_env_var(envp[i]);
+        if (!ft_strcmp(var, envp_var))
+        {
+            free(envp_var);
+            return (true);
+        }
+        free(envp_var);
+    }
+    return (false);
 }
 
 char	*ft_varjoin(char *s1, char *s2)

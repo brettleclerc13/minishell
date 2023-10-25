@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 14:44:49 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/16 20:00:09 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/25 17:19:08 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ char	**ft_split(char const *s, char c);
 //Adding
 void	ft_error(char *message);
 char	**ft_split_bash(char const *s, char c1, char c2);
-void	ft_count_quote(char const *s); // Usefull for ft_split_bash
+void	ft_count_quote(char const *s);
+char	*ft_strjoin_parser(char *s1, char *s2, bool free_first_param);
 
 //Bonus Part:
 t_list	*ft_lstnew(void *content);

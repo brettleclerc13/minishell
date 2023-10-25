@@ -14,7 +14,8 @@ SRC_MAIN 	= 	./main.c \
 				./array_manipulation.c \
 				./var_manipulation.c \
 				./init.c \
-				./execute.c
+				./execute.c \
+				./parser_dollar.c \
 
 SRC_BUILTIN	=	${addprefix ${BUILT_PATH}, ./builtin_main.c \
 											./ft_cd.c \

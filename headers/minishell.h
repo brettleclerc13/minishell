@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/24 19:43:24 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/25 17:24:57 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ enum	e_token
 	STRING,
 	FUNCTION,
 	DOLLAR,
+	ZERO,
 };
 
 typedef struct	s_separator
@@ -65,6 +66,7 @@ typedef struct	s_struct
 	t_lex		*args;
 	int			pipe_count;
 	char		**path;
+	bool		check_valid;
 	pid_t		child;
 }				t_struct;
 
@@ -85,20 +87,22 @@ typedef struct	s_var
 }			t_var;
 
 /* -- MINISHELL -- */
-bool		parsing(char *input, t_struct *mshell);
+void		parsing(char *input, t_struct **mshell);
 t_struct	*before_loop_init(int argc, char **envp);
 char		**init_path(char **envp);
 
 /* -- LEXER -- */
-void	*lexer(char **args, char **envp, t_lex **list);
+t_lex	*lexer(char **args, t_lex **list);
 bool	lex_dollar(char **args, t_lex **list, int *i);
 t_lex	*ft_lstnew_lex(void *content, enum e_token token);
 void	ft_lstadd_back_lex(t_lex **lst, t_lex *new);
 int		ft_split_word(char *args, t_lex **list);
 
 /* -- PARSER -- */
-void	parser(t_lex **list, char **envp);
+bool	parser(t_lex **list, char **envp);
 int		ft_count_pipe(t_struct *mshell);
+void	check_dollar(t_lex **list, char **envp);
+
 
 /* -- DEBUGGING -- */
 void    print_list(t_lex *list);
@@ -137,6 +141,7 @@ char	*get_env_var(char *line);
 int		ft_varcmp(t_var *var, char **envp);
 void	ft_create_var(char *arg, t_var *var);
 char	*ft_varjoin(char *s1, char *s2);
+bool	ft_varcmp_vtwo(char *var, char **envp);
 
 /* -- ARRAY MANIPULATIONS -- */
 char	**ft_arraydup(char **array);
