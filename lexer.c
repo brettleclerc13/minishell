@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 13:45:40 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/15 15:50:17 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/23 08:45:59 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void	*lexer(char **args, char **envp, t_lex **list)
 	t_lex	*tmp;
 
 	i = 0;
-	tmp = *list;
 	(void)envp;
 	while (args[i])
 	{
@@ -108,5 +107,6 @@ void	*lexer(char **args, char **envp, t_lex **list)
 			continue;
 		lex_word(args, list, &i);
 	}
+	tmp = *list;
 	return (tmp);
 }

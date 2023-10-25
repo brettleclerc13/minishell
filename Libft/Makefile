@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+         #
+#    By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 20:15:35 by ehouot            #+#    #+#              #
-#    Updated: 2023/09/20 07:09:36 by ehouot           ###   ########.fr        #
+#    Updated: 2023/10/16 20:00:45 by brettlecler      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRC 		= ft_isalpha.c \
 				ft_toupper.c \
 				ft_tolower.c \
 				ft_strlcat.c \
+				ft_strcmp.c \
 				ft_strncmp.c \
 				ft_strchr.c \
 				ft_strrchr.c \

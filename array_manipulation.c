@@ -6,11 +6,34 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 20:01:37 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/15 20:37:11 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/23 17:13:57 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	**ft_arrayremove(char *removeline, char **array)
+{
+	char **tmp;
+	int	i;
+	int	j;
+
+	if (!array)
+		return (NULL);
+	i = -1;
+	j = -1;
+	tmp = ft_calloc(ft_arraylen(array), sizeof(char *));
+	if (!tmp)
+		return (NULL);
+	while (array[++i])
+	{
+		if (!ft_strncmp(array[i], removeline, ft_strlen(removeline)))
+			continue ;
+		tmp[++j] = ft_strdup(array[i]);
+	}
+	ft_arrayfree(array);
+	return (tmp);
+}
 
 void	ft_arrayfree(char **array)
 {
@@ -38,6 +61,7 @@ char	**ft_arrayadd(char *newline, char **array)
 	while (array[++i])
 		tmp[i] = ft_strdup(array[i]);
 	tmp[i] = ft_strdup(newline);
+	ft_arrayfree(array);
 	return (tmp);
 }
 

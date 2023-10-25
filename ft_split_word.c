@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 16:09:16 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/15 15:51:06 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/17 10:17:18 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ void	create_token(char *args, t_lex **list, t_sp_wd **vars, enum e_token type)
 		return ;
 	if (*char_token)
 		new_node(char_token, list, type);
-	if (!*char_token)
-		free(char_token);
+	free(char_token);
 }
 
 enum e_token	is_sep(char *c, int *i)

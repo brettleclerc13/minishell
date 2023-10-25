@@ -6,25 +6,18 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 17:01:46 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/15 20:03:39 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/23 16:57:09 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_env(t_struct *mshell)
+char	**add_env_str(char *arg, char **envp)
 {
-	int	i;
+	char	**new_envp;
 
-	i = -1;
-	if (!mshell->envp)
-	{
-		ft_putstr_fd("env: env not found", 2);
-		return (1);
-	}
-	while (mshell->envp[++i])
-		printf("%s\n", mshell->envp[i]);
-	return (0);
+	new_envp = ft_arrayadd(arg, envp);
+	return (new_envp);
 }
 
 int	ft_update_shlvl(t_struct *mshell)
@@ -62,6 +55,25 @@ void	update_env_value(char *var, char *new_value, char **envp)
 	}
 }
 
+void	update_env(t_var *var, char *new_value, t_struct *mshell)
+{
+	int		i;
+	
+	i = -1;
+	while (mshell->envp[++i])
+	{
+		if (!ft_strncmp(mshell->envp[i], var->var, var->varlen))
+		{
+			if (!ft_strcmp(var->var, var->envp_var))
+			{
+				free(mshell->envp[i]);
+				mshell->envp[i] = ft_varjoin(var->var, new_value);
+				return ;
+			}
+		}
+	}
+}
+
 char	*get_env_value(char *var, char **envp)
 {
 	int	i;
@@ -83,6 +95,5 @@ char	**add_env_value(char *var, char *value, char **envp)
 	tmp = ft_strjoin(var, value);
 	new_envp = ft_arrayadd(tmp, envp);
 	free(tmp);
-	ft_arrayfree(envp);
 	return (new_envp);
 }
