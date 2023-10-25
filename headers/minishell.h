@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/16 11:54:49 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/24 19:43:24 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct	s_struct
 	t_lex		*args;
 	int			pipe_count;
 	char		**path;
+	pid_t		child;
 }				t_struct;
 
 typedef struct	s_split_word
@@ -75,8 +76,16 @@ typedef struct	s_split_word
 	int				skip;
 }				t_sp_wd;
 
+typedef struct	s_var
+{
+	char		*var;
+	char		*envp_var;
+	int			symbol;
+	int			varlen;
+}			t_var;
+
 /* -- MINISHELL -- */
-t_lex		*parsing(char *input, char **envp);
+bool		parsing(char *input, t_struct *mshell);
 t_struct	*before_loop_init(int argc, char **envp);
 char		**init_path(char **envp);
 
@@ -94,28 +103,47 @@ int		ft_count_pipe(t_struct *mshell);
 /* -- DEBUGGING -- */
 void    print_list(t_lex *list);
 void    print_token(t_lex *list);
-void	print_tab(char *tab);
+void	print_string(char *tab);
 void	print_lst_tok(t_lex *list);
+void	print_array(char **array);
 
 /* -- BUILTINS -- */
-int		ft_echo(char **argv);
-int		ft_cd(int argc, char **argv, t_struct *mshell);
+int		builtin_main(char **args, t_struct *mshell);
+bool	builtin_function(char *arg);
+int		ft_cd(char **args, t_struct *mshell);
 int		ft_cd_contd(char *dir, char *cwd, t_struct *mshell);
+int		ft_echo(char **args);
+int		ft_env(char **envp);
+void	ft_exit(char **args, pid_t child);
+int		ft_export(char **args, t_struct *mshell);
 int		ft_pwd(void);
-int		ft_env(t_struct *mshell);
-int		ft_export(char **argv, t_struct *mshell);
+int		ft_unset(char **args, t_struct *mshell);
+
+/* -- PRINT EXPORT -- */
+void	ft_print_export(char **envp);
+void	ft_sort_ascii(char **array);
+bool	ft_put_export_error(char *arg);
 
 /* -- ENVP MANIPULATIONS -- */
 char	**add_env_value(char *var, char *value, char **envp);
 char	*get_env_value(char *var, char **envp);
 void	update_env_value(char *var, char *new_value, char **envp);
 int		ft_update_shlvl(t_struct *mshell);
+char	**add_env_str(char *arg, char **envp);
+void	update_env(t_var *var, char *new_value, t_struct *mshell);
 
-/* -- FREE -- */
+/* -- ENV VARIABLE MANIPULATIONS -- */
+char	*get_env_var(char *line);
+int		ft_varcmp(t_var *var, char **envp);
+void	ft_create_var(char *arg, t_var *var);
+char	*ft_varjoin(char *s1, char *s2);
+
+/* -- ARRAY MANIPULATIONS -- */
 char	**ft_arraydup(char **array);
 int		ft_arraylen(char **array);
 char	**ft_arrayadd(char *newline, char **array);
 void	ft_arrayfree(char **array);
+char	**ft_arrayremove(char *removeline, char **array);
 
 /* -- EXECUTE -- */
 void	ft_execute(t_struct *mshell);

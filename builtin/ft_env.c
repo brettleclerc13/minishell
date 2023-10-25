@@ -1,40 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 14:39:24 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/23 08:59:50 by brettlecler      ###   ########.fr       */
+/*   Created: 2023/10/16 16:17:25 by brettlecler       #+#    #+#             */
+/*   Updated: 2023/10/17 19:53:37 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+int	ft_env(char **envp)
 {
-	t_struct	*mshell;
-	char	*input;
-	
-	(void)argv;
-	mshell = before_loop_init(argc, envp);
-	if (!mshell)
-		return (1);
-	while (1)
+	int	i;
+
+	i = -1;
+	if (!envp)
 	{
-		input = readline(COLOR_PROMPT COLOR_RESET"$ ");
-		if (input == NULL)
-			break ;
-		if (!parsing(input, mshell))
-			return (-1);
-		ft_execute(mshell);
-		add_history(input);
-		free(input);
+		ft_putstr_fd("env: env not found", 2);
+		return (1);
+	}
+	while (envp[++i])
+	{
+		if (ft_strchr(envp[i], '='))
+		printf("%s\n", envp[i]);
 	}
 	return (0);
 }
-
-// if (ft_strncmp(input, "exit", 5) == 0)
-				// ft_exit();
