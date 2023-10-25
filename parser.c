@@ -6,71 +6,87 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:17:25 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/16 12:54:08 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/10/25 17:04:45 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// static char	*get_env_value(char *var, char **envp)
-// {
-// 	int	i;
-// 	int	str_len;
+void	opening_redir(t_lex **list, enum e_token prev_tok, t_lex *tmp)
+{
+	(void)prev_tok;
+	tmp = tmp->next;
+	if ((*list)->token == RIGHT_CHEV && tmp->token == WORD)
+		open(tmp->content, O_RDWR | O_TRUNC | O_CREAT, 0644);
+}
 
-// 	i = -1;
-// 	str_len = ft_strlen(var);
-// 	while (envp[++i])
-// 		if (!ft_strncmp(envp[i], var, str_len))
-// 			return (envp[i] + str_len + 1);
-// 	return (NULL);
-// }
+bool	check_redir(t_lex **list, enum e_token prev_tok)
+{
+	t_lex	*tmp;
 
-// static bool	check_dollar(t_lex **list, char **envp)
-// {
-// 	int		i;
-// 	char	*str;
+	tmp = *list;
+	if ((*list)->token >= 0 && (*list)->token <= 3)
+	{
+		opening_redir(list, prev_tok, tmp);
+		if (tmp->next == NULL)
+		{
+			printf("minishell: syntax error near unexpected token `newline'\n");
+			return (true);
+		}
+		tmp = tmp->next;
+		if ((*list)->token == LEFT_CHEV && prev_tok == (enum e_token)-1 \
+			&& (open(tmp->content, O_RDONLY) == -1))
+		{
+			printf("minishell: %s: No such file or directory\n", tmp->content);
+			return (true);
+		}
+		if ((tmp->token >= 0 && tmp->token <= 4))
+		{
+			printf("minishell: syntax error near unexpected token `%s'\n", tmp->content);
+			return (true);
+		}
+	}
+	return (false);
+}
 
-// 	i = -1;
-// 	str = ft_strchr((*list)->content, '$');
-// 	if (!str)
-// 		return (false);
-// 	(*list)->content = get_env_value(ft_substr((*list)->content, 1, ft_strlen((*list)->content)), envp);
-// 	if ((*list)->content == NULL)
-// 		return (false);
-// 	return (true);
-// }
+bool	check_double_pipe(t_lex **list)
+{
+	t_lex	*tmp;
 
-// void	check_double_pipe(t_lex **list)
-// {
-// 	t_lex	*tmp;
+	tmp = *list;
+	if ((*list)->token == PIPE)
+	{
+		if (tmp->next == NULL)
+		{
+			printf("minishell: syntax error near unexpected token `|'\n");
+			return (true);
+		}
+		tmp = tmp->next;
+		if (tmp->token == PIPE)
+		{
+			printf("Double pipe not supported\n"); // faire retourner le prompt
+			return (true);
+		}
+	}
+	return (false);
+}
 
-// 	tmp = *list;
-// 	if ((*list)->token == PIPE)
-// 	{
-// 		tmp = tmp->next;
-// 		if (tmp->token == PIPE)
-// 			ft_error("Double pipe not supported\n"); // faire retourner le prompt
-// 	}
-// }
+bool	parser(t_lex **list, char **envp)
+{
+	enum e_token	prev_tok;
+	t_lex			*tmp;
 
-// void	parser(t_lex **list, char **envp)
-// {
-// 	t_lex	*tmp;
-
-// 	tmp = *list;
-// 	while (list)
-// 	{
-// 		if ((*list)->token == STRING | (*list)->token  == WORD)
-// 		{
-// 			// check_string_word(list, envp);
-// 			continue;
-// 		}
-// 		if ((*list)->token  == WORD | (*list)->token == FUNCTION)
-// 		{
-			
-// 		}
-// 		if ((*list)->token == WORD | (*list)->token == STRING | (*list)->token == DOLLAR)
-// 			// check_dollar(list, envp);
-// 		list = (*list)->next;
-// 	}
-// }
+	prev_tok = -1;
+	tmp = *list;
+	while (tmp)
+	{
+		if (check_double_pipe(&tmp) == true) // cas des doubles pipes
+			return (true);
+		check_dollar(&tmp, envp); // cas des dollars
+		if (check_redir(&tmp, prev_tok) == true) // cas des redirections
+			return (true);
+		prev_tok = tmp->token;
+		tmp = tmp->next;
+	}
+	return (false);
+}

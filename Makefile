@@ -13,7 +13,8 @@ SRC_MAIN 	= 	./main.c \
 				./ft_split_word.c \
 				./array_manipulation.c \
 				./init.c \
-				./execute.c
+				./execute.c \
+				./parser_dollar.c \
 
 SRC_BUILTIN	=	${addprefix ${BUILT_PATH}, ./ft_cd.c \
 											./envp.c \

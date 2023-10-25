@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 20:16:19 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/16 12:30:34 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/23 15:51:07 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ int	ft_count_pipe(t_struct *mshell)
 
 void	ft_execute(t_struct *mshell)
 {
-	print_lst_tok(mshell->args);
+	// print_lst_tok(mshell->args);
 	printf("Nb of pipes: %d\n", mshell->pipe_count);
 }

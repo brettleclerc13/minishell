@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 17:46:42 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/14 08:15:14 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/10/23 09:44:16 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_lex	*ft_lstnew_lex(void *content, enum e_token token)
 	new = malloc (sizeof(t_lex));
 	if (!new)
 		return (NULL);
-	new->content = content;
+	new->content = ft_strdup(content);
     new->token = token;
 	new->next = NULL;
 	return (new);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 13:45:40 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/15 15:50:17 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/25 08:56:54 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static bool	lex_string(char **args, t_lex **list, int *i, int j)
 	return (false);
 }
 
-void	*lexer(char **args, char **envp, t_lex **list)
+t_lex	*lexer(char **args, t_lex **list)
 {
 	int		i;
 	int		j;
@@ -92,7 +92,6 @@ void	*lexer(char **args, char **envp, t_lex **list)
 
 	i = 0;
 	tmp = *list;
-	(void)envp;
 	while (args[i])
 	{
 		j = 0;
@@ -108,5 +107,6 @@ void	*lexer(char **args, char **envp, t_lex **list)
 			continue;
 		lex_word(args, list, &i);
 	}
+	tmp = *list;
 	return (tmp);
 }
