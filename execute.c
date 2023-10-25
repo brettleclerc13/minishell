@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 20:16:19 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/24 19:44:30 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/25 14:36:39 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,6 @@ void	ft_execute(t_struct *mshell)
 	char	**args;
 
 	args = ft_convert_to_array(mshell->args);
-	builtin_main();
+	builtin_main(args, mshell);
 	ft_arrayfree(args);
 }

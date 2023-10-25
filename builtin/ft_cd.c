@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:53:41 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/24 11:12:07 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/25 14:41:11 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	ft_cd(char **args, t_struct *mshell)
 		}
 	}
 	else
-		dir = ft_strdup(args[2]);
+		dir = ft_strdup(args[1]);
 	if (ft_cd_contd(dir, cwd, mshell))
 		return (1);
 	return (0);

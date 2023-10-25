@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 18:10:35 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/24 11:06:11 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/25 15:03:33 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static bool is_newline(char **argv, int *i)
 	int		j;
 
 	is_newline = false;
-	*i = 1;
+	*i = 0;
 	while (argv[++(*i)] && argv[*i][0] == '-')
 	{
 		j = 0;
