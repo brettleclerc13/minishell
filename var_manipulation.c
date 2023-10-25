@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 17:11:30 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/25 14:55:16 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/25 15:44:52 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,25 @@ int	ft_varcmp(t_var *var, char **envp)
 		free(var->envp_var);
 	}
 	return (0);
+}
+
+bool	ft_varcmp_vtwo(char *var, char **envp)
+{
+	char	*envp_var;
+	int		i;
+
+	i = 0;
+	while (envp[++i])
+	{
+		envp_var = get_env_var(envp[i]);
+		if (!ft_strcmp(var, envp_var))
+		{
+			free(envp_var);
+			return (true);
+		}
+		free(envp_var);
+	}
+	return (false);
 }
 
 void	ft_create_var(char *arg, t_var *var)
