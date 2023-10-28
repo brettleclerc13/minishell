@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/25 17:24:57 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/10/28 21:00:46 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,14 @@ typedef struct s_lex
 	void			*next;
 }				t_lex;
 
+typedef struct	s_serie
+{
+	char			**cmd;
+	enum e_token	cmd_token;
+	enum e_token	fd_token;
+	void			*next;
+}				t_serie;
+
 typedef struct	s_struct
 {
 	char		**envp;
@@ -103,10 +111,15 @@ bool	parser(t_lex **list, char **envp);
 int		ft_count_pipe(t_struct *mshell);
 void	check_dollar(t_lex **list, char **envp);
 
+/* -- SERIES -- */
+void	serie_creation(t_struct *mshell, t_serie **series);
+t_serie	*ft_lstnew_serie(t_lex *args, int start, int end);
+char	**ft_serie_array(t_lex *args, t_serie **new, int start, int end);
+void	ft_lstadd_back_serie(t_serie **series, t_serie *new);
+t_serie	*ft_lstlast_serie(t_serie *series);
 
 /* -- DEBUGGING -- */
 void    print_list(t_lex *list);
-void    print_token(t_lex *list);
 void	print_string(char *tab);
 void	print_lst_tok(t_lex *list);
 void	print_array(char **array);
