@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/28 21:00:46 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/29 09:09:46 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ void    print_list(t_lex *list);
 void	print_string(char *tab);
 void	print_lst_tok(t_lex *list);
 void	print_array(char **array);
+void	print_lst_serie(t_serie *series);
 
 /* -- BUILTINS -- */
 int		builtin_main(char **args, t_struct *mshell);

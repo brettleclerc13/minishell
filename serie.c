@@ -6,37 +6,11 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:15:30 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/28 21:01:00 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/29 09:00:32 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	**ft_serie_array(t_lex *args, t_serie **new, int start, int end)
-{
-	t_lex	*tmp;
-	char	**array;
-	int		i;
-	
-	i = -1;
-	array = ft_calloc((end - start) + 1, sizeof(char *));
-	if (!array)
-		return (NULL);
-	tmp = args;
-	while (tmp && ++i < start)
-		tmp = tmp->next;
-	(*new)->cmd_token = tmp->token;
-	i = 0;
-	while (tmp && start < end)
-	{
-		array[i++] = ft_strdup(tmp->content);
-		tmp = tmp->next;
-		start++;
-	}
-	if (tmp)
-		(*new)->fd_token = tmp->token;
-	return (array);
-}
 
 t_serie	*ft_lstlast_serie(t_serie *series)
 {
@@ -74,6 +48,32 @@ t_serie	*ft_lstnew_serie(t_lex *args, int start, int end)
 	return (new);
 }
 
+char	**ft_serie_array(t_lex *args, t_serie **new, int start, int end)
+{
+	t_lex	*tmp;
+	char	**array;
+	int		i;
+	
+	i = -1;
+	array = ft_calloc((end - start) + 1, sizeof(char *));
+	if (!array)
+		return (NULL);
+	tmp = args;
+	while (tmp && ++i < start)
+		tmp = tmp->next;
+	(*new)->cmd_token = tmp->token;
+	i = 0;
+	while (tmp && start < end)
+	{
+		array[i++] = ft_strdup(tmp->content);
+		tmp = tmp->next;
+		start++;
+	}
+	if (tmp)
+		(*new)->fd_token = tmp->token;
+	return (array);
+}
+
 void	serie_creation(t_struct *mshell, t_serie **series)
 {
 	int		i;
@@ -94,6 +94,11 @@ void	serie_creation(t_struct *mshell, t_serie **series)
 			j = i;
 		}
 		i++;
+		if (!tmp_arg->next)
+		{
+			new = ft_lstnew_serie(mshell->args, j , i);
+			ft_lstadd_back_serie(series, new);
+		}
 		tmp_arg = tmp_arg->next;
 	}
 }

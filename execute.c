@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 20:16:19 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/28 20:53:49 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/29 09:10:19 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ void	ft_execute(t_struct *mshell)
 	series = NULL;
 	serie_creation(mshell, &series);
 	tmp = series;
+	print_lst_serie(series);
 	while (tmp)
 	{
-		print_array(tmp->cmd);
 		builtin_main(tmp->cmd, mshell);
 		tmp = tmp->next;
 	}
