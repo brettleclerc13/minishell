@@ -1,6 +1,7 @@
 LIBFT_PATH	=	./Libft/
 PIPEX_PATH	=	./pipex42/
 BUILT_PATH	=	./builtin/
+
 READLINE	=	/usr/include/readline
 
 SRC_MAIN 	= 	./main.c \
@@ -16,6 +17,8 @@ SRC_MAIN 	= 	./main.c \
 				./init.c \
 				./execute.c \
 				./parser_dollar.c \
+				./serie.c \
+				./signals/main_signals.c \
 
 SRC_BUILTIN	=	${addprefix ${BUILT_PATH}, ./builtin_main.c \
 											./ft_cd.c \

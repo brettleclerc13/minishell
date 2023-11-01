@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 13:45:40 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/25 17:17:23 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/10/25 18:01:34 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static bool	lex_function(char **args, t_lex **list, int *i)
 	{
 		new = ft_lstnew_lex(args[*i], FUNCTION);
 		ft_lstadd_back_lex(list, new);
-		(*i)++;
+		(*i)++; 
 		return (true);
 	}
 	return (false);

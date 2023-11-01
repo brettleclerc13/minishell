@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:39:24 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/25 17:25:54 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/10/31 17:29:34 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		input = readline(COLOR_PROMPT COLOR_RESET"$ ");
+		signals_types(input, false);
 		if (*input == '\0')
 		{
 			free(input);

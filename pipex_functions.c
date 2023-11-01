@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_functions.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 09:07:07 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/10 09:24:56 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/10/31 13:55:50 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	**ft_extract_path(char **envp)
 			free(trimmed);
 			i = -1;
 			while (stash[++i])
-				stash[i] = ft_strjoin_gnl(stash[i], "/");
+				stash[i] = ft_strjoin_gnl(stash[i], "/", true);
 			return (stash);
 		}
 	}
@@ -37,7 +37,7 @@ char	**ft_extract_path(char **envp)
 }
 
 
-char	*ft_add_path(t_pipex *arg, char *cmd)
+char	*ft_add_path(t_varb *arg, char *cmd)
 {
 	int		i;
 	char	*tmp;
@@ -58,7 +58,7 @@ char	*ft_add_path(t_pipex *arg, char *cmd)
 	return (NULL);
 }
 
-int	ft_execve(char *cmd, t_pipex *arg, char **envp)
+int	ft_execve(char *cmd, t_varb *arg, char **envp)
 {
 	arg->cmd = ft_split(cmd, ' ');
 	if (arg->cmd[0] == NULL)

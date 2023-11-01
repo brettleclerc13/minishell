@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 12:01:13 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/25 17:17:05 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/10/31 13:39:29 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,22 @@ void	print_array(char **array)
 	i = -1;
 	while (array[++i])
 		printf("%s\n", array[i]);
+}
+
+void	print_lst_serie(t_serie *series)
+{
+	int i;
+	int	j;
+
+	i = -1;
+	j = -1;
+	while (series)
+	{
+		i++;
+		while (series->cmd[++j])
+			printf("serie[%d]: cmd[%d]: %s\n", i, j, series->cmd[j]);
+		printf("serie[%d]: cmd_token: %d, fd_token: %d\n", i, series->cmd_token, series->fd_token);
+		j = -1;
+		series = series->next;
+	}
 }

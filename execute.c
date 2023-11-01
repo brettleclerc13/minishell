@@ -6,37 +6,37 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 20:16:19 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/25 17:16:30 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/10/31 12:55:09 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	**ft_convert_to_array(t_lex *args)
-{
-	t_lex	*tmp;
-	char	**array;
-	int		struct_len;
+// static char	**ft_convert_to_array(t_lex *args)
+// {
+// 	t_lex	*tmp;
+// 	char	**array;
+// 	int		struct_len;
 
-	struct_len = 0;
-	tmp = args;
-	while (tmp)
-	{
-		struct_len++;
-		tmp = tmp->next;
-	}
-	array = calloc(struct_len + 1, sizeof(char *));
-	if (!array)
-		return (NULL);
-	tmp = args;
-	struct_len = 0;
-	while (tmp)
-	{
-		array[struct_len++] = ft_strdup(tmp->content);
-		tmp = tmp->next;
-	}
-	return (array);
-}
+// 	struct_len = 0;
+// 	tmp = args;
+// 	while (tmp)
+// 	{
+// 		struct_len++;
+// 		tmp = tmp->next;
+// 	}
+// 	array = ft_calloc(struct_len + 1, sizeof(char *));
+// 	if (!array)
+// 		return (NULL);
+// 	tmp = args;
+// 	struct_len = 0;
+// 	while (tmp)
+// 	{
+// 		array[struct_len++] = ft_strdup(tmp->content);
+// 		tmp = tmp->next;
+// 	}
+// 	return (array);
+// }
 
 int	ft_count_pipe(t_struct *mshell)
 {
@@ -50,15 +50,29 @@ int	ft_count_pipe(t_struct *mshell)
 		if (args->token == 4)
 			pipe_count++;
 		args = args->next;
-	}	
+	}
 	return(pipe_count);
 }
 
 void	ft_execute(t_struct *mshell)
 {
-	char	**args;
+	t_serie	*series;
+	t_serie *tmp;
 
-	args = ft_convert_to_array(mshell->args);
-	builtin_main(args, mshell);
-	ft_arrayfree(args);
+	series = NULL;
+	serie_creation(mshell, &series);
+	tmp = series;
+	print_lst_serie(series);
+	while (tmp)
+	{
+		builtin_main(tmp->cmd, mshell);
+		tmp = tmp->next;
+	}
+	//ft_arrayfree(args);
 }
+// char	**args;
+
+	// args = ft_convert_to_array(mshell->args);
+
+	// builtin_main(args, mshell);
+	// ft_arrayfree(args);
