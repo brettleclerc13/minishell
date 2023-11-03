@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/31 18:26:05 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/02 10:15:02 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 
 # include "../Libft/libft.h"
 # include "../pipex42/pipex_bonus.h"
+
+extern int	g_var;
 
 enum	e_token
 {

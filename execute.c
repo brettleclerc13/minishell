@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 20:16:19 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/31 12:55:09 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/02 12:03:04 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,9 @@ void	ft_execute(t_struct *mshell)
 	print_lst_serie(series);
 	while (tmp)
 	{
-		builtin_main(tmp->cmd, mshell);
+		if (builtin_main(tmp->cmd, mshell) == 0)
+			ft_execve();
+		
 		tmp = tmp->next;
 	}
 	//ft_arrayfree(args);

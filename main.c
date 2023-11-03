@@ -6,12 +6,14 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:39:24 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/31 17:29:34 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/02 11:22:36 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "minishell.h"
+
+int g_var = 0;
 
 int	main(int argc, char **argv, char **envp)
 {

@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 09:07:07 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/31 13:55:50 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/02 12:03:43 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ char	**ft_extract_path(char **envp)
 	return (stash);
 }
 
-
 char	*ft_add_path(t_varb *arg, char *cmd)
 {
 	int		i;
@@ -58,9 +57,21 @@ char	*ft_add_path(t_varb *arg, char *cmd)
 	return (NULL);
 }
 
+// int	ft_execve(char *cmd, t_varb *arg, char **envp)
+// {
+// 	arg->cmd = ft_split(cmd, ' ');
+// 	if (arg->cmd[0] == NULL)
+// 		ft_print_error(2);
+// 	execve(arg->cmd[0], arg->cmd, envp);
+// 	arg->cmd[0] = ft_add_path(arg, arg->cmd[0]);
+// 	if (arg->cmd[0] == NULL)
+// 		ft_print_error(6);
+// 	execve(arg->cmd[0], arg->cmd, envp);
+// 	return (-1);
+// }
+
 int	ft_execve(char *cmd, t_varb *arg, char **envp)
 {
-	arg->cmd = ft_split(cmd, ' ');
 	if (arg->cmd[0] == NULL)
 		ft_print_error(2);
 	execve(arg->cmd[0], arg->cmd, envp);

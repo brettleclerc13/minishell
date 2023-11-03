@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:32:36 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/31 17:29:58 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/02 10:16:12 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void	basic_sigint(int signal)
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
+	g_var = 130;
 }
 
 static void	basic_sigquit(int signal)
@@ -28,6 +29,7 @@ static void	basic_sigquit(int signal)
 		return ;
 	rl_on_new_line();
 	rl_redisplay();
+	g_var = 131;
 }
 
 static void	heredoc_sigint(int signal)
@@ -35,6 +37,7 @@ static void	heredoc_sigint(int signal)
 	if (signal != SIGINT)
 		return ;
 	ft_putstr_fd("\n", STDOUT_FILENO);
+	g_var = 130;
 	exit(1);
 }
 

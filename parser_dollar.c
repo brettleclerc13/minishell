@@ -6,16 +6,32 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 16:55:51 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/25 17:24:12 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/02 11:07:10 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	one_dollar(void)
+{
+	ft_putstr_fd("minishell: $: command not found\n", STDOUT_FILENO);
+	g_var = 127;
+	return ;
+}
+
+void	g_var_value(char *char_dol)
+{
+	*char_dol = char_dol[1];
+	printf("minishell: %d%s: command not found\n", g_var, char_dol);
+	g_var = 127;
+}
+
 char	*check_dollar_continue(char **char_dol, char *result, char **envp, int i)
 {
 	while (char_dol[++i])
 	{
+		if (ft_strncmp(*char_dol, "?", 2) == 0)
+			g_var_value(*char_dol);
 		if (ft_varcmp_vtwo(char_dol[i], envp) == true)
 		{
 			char_dol[i] = ft_strjoin_parser(char_dol[i], "=", true);
