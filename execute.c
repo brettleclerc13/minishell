@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 20:16:19 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/06 09:32:08 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/06 16:40:17 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,13 @@ int	ft_count_pipe(t_struct *mshell)
 void	ft_execute(t_struct *mshell)
 {
 	t_serie	*series;
-	t_serie *tmp;
+	//t_serie *tmp;
 
 	series = NULL;
 	serie_creation(mshell, &series);
-	tmp = series;
-	print_lst_serie(tmp);
+	ft_count_pipe(mshell);
+	mshell->series = series;
+	print_lst_serie(mshell->series);
 	// while (tmp)
 	// {
 	// 	if (builtin_main(tmp->cmd, mshell) == 0)

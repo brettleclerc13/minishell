@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/06 09:28:52 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/06 16:24:52 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ enum	e_token
 	END,
 };
 
+extern void	rl_replace_line(const char *text, int clear_undo);
+
 typedef struct	s_separator
 {
 	char	*str;
@@ -76,6 +78,7 @@ typedef struct	s_struct
 {
 	char		**envp;
 	t_lex		*args;
+	t_serie		*series;
 	int			pipe_count;
 	char		**path;
 	bool		check_valid;

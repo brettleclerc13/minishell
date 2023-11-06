@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 12:52:57 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/06 09:28:35 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/06 16:39:25 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,4 +100,5 @@ void	serie_creation(t_struct *mshell, t_serie **series)
         i++;
 		tmp_arg = tmp_arg->next;
 	}
+	printf("check\n");
 }

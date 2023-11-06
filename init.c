@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 11:38:35 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/24 11:00:32 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/06 16:34:27 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ t_struct	*before_loop_init(int argc, char **envp)
 		return (NULL);
 	mshell->args = malloc(sizeof(t_lex));
 	if (!mshell->args)
+		return (NULL);
+	mshell->series = malloc(sizeof(t_serie));
+	if (!mshell->series)
 		return (NULL);
 	mshell->pipe_count = 0;
 	mshell->child = 0;
