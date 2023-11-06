@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/29 09:09:46 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/06 09:28:52 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,12 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <limits.h>
+# include <signal.h>
 
 # include "../Libft/libft.h"
 # include "../pipex42/pipex_bonus.h"
+
+extern int	g_var;
 
 enum	e_token
 {
@@ -45,6 +48,7 @@ enum	e_token
 	FUNCTION,
 	DOLLAR,
 	ZERO,
+	END,
 };
 
 typedef struct	s_separator
@@ -120,6 +124,7 @@ t_serie	*ft_lstlast_serie(t_serie *series);
 
 /* -- DEBUGGING -- */
 void    print_list(t_lex *list);
+void	print_lst_serie(t_serie *series);
 void	print_string(char *tab);
 void	print_lst_tok(t_lex *list);
 void	print_array(char **array);
@@ -166,5 +171,8 @@ char	**ft_arrayremove(char *removeline, char **array);
 
 /* -- EXECUTE -- */
 void	ft_execute(t_struct *mshell);
+
+/* -- SIGNALS -- */
+void    signals_types(char *input, bool isheredoc);
 
 #endif

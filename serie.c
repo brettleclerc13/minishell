@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/27 18:15:30 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/29 09:00:32 by brettlecler      ###   ########.fr       */
+/*   Created: 2023/10/31 12:52:57 by ehouot            #+#    #+#             */
+/*   Updated: 2023/11/06 09:28:35 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,31 @@ void	ft_lstadd_back_serie(t_serie **series, t_serie *new)
 	tmp = ft_lstlast_serie(*series);
 	tmp->next = new;
 }
+char	**ft_serie_array(t_lex *args, t_serie **new, int start, int end)
+{
+	t_lex	*tmp;
+	char	**array;
+	int		i;
+
+	i = -1;
+	array = ft_calloc((end - start) + 1, sizeof(char *));
+	if (!array)
+		return (NULL);
+	tmp = args;
+	while (tmp && ++i < start)
+		tmp = tmp->next;
+	(*new)->cmd_token = tmp->token;
+	i = 0;
+	while (tmp && start < end && tmp->token > 4)
+	{
+		array[i++] = ft_strdup(tmp->content);
+		tmp = tmp->next;
+		start++;
+	}
+	if (tmp)
+		(*new)->fd_token = tmp->token;
+	return (array);
+}
 
 t_serie	*ft_lstnew_serie(t_lex *args, int start, int end)
 {
@@ -46,32 +71,6 @@ t_serie	*ft_lstnew_serie(t_lex *args, int start, int end)
 	new->cmd = ft_serie_array(args, &new, start, end);
 	new->next = NULL;
 	return (new);
-}
-
-char	**ft_serie_array(t_lex *args, t_serie **new, int start, int end)
-{
-	t_lex	*tmp;
-	char	**array;
-	int		i;
-	
-	i = -1;
-	array = ft_calloc((end - start) + 1, sizeof(char *));
-	if (!array)
-		return (NULL);
-	tmp = args;
-	while (tmp && ++i < start)
-		tmp = tmp->next;
-	(*new)->cmd_token = tmp->token;
-	i = 0;
-	while (tmp && start < end)
-	{
-		array[i++] = ft_strdup(tmp->content);
-		tmp = tmp->next;
-		start++;
-	}
-	if (tmp)
-		(*new)->fd_token = tmp->token;
-	return (array);
 }
 
 void	serie_creation(t_struct *mshell, t_serie **series)
@@ -93,12 +92,12 @@ void	serie_creation(t_struct *mshell, t_serie **series)
 			ft_lstadd_back_serie(series, new);
 			j = i;
 		}
-		i++;
 		if (!tmp_arg->next)
 		{
 			new = ft_lstnew_serie(mshell->args, j , i);
 			ft_lstadd_back_serie(series, new);
 		}
+        i++;
 		tmp_arg = tmp_arg->next;
 	}
 }
