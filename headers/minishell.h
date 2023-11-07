@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/07 12:07:33 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/07 18:26:14 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,19 @@ typedef struct	s_serie
 {
 	char			**cmd;
 	enum e_token	cmd_token;
-	enum e_token	fd_token;
+	enum e_token	fd_out_token;
+	int				fd_in;
+	int				fd_out;
 	void			*next;
 }				t_serie;
+
+typedef struct	s_count_red
+{
+	int	double_left;
+	int	double_right;
+	int	left;
+	int	right;
+}				t_count_red;
 
 typedef struct	s_struct
 {
@@ -82,6 +92,7 @@ typedef struct	s_struct
 	int			pipe_count;
 	bool		check_valid;
 	pid_t		child;
+	t_count_red	redir;
 }				t_struct;
 
 typedef struct	s_split_word
@@ -99,6 +110,19 @@ typedef struct	s_var
 	int			symbol;
 	int			varlen;
 }			t_var;
+
+typedef struct s_fd
+{
+	int		infile;
+	int		outfile;
+	int		pfd[2];
+	int		fdhd[2];
+	int		tmpfd;
+	int		here_doc;
+	pid_t	child;
+	char	**path;
+	char	**cmd;
+}				t_fd;
 
 /* -- MINISHELL -- */
 void		parsing(char *input, t_struct **mshell);

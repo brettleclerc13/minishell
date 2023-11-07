@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 20:16:19 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/07 12:07:00 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/07 18:10:02 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,17 @@ int	ft_count_pipe(t_struct *mshell)
 // 	return (array);
 // }
 
+void	ft_execute_serie(t_serie *serie, t_struct *mshell)
+{
+	int	fd[2];
+	
+
+	if (mshell->series->cmd_token == FUNCTION)
+		g_var = builtin_main(mshell->series->cmd, mshell);
+	else
+		g_var = ft_execve(mshell->series->cmd, mshell->envp);
+}
+
 void	ft_execute(t_struct *mshell)
 {
 	t_serie	*series;
@@ -91,10 +102,7 @@ void	ft_execute(t_struct *mshell)
 	print_lst_serie(mshell->series);
 	while (mshell->series)
 	{
-		if (mshell->series->cmd_token == FUNCTION)
-			g_var = builtin_main(mshell->series->cmd, mshell);
-		else
-			g_var = ft_execve(mshell->series->cmd, mshell->envp);
+		ft_execute_serie(mshell->series, mshell);
 		mshell->series = mshell->series->next;
 	}
 	//ft_arrayfree(args);
