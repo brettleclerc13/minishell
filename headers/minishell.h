@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/02 10:15:02 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/07 12:07:33 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ enum	e_token
 	END,
 };
 
+extern void	rl_replace_line(const char *text, int clear_undo);
+
 typedef struct	s_separator
 {
 	char	*str;
@@ -76,8 +78,8 @@ typedef struct	s_struct
 {
 	char		**envp;
 	t_lex		*args;
+	t_serie		*series;
 	int			pipe_count;
-	char		**path;
 	bool		check_valid;
 	pid_t		child;
 }				t_struct;
@@ -128,6 +130,7 @@ void	print_lst_serie(t_serie *series);
 void	print_string(char *tab);
 void	print_lst_tok(t_lex *list);
 void	print_array(char **array);
+void	print_lst_serie(t_serie *series);
 
 /* -- BUILTINS -- */
 int		builtin_main(char **args, t_struct *mshell);
@@ -170,6 +173,7 @@ char	**ft_arrayremove(char *removeline, char **array);
 
 /* -- EXECUTE -- */
 void	ft_execute(t_struct *mshell);
+int		ft_execve(char **cmd, char **envp);
 
 /* -- SIGNALS -- */
 void    signals_types(char *input, bool isheredoc);

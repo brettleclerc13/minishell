@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 12:52:57 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/31 19:05:29 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/07 11:12:03 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	**ft_serie_array(t_lex *args, t_serie **new, int start, int end)
 		tmp = tmp->next;
 	(*new)->cmd_token = tmp->token;
 	i = 0;
-	while (tmp && start < end && tmp->token > 4)
+	while (tmp && start < end && tmp->token != 4)
 	{
 		array[i++] = ft_strdup(tmp->content);
 		tmp = tmp->next;
@@ -58,6 +58,8 @@ char	**ft_serie_array(t_lex *args, t_serie **new, int start, int end)
 	}
 	if (tmp)
 		(*new)->fd_token = tmp->token;
+	else
+		(*new)->fd_token = END;
 	return (array);
 }
 
@@ -68,6 +70,8 @@ t_serie	*ft_lstnew_serie(t_lex *args, int start, int end)
 	new = malloc (sizeof(t_serie));
 	if (!new)
 		return (NULL);
+	new->fd_token = ZERO;
+	new->cmd_token = ZERO;
 	new->cmd = ft_serie_array(args, &new, start, end);
 	new->next = NULL;
 	return (new);

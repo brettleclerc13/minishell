@@ -2,7 +2,7 @@ LIBFT_PATH	=	./Libft/
 PIPEX_PATH	=	./pipex42/
 BUILT_PATH	=	./builtin/
 
-READLINE	=	/usr/include/readline
+READLINE	=	/opt/homebrew/opt/readline/
 
 SRC_MAIN 	= 	./main.c \
 				./parsing.c \
@@ -19,6 +19,7 @@ SRC_MAIN 	= 	./main.c \
 				./parser_dollar.c \
 				./serie.c \
 				./signals/main_signals.c \
+				./execve.c \
 
 SRC_BUILTIN	=	${addprefix ${BUILT_PATH}, ./builtin_main.c \
 											./ft_cd.c \
@@ -42,6 +43,8 @@ CC 			= clang
 RM 			= rm -f
 
 CFLAGS 		= -Wall -Werror -Wextra -g
+LDFLAGS		= -L/usr/local/opt/readline/lib
+CPPFLAGS	= -I/usr/local/opt/readline/include
 
 ifdef DEBUG
 	CFLAGS += -fsanitize=address -g3
@@ -56,7 +59,7 @@ all:		$(NAME)
 
 $(NAME):	$(OBJ)
 			@${MAKE} -C ${LIBFT_PATH}
-			@$(CC) $(CFLAGS) $(OBJ) ${LIBFT_PATH}libft.a -L ${READLINE} -lreadline -I $(HEADER) -o $(NAME)
+			@$(CC) $(CFLAGS) $(OBJ) ${LIBFT_PATH}libft.a -L$(shell brew --prefix readline)/lib -lreadline -I $(HEADER) -o $(NAME)
 
 debug:
 	${MAKE} DEBUG=1

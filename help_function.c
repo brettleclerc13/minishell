@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   help_function.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 12:01:13 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/31 13:39:29 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/06 09:31:29 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,24 +40,6 @@ void	print_lst_tok(t_lex *list)
 	}
 }
 
-void	print_string(char *tab)
-{
-	int	i;
-
-	i = -1;
-	while (tab[++i])
-		printf("tab[%d] : %c\n", i, tab[i]);
-}
-
-void	print_array(char **array)
-{
-	int	i;
-
-	i = -1;
-	while (array[++i])
-		printf("%s\n", array[i]);
-}
-
 void	print_lst_serie(t_serie *series)
 {
 	int i;
@@ -74,4 +56,22 @@ void	print_lst_serie(t_serie *series)
 		j = -1;
 		series = series->next;
 	}
+}
+
+void	print_string(char *tab)
+{
+	int	i;
+
+	i = -1;
+	while (tab[++i])
+		printf("tab[%d] : %c\n", i, tab[i]);
+}
+
+void	print_array(char **array)
+{
+	int	i;
+
+	i = -1;
+	while (array[++i])
+		printf("array[%i] : %s\n", i, array[i]);
 }
