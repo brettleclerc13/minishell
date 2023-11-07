@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 20:16:19 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/06 16:40:17 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/06 19:02:07 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,11 @@ void	ft_execute(t_struct *mshell)
 	ft_count_pipe(mshell);
 	mshell->series = series;
 	print_lst_serie(mshell->series);
-	// while (tmp)
-	// {
-	// 	if (builtin_main(tmp->cmd, mshell) == 0)
-	// 		ft_execve();
-		
-	// 	tmp = tmp->next;
-	// }
+	while (mshell->series)
+	{
+		if (builtin_main(mshell->series->cmd, mshell) == 0)
+		return ;
+	}
 	//ft_arrayfree(args);
 }
 // char	**args;
