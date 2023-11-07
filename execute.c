@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 20:16:19 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/02 12:03:04 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/06 19:01:02 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	ft_execute(t_struct *mshell)
 	while (tmp)
 	{
 		if (builtin_main(tmp->cmd, mshell) == 0)
-			ft_execve();
+			// ft_execve();
 		
 		tmp = tmp->next;
 	}

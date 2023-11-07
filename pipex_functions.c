@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 09:07:07 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/02 12:03:43 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/06 16:11:31 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	*ft_add_path(t_varb *arg, char *cmd)
 // 	return (-1);
 // }
 
-int	ft_execve(char *cmd, t_varb *arg, char **envp)
+int	ft_execve( *arg, char **envp)
 {
 	if (arg->cmd[0] == NULL)
 		ft_print_error(2);
