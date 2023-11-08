@@ -6,11 +6,12 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 15:34:36 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/25 17:29:51 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/07 18:26:14 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
 
 void	parsing(char *input, t_struct **mshell)
 {

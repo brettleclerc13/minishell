@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_signals.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:32:36 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/06 15:03:25 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/07 09:58:13 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	heredoc_sigint(int signal)
 	if (signal != SIGINT)
 		return ;
 	ft_putstr_fd("\n", STDOUT_FILENO);
-	g_var = 130;
+	g_var = 1;
 	exit(1);
 }
 

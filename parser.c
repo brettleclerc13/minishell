@@ -6,20 +6,20 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:17:25 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/02 11:49:34 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/07 18:04:31 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	opening_redir(t_lex **list, enum e_token prev_tok, t_lex *tmp)
-{
-	(void)prev_tok;
-	tmp = tmp->next;
+// void	opening_redir(t_lex **list, enum e_token prev_tok, t_lex *tmp)
+// {
+// 	(void)prev_tok;
+// 	tmp = tmp->next;
 
-	if ((*list)->token == RIGHT_CHEV && tmp->token == WORD)
-		open(tmp->content, O_RDWR | O_TRUNC | O_CREAT, 0644);
-}
+// 	if ((*list)->token == RIGHT_CHEV && tmp->token == WORD)
+// 		open(tmp->content, O_RDWR | O_TRUNC | O_CREAT, 0644);
+// }
 
 bool	check_redir(t_lex **list, enum e_token prev_tok)
 {
@@ -33,7 +33,7 @@ bool	check_redir(t_lex **list, enum e_token prev_tok)
 			printf("minishell: syntax error near unexpected token `newline'\n");
 			return (true);
 		}
-		opening_redir(list, prev_tok, tmp);
+		// opening_redir(list, prev_tok, tmp);
 		tmp = tmp->next;
 		if ((*list)->token == LEFT_CHEV && prev_tok == (enum e_token)-1 \
 			&& (open(tmp->content, O_RDONLY) == -1))

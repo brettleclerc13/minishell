@@ -19,6 +19,7 @@ SRC_MAIN 	= 	./main.c \
 				./parser_dollar.c \
 				./serie.c \
 				./signals/main_signals.c \
+				./execve.c \
 
 SRC_BUILTIN	=	${addprefix ${BUILT_PATH}, ./builtin_main.c \
 											./ft_cd.c \
