@@ -1,1 +1,7 @@
-whatever
+serie[0]: cmd[0]: echo
+serie[0]: cmd[1]: whatever
+serie[0]: cmd_token: 9, fd_out_token: 12
+[?2004h[44;1mmin[47;1mish[41;1mell[0m$ ^C[?2004l
+[44;1mmin[47;1mish[41;1mell[0m$ [?2004h^C[?2004l
+[44;1mmin[47;1mish[41;1mell[0m$ [?2004h[?2004l
+exit

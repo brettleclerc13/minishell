@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 20:16:19 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/07 18:10:02 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/08 19:49:220 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,15 +80,55 @@ int	ft_count_pipe(t_struct *mshell)
 // 	return (array);
 // }
 
+int	ft_pipe_execution(t_serie *serie, t_struct *mshell)
+{
+	int 	pfd[2];
+	pid_t	pid;
+
+	pipe(pfd);
+	pid = fork();
+	if (pid == 0)
+	{
+		dup2(serie->fd_in, STDIN_FILENO);
+		dup2(serie->fd_out, pfd[1]);
+		// close(serie->fd_in);
+		// close(serie->fd_out);
+		if (serie->cmd_token == FUNCTION)
+			g_var = builtin_main(serie->cmd, mshell);
+		else
+			g_var = ft_execve(serie->cmd, mshell->envp);
+	}
+	waitpid(0, NULL, WNOHANG);
+	return (pfd[0]);
+}
+
 void	ft_execute_serie(t_serie *serie, t_struct *mshell)
 {
-	int	fd[2];
-	
+	int		pipe_fd;
+	pid_t	pid;
 
-	if (mshell->series->cmd_token == FUNCTION)
-		g_var = builtin_main(mshell->series->cmd, mshell);
+	pipe_fd = 0;
+	if (serie->fd_out_token == PIPE)
+		pipe_fd = ft_pipe_execution(serie, mshell);
 	else
-		g_var = ft_execve(mshell->series->cmd, mshell->envp);
+	{
+		pid = fork();
+		if (pid == 0)
+		{
+			if (!pipe_fd)
+				dup2(serie->fd_in, STDIN_FILENO);
+			else
+				dup2(serie->fd_in, pipe_fd);
+			dup2(serie->fd_out, STDOUT_FILENO);
+			// close(serie->fd_in);
+			// close(serie->fd_out);
+			if (serie->cmd_token == FUNCTION)
+				g_var = builtin_main(serie->cmd, mshell);
+			else
+				g_var = ft_execve(serie->cmd, mshell->envp);
+		}
+		waitpid(0, NULL, WNOHANG);
+	}
 }
 
 void	ft_execute(t_struct *mshell)
@@ -97,19 +137,9 @@ void	ft_execute(t_struct *mshell)
 
 	series = NULL;
 	serie_creation(mshell, &series);
-	// ft_count_pipe(mshell);
-	mshell->series = series;
-	print_lst_serie(mshell->series);
-	while (mshell->series)
+	while (series)
 	{
-		ft_execute_serie(mshell->series, mshell);
-		mshell->series = mshell->series->next;
+		ft_execute_serie(series, mshell);
+		series = series->next;
 	}
-	//ft_arrayfree(args);
 }
-// char	**args;
-
-	// args = ft_convert_to_array(mshell->args);
-
-	// builtin_main(args, mshell);
-	// ft_arrayfree(args);

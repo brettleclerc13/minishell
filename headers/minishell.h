@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/07 18:26:14 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/08 19:43:21 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include <readline/history.h>
 # include <limits.h>
 # include <signal.h>
+#include <sys/wait.h>
 
 # include "../Libft/libft.h"
 # include "../pipex42/pipex_bonus.h"
@@ -73,6 +74,8 @@ typedef struct	s_serie
 	enum e_token	fd_out_token;
 	int				fd_in;
 	int				fd_out;
+	char			*hd_limiter;
+	bool			hd;
 	void			*next;
 }				t_serie;
 
@@ -143,8 +146,8 @@ void	check_dollar(t_lex **list, char **envp);
 
 /* -- SERIES -- */
 void	serie_creation(t_struct *mshell, t_serie **series);
-t_serie	*ft_lstnew_serie(t_lex *args, int start, int end);
-char	**ft_serie_array(t_lex *args, t_serie **new, int start, int end);
+t_serie	*ft_lstnew_serie(t_lex *args, int i, bool ispipe);
+char	**ft_serie_array(t_lex *args, t_serie **new, int i);
 void	ft_lstadd_back_serie(t_serie **series, t_serie *new);
 t_serie	*ft_lstlast_serie(t_serie *series);
 
@@ -198,6 +201,10 @@ char	**ft_arrayremove(char *removeline, char **array);
 /* -- EXECUTE -- */
 void	ft_execute(t_struct *mshell);
 int		ft_execve(char **cmd, char **envp);
+
+/* -- REDIRECTION -- */
+int	ft_count_redir(t_lex *args);
+int	ft_set_redirections(t_lex *tmp, t_serie **new);
 
 /* -- SIGNALS -- */
 void    signals_types(char *input, bool isheredoc);

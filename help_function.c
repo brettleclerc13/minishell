@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   help_function.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 12:01:13 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/06 09:31:29 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/08 14:05:05 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	print_lst_serie(t_serie *series)
 		i++;
 		while (series->cmd[++j])
 			printf("serie[%d]: cmd[%d]: %s\n", i, j, series->cmd[j]);
-		printf("serie[%d]: cmd_token: %d, fd_token: %d\n", i, series->cmd_token, series->fd_token);
+		printf("serie[%d]: cmd_token: %d, fd_out_token: %d\n", i, series->cmd_token, series->fd_out_token);
 		j = -1;
 		series = series->next;
 	}
