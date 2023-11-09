@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 20:16:19 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/08 12:29:29 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/08 15:14:20 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	ft_execute_serie(t_serie *serie, t_struct *mshell)
 	int	fd[2];
 	
 
-	if (mshell->series->cmd_token == FUNCTION)
+	if (builtin_function(mshell->series->cmd[0]))
 		g_var = builtin_main(mshell->series->cmd, mshell);
 	else
 		g_var = ft_execve(mshell->series->cmd, mshell->envp);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   serie.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 12:52:57 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/07 18:06:50 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/08 15:35:56 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,32 +36,23 @@ void	ft_lstadd_back_serie(t_serie **series, t_serie *new)
 	tmp->next = new;
 }
 
-void	ft_set_redirections(t_lex *tmp, t_serie **new, int start, int end)
+void	ft_set_redirections(t_lex **args, t_serie **new)
 {
-	while (tmp && start < end && tmp->token != 4)
-	{
-		if (tmp->token == RIGHT_CHEV)
-		{
-			tmp = tmp->next;
-			(*new)->fd_out = open(tmp->content, O_RDWR | O_TRUNC | O_CREAT, 0644);
-		}
-		if (tmp->token == DOUBLE_R_CHEV)
-		{
-			tmp = tmp->next;
-			(*new)->fd_out = open(tmp->content, O_RDWR | O_APPEND | O_CREAT, 0644);
-		}
-		if (tmp->token == LEFT_CHEV)
-		{
-			tmp = tmp->next;
-			(*new)->fd_in = open(tmp->content, O_RDWR, 0666);
-		}
-		if (tmp->token == DOUBLE_L_CHEV)
-			(*new)->fd_in = -5;
-		tmp = tmp->next;
-	}
+	enum e_token	tmp_token;
+
+	tmp_token = (*args)->token;
+	if (tmp_token == RIGHT_CHEV)
+		(*new)->fd_out = open((*args)->content, O_RDWR | O_TRUNC | O_CREAT, 0644);
+	if (tmp_token == DOUBLE_R_CHEV)
+		(*new)->fd_out = open((*args)->content, O_RDWR | O_APPEND | O_CREAT, 0644);
+	if (tmp_token == LEFT_CHEV)
+		(*new)->fd_in = open((*args)->content, O_RDWR, 0666);
+	if (tmp_token == DOUBLE_L_CHEV)
+		(*new)->fd_in = -5;
+	*args = (*args)->next;
 }
 
-char	**ft_serie_array(t_lex *args, t_serie **new, int start, int end)
+char	**ft_serie_array(t_lex *args, t_serie **new)
 {
 	t_lex	*tmp;
 	char	**array;
@@ -74,7 +65,6 @@ char	**ft_serie_array(t_lex *args, t_serie **new, int start, int end)
 	tmp = args;
 	while (tmp && ++i < start)
 		tmp = tmp->next;
-	(*new)->cmd_token = tmp->token;
 	ft_set_redirections(tmp, new, start, end);
 	i = 0;
 	while (tmp && start < end && tmp->token != 4)
@@ -84,53 +74,58 @@ char	**ft_serie_array(t_lex *args, t_serie **new, int start, int end)
 		start++;
 	}
 	if (tmp)
-		(*new)->fd_out_token = tmp->token;
-	else
-		(*new)->fd_out_token = END;
+		(*new)->is_pipe = true;
 	return (array);
 }
+void	ft_serie(t_lex *args, t_serie **new)
+{
+	while (args && args->token != PIPE)
+	{
+		if (args->token >= 0 && args->token <= 3)
+			ft_set_redirections(&args, new);
+		else
+			ft_serie_array(args, new);
+		args = args->next;
+	}
+}
 
-t_serie	*ft_lstnew_serie(t_lex *args, int start, int end)
+
+t_serie	*ft_lstnew_serie(t_lex *args)
 {
 	t_serie	*new;
 
-	new = malloc (sizeof(t_serie));
+	new = malloc(sizeof(t_serie));
 	if (!new)
 		return (NULL);
-	new->fd_out_token = ZERO;
+	new->is_pipe = false;
 	new->fd_in = 0;
 	new->fd_out = 0;
-	new->cmd_token = ZERO;
-	new->cmd = ft_serie_array(args, &new, start, end);
+	new->cmd = ft_calloc(1, sizeof(char *));
 	new->next = NULL;
+	ft_serie(args, &new);
 	return (new);
 }
 
 void	serie_creation(t_struct *mshell, t_serie **series)
 {
-	int		i;
-	int		j;
 	t_serie	*new;
 	t_lex	*tmp_arg;
 
-	i = 1;
-	j = 0;
 	new = NULL;
 	tmp_arg = mshell->args;
 	while (tmp_arg)
 	{
-		if (tmp_arg->token >= 0 && tmp_arg->token <= 4)
+		if (tmp_arg->token == PIPE)
 		{
-			new = ft_lstnew_serie(mshell->args, j , i);
+			new = ft_lstnew_serie(mshell->args);
 			ft_lstadd_back_serie(series, new);
-			j = i;
 		}
 		if (!tmp_arg->next)
 		{
-			new = ft_lstnew_serie(mshell->args, j , i);
+			new = ft_lstnew_serie(mshell->args);
 			ft_lstadd_back_serie(series, new);
 		}
-        i++;
+		mshell->args = tmp_arg;
 		tmp_arg = tmp_arg->next;
 	}
 }

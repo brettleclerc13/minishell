@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/07 18:26:14 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/08 15:02:05 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,7 @@ typedef struct s_lex
 typedef struct	s_serie
 {
 	char			**cmd;
-	enum e_token	cmd_token;
-	enum e_token	fd_out_token;
+	bool			is_pipe;
 	int				fd_in;
 	int				fd_out;
 	void			*next;
