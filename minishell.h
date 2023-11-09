@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/09 13:37:37 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/09 16:46:51 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,7 +202,7 @@ char	**ft_arrayremove(char *removeline, char **array);
 
 /* -- EXECUTE -- */
 void	ft_execute(t_struct *mshell);
-pid_t	ft_execute_serie(t_serie *serie, t_struct *mshell);
+pid_t	ft_execute_serie(t_serie *serie, int start, t_struct *mshell);
 pid_t	ft_fork_execution(t_serie *serie, t_struct *mshell);
 int		ft_execve(char **cmd, char **envp);
 void	set_input(t_serie *serie, int pfd[]);

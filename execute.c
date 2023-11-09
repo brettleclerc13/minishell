@@ -28,10 +28,10 @@ pid_t	ft_fork_execution(t_serie *serie, t_struct *mshell)
 			g_var = ft_execve(serie->cmd, mshell->envp);
 	}
 	set_input(serie, pfd);
-	return (pfd[0]);
+	return (pfd);
 }
 
-pid_t	ft_execute_serie(t_serie *serie, t_struct *mshell)
+pid_t	ft_execute_serie(t_serie *serie, int start, t_struct *mshell)
 {
 	if (serie->fd_in != STDIN_FILENO)
 	{
@@ -43,7 +43,7 @@ pid_t	ft_execute_serie(t_serie *serie, t_struct *mshell)
 		dup2(serie->fd_out, STDOUT_FILENO);
 		close(serie->fd_out);
 	}
-	if (serie->fd_out_token == END && serie->cmd_token == FUNCTION)
+	if (serie->fd_out_token == END && start == 0 && serie->cmd_token == FUNCTION)
 	{
 		g_var = builtin_main(serie->cmd, mshell);
 		return (-5);
@@ -52,20 +52,24 @@ pid_t	ft_execute_serie(t_serie *serie, t_struct *mshell)
 		return (ft_fork_execution(serie, mshell));
 }
 
+
 void	ft_execute(t_struct *mshell)
 {
+	int		i;
 	t_serie *tmp;
 	t_serie	*series;
 	int		original_io[2];
 
 	series = NULL;
+	i = 0;
 	serie_creation(mshell, &series);
 	tmp = series;
 	original_io[0] = dup(STDIN_FILENO);
 	original_io[1] = dup(STDOUT_FILENO);
 	while (series)
 	{
-		series->pid = ft_execute_serie(series, mshell);
+		series->pid = ft_execute_serie(series, i, mshell);
+		i++;
 		series = series->next;
 	}
 	dup2(original_io[0], STDIN_FILENO);

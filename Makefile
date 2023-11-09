@@ -45,8 +45,6 @@ CC 			= clang
 RM 			= rm -f
 
 CFLAGS 		= -Wall -Werror -Wextra -g
-LDFLAGS		= -L/usr/local/opt/readline/lib
-CPPFLAGS	= -I/usr/local/opt/readline/include
 
 ifdef DEBUG
 	CFLAGS += -fsanitize=address -g3
