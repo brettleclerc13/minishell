@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 12:52:57 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/09 10:48:22 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/09 12:30:36 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ t_serie	*ft_lstnew_serie(t_lex *args, int i, bool ispipe)
 		new->fd_out_token = END;
 	new->fd_in = 0;
 	new->fd_out = 1;
+	new->pid = 0;
 	new->cmd_token = ZERO;
 	new->hd = false;
 	new->hd_limiter = NULL;

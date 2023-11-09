@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/09 10:46:07 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/09 12:29:37 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ typedef struct	s_serie
 	int				fd_out;
 	char			*hd_limiter;
 	bool			hd;
+	pid_t			pid;
 	void			*next;
 }				t_serie;
 

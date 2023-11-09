@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 09:07:07 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/07 18:27:06 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/09 12:26:23 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ int	ft_execve(char **cmd, char **envp)
 	char **path;
 
 	path = ft_extract_path(envp);
+	if (!cmd)
+		exit(0);
 	execve(cmd[0], cmd, envp);
 	if (path == NULL)
 	{

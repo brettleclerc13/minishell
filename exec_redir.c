@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:29:32 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/09 10:49:21 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/09 11:27:18 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	ft_put_redir_error(char *file)
 	return (-1);
 }
 
-int	check_permissions(char *file, int i)
+static int	check_permissions(char *file, int i)
 {
 	if (i == 1)
 	{
@@ -46,7 +46,7 @@ int	check_permissions(char *file, int i)
 	return (0);
 }
 
-int fd_in_redir(t_lex *tmp, t_serie **new)
+static int fd_in_redir(t_lex *tmp, t_serie **new)
 {
     if (tmp->token == LEFT_CHEV)
 	{
@@ -68,7 +68,7 @@ int fd_in_redir(t_lex *tmp, t_serie **new)
     return (0);
 }
 
-int fd_out_redir(t_lex *tmp, t_serie **new)
+static int fd_out_redir(t_lex *tmp, t_serie **new)
 {
     if (tmp->token == RIGHT_CHEV)
     {

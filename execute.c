@@ -12,75 +12,26 @@
 
 #include "minishell.h"
 
-// static char	**ft_convert_to_array(t_lex *args)
-// {
-// 	t_lex	*tmp;
-// 	char	**array;
-// 	int		struct_len;
-
-// 	struct_len = 0;
-// 	tmp = args;
-// 	while (tmp)
-// 	{
-// 		struct_len++;
-// 		tmp = tmp->next;
-// 	}
-// 	array = ft_calloc(struct_len + 1, sizeof(char *));
-// 	if (!array)
-// 		return (NULL);
-// 	tmp = args;
-// 	struct_len = 0;
-// 	while (tmp)
-// 	{
-// 		array[struct_len++] = ft_strdup(tmp->content);
-// 		tmp = tmp->next;
-// 	}
-// 	return (array);
-// }
-
-int	ft_count_pipe(t_struct *mshell)
+void	set_output(t_serie *serie, int pfd[])
 {
-	t_lex	*args;
-	int		pipe_count;
-
-	pipe_count = 0;
-	args = mshell->args;
-	while (args)
-	{
-		if (args->token == 4)
-			pipe_count++;
-		args = args->next;
-	}
-	return(pipe_count);
+	if (serie->fd_out_token == END)
+		return ;
+	close(pfd[0]);
+	if (serie->fd_out == STDOUT_FILENO)
+		dup2(pfd[1], STDOUT_FILENO);
+	close(pfd[1]);
 }
 
-// char	**ft_lex_array(t_lex *args)
-// {
-// 	t_lex	*tmp;
-// 	char	**array;
-// 	int		struct_len;
+void	set_input(t_serie *serie, int pfd[])
+{
+	if (serie->fd_out_token == END)
+		return ;
+	close(pfd[1]);
+	dup2(pfd[0], STDIN_FILENO);
+	close(pfd[0]);
+}
 
-// 	struct_len = 0;
-// 	tmp = args;
-// 	while (tmp)
-// 	{
-// 		struct_len++;
-// 		tmp = tmp->next;
-// 	}
-// 	array = ft_calloc(struct_len + 1, sizeof(char *));
-// 	if (!array)
-// 		return (NULL);
-// 	tmp = args;
-// 	struct_len = 0;
-// 	while (tmp)
-// 	{
-// 		array[struct_len++] = ft_strdup(tmp->content);
-// 		tmp = tmp->next;
-// 	}
-// 	return (array);
-// }
-
-int	ft_pipe_execution(t_serie *serie, t_struct *mshell)
+pid_t	ft_fork_execution(t_serie *serie, t_struct *mshell)
 {
 	int 	pfd[2];
 	pid_t	pid;
@@ -89,57 +40,75 @@ int	ft_pipe_execution(t_serie *serie, t_struct *mshell)
 	pid = fork();
 	if (pid == 0)
 	{
-		dup2(serie->fd_in, STDIN_FILENO);
-		dup2(serie->fd_out, pfd[1]);
-		// close(serie->fd_in);
-		// close(serie->fd_out);
+		set_output(serie, pfd);
 		if (serie->cmd_token == FUNCTION)
 			g_var = builtin_main(serie->cmd, mshell);
 		else
 			g_var = ft_execve(serie->cmd, mshell->envp);
 	}
-	waitpid(0, NULL, WNOHANG);
+	set_input(serie, pfd);
 	return (pfd[0]);
 }
 
-void	ft_execute_serie(t_serie *serie, t_struct *mshell)
+pid_t	ft_execute_serie(t_serie *serie, t_struct *mshell)
 {
-	int		pipe_fd;
-	pid_t	pid;
-
-	pipe_fd = 0;
-	if (serie->fd_out_token == PIPE)
-		pipe_fd = ft_pipe_execution(serie, mshell);
-	else
+	if (serie->fd_in != STDIN_FILENO)
 	{
-		pid = fork();
-		if (pid == 0)
-		{
-			if (!pipe_fd)
-				dup2(serie->fd_in, STDIN_FILENO);
-			else
-				dup2(serie->fd_in, pipe_fd);
-			dup2(serie->fd_out, STDOUT_FILENO);
-			// close(serie->fd_in);
-			// close(serie->fd_out);
-			if (serie->cmd_token == FUNCTION)
-				g_var = builtin_main(serie->cmd, mshell);
-			else
-				g_var = ft_execve(serie->cmd, mshell->envp);
-		}
-		waitpid(0, NULL, WNOHANG);
+		dup2(serie->fd_in, STDIN_FILENO);
+		close(serie->fd_in);
 	}
+	if (serie->fd_out != STDOUT_FILENO)
+	{
+		dup2(serie->fd_out, STDOUT_FILENO);
+		close(serie->fd_out);
+	}
+	if (serie->fd_out_token == END && serie->cmd_token == FUNCTION)
+	{
+		g_var = builtin_main(serie->cmd, mshell);
+		return (-5);
+	}
+	else
+		return (ft_fork_execution(serie, mshell));
+}
+
+static void	ft_waitpid(t_serie *series)
+{
+	t_serie	*tmp;
+	//int		return_result;
+
+	tmp = series;
+	//return_result = 0;
+	if (tmp->pid == -5)
+		return ;
+	while (tmp)
+	{
+		waitpid(tmp->pid, &g_var, 0);
+		tmp = tmp->next;
+	}
+	//ft_exit_result(return_result);
 }
 
 void	ft_execute(t_struct *mshell)
 {
+	t_serie *tmp;
 	t_serie	*series;
+	int		original_io[2];
 
 	series = NULL;
 	serie_creation(mshell, &series);
+	tmp = series;
+	original_io[0] = dup(STDIN_FILENO);
+	original_io[1] = dup(STDOUT_FILENO);
 	while (series)
 	{
-		ft_execute_serie(series, mshell);
+		series->pid = ft_execute_serie(series, mshell);
 		series = series->next;
 	}
+	dup2(original_io[0], STDIN_FILENO);
+	dup2(original_io[1], STDOUT_FILENO);
+	close(original_io[0]);
+	close(original_io[1]);
+	ft_waitpid(tmp);
 }
+
+// ft_putstr_fd("check\n", 1);
