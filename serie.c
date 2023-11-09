@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   serie.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 12:52:57 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/09 12:30:36 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/09 17:30:56 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	serie_creation(t_struct *mshell, t_serie **series)
 	t_serie	*new;
 	t_lex	*tmp;
 
-	i = 1;
+	i = 0;
 	new = NULL;
 	tmp = mshell->args;
 	while (mshell->args)
@@ -101,7 +101,7 @@ void	serie_creation(t_struct *mshell, t_serie **series)
 			new = ft_lstnew_serie(tmp, i, true);
 			ft_lstadd_back_serie(series, new);
 			i = 0;
-			tmp = mshell->args;
+			tmp = mshell->args->next;
 		}
 		else if (!mshell->args->next)
 		{

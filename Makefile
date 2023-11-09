@@ -2,7 +2,13 @@ LIBFT_PATH	=	./Libft/
 PIPEX_PATH	=	./pipex42/
 BUILT_PATH	=	./builtin/
 
-READLINE	=	/opt/homebrew/opt/readline/
+OS := ${shell uname}
+
+ifeq (${OS}, Linux)
+    READLINE = /usr/include/readline/
+else
+    READLINE = /opt/homebrew/opt/readline//
+endif
 
 SRC_MAIN 	= 	./main.c \
 				./parsing.c \
@@ -45,8 +51,6 @@ CC 			= clang
 RM 			= rm -f
 
 CFLAGS 		= -Wall -Werror -Wextra -g
-LDFLAGS		= -L/usr/local/opt/readline/lib
-CPPFLAGS	= -I/usr/local/opt/readline/include
 
 ifdef DEBUG
 	CFLAGS += -fsanitize=address -g3

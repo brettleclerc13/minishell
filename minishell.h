@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/09 13:37:37 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/09 18:04:30 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# define COLOR_PROMPT "\033[44;1mmin\033[47;1mish\033[41;1mell"
-# define COLOR_RESET "\033[0m"
+// # define COLOR_PROMPT "\033[44;1mmin\033[47;1mish\033[41;1mell"
+// # define COLOR_RESET "\033[0m"
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -202,7 +202,7 @@ char	**ft_arrayremove(char *removeline, char **array);
 
 /* -- EXECUTE -- */
 void	ft_execute(t_struct *mshell);
-pid_t	ft_execute_serie(t_serie *serie, t_struct *mshell);
+pid_t	ft_execute_serie(t_serie *serie, int start, t_struct *mshell);
 pid_t	ft_fork_execution(t_serie *serie, t_struct *mshell);
 int		ft_execve(char **cmd, char **envp);
 void	set_input(t_serie *serie, int pfd[]);

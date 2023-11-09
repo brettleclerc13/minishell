@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:29:32 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/09 11:27:18 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/09 13:41:28 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	check_permissions(char *file, int i)
 {
 	if (i == 1)
 	{
-        if (!open(file, O_DIRECTORY))
+        if (!open(file, __O_DIRECTORY))
 		{
 			printf("file %s, check\n", file);
 			return (ft_put_redir_error(file));

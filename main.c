@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:39:24 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/02 11:22:36 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/09 17:52:40 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	while (1)
 	{
-		input = readline(COLOR_PROMPT COLOR_RESET"$ ");
+		input = readline("ENVIE_DE_MOURIR$ ");
 		signals_types(input, false);
 		if (*input == '\0')
 		{
