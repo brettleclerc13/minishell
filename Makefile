@@ -20,6 +20,7 @@ SRC_MAIN 	= 	./main.c \
 				./serie.c \
 				./signals/main_signals.c \
 				./execve.c \
+				./exec_redir.c \
 
 SRC_BUILTIN	=	${addprefix ${BUILT_PATH}, ./builtin_main.c \
 											./ft_cd.c \
