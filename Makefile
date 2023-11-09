@@ -21,6 +21,7 @@ SRC_MAIN 	= 	./main.c \
 				./signals/main_signals.c \
 				./execve.c \
 				./exec_redir.c \
+				./exec_function.c \
 
 SRC_BUILTIN	=	${addprefix ${BUILT_PATH}, ./builtin_main.c \
 											./ft_cd.c \
@@ -37,7 +38,7 @@ SRC = ${SRC_MAIN} ${SRC_BUILTIN}
 
 OBJ		= ${SRC:.c=.o}
 
-HEADER		= ./headers
+HEADER		= ./
 
 CC 			= clang
 

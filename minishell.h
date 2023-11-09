@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/09 12:29:37 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/09 13:37:37 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@
 # include <signal.h>
 #include <sys/wait.h>
 
-# include "../Libft/libft.h"
-# include "../pipex42/pipex_bonus.h"
+# include "Libft/libft.h"
+# include "pipex42/pipex_bonus.h"
 
 extern int	g_var;
 
@@ -202,7 +202,12 @@ char	**ft_arrayremove(char *removeline, char **array);
 
 /* -- EXECUTE -- */
 void	ft_execute(t_struct *mshell);
+pid_t	ft_execute_serie(t_serie *serie, t_struct *mshell);
+pid_t	ft_fork_execution(t_serie *serie, t_struct *mshell);
 int		ft_execve(char **cmd, char **envp);
+void	set_input(t_serie *serie, int pfd[]);
+void	set_output(t_serie *serie, int pfd[]);
+void	ft_waitpid(t_serie *series);
 
 /* -- REDIRECTION -- */
 int	ft_count_redir(t_lex *args);
@@ -210,5 +215,6 @@ int	ft_set_redirections(t_lex *tmp, t_serie **new);
 
 /* -- SIGNALS -- */
 void    signals_types(char *input, bool isheredoc);
+void	ft_exit_result(int process_result);
 
 #endif

@@ -12,25 +12,6 @@
 
 #include "minishell.h"
 
-void	set_output(t_serie *serie, int pfd[])
-{
-	if (serie->fd_out_token == END)
-		return ;
-	close(pfd[0]);
-	if (serie->fd_out == STDOUT_FILENO)
-		dup2(pfd[1], STDOUT_FILENO);
-	close(pfd[1]);
-}
-
-void	set_input(t_serie *serie, int pfd[])
-{
-	if (serie->fd_out_token == END)
-		return ;
-	close(pfd[1]);
-	dup2(pfd[0], STDIN_FILENO);
-	close(pfd[0]);
-}
-
 pid_t	ft_fork_execution(t_serie *serie, t_struct *mshell)
 {
 	int 	pfd[2];
@@ -69,23 +50,6 @@ pid_t	ft_execute_serie(t_serie *serie, t_struct *mshell)
 	}
 	else
 		return (ft_fork_execution(serie, mshell));
-}
-
-static void	ft_waitpid(t_serie *series)
-{
-	t_serie	*tmp;
-	//int		return_result;
-
-	tmp = series;
-	//return_result = 0;
-	if (tmp->pid == -5)
-		return ;
-	while (tmp)
-	{
-		waitpid(tmp->pid, &g_var, 0);
-		tmp = tmp->next;
-	}
-	//ft_exit_result(return_result);
 }
 
 void	ft_execute(t_struct *mshell)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_signals.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:32:36 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/07 09:58:13 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/09 13:30:23 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,14 @@ void    signals_types(char *input, bool isheredoc)
 	else
 		signal(SIGINT, basic_sigint); // Ctrl + C
     signal(SIGQUIT, basic_sigquit); // ctrl + "\" same for heredoc
+}
+
+void	ft_exit_result(int process_result)
+{
+	if (WIFEXITED(process_result))
+		g_var = WEXITSTATUS(process_result);
+	else if (WIFSIGNALED(process_result))
+		g_var = 128 + WTERMSIG(process_result);
+	else if (WIFSTOPPED(process_result))
+		g_var = 128 + WSTOPSIG(process_result);
 }
