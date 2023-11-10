@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:15:00 by ehouot            #+#    #+#             */
-/*   Updated: 2023/09/19 10:37:30 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/10 16:44:15 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ static int	ft_count(char const *s, char c1, char c2)
 
 char	**ft_split_bash(char const *s, char c1, char c2)
 {
-	char	**dest;
+	char	**dest = NULL;
 	int		i;
 	int		nb_words;
 	t_split	c;
@@ -108,17 +108,17 @@ char	**ft_split_bash(char const *s, char c1, char c2)
 	c.c2 = c2;
 	i = 0;
 	if (!s)
-		ft_error("Entry is empty");
+		return (ft_split_bash_error("Entry is empty", dest));
 	ft_count_quote(s);
 	nb_words = ft_count(s, c1, c2);
 	dest = malloc (sizeof(char *) * (nb_words + 1));
 	if (!dest)
-		ft_error("Malloc problem");
+		return (ft_split_bash_error("Malloc problem", dest));
 	while (i < nb_words)
 	{
 		dest[i] = malloc (ft_count_size(s, c1, c2, i) + 1);
 		if (!dest[i])
-			ft_error("Malloc problem");
+			return (ft_split_bash_error("Malloc problem", dest));
 		dest[i] = ft_fill(dest[i], s, c, i);
 		i++;
 	}

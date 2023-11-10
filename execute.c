@@ -20,14 +20,14 @@ pid_t	ft_fork_execution(t_serie *serie, t_struct *mshell, int start)
 	if (pipe(pfd) == -1)
 		ft_error("pipe error\n");
 	pid = fork();
-	if (pipe < 0)
+	if (pid < 0)
 		ft_error("fork problem\n");
 	if (pid == 0)
 	{
 		set_child_input(serie, pfd, mshell->tmp_fd, start);
 		set_child_output(serie, pfd);
 		if (serie->cmd_token == FUNCTION)
-			g_var = builtin_main(serie->cmd, mshell);
+			g_var = builtin_main(serie->cmd, mshell, 0);
 		else
 			g_var = ft_execve(serie->cmd, mshell->envp);
 		exit (1);					//to be modified - set sig & free before exit
@@ -50,7 +50,7 @@ pid_t	ft_execute_serie(t_serie *serie, int start, t_struct *mshell)
 			dup2(serie->fd_out, STDOUT_FILENO);
 			close(serie->fd_out);
 		}
-		g_var = builtin_main(serie->cmd, mshell);
+		g_var = builtin_main(serie->cmd, mshell, 1);
 		return (-5);
 	}
 	else

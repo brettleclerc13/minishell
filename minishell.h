@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/10 13:08:27 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/10 16:54:21 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ typedef struct s_fd
 }				t_fd;
 
 /* -- MINISHELL -- */
-void		parsing(char *input, t_struct **mshell);
+bool		parsing(char *input, t_struct **mshell);
 t_struct	*before_loop_init(int argc, char **envp);
 char		**init_path(char **envp);
 
@@ -163,7 +163,7 @@ void	print_array(char **array);
 void	print_lst_serie(t_serie *series);
 
 /* -- BUILTINS -- */
-int		builtin_main(char **args, t_struct *mshell);
+int		builtin_main(char **args, t_struct *mshell, int process);
 bool	builtin_function(char *arg);
 int		ft_cd(char **args, t_struct *mshell);
 int		ft_cd_contd(char *dir, char *cwd, t_struct *mshell);

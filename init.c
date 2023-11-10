@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 11:38:35 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/10 12:10:01 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/10 15:56:51 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	**init_path(char **envp)
 
 t_struct	*before_loop_init(int argc, char **envp)
 {
-	t_struct	*mshell;
+	t_struct	*mshell = NULL;
 
 	if (argc != 1)
 		return (NULL);

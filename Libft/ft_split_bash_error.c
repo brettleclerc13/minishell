@@ -1,19 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   ft_split_bash_error.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/08 15:20:44 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/10 16:05:58 by ehouot           ###   ########.fr       */
+/*   Created: 2023/11/10 16:39:50 by ehouot            #+#    #+#             */
+/*   Updated: 2023/11/10 16:45:35 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_error(char *message)
+static void	ft_freearray(char **array)
 {
+	int	i;
+
+	if (!array)
+		return ;
+	i = -1;
+	while (array[++i])
+		free(array[i]);
+	free(array);
+}
+
+char	**ft_split_bash_error(char *message, char **dest)
+{
+	ft_freearray(dest);
 	perror(message);
-	exit(EXIT_FAILURE);
+	return (NULL);
 }

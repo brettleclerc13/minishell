@@ -1,0 +1,4 @@
+- Gerer les here_doc
+- Gerer les signaux (here_doc && ft_execve) + ignorer les signaux dans le parent quand (pid == 0);
+- Gerer les erreurs (modifier la g_var suivant les erreurs) 
+- ft_exit dans le child process : Done
