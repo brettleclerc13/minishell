@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-pid_t	ft_fork_execution(t_serie *serie, t_struct *mshell)
+pid_t	ft_fork_execution(t_serie *serie, t_struct *mshell, int start)
 {
 	int 	pfd[2];
 	pid_t	pid;
@@ -24,35 +24,37 @@ pid_t	ft_fork_execution(t_serie *serie, t_struct *mshell)
 		ft_error("fork problem\n");
 	if (pid == 0)
 	{
-		set_output(serie, pfd);
+		set_child_input(serie, pfd, mshell->tmp_fd, start);
+		set_child_output(serie, pfd);
 		if (serie->cmd_token == FUNCTION)
 			g_var = builtin_main(serie->cmd, mshell);
 		else
 			g_var = ft_execve(serie->cmd, mshell->envp);
+		exit (1);					//to be modified - set sig & free before exit
 	}
-	set_input(serie, pfd);
+	set_parent_io(pfd, mshell);
 	return (pid);
 }
 
 pid_t	ft_execute_serie(t_serie *serie, int start, t_struct *mshell)
 {
-	if (serie->fd_in != STDIN_FILENO)
-	{
-		dup2(serie->fd_in, STDIN_FILENO);
-		close(serie->fd_in);
-	}
-	if (serie->fd_out != STDOUT_FILENO)
-	{
-		dup2(serie->fd_out, STDOUT_FILENO);
-		close(serie->fd_out);
-	}
 	if (serie->fd_out_token == END && start == 0 && serie->cmd_token == FUNCTION)
 	{
+		if (serie->fd_in != STDIN_FILENO && serie->fd_in != -1)
+		{
+			dup2(serie->fd_in, STDIN_FILENO);
+			close(serie->fd_in);
+		}
+		if (serie->fd_out != STDOUT_FILENO && serie->fd_out != -1)
+		{
+			dup2(serie->fd_out, STDOUT_FILENO);
+			close(serie->fd_out);
+		}
 		g_var = builtin_main(serie->cmd, mshell);
 		return (-5);
 	}
 	else
-		return (ft_fork_execution(serie, mshell));
+		return (ft_fork_execution(serie, mshell, start));
 }
 
 
@@ -84,6 +86,8 @@ void	ft_execute(t_struct *mshell)
 	tmp_series = series;
 	ft_waitpid(tmp_series);
 	ft_free_serie(series);
+	if (mshell->tmp_fd != STDIN_FILENO && mshell->tmp_fd != -1)
+		close(mshell->tmp_fd);
 }
 
 // ft_putstr_fd("check\n", 1);

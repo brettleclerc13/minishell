@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:29:32 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/10 11:10:30 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/10 13:04:37 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,15 @@ static int	check_permissions_fdin(char *file)
 	return (0);
 }
 
-static int	check_permissions_fdout(char *file)
-{
-    if (open(file, O_DIRECTORY) == -1)
-	{
-		printf("file %s, check\n", file);
-		return (ft_put_redir_error(file));
-	}
-	if (access(file, W_OK) == -1)
-    {
-		if (errno == EACCES)
-			g_var = 126;
-		else
-			g_var = 1;
-		return (ft_put_redir_error(file));
-    }
-	return (0);
-}
+// static int	check_permissions_fdout(char *file)
+// {
+//     if (open(file, O_DIRECTORY) == -1)
+// 	{
+// 		printf("file %s, check\n", file);
+// 		return (ft_put_redir_error(file));
+// 	}
+// 	return (0);
+// }
 
 static int fd_in_redir(t_lex *tmp, t_serie **new)
 {
@@ -70,8 +62,6 @@ static int fd_in_redir(t_lex *tmp, t_serie **new)
 	}
     if ((*new)->fd_in < 0)
 	    return (ft_put_redir_error(tmp->content));
-	// dup2((*new)->fd_in, STDIN_FILENO);
-	// close((*new)->fd_in);
     return (0);
 }
 
@@ -80,21 +70,19 @@ static int fd_out_redir(t_lex *tmp, t_serie **new)
     if (tmp->token == RIGHT_CHEV)
     {
 		tmp = tmp->next;
-		if (check_permissions_fdout(tmp->content))
-			return (-1);
+		// if (check_permissions_fdout(tmp->content))
+		// 	return (-1);
 		(*new)->fd_out = open(tmp->content, O_RDWR | O_TRUNC | O_CREAT, 0644);
     }
     if (tmp->token == DOUBLE_R_CHEV)
 	{
 		tmp = tmp->next;
-		if (check_permissions_fdout(tmp->content))
-			return (-1);
+		// if (check_permissions_fdout(tmp->content))
+		// 	return (-1);
 		(*new)->fd_out = open(tmp->content, O_RDWR | O_APPEND | O_CREAT, 0644);
     }
 	if ((*new)->fd_out < 0)
 		return (ft_put_redir_error(tmp->content));
-	// dup2((*new)->fd_out, STDOUT_FILENO);
-	// close((*new)->fd_out);
     return (0);
 }
 

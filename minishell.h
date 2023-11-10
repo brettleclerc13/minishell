@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/10 09:55:21 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/10 13:08:27 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ typedef struct	s_struct
 	int			pipe_count;
 	bool		check_valid;
 	pid_t		child;
+	int			tmp_fd;
 	t_count_red	redir;
 }				t_struct;
 
@@ -203,10 +204,11 @@ char	**ft_arrayremove(char *removeline, char **array);
 /* -- EXECUTE -- */
 void	ft_execute(t_struct *mshell);
 pid_t	ft_execute_serie(t_serie *serie, int start, t_struct *mshell);
-pid_t	ft_fork_execution(t_serie *serie, t_struct *mshell);
+pid_t	ft_fork_execution(t_serie *serie, t_struct *mshell, int start);
 int		ft_execve(char **cmd, char **envp);
-void	set_input(t_serie *serie, int pfd[]);
-void	set_output(t_serie *serie, int pfd[]);
+void	set_child_input(t_serie *serie, int pfd[], int previous_fd, int start);
+void	set_child_output(t_serie *serie, int pfd[]);
+void	set_parent_io(int pfd[], t_struct *mshell);
 void	ft_waitpid(t_serie *series);
 
 /* -- REDIRECTION -- */
