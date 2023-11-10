@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 12:52:57 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/09 12:30:36 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/10 10:36:13 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ t_serie	*ft_lstnew_serie(t_lex *args, int i, bool ispipe)
 		new->fd_out_token = PIPE;
 	else
 		new->fd_out_token = END;
-	new->fd_in = 0;
-	new->fd_out = 1;
+	new->fd_in = STDIN_FILENO;
+	new->fd_out = STDOUT_FILENO;
 	new->pid = 0;
 	new->cmd_token = ZERO;
 	new->hd = false;
@@ -85,7 +85,7 @@ t_serie	*ft_lstnew_serie(t_lex *args, int i, bool ispipe)
 	return (new);
 }
 
-void	serie_creation(t_struct *mshell, t_serie **series)
+void	serie_creation(t_lex *args, t_serie **series)
 {
 	int		i;
 	t_serie	*new;
@@ -93,22 +93,22 @@ void	serie_creation(t_struct *mshell, t_serie **series)
 
 	i = 1;
 	new = NULL;
-	tmp = mshell->args;
-	while (mshell->args)
+	tmp = args;
+	while (args)
 	{
-		if (mshell->args->token == PIPE)
+		if (args->token == PIPE)
 		{
 			new = ft_lstnew_serie(tmp, i, true);
 			ft_lstadd_back_serie(series, new);
-			i = 0;
-			tmp = mshell->args;
+			i = 1;
+			tmp = args->next;
 		}
-		else if (!mshell->args->next)
+		else if (!args->next)
 		{
 			new = ft_lstnew_serie(tmp, i, false);
 			ft_lstadd_back_serie(series, new);
 		}
 		i++;
-		mshell->args = mshell->args->next;
+		args = args->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 09:07:07 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/09 12:26:23 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/10 06:56:43 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,6 @@ int	ft_execve(char **cmd, char **envp)
 	execve(cmd[0], cmd, envp);
 	ft_put_execve_error(cmd[0]);
 	ft_arrayfree(path);
+	exit (1);					//to be modified - set sig & free before exit
 	return (-1);
 }

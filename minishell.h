@@ -6,15 +6,15 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/09 16:46:51 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/10 09:55:21 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# define COLOR_PROMPT "\033[44;1mmin\033[47;1mish\033[41;1mell"
-# define COLOR_RESET "\033[0m"
+// # define COLOR_PROMPT "\033[44;1mmin\033[47;1mish\033[41;1mell"
+// # define COLOR_RESET "\033[0m"
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -147,7 +147,7 @@ int		ft_count_pipe(t_struct *mshell);
 void	check_dollar(t_lex **list, char **envp);
 
 /* -- SERIES -- */
-void	serie_creation(t_struct *mshell, t_serie **series);
+void	serie_creation(t_lex *args, t_serie **series);
 t_serie	*ft_lstnew_serie(t_lex *args, int i, bool ispipe);
 char	**ft_serie_array(t_lex *args, t_serie **new, int i);
 void	ft_lstadd_back_serie(t_serie **series, t_serie *new);
@@ -178,7 +178,7 @@ void	ft_print_export(char **envp);
 void	ft_sort_ascii(char **array);
 bool	ft_put_export_error(char *arg);
 
-/* -- ENVP MANIPULATIONS -- */
+/* -- ENVP -- */
 char	**add_env_value(char *var, char *value, char **envp);
 char	*get_env_value(char *var, char **envp);
 void	update_env_value(char *var, char *new_value, char **envp);
@@ -186,14 +186,14 @@ int		ft_update_shlvl(t_struct *mshell);
 char	**add_env_str(char *arg, char **envp);
 void	update_env(t_var *var, char *new_value, t_struct *mshell);
 
-/* -- ENV VARIABLE MANIPULATIONS -- */
+/* -- ENV VARIABLE-- */
 char	*get_env_var(char *line);
 int		ft_varcmp(t_var *var, char **envp);
 void	ft_create_var(char *arg, t_var *var);
 char	*ft_varjoin(char *s1, char *s2);
 bool	ft_varcmp_vtwo(char *var, char **envp);
 
-/* -- ARRAY MANIPULATIONS -- */
+/* -- ARRAY -- */
 char	**ft_arraydup(char **array);
 int		ft_arraylen(char **array);
 char	**ft_arrayadd(char *newline, char **array);
@@ -216,5 +216,9 @@ int	ft_set_redirections(t_lex *tmp, t_serie **new);
 /* -- SIGNALS -- */
 void    signals_types(char *input, bool isheredoc);
 void	ft_exit_result(int process_result);
+
+/* -- FREE-- */
+void	ft_free_serie(t_serie *series);
+void	ft_free_lex(t_lex *lex);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:39:24 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/02 11:22:36 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/10 07:38:28 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	while (1)
 	{
-		input = readline(COLOR_PROMPT COLOR_RESET"$ ");
+		input = readline("ENVIE_DE_MOURIR$ ");
 		signals_types(input, false);
 		if (*input == '\0')
 		{
@@ -40,6 +40,8 @@ int	main(int argc, char **argv, char **envp)
 		add_history(input);
 		free(input);
 	}
+	ft_arrayfree(mshell->envp);
+	free(mshell);
 	return (0);
 }
 

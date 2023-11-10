@@ -17,8 +17,11 @@ pid_t	ft_fork_execution(t_serie *serie, t_struct *mshell)
 	int 	pfd[2];
 	pid_t	pid;
 
-	pipe(pfd);
+	if (pipe(pfd) == -1)
+		ft_error("pipe error\n");
 	pid = fork();
+	if (pipe < 0)
+		ft_error("fork problem\n");
 	if (pid == 0)
 	{
 		set_output(serie, pfd);
@@ -28,7 +31,7 @@ pid_t	ft_fork_execution(t_serie *serie, t_struct *mshell)
 			g_var = ft_execve(serie->cmd, mshell->envp);
 	}
 	set_input(serie, pfd);
-	return (pfd);
+	return (pid);
 }
 
 pid_t	ft_execute_serie(t_serie *serie, int start, t_struct *mshell)
@@ -56,27 +59,31 @@ pid_t	ft_execute_serie(t_serie *serie, int start, t_struct *mshell)
 void	ft_execute(t_struct *mshell)
 {
 	int		i;
-	t_serie *tmp;
+	t_serie *tmp_series;
 	t_serie	*series;
 	int		original_io[2];
 
 	series = NULL;
 	i = 0;
-	serie_creation(mshell, &series);
-	tmp = series;
+	serie_creation(mshell->args, &series);
+	ft_free_lex(mshell->args);
+	print_lst_serie(series);
+	tmp_series = series;
 	original_io[0] = dup(STDIN_FILENO);
 	original_io[1] = dup(STDOUT_FILENO);
-	while (series)
+	while (tmp_series)
 	{
-		series->pid = ft_execute_serie(series, i, mshell);
+		tmp_series->pid = ft_execute_serie(tmp_series, i, mshell);
 		i++;
-		series = series->next;
+		tmp_series = tmp_series->next;
 	}
 	dup2(original_io[0], STDIN_FILENO);
 	dup2(original_io[1], STDOUT_FILENO);
 	close(original_io[0]);
 	close(original_io[1]);
-	ft_waitpid(tmp);
+	tmp_series = series;
+	ft_waitpid(tmp_series);
+	ft_free_serie(series);
 }
 
 // ft_putstr_fd("check\n", 1);

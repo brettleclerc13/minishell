@@ -2,7 +2,13 @@ LIBFT_PATH	=	./Libft/
 PIPEX_PATH	=	./pipex42/
 BUILT_PATH	=	./builtin/
 
-READLINE	=	/opt/homebrew/opt/readline/
+OS := ${shell uname}
+
+ifeq (${OS}, Linux)
+    READLINE = /usr/include/readline/
+else
+    READLINE = /opt/homebrew/opt/readline/
+endif
 
 SRC_MAIN 	= 	./main.c \
 				./parsing.c \
@@ -22,6 +28,7 @@ SRC_MAIN 	= 	./main.c \
 				./execve.c \
 				./exec_redir.c \
 				./exec_function.c \
+				./free.c \
 
 SRC_BUILTIN	=	${addprefix ${BUILT_PATH}, ./builtin_main.c \
 											./ft_cd.c \
