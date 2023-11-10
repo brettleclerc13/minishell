@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:29:32 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/09 13:41:28 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/10 13:04:37 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,38 +22,37 @@ static int	ft_put_redir_error(char *file)
 	return (-1);
 }
 
-static int	check_permissions(char *file, int i)
+static int	check_permissions_fdin(char *file)
 {
-	if (i == 1)
-	{
-        if (!open(file, __O_DIRECTORY))
-		{
-			printf("file %s, check\n", file);
-			return (ft_put_redir_error(file));
-		}
-	}
-	else
-	{
-		if (access(file, X_OK) == -1)
-    	{
-			if (errno == EACCES)
-				g_var = 126;
-			else
-				g_var = 1;
-			return (ft_put_redir_error(file));
-    	}
-	}
+	if (access(file, R_OK) == -1)
+    {
+		if (errno == EACCES)
+			g_var = 126;
+		else
+			g_var = 1;
+		return (ft_put_redir_error(file));
+    }
 	return (0);
 }
+
+// static int	check_permissions_fdout(char *file)
+// {
+//     if (open(file, O_DIRECTORY) == -1)
+// 	{
+// 		printf("file %s, check\n", file);
+// 		return (ft_put_redir_error(file));
+// 	}
+// 	return (0);
+// }
 
 static int fd_in_redir(t_lex *tmp, t_serie **new)
 {
     if (tmp->token == LEFT_CHEV)
 	{
 		tmp = tmp->next;
-		if (check_permissions(tmp->content, 0))
+		if (check_permissions_fdin(tmp->content))
 			return (-1);
-		(*new)->fd_in = open(tmp->content, O_RDWR, 0666);
+		(*new)->fd_in = open(tmp->content, O_RDWR, 0644);
 	}
 	if (tmp->token == DOUBLE_L_CHEV)
 	{
@@ -63,8 +62,6 @@ static int fd_in_redir(t_lex *tmp, t_serie **new)
 	}
     if ((*new)->fd_in < 0)
 	    return (ft_put_redir_error(tmp->content));
-	// dup2((*new)->fd_in, STDIN_FILENO);
-	// close((*new)->fd_in);
     return (0);
 }
 
@@ -73,21 +70,19 @@ static int fd_out_redir(t_lex *tmp, t_serie **new)
     if (tmp->token == RIGHT_CHEV)
     {
 		tmp = tmp->next;
-		if (check_permissions(tmp->content, 1))
-			return (-1);
+		// if (check_permissions_fdout(tmp->content))
+		// 	return (-1);
 		(*new)->fd_out = open(tmp->content, O_RDWR | O_TRUNC | O_CREAT, 0644);
     }
     if (tmp->token == DOUBLE_R_CHEV)
 	{
 		tmp = tmp->next;
-		if (check_permissions(tmp->content, 1))
-			return (-1);
+		// if (check_permissions_fdout(tmp->content))
+		// 	return (-1);
 		(*new)->fd_out = open(tmp->content, O_RDWR | O_APPEND | O_CREAT, 0644);
     }
 	if ((*new)->fd_out < 0)
 		return (ft_put_redir_error(tmp->content));
-	// dup2((*new)->fd_out, STDOUT_FILENO);
-	// close((*new)->fd_out);
     return (0);
 }
 

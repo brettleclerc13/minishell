@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:39:24 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/09 18:38:39 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/10 17:00:28 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,15 @@ int	main(int argc, char **argv, char **envp)
 			free(input);
 			continue ;
 		}
-		parsing(input, &mshell);
+		if (parsing(input, &mshell) == false)
+			// return (g_var); // changer la valeur de g_var dans les retours du parsing
 		if (mshell->check_valid == true)
 			continue ;
 		ft_execute(mshell);
-		// ft_free_mshell(mshell);
 		add_history(input);
 		free(input);
 	}
+	// ft_arrayfree(mshell->envp);
+	// free(mshell);
 	return (0);
 }
-
-// if (ft_strncmp(input, "exit", 5) == 0)
-				// ft_exit();

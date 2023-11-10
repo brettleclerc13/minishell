@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 14:44:49 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/25 17:19:08 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/10 16:42:23 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	ft_error(char *message);
 char	**ft_split_bash(char const *s, char c1, char c2);
 void	ft_count_quote(char const *s);
 char	*ft_strjoin_parser(char *s1, char *s2, bool free_first_param);
+char	**ft_split_bash_error(char *message, char **dest);
 
 //Bonus Part:
 t_list	*ft_lstnew(void *content);

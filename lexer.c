@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 13:45:40 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/25 18:01:34 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/10 16:48:24 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,6 @@ t_lex	*lexer(char **args, t_lex **list)
 		j = 0;
 		if (lex_string(args, list, &i, j) == true)
 			continue;
-		if (*args[i] == '#')
-			ft_error("'#' not supported");
 		if (lex_function(args, list, &i) == true)
 			continue;
 		if (lex_sign(args, list, &i, j) == true)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_word.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 16:09:16 by ehouot            #+#    #+#             */
-/*   Updated: 2023/10/17 10:17:18 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/10 16:47:40 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,6 @@ int	ft_split_word(char *args, t_lex **list)
 			check_sep = 1;
 		}
 	}
+	free(vars);
 	return (check_sep);
 }
