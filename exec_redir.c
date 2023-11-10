@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:29:32 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/10 10:53:30 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/10 11:10:30 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	check_permissions_fdin(char *file)
 
 static int	check_permissions_fdout(char *file)
 {
-    if (open(file, O_DIRECTORY) != -1)
+    if (open(file, O_DIRECTORY) == -1)
 	{
 		printf("file %s, check\n", file);
 		return (ft_put_redir_error(file));
