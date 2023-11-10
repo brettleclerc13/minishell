@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 15:34:36 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/07 18:27:06 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/10 16:27:23 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,5 @@ void	parsing(char *input, t_struct **mshell)
 	if ((*mshell)->check_valid == true)
 		return ;
 	(*mshell)->args = list;
-	// (*mshell)->pipe_count = ft_count_pipe(*mshell);
 	return ;
 }
