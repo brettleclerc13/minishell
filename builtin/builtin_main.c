@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_main.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:29 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/25 14:39:06 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/09 20:14:03 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,23 @@ bool	builtin_function(char *arg)
 
 int	builtin_main(char **args, t_struct *mshell)
 {
-	if (!ft_strcmp(args[0], "cd"))
-		return (ft_cd(args, mshell));
-	if (!ft_strcmp(args[0], "echo"))
-		return (ft_echo(args));
-	if (!ft_strcmp(args[0], "env"))
-		return (ft_env(mshell->envp));
-	if (!ft_strcmp(args[0], "exit"))
-		ft_exit(args, 1);
-	if (!ft_strcmp(args[0], "export"))
-		return (ft_export(args, mshell));
-	if (!ft_strcmp(args[0], "pwd"))
-		return (ft_pwd());
-	if (!ft_strcmp(args[0], "unset"))
-		return (ft_unset(args, mshell));
+	if (builtin_function(args[0]) == true)
+	{
+		if (!ft_strcmp(args[0], "cd"))
+			ft_cd(args, mshell);
+		else if (!ft_strcmp(args[0], "echo"))
+			ft_echo(args);
+		else if (!ft_strcmp(args[0], "env"))
+			ft_env(mshell->envp);
+		else if (!ft_strcmp(args[0], "exit"))
+			ft_exit(args, 1);
+		else if (!ft_strcmp(args[0], "export"))
+			ft_export(args, mshell);
+		else if (!ft_strcmp(args[0], "pwd"))
+			ft_pwd();
+		else if (!ft_strcmp(args[0], "unset"))
+			ft_unset(args, mshell);
+		exit(0);
+	}
 	return (0);
 }

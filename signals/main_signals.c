@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_signals.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:32:36 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/09 13:30:23 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/09 18:25:45 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void    signals_types(char *input, bool isheredoc)
 {
 	if (!input)
 	{
+		printf("pid du processus : %d\n", getpid());
 		ft_putstr_fd("exit\n", STDOUT_FILENO);
 		exit(127);
 	}

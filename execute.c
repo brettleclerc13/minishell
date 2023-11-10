@@ -20,7 +20,7 @@ pid_t	ft_fork_execution(t_serie *serie, t_struct *mshell)
 	if (pipe(pfd) == -1)
 		ft_error("pipe error\n");
 	pid = fork();
-	if (pipe < 0)
+	if (pid < 0)
 		ft_error("fork problem\n");
 	if (pid == 0)
 	{
@@ -65,7 +65,7 @@ void	ft_execute(t_struct *mshell)
 	series = NULL;
 	i = 0;
 	serie_creation(mshell, &series);
-	print_lst_serie(series);
+	// print_lst_serie(series);
 	tmp = series;
 	original_io[0] = dup(STDIN_FILENO);
 	original_io[1] = dup(STDOUT_FILENO);

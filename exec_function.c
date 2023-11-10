@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_function.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:28:04 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/09 13:30:18 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/09 20:08:06 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void	ft_waitpid(t_serie *series)
 
 void	set_output(t_serie *serie, int pfd[])
 {
+	close(pfd[0]);
 	if (serie->fd_out_token == END)
 		return ;
-	close(pfd[0]);
 	if (serie->fd_out == STDOUT_FILENO)
 		dup2(pfd[1], STDOUT_FILENO);
 	close(pfd[1]);
