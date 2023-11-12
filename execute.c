@@ -12,16 +12,31 @@
 
 #include "minishell.h"
 
+static void	reset_io(int original_io[])
+{
+	dup2(original_io[0], STDIN_FILENO);
+	dup2(original_io[1], STDOUT_FILENO);
+	close(original_io[0]);
+	close(original_io[1]);
+}
+
+static pid_t	ft_execute_error(char *message)
+{
+	ft_putstr_fd(message, 2);
+	g_var = -1;
+	return (g_var);
+}
+
 pid_t	ft_fork_execution(t_serie *serie, t_struct *mshell, int start)
 {
 	int 	pfd[2];
 	pid_t	pid;
 
 	if (pipe(pfd) == -1)
-		ft_error("pipe error\n");
+		ft_execute_error("minishell: broken pipe\n");
 	pid = fork();
 	if (pid < 0)
-		ft_error("fork problem\n");
+		ft_execute_error("minishell: fork: resource temporarily unavailable\n");
 	if (pid == 0)
 	{
 		set_child_input(serie, pfd, mshell->tmp_fd, start);
@@ -60,14 +75,15 @@ pid_t	ft_execute_serie(t_serie *serie, int start, t_struct *mshell)
 
 void	ft_execute(t_struct *mshell)
 {
-	int		i;
+	int		start;
 	t_serie *tmp_series;
 	t_serie	*series;
 	int		original_io[2];
 
 	series = NULL;
-	i = 0;
-	serie_creation(mshell->args, &series);
+	start = 0;
+	if (serie_creation(mshell->args, &series) == false)
+		ft_free_serie_lex(series, mshell->args);
 	ft_free_lex(mshell->args);
 	print_lst_serie(series);
 	tmp_series = series;
@@ -75,14 +91,10 @@ void	ft_execute(t_struct *mshell)
 	original_io[1] = dup(STDOUT_FILENO);
 	while (tmp_series)
 	{
-		tmp_series->pid = ft_execute_serie(tmp_series, i, mshell);
-		i++;
+		tmp_series->pid = ft_execute_serie(tmp_series, start++, mshell);
 		tmp_series = tmp_series->next;
 	}
-	dup2(original_io[0], STDIN_FILENO);
-	dup2(original_io[1], STDOUT_FILENO);
-	close(original_io[0]);
-	close(original_io[1]);
+	reset_io(original_io);
 	tmp_series = series;
 	ft_waitpid(tmp_series);
 	ft_free_serie(series);
