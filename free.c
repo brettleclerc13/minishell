@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 09:50:54 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/10 16:40:31 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/12 21:27:44 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,14 @@ void	ft_free_lex(t_lex *lex)
 		free(lex->content);
 		lex = lex->next;
 	}
+}
+
+void	ft_free_serie_lex(t_serie *series, t_lex *args)
+{
+	if (series)
+		ft_free_serie(series);
+	if (args)
+		ft_free_lex(args);
+	g_var = -1;
+	exit(g_var);
 }

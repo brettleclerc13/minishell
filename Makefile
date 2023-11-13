@@ -24,6 +24,7 @@ SRC_MAIN 	= 	./main.c \
 				./execute.c \
 				./parser_dollar.c \
 				./serie.c \
+				./ft_lst_utils_serie.c \
 				./signals/main_signals.c \
 				./execve.c \
 				./exec_redir.c \

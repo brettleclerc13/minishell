@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:39:24 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/12 14:43:05 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/13 08:40:43 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int	main(int argc, char **argv, char **envp)
 			free(input);
 			continue ;
 		}
-		if (parsing(input, &mshell) == true)
-			return (g_var); // changer la valeur de g_var dans les retours du parsing
-		if (mshell->check_valid == true)
+		if (parsing(input, &mshell) == false)
+			return (g_var); // changer g_var dans les retours du split_bash si besoin
+		if (mshell->check_valid == false)
 			continue ;
 		ft_execute(mshell);
 		add_history(input);

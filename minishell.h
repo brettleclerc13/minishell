@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/10 16:54:21 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/12 21:03:11 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,9 +148,10 @@ int		ft_count_pipe(t_struct *mshell);
 void	check_dollar(t_lex **list, char **envp);
 
 /* -- SERIES -- */
-void	serie_creation(t_lex *args, t_serie **series);
-t_serie	*ft_lstnew_serie(t_lex *args, int i, bool ispipe);
-char	**ft_serie_array(t_lex *args, t_serie **new, int i);
+bool	serie_creation(t_lex *args, t_serie **series);
+bool	serie_addition(t_serie **series, t_lex *args, int count, bool ispipe);
+t_serie	*ft_lstnew_serie(t_lex *args, int count, bool ispipe);
+char	**ft_serie_array(t_lex *args, t_serie **new, int count);
 void	ft_lstadd_back_serie(t_serie **series, t_serie *new);
 t_serie	*ft_lstlast_serie(t_serie *series);
 
@@ -222,5 +223,6 @@ void	ft_exit_result(int process_result);
 /* -- FREE-- */
 void	ft_free_serie(t_serie *series);
 void	ft_free_lex(t_lex *lex);
+void	ft_free_serie_lex(t_serie *series, t_lex *args);
 
 #endif
