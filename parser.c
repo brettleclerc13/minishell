@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:17:25 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/10 16:51:39 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/12 06:55:00 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@ bool	check_redir(t_lex **list, enum e_token prev_tok)
 			printf("minishell: syntax error near unexpected token `newline'\n");
 			return (true);
 		}
-		// opening_redir(list, prev_tok, tmp);
 		tmp = tmp->next;
-		if ((*list)->token == LEFT_CHEV && prev_tok == (enum e_token)-1 \
+		if ((*list)->token == LEFT_CHEV && prev_tok == (enum e_token) -1 \
 			&& (open(tmp->content, O_RDONLY) == -1))
 		{
 			printf("minishell: %s: No such file or directory\n", tmp->content);
