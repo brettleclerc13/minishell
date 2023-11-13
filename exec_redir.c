@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:29:32 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/12 07:53:25 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/13 11:37:07 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,31 +45,31 @@ static int	check_permissions_fdin(char *file)
 // 	return (0);
 // }
 
-static void	ft_here_doc(int argc, char **argv, t_varb *var)
-{
-	char	*str;
+// static void	ft_here_doc(int argc, char **argv, t_varb *var)
+// {
+// 	char	*str;
 
-	if (pipe(var->fdhd) == -1)
-		ft_error("here_doc pipe error\n");
-	while (1)
-	{
-		write(1, "> ", 2);
-		str = get_next_line(0);
-		if ((ft_strlen(argv[2]) == ft_strlen(str + 1))
-			&& (ft_strncmp(str, argv[2], ft_strlen(argv[2])) == 0))
-		{
-			free(str);
-			break ;
-		}
-		write(var->fdhd[1], str, ft_strlen(str) + 1);
-	}
-	close(var->fdhd[1]);
-	if (access(argv[argc - 1], F_OK) == 0)
-		unlink(argv[argc - 1]);
-	var->outfile = open(argv[argc - 1], O_RDWR | O_APPEND | O_CREAT, 0666);
-	if (var->outfile == -1)
-		ft_error("outfile problem\n");
-}
+// 	if (pipe(var->fdhd) == -1)
+// 		ft_error("here_doc pipe error\n");
+// 	while (1)
+// 	{
+// 		write(1, "> ", 2);
+// 		str = get_next_line(0);
+// 		if ((ft_strlen(argv[2]) == ft_strlen(str + 1))
+// 			&& (ft_strncmp(str, argv[2], ft_strlen(argv[2])) == 0))
+// 		{
+// 			free(str);
+// 			break ;
+// 		}
+// 		write(var->fdhd[1], str, ft_strlen(str) + 1);
+// 	}
+// 	close(var->fdhd[1]);
+// 	if (access(argv[argc - 1], F_OK) == 0)
+// 		unlink(argv[argc - 1]);
+// 	var->outfile = open(argv[argc - 1], O_RDWR | O_APPEND | O_CREAT, 0666);
+// 	if (var->outfile == -1)
+// 		ft_error("outfile problem\n");
+// }
 
 static int fd_in_redir(t_lex *tmp, t_serie **new)
 {
@@ -85,7 +85,7 @@ static int fd_in_redir(t_lex *tmp, t_serie **new)
 		tmp = tmp->next;
 		// (*new)->hd_limiter = tmp->content;
 		// (*new)->hd = true;
-		ft_here_doc();
+		// ft_here_doc();
 	}
     if ((*new)->fd_in < 0)
 	    return (ft_put_redir_error(tmp->content));

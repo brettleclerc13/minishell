@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_signals.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:32:36 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/10 16:42:23 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/13 11:0:20 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void    signals_types(char *input, bool isheredoc)
 {
 	if (!input)
 	{
-		printf("pid du processus : %d\n", getpid());
+		// printf("pid du processus : %d\n", getpid());
 		ft_putstr_fd("exit\n", STDOUT_FILENO);
 		exit(127);
 	}
@@ -56,7 +56,7 @@ void    signals_types(char *input, bool isheredoc)
     signal(SIGQUIT, basic_sigquit); // ctrl + "\" same for heredoc
 }
 
-void	ft_exit_result(int process_result)
+void	ft_gvar_result(int process_result)
 {
 	if (WIFEXITED(process_result))
 		g_var = WEXITSTATUS(process_result);

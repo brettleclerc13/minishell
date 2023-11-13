@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 08:10:41 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/24 11:02:57 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/13 12:08:59 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,39 +73,3 @@ int	ft_export(char **args, t_struct *mshell)
 		ft_print_export(mshell->envp);
 	return (result);
 }
-
-/*   ROUGH WORK   */
-// static void	ft_add_to_envp(char *arg, t_struct *mshell)
-// {
-// 	char	*var;
-// 	int		var_length;
-
-// 	var_length = 0;
-// 	var = NULL;
-// 	if (ft_strnstr(arg, "+=", ft_strlen(arg)))
-// 	{
-// 		var_length = ft_strlen(arg) - ft_strlen(ft_strchr(arg, '+'));
-// 		var = ft_retrieve_var(arg, '+');
-// 		if (get_env_value(var, mshell->envp))
-// 			update_env_value(var, arg + (var_length + 1), mshell->envp);
-// 		else
-// 			mshell->envp = add_env_value(var, arg + (var_length + 1), mshell->envp);
-// 		free (var);
-// 	}
-// 	else if (!ft_strchr(arg, '='))
-// 	{
-// 		if (get_env_value(arg, mshell->envp))
-// 			return ;
-// 		else
-// 			mshell->envp = add_env_str(arg, mshell->envp);
-// 	}
-// 	else
-// 	{
-// 		var = ft_retrieve_var(arg, '=');
-// 		if (get_env_value(var, mshell->envp))
-// 			update_env_value(var, arg + (var_length + 1), mshell->envp);
-// 		else
-// 			mshell->envp = add_env_str(arg, mshell->envp);
-// 		free (var);
-// 	}
-// }

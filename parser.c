@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:17:25 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/13 08:39:36 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/13 12:08:58 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,13 @@ bool	parser(t_lex **list, char **envp)
 	tmp = *list;
 	while (tmp)
 	{
-		if (check_double_pipe(&tmp) == false) // cas des doubles pipes
+		if (check_double_pipe(&tmp) == false)
 			return (false);
-		check_dollar(&tmp, envp); // cas des dollars
+		if (check_dollar(&tmp, envp) == false)
+			return (false);
 		if (tmp->content == NULL)
 			tmp->content = "\0";
-		if (check_redir(&tmp, prev_tok) == false) // cas des redirections
+		if (check_redir(&tmp, prev_tok) == false)
 			return (false);
 		prev_tok = tmp->token;
 		tmp = tmp->next;

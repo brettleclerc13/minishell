@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:08:06 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/15 19:45:59 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/13 12:09:00 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ int	ft_pwd(void)
 
 	if (!getcwd(pwd, sizeof(pwd)))
 	{
-		ft_putstr_fd("pwd: Cannot retrieve cwd", 2);
-		perror(pwd);
+		ft_putstr_fd("minishell: pwd: cannot retrieve cwd", 2);
 		return (1);
 	}
 	printf("%s\n", pwd);

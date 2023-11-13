@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:53:41 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/25 14:41:11 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/13 12:08:59 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_cd_contd(char *dir, char *cwd, t_struct *mshell)
 {
 	if (chdir(dir))
 	{
-		ft_putstr_fd("minishell: cd error: ", 2);
+		ft_putstr_fd("minishell: cd: ", 2);
 		perror(dir);
 		free(dir);
 		return (1);
@@ -37,8 +37,7 @@ int	ft_cd(char **args, t_struct *mshell)
 
 	if (!getcwd(cwd, sizeof(cwd)))
 	{
-		ft_putstr_fd("minishell: cwd: Cannot retrieve cwd", 2);
-		perror(cwd);
+		ft_putstr_fd("minishell: cwd: cannot retrieve cwd", 2);
 		return (1);
 	}
 	if (ft_arraylen(args) == 1)
@@ -46,7 +45,7 @@ int	ft_cd(char **args, t_struct *mshell)
 		dir = ft_strdup(get_env_value("HOME=", mshell->envp));
 		if (!dir)
 		{
-			ft_putstr_fd("minishell: cd: Home directory not listed in env\n", 2);
+			ft_putstr_fd("minishell: cd: home directory not listed in env\n", 2);
 			return (1);
 		}
 	}

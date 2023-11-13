@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:28:04 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/10 15:01:56 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/13 11:39:04 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ void	ft_waitpid(t_serie *series)
 
 	tmp = series;
 	return_result = 0;
-	if (tmp->pid == -5)
+	if (tmp->pid == -5 || tmp->pid == -1)
 		return ;
 	while (tmp)
 	{
 		waitpid(tmp->pid, &return_result, 0);
 		tmp = tmp->next;
 	}
-	ft_exit_result(return_result);
+	ft_gvar_result(return_result);
 }
 
 void	set_child_input(t_serie *serie, int pfd[], int previous_fd, int start)

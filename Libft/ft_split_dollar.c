@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_split_dollar.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 14:15:00 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/13 12:09:31 by ehouot           ###   ########.fr       */
+/*   Created: 2023/11/13 12:14:33 by ehouot            #+#    #+#             */
+/*   Updated: 2023/11/13 12:34:15 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@ static int	ft_count_size(char const *s, char c, int i)
 	z = 0;
 	j = 0;
 	a = 0;
+    if (s[i] == c && !s[i + 1])
+    {
+        return (1);
+    }
 	while (s[z] && a <= i)
 	{
 		while (s[z] && s[z] == c)
@@ -73,9 +77,7 @@ static int	ft_count(char const *s, char c)
 	i = 0;
 	while (s[i])
 	{
-		while (s[i] && s[i] == c)
-			i++;
-		if (s[i])
+		if (s[i] == c && !s[i + 1])
 			cpt++;
 		while (s[i] && s[i] != c)
 			i++;
@@ -83,7 +85,7 @@ static int	ft_count(char const *s, char c)
 	return (cpt);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split_dollar(char const *s, char c)
 {
 	char	**dest;
 	int		i;
@@ -101,7 +103,10 @@ char	**ft_split(char const *s, char c)
 		dest[i] = malloc (ft_count_size(s, c, i) + 1);
 		if (!dest[i])
 			return (NULL);
-		dest[i] = ft_fill(dest[i], s, c, i);
+        if (s[i] == c && !s[i + 1])
+            dest[i] = &c;
+        else
+		    dest[i] = ft_fill(dest[i], s, c, i);
 		i++;
 	}
 	dest[i] = NULL;

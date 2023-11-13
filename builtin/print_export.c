@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 20:33:16 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/23 15:18:52 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/13 12:08:59 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	ft_print_export(char **envp)
 
 bool	ft_put_export_error(char *arg)
 {
-	ft_putstr_fd("minishell: export: ", 2);
+	ft_putstr_fd("minishell: export: `", 2);
 	ft_putstr_fd(arg, 2);
-	ft_putstr_fd(": not a valid identifier\n", 2);
+	ft_putstr_fd("': not a valid identifier\n", 2);
 	return (false);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 16:17:25 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/17 19:53:37 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/13 12:08:59 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	ft_env(char **envp)
 	i = -1;
 	if (!envp)
 	{
-		ft_putstr_fd("env: env not found", 2);
-		return (1);
+		ft_putstr_fd("minishell: env: No such file or directory\n", 2);
+		return (127);
 	}
 	while (envp[++i])
 	{

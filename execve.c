@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 09:07:07 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/10 11:19:51 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/13 10:32:55 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,6 @@ char	*ft_add_path(char *cmd, char **path)
 	return (cmd);
 }
 
-// int	ft_execve(char *cmd, t_varb *arg, char **envp)
-// {
-// 	arg->cmd = ft_split(cmd, ' ');
-// 	if (arg->cmd[0] == NULL)
-// 		ft_print_error(2);
-// 	execve(arg->cmd[0], arg->cmd, envp);
-// 	arg->cmd[0] = ft_add_path(arg, arg->cmd[0]);
-// 	if (arg->cmd[0] == NULL)
-// 		ft_print_error(6);
-// 	execve(arg->cmd[0], arg->cmd, envp);
-// 	return (-1);
-// }
 void	ft_put_execve_error(char *arg)
 {
 	ft_putstr_fd("minishell: ", 2);
@@ -86,11 +74,11 @@ int	ft_execve(char **cmd, char **envp)
 	if (path == NULL)
 	{
 		ft_put_execve_error(cmd[0]);
-		return (-1);
+		return (127);
 	}
 	cmd[0] = ft_add_path(cmd[0], path);
 	execve(cmd[0], cmd, envp);
 	ft_put_execve_error(cmd[0]);
 	ft_arrayfree(path);
-	return (-1);
+	return (127);
 }

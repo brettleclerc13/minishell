@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_bash_error.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:39:50 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/12 18:40:02 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/13 12:09:00 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 17:26:36 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/24 18:08:33 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/13 11:05:28 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static void	ft_put_exit_error(char *arg)
 	ft_putstr_fd("minishell: exit: ", 2);
 	ft_putstr_fd(arg, 2);
 	ft_putstr_fd(": numeric argument required\n", 2);
-	exit(255);
+	exit(2);
 }
 
 void	ft_exit(char **args, pid_t child)

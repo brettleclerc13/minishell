@@ -23,8 +23,8 @@ static void	reset_io(int original_io[])
 static pid_t	ft_execute_error(char *message)
 {
 	ft_putstr_fd(message, 2);
-	g_var = -1;
-	return (g_var);
+	g_var = 1;
+	return (-1);
 }
 
 pid_t	ft_fork_execution(t_serie *serie, t_struct *mshell, int start)
@@ -45,7 +45,7 @@ pid_t	ft_fork_execution(t_serie *serie, t_struct *mshell, int start)
 			g_var = builtin_main(serie->cmd, mshell, 0);
 		else
 			g_var = ft_execve(serie->cmd, mshell->envp);
-		exit (1);					//to be modified - set sig & free before exit
+		exit (g_var);					//to be modified - set sig & free before exit
 	}
 	set_parent_io(pfd, mshell);
 	return (pid);
@@ -72,7 +72,6 @@ pid_t	ft_execute_serie(t_serie *serie, int start, t_struct *mshell)
 		return (ft_fork_execution(serie, mshell, start));
 }
 
-
 void	ft_execute(t_struct *mshell)
 {
 	int		start;
@@ -85,7 +84,7 @@ void	ft_execute(t_struct *mshell)
 	if (serie_creation(mshell->args, &series) == false)
 		ft_free_serie_lex(series, mshell->args);
 	ft_free_lex(mshell->args);
-	print_lst_serie(series);
+	//print_lst_serie(series);
 	tmp_series = series;
 	original_io[0] = dup(STDIN_FILENO);
 	original_io[1] = dup(STDOUT_FILENO);
