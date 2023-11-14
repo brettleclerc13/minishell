@@ -41,7 +41,7 @@ pid_t	ft_fork_execution(t_serie *serie, t_struct *mshell, int start)
 	{
 		set_child_input(serie, pfd, mshell->tmp_fd, start);
 		set_child_output(serie, pfd);
-		if (serie->cmd_token == FUNCTION)
+		if (builtin_checker(serie->cmd[0]))
 			g_var = builtin_main(serie->cmd, mshell, 0);
 		else
 			g_var = ft_execve(serie->cmd, mshell->envp);
@@ -53,7 +53,7 @@ pid_t	ft_fork_execution(t_serie *serie, t_struct *mshell, int start)
 
 pid_t	ft_execute_serie(t_serie *serie, int start, t_struct *mshell)
 {
-	if (serie->fd_out_token == END && start == 0 && serie->cmd_token == FUNCTION)
+	if (serie->fd_out_token == END && start == 0 && builtin_checker(serie->cmd[0]))
 	{
 		if (serie->fd_in != STDIN_FILENO && serie->fd_in != -1)
 		{

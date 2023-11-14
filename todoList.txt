@@ -9,7 +9,7 @@ Grand tâches:
 Petit tâches:
 - Open ended double quotes quits the program. Should not.	[-EMILIEN-]
 - WAITPID inversé (liste double chaîné)	[-EMILIEN-]
-- strncmp builtin functions to avoid $ec $ho issue	[-BRETT-]
+- rm cmd_token option in series, not needed
 - File permission denied - program quits	[-BRETT-]
 - File permission denied + pipe - program should continue	[-BRETT-]
 - env -i ./minishell (initialise 4 vars: blank OLD_PWD, PWD with cwd, SHLVL, _)		[-BRETT-]
