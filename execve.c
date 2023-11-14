@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 09:07:07 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/13 10:32:55 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/13 16:46:31 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	**ft_extract_path(char **envp)
 			free(trimmed);
 			i = -1;
 			while (stash[++i])
-				stash[i] = ft_strjoin_parser(stash[i], "/", true);
+				stash[i] = ft_strjoin_path(stash[i], "/", true);
 			return (stash);
 		}
 	}

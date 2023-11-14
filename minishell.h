@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/13 10:55:32 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/14 10:44:49 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,14 @@ typedef struct	s_separator
 {
 	char	*str;
 	int		num;
-}				t_sep;
+}			t_sep;
 
 typedef struct s_lex
 {
 	char			*content;
 	enum e_token	token;
 	void			*next;
-}				t_lex;
+}					t_lex;
 
 typedef struct	s_serie
 {
@@ -79,7 +79,7 @@ typedef struct	s_serie
 	bool			hd;
 	pid_t			pid;
 	void			*next;
-}				t_serie;
+}					t_serie;
 
 typedef struct	s_count_red
 {
@@ -87,7 +87,7 @@ typedef struct	s_count_red
 	int	double_right;
 	int	left;
 	int	right;
-}				t_count_red;
+}		t_count_red;
 
 typedef struct	s_struct
 {
@@ -107,7 +107,7 @@ typedef struct	s_split_word
 	int				start;
 	enum e_token	type;
 	int				skip;
-}				t_sp_wd;
+}					t_sp_wd;
 
 typedef struct	s_var
 {
@@ -115,20 +115,15 @@ typedef struct	s_var
 	char		*envp_var;
 	int			symbol;
 	int			varlen;
-}			t_var;
+}				t_var;
 
-typedef struct s_fd
+typedef struct	s_dollar
 {
-	int		infile;
-	int		outfile;
-	int		pfd[2];
-	int		fdhd[2];
-	int		tmpfd;
-	int		here_doc;
-	pid_t	child;
-	char	**path;
-	char	**cmd;
-}				t_fd;
+	int		i;
+	int		j;
+	int		start;
+	char	**array;
+} 			t_dollar;
 
 /* -- MINISHELL -- */
 bool		parsing(char *input, t_struct **mshell);
@@ -164,7 +159,6 @@ void	print_lst_serie(t_serie *series);
 
 /* -- BUILTINS -- */
 int		builtin_main(char **args, t_struct *mshell, int process);
-bool	builtin_function(char *arg);
 int		ft_cd(char **args, t_struct *mshell);
 int		ft_cd_contd(char *dir, char *cwd, t_struct *mshell);
 int		ft_echo(char **args);
