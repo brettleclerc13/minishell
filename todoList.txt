@@ -1,0 +1,59 @@
+Grand tâches:
+- Gerer les here_doc	[-EMILIEN-]
+- Gerer les signaux (here_doc && ft_execve) + ignorer les signaux dans le parent quand (pid == 0)	[-EMILIEN-]
+- DOLLAR	[-BRETT-]
+- SIMPLE QUOTES et DOUBLE QUOTES	[-EMILIEN-]
+- WHITE SPACE	[-EMILIEN-]
+- cd test within 3 folders	[-BRETT-]
+
+Petit tâches:
+- Open ended double quotes quits the program. Should not.	[-EMILIEN-]
+- WAITPID inversé (liste double chaîné)	[-EMILIEN-]
+- strncmp builtin functions to avoid $ec $ho issue	[-BRETT-]
+- File permission denied - program quits	[-BRETT-]
+- File permission denied + pipe - program should continue	[-BRETT-]
+- env -i ./minishell (initialise 4 vars: blank OLD_PWD, PWD with cwd, SHLVL, _)		[-BRETT-]
+- OLD_PWD should not be initialised at the beginning	[-BRETT-]
+- Ctrl / should not print (Termios)		[-EMILIEN-]
+- cat ; Ctrl+C : 2 minishell argv[0] shows up	[-EMILIEN-]
+
+Pointers:
+- ps command for current pipes on dif terminal
+- character non-bloquant
+
+
+
+DOUBLE QUOTE TESTS:
+echo '$USER'
+result: $USER
+
+echo "'$USER'"
+result: 'brettleclerc'
+
+
+
+WHITE SPACE TESTS:
+export a="     what      ever     "
+
+echo $a
+result:what ever
+
+echo "$a"
+result:      what      ever
+
+
+DOLLAR TESTS:
+echo $USERJDK
+result: /n
+
+
+export a=ec
+export b=ho
+$a$b whatever
+result: whatever
+
+
+
+SERIE - DOUBLE LISTE CHAINE TESTS
+cat | cat | cat | ls
+Should quit after 3 enters

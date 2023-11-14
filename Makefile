@@ -1,5 +1,4 @@
 LIBFT_PATH	=	./Libft/
-PIPEX_PATH	=	./pipex42/
 BUILT_PATH	=	./builtin/
 
 OS := ${shell uname}

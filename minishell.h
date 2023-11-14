@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/14 10:44:49 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/14 11:01:20 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 #include <sys/wait.h>
 
 # include "Libft/libft.h"
-# include "pipex42/pipex_bonus.h"
 
 extern int	g_var;
 

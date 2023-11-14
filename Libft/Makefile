@@ -6,7 +6,7 @@
 #    By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 20:15:35 by ehouot            #+#    #+#              #
-#    Updated: 2023/11/13 16:47:04 by brettlecler      ###   ########.fr        #
+#    Updated: 2023/11/14 11:02:13 by brettlecler      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,8 +60,7 @@ SRC_ADD		= ft_split_bash.c \
 				ft_error.c \
 				ft_count_quote.c \
 				strjoin_functions.c \
-				ft_split_bash_error.c \
-				ft_split_dollar.c
+				ft_split_bash_error.c
 
 OBJ 		= $(SRC:.c=.o)
 
