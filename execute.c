@@ -39,6 +39,8 @@ pid_t	ft_fork_execution(t_serie *serie, t_struct *mshell, int start)
 		ft_execute_error("minishell: fork: resource temporarily unavailable\n");
 	if (pid == 0)
 	{
+		if (serie->fd_in == -1 || serie->fd_out == -1)
+			exit (g_var);
 		set_child_input(serie, pfd, mshell->tmp_fd, start);
 		set_child_output(serie, pfd);
 		if (builtin_checker(serie->cmd[0]))
@@ -55,12 +57,14 @@ pid_t	ft_execute_serie(t_serie *serie, int start, t_struct *mshell)
 {
 	if (serie->fd_out_token == END && start == 0 && builtin_checker(serie->cmd[0]))
 	{
-		if (serie->fd_in != STDIN_FILENO && serie->fd_in != -1)
+		if (serie->fd_in == -1 || serie->fd_out == -1)
+			return (-5);
+		if (serie->fd_in != STDIN_FILENO)
 		{
 			dup2(serie->fd_in, STDIN_FILENO);
 			close(serie->fd_in);
 		}
-		if (serie->fd_out != STDOUT_FILENO && serie->fd_out != -1)
+		if (serie->fd_out != STDOUT_FILENO)
 		{
 			dup2(serie->fd_out, STDOUT_FILENO);
 			close(serie->fd_out);

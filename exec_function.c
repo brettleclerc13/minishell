@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_function.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:28:04 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/13 11:39:04 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/15 12:25:58 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_waitpid(t_serie *series)
 
 void	set_child_input(t_serie *serie, int pfd[], int previous_fd, int start)
 {
-	if (serie->fd_in != STDIN_FILENO && serie->fd_in != -1)
+	if (serie->fd_in != STDIN_FILENO)
 	{
 		dup2(serie->fd_in, STDIN_FILENO);
 		close(serie->fd_in);
@@ -39,7 +39,7 @@ void	set_child_input(t_serie *serie, int pfd[], int previous_fd, int start)
 		if (previous_fd)
 			close(previous_fd);
 	}
-	else if ((serie->fd_in == STDIN_FILENO || serie->fd_in == -1) && start != 0)
+	else if (serie->fd_in == STDIN_FILENO && start != 0)
 	{
 		dup2(previous_fd, STDIN_FILENO);
 		close(previous_fd);
@@ -50,7 +50,7 @@ void	set_child_input(t_serie *serie, int pfd[], int previous_fd, int start)
 }
 void	set_child_output(t_serie *serie, int pfd[])
 {
-	if (serie->fd_out != STDOUT_FILENO && serie->fd_out != -1)
+	if (serie->fd_out != STDOUT_FILENO)
 	{
 		if (serie->fd_out_token != END)
 		{
@@ -66,7 +66,7 @@ void	set_child_output(t_serie *serie, int pfd[])
 			close(pfd[1]);
 		}
 	}
-	else if ((serie->fd_out == STDOUT_FILENO || serie->fd_out == -1) && serie->fd_out_token != END)
+	else if (serie->fd_out == STDOUT_FILENO && serie->fd_out_token != END)
 	{
 		dup2(pfd[1], STDOUT_FILENO);
 		close(pfd[1]);

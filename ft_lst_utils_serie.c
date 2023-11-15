@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 20:12:53 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/14 17:13:57 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/15 10:45:10 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,7 @@ char	**ft_serie_array(t_lex *args, t_serie **new, int count)
 	}
 	tmp = args;
 	(*new)->cmd_token = tmp->token;
-	if (ft_set_redirections(tmp, new) == -1)
-		return (NULL);
+	ft_set_redirections(tmp, new);
 	while (tmp && tmp->token != 4)
 	{
 		if (tmp->token == RIGHT_CHEV || tmp->token == DOUBLE_R_CHEV \

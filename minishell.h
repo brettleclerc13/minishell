@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/14 19:12:59 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/15 10:43:36 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,8 +206,8 @@ void	set_parent_io(int pfd[], t_struct *mshell);
 void	ft_waitpid(t_serie *series);
 
 /* -- REDIRECTION -- */
-int	ft_count_redir(t_lex *args);
-int	ft_set_redirections(t_lex *tmp, t_serie **new);
+int		ft_count_redir(t_lex *args);
+void	ft_set_redirections(t_lex *tmp, t_serie **new);
 
 /* -- SIGNALS -- */
 void    signals_types(char *input, bool isheredoc);
