@@ -3,19 +3,20 @@ Grand tâches:
 - Gerer les signaux (here_doc && ft_execve) + ignorer les signaux dans le parent quand (pid == 0)	[-EMILIEN-]
 - DOLLAR	[-BRETT-]
 - SIMPLE QUOTES et DOUBLE QUOTES	[-EMILIEN-]
-- WHITE SPACE	[-EMILIEN-]
+- WHITE SPACE	[-BRETT-]
 - cd test within 3 folders	[-BRETT-]
 
 Petit tâches:
 - Open ended double quotes quits the program. Should not.	[-EMILIEN-]
 - WAITPID inversé (liste double chaîné)	[-EMILIEN-]
-- env -i ./minishell (initialise 4 vars: blank OLD_PWD, PWD with cwd, SHLVL, _)		[-BRETT-]
+- '_' variable updated each time successful? execution is launched	[-BRETT-]
 - OLD_PWD should not be initialised at the beginning	[-BRETT-]
 - Ctrl / should not print (Termios)		[-EMILIEN-]
 - cat ; Ctrl+C : 2 minishell argv[0] shows up	[-EMILIEN-]
 
 Really small tasks to be done last:
 - rm cmd_token option in series, not needed		[-BRETT-]
+- rm get_env_value function, probably not needed		[-BRETT-]
 
 Pointers:
 - ps command for current pipes on dif terminal
@@ -26,6 +27,7 @@ TASKS DONE
 - a=ec, b=ho, $a$b should work as a function, strcmp builtin checker needed		 [-BRETT-]
 - File permission denied - program quits	[-BRETT-]
 - File permission denied + pipe - program should continue	[-BRETT-]
+- env -i ./minishell (initialise 4 vars: blank OLD_PWD, PWD with cwd, SHLVL, _)		[-BRETT-]
 
 
 

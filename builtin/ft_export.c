@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 08:10:41 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/13 12:08:59 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/15 20:47:18 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_add_to_envp(char *arg, t_struct *mshell)
+void	ft_add_to_envp(char *arg, t_struct *mshell)
 {
 	t_var	var;
 
 	ft_create_var(arg, &var);
-	if (!ft_varcmp(&var, mshell->envp))
+	if (!ft_varcmp_struct(&var, mshell->envp))
 	{
 		if (var.symbol == '+')
 			mshell->envp = add_env_value(var.var, arg + (var.varlen + 1), mshell->envp);
@@ -27,9 +27,9 @@ static void	ft_add_to_envp(char *arg, t_struct *mshell)
 	else
 	{
 		if (var.symbol == '+')
-			update_env(&var, arg + (var.varlen + 1), mshell);
+			update_env(&var, arg + (var.varlen + 1), mshell, true);
 		if (var.symbol == '=')
-			update_env(&var, arg + var.varlen, mshell);
+			update_env(&var, arg + var.varlen, mshell, true);
 		free(var.envp_var);
 	}
 	free(var.var);

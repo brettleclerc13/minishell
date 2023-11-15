@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 17:01:46 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/23 16:57:09 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/15 20:52:28 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,6 @@ char	**add_env_str(char *arg, char **envp)
 
 	new_envp = ft_arrayadd(arg, envp);
 	return (new_envp);
-}
-
-int	ft_update_shlvl(t_struct *mshell)
-{
-	char	*shlvl;
-
-	shlvl = get_env_value("SHLVL=", mshell->envp);
-	if (!shlvl)
-	{
-		ft_putstr_fd("env: Cannot retrieve shlvl in env", 2);
-		return (1);
-	}
-	update_env_value("SHLVL=", ft_itoa(ft_atoi(shlvl) + 1), mshell->envp);
-	return (0);	
 }
 
 void	update_env_value(char *var, char *new_value, char **envp)
@@ -48,14 +34,17 @@ void	update_env_value(char *var, char *new_value, char **envp)
 		{
 			tmp = ft_substr(envp[i], 0, varlen);
 			free(envp[i]);
-			envp[i] = ft_strjoin(tmp, new_value);
+			if (!new_value)
+				envp[i] = ft_strdup(var);
+			else
+				envp[i] = ft_strjoin(tmp, new_value);
 			free(tmp);
 			return ;
 		}
 	}
 }
 
-void	update_env(t_var *var, char *new_value, t_struct *mshell)
+void	update_env(t_var *var, char *new_value, t_struct *mshell, bool is_equal)
 {
 	int		i;
 	
@@ -67,7 +56,13 @@ void	update_env(t_var *var, char *new_value, t_struct *mshell)
 			if (!ft_strcmp(var->var, var->envp_var))
 			{
 				free(mshell->envp[i]);
-				mshell->envp[i] = ft_varjoin(var->var, new_value);
+				if (is_equal)
+					mshell->envp[i] = ft_varjoin(var->var, new_value);
+				else
+				{
+					var->var = ft_strjoin_path(var->var, "=", true);
+					mshell->envp[i] = ft_varjoin(var->var, new_value);
+				}
 				return ;
 			}
 		}

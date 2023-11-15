@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/15 10:43:36 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/15 20:46:45 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ typedef struct	s_struct
 	t_serie		*series;
 	int			pipe_count;
 	bool		check_valid;
-	pid_t		child;
 	int			tmp_fd;
 	t_count_red	redir;
 }				t_struct;
@@ -177,16 +176,18 @@ bool	ft_put_export_error(char *arg);
 char	**add_env_value(char *var, char *value, char **envp);
 char	*get_env_value(char *var, char **envp);
 void	update_env_value(char *var, char *new_value, char **envp);
-int		ft_update_shlvl(t_struct *mshell);
+void	ft_update_shlvl(t_struct *mshell);
 char	**add_env_str(char *arg, char **envp);
-void	update_env(t_var *var, char *new_value, t_struct *mshell);
+void	update_env(t_var *var, char *new_value, t_struct *mshell, bool is_equal);
+void	ft_add_to_envp(char *arg, t_struct *mshell);
+bool	init_envp(t_struct *mshell);
 
 /* -- ENV VARIABLE-- */
 char	*get_env_var(char *line);
-int		ft_varcmp(t_var *var, char **envp);
+int		ft_varcmp_struct(t_var *var, char **envp);
 void	ft_create_var(char *arg, t_var *var);
 char	*ft_varjoin(char *s1, char *s2);
-bool	ft_varcmp_vtwo(char *var, char **envp);
+bool	ft_varcmp(char *var, char **envp);
 
 /* -- ARRAY -- */
 char	**ft_arraydup(char **array);

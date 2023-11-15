@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_manipulation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 17:11:30 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/25 17:24:18 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/15 19:58:41 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*get_env_var(char *line)
 	}
 }
 
-int	ft_varcmp(t_var *var, char **envp)
+int	ft_varcmp_struct(t_var *var, char **envp)
 {
 	int		i;
 
@@ -67,7 +67,7 @@ void	ft_create_var(char *arg, t_var *var)
 	var->var = ft_substr(arg, 0, var->varlen);
 }
 
-bool	ft_varcmp_vtwo(char *var, char **envp)
+bool	ft_varcmp(char *var, char **envp)
 {
 	char    *envp_var;
 	int      i;
@@ -93,17 +93,14 @@ char	*ft_varjoin(char *s1, char *s2)
 	char	*dest;
 
 	j = 0;
-	i = 0;
+	i = -1;
 	if (!s1)
 		return (NULL);
 	dest = ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, sizeof(char *));
 	if (!dest)
 		return (NULL);
-	while (i < ft_strlen(s1))
-	{
+	while (++i < ft_strlen(s1))
 		dest[i] = s1[i];
-		i++;
-	}
 	while (s2 && j < ft_strlen(s2))
 		dest[i++] = s2[j++];
 	dest[i] = '\0';

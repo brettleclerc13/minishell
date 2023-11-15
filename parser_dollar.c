@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 16:55:51 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/14 10:43:20 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/15 20:01:38 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ static char	*expand_dollar(char **char_dol, char *result, char **envp, int i)
 		}
 		else if (!ft_strncmp(char_dol[i], "`PID'", 5))
 			result = ft_strjoin_dollar(result, char_dol[i], true);
-		else if (ft_varcmp_vtwo(char_dol[i], envp) == true)
+		else if (ft_varcmp(char_dol[i], envp) == true)
 		{
 			char_dol[i] = ft_strjoin_dollar(char_dol[i], "=", true);
 			if (!get_env_value(char_dol[i], envp))
