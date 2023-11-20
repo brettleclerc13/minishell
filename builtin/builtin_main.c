@@ -14,19 +14,21 @@
 
 bool	builtin_checker(char *args)
 {
-	if (!ft_strcmp(args, "cd"))
+	if (!args)
 		return (true);
-	else if (!ft_strcmp(args, "echo"))
+	else if (!ft_strncmp(args, "cd", 3))
 		return (true);
-	else if (!ft_strcmp(args, "env"))
+	else if (!ft_strncmp(args, "echo", 5))
 		return (true);
-	else if (!ft_strcmp(args, "exit"))
+	else if (!ft_strncmp(args, "env", 4))
 		return (true);
-	else if (!ft_strcmp(args, "export"))
+	else if (!ft_strncmp(args, "exit", 5))
 		return (true);
-	else if (!ft_strcmp(args, "pwd"))
+	else if (!ft_strncmp(args, "export", 7))
 		return (true);
-	else if (!ft_strcmp(args, "unset"))
+	else if (!ft_strncmp(args, "pwd", 4))
+		return (true);
+	else if (!ft_strncmp(args, "unset", 6))
 		return (true);
 	return (false);
 }

@@ -55,6 +55,8 @@ pid_t	ft_fork_execution(t_serie *serie, t_struct *mshell, int start)
 
 pid_t	ft_execute_serie(t_serie *serie, int start, t_struct *mshell)
 {
+	if (!serie->cmd[0])
+		return (0);
 	if (serie->fd_out_token == END && start == 0 && builtin_checker(serie->cmd[0]))
 	{
 		if (serie->fd_in == -1 || serie->fd_out == -1)
@@ -88,7 +90,6 @@ void	ft_execute(t_struct *mshell)
 	if (serie_creation(mshell->args, &series) == false)
 		ft_free_serie_lex(series, mshell->args);
 	ft_free_lex(mshell->args);
-	//print_lst_serie(series);
 	tmp_series = series;
 	original_io[0] = dup(STDIN_FILENO);
 	original_io[1] = dup(STDOUT_FILENO);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:29:32 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/15 12:39:38 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/20 10:21:08 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	check_permissions(char *file)
     }
 }
 
-static void fd_in_redir(t_lex *tmp, t_serie **new)
+static void fd_in_redir(t_lex *tmp, t_serie **new, int nb_heredoc)
 {
     if (tmp->token == LEFT_CHEV)
 	{
@@ -58,9 +58,9 @@ static void fd_in_redir(t_lex *tmp, t_serie **new)
 	if (tmp->token == DOUBLE_L_CHEV)
 	{
 		tmp = tmp->next;
-		// (*new)->hd_limiter = tmp->content;
-		// (*new)->hd = true;
-		// ft_here_doc();
+		ft_here_doc(tmp, new, nb_heredoc);
+		if ((*new)->fd_in == -1)
+        	ft_put_redir_error(tmp->content, true);
 	}
     if ((*new)->fd_in == -1)
 		check_permissions(tmp->content);
@@ -84,12 +84,20 @@ static void fd_out_redir(t_lex *tmp, t_serie **new)
 
 void	ft_set_redirections(t_lex *tmp, t_serie **new)
 {
+	int	nb_heredoc;
+
+	nb_heredoc = ft_count_heredoc(tmp);
 	while (tmp && tmp->token != 4)
 	{
 		if (tmp->token == RIGHT_CHEV || tmp->token == DOUBLE_R_CHEV)
 			fd_out_redir(tmp, new);
-		if (tmp->token == LEFT_CHEV || tmp->token == DOUBLE_L_CHEV)
-			fd_in_redir(tmp, new);
+		else if (tmp->token == LEFT_CHEV)
+			fd_in_redir(tmp, new, 0);
+		else if (tmp->token == DOUBLE_L_CHEV)
+		{
+			nb_heredoc -= 1;
+			fd_in_redir(tmp, new, nb_heredoc);
+		}
 		tmp = tmp->next;
 	}
 }

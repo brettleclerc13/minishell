@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lst_utils_serie.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 20:12:53 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/15 10:45:10 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/19 18:20:02 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

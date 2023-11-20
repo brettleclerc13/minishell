@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 17:01:46 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/23 16:57:09 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/16 13:21:53 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	update_env_value(char *var, char *new_value, char **envp)
 			free(envp[i]);
 			envp[i] = ft_strjoin(tmp, new_value);
 			free(tmp);
+			free(new_value);
 			return ;
 		}
 	}

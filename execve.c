@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 09:07:07 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/15 11:24:50 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/19 18:53:22 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ char	*ft_add_path(char *cmd, char **path)
 
 	i = -1;
 	tmp = NULL;
+	if (ft_strcmp(cmd, "") == 0)
 	while (path[++i])
 	{
 		tmp = ft_strjoin(path[i], cmd);
@@ -59,7 +60,10 @@ char	*ft_add_path(char *cmd, char **path)
 void	ft_put_execve_error(char *arg)
 {
 	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd(arg, 2);
+	if (ft_strcmp(arg, "") == 0)
+		ft_putstr_fd("", 2);
+	else
+		ft_putstr_fd(arg, 2);
 	ft_putstr_fd(": command not found\n", 2);
 }
 
@@ -76,8 +80,11 @@ int	ft_execve(char **cmd, char **envp)
 		ft_put_execve_error(cmd[0]);
 		return (127);
 	}
-	cmd[0] = ft_add_path(cmd[0], path);
-	execve(cmd[0], cmd, envp);
+	if (ft_strcmp(cmd[0], "") != 0)
+	{
+		cmd[0] = ft_add_path(cmd[0], path);
+		execve(cmd[0], cmd, envp);
+	}
 	ft_put_execve_error(cmd[0]);
 	ft_arrayfree(path);
 	return (127);

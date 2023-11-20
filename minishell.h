@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/15 10:43:36 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/19 23:35:45 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # include <readline/history.h>
 # include <limits.h>
 # include <signal.h>
-#include <sys/wait.h>
+# include <sys/wait.h>
 
 # include "Libft/libft.h"
 
@@ -151,7 +151,7 @@ t_serie	*ft_lstlast_serie(t_serie *series);
 /* -- DEBUGGING -- */
 void    print_list(t_lex *list);
 void	print_lst_serie(t_serie *series);
-void	print_string(char *tab);
+void	print_string(char **tab);
 void	print_lst_tok(t_lex *list);
 void	print_array(char **array);
 void	print_lst_serie(t_serie *series);
@@ -208,6 +208,8 @@ void	ft_waitpid(t_serie *series);
 /* -- REDIRECTION -- */
 int		ft_count_redir(t_lex *args);
 void	ft_set_redirections(t_lex *tmp, t_serie **new);
+void	ft_here_doc(t_lex *tmp, t_serie **serie, int nb_heredoc);
+int		ft_count_heredoc(t_lex *args);
 
 /* -- SIGNALS -- */
 void    signals_types(char *input, bool isheredoc);

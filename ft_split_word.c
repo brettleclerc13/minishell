@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 16:09:16 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/10 16:47:40 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/16 08:29:15 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	new_node(char *char_tmp, t_lex **list, enum e_token type)
 	new = ft_lstnew_lex(char_tmp, type);
 	ft_lstadd_back_lex(list, new);
 }
-
 
 void	create_token(char *args, t_lex **list, t_sp_wd **vars, enum e_token type)
 {
@@ -35,7 +34,7 @@ void	create_token(char *args, t_lex **list, t_sp_wd **vars, enum e_token type)
 enum e_token	is_sep(char *c, int *i)
 {
 	static t_sep	type[] = {{"<<", 2}, {">>", 2}, {"<", 1}, \
-					{">", 1}, {"|", 1}, {"\'", 1}, {"\"", 1}};
+					{">", 1}, {"|", 1}}; /*, {"\'", 1}, {"\"", 1}*/
 	int				index;
 	int				len_word;
 
@@ -45,7 +44,7 @@ enum e_token	is_sep(char *c, int *i)
 	while (c[len_word])
 	{
 		index = -1;
-		while (++index < 7)
+		while (++index < 5)
 		{
 			if (!ft_strncmp((c + len_word), type[index].str, type[index].num))
 			{

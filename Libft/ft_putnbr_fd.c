@@ -6,14 +6,14 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 18:51:52 by ehouot            #+#    #+#             */
-/*   Updated: 2022/11/24 18:00:49 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/16 08:25:49 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 static void	ft_print(int n, int i, char *mod, int fd)
-{	
+{
 	if (n == -2147483648)
 		write (fd, "-2147483648", 11);
 	else
