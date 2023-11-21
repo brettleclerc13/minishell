@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 20:12:53 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/19 18:20:02 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/21 15:42:28 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ t_serie	*ft_lstnew_serie(t_lex *args, int count, bool ispipe)
 		new->fd_out_token = PIPE;
 	else
 		new->fd_out_token = END;
+	new->pipe_hd[0] = STDIN_FILENO;
+	new->pipe_hd[1] = STDOUT_FILENO;
 	new->fd_in = STDIN_FILENO;
 	new->fd_out = STDOUT_FILENO;
 	new->pid = 0;

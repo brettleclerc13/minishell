@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/21 14:41:09 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/21 15:22:47 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 # include <sys/wait.h>
 
 # include "Libft/libft.h"
-# include "Printf/ft_printf.h"
 
 extern int	g_var;
 
@@ -73,6 +72,7 @@ typedef struct	s_serie
 	enum e_token	fd_out_token;
 	enum e_token	cmd_token;
 	bool			is_pipe;
+	int				pipe_hd[2];
 	int				fd_in;
 	int				fd_out;
 	char			*hd_limiter;
