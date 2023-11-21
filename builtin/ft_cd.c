@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:53:41 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/16 15:01:37 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/21 14:18:29 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static char	*get_dir_path(char *dir, char *cwd, char *tmp)
 			tmp = ft_strjoin_path(tmp, dir, true);
 			if (!access(tmp, F_OK | X_OK))			//if i == 0, then access(cwd...)
 			{
-				printf("check\n");
 				free(dir);
 				return (tmp);
 			}
@@ -92,7 +91,8 @@ static int	ft_cd_contd(char *dir, char *cwd, t_struct *mshell, bool is_cwd)
 	}
 	update_oldpwd(cwd, mshell, is_cwd);
 	update_pwd(dir, cwd, mshell, is_cwd);
-	free(dir);
+	//if (dir)
+	//	free(dir);
 	return (0);
 }
 

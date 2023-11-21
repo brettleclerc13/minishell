@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 09:07:07 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/21 11:16:08 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/21 14:35:38 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	**ft_extract_path(char **envp)
 	stash = NULL;
 	while (envp[++i])
 	{
-		if (ft_strnstr(envp[i], "PATH=", ft_strlen(envp[i])))
+		if (ft_strnstr(envp[i], "PATH=", 5))
 		{
 			trimmed = ft_strtrim(envp[i], "PATH=");
 			stash = ft_split(trimmed, ':');
