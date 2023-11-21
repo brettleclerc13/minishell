@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 09:07:07 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/19 18:53:22 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/21 11:51:53 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ char	*ft_add_path(char *cmd, char **path)
 
 	i = -1;
 	tmp = NULL;
-	if (ft_strcmp(cmd, "") == 0)
 	while (path[++i])
 	{
 		tmp = ft_strjoin(path[i], cmd);
@@ -80,7 +79,7 @@ int	ft_execve(char **cmd, char **envp)
 		ft_put_execve_error(cmd[0]);
 		return (127);
 	}
-	if (ft_strcmp(cmd[0], "") != 0)
+	if (ft_strncmp(cmd[0], "", 1) != 0)
 	{
 		cmd[0] = ft_add_path(cmd[0], path);
 		execve(cmd[0], cmd, envp);
