@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 12:01:13 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/09 17:11:33 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/15 18:29:45 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,18 @@ void	print_lst_serie(t_serie *series)
 	}
 }
 
-void	print_string(char *tab)
+void	print_string(char **tab)
 {
 	int	i;
+	int	j;
 
 	i = -1;
 	while (tab[++i])
-		printf("tab[%d] : %c\n", i, tab[i]);
+	{
+		j = -1;
+		while (tab[i][++j])
+			printf("tab[%d] : %s\n", i, tab[i]);
+	}
 }
 
 void	print_array(char **array)

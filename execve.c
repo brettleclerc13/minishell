@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 09:07:07 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/21 14:35:38 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/21 14:40:19 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ char	*ft_add_path(char *cmd, char **path)
 void	ft_put_execve_error(char *arg)
 {
 	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd(arg, 2);
+	if (ft_strcmp(arg, "") == 0)
+		ft_putstr_fd("", 2);
+	else
+		ft_putstr_fd(arg, 2);
 	ft_putstr_fd(": command not found\n", 2);
 }
 
@@ -76,8 +79,11 @@ int	ft_execve(char **cmd, char **envp)
 		ft_put_execve_error(cmd[0]);
 		return (127);
 	}
-	cmd[0] = ft_add_path(cmd[0], path);
-	execve(cmd[0], cmd, envp);
+	if (ft_strncmp(cmd[0], "", 1) != 0)
+	{
+		cmd[0] = ft_add_path(cmd[0], path);
+		execve(cmd[0], cmd, envp);
+	}
 	ft_put_execve_error(cmd[0]);
 	ft_arrayfree(path);
 	return (127);

@@ -31,6 +31,7 @@ SRC_MAIN 	= 	./main.c \
 				./exec_function.c \
 				./free.c \
 				./error.c \
+				./ft_here_doc.c \
 
 SRC_BUILTIN	=	${addprefix ${BUILT_PATH}, ./builtin_main.c \
 											./ft_cd.c \

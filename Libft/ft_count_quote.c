@@ -6,24 +6,46 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 00:31:48 by ehouot            #+#    #+#             */
-/*   Updated: 2023/09/15 00:32:08 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/16 13:35:03 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_count_quote(char const *s)
+static char	ft_check_doublon(char const *s)
 {
-	int	i;
-	int	cpt;
+	int		i;
+	char	c;
 
 	i = -1;
-	cpt = 0;
 	while (s[++i])
 	{
-		if (s[i] == '"')
-			cpt++;
+		if (s[i] == '\"' || s[i] == '\'')
+		{
+			c = s[i];
+			while (s[++i] && s[i] != c)
+				;
+			if (!s[i])
+				return (c);
+		}
 	}
-	if (cpt % 2 != 0)
-		ft_error("simple \" is not supported");
+	return ('n');
+}
+
+bool	ft_count_quote(char const *s)
+{
+	char	res;
+
+	res = ft_check_doublon(s);
+	if (res == '\"')
+	{
+		ft_putstr_fd("single \" is not supported\n", 2);
+		return (false);
+	}
+	if (res == '\'')
+	{
+		ft_putstr_fd("single \' is not supported\n", 2);
+		return (false);
+	}
+	return (true);
 }

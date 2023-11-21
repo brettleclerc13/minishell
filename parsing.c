@@ -6,12 +6,21 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 15:34:36 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/13 12:08:58 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/19 18:27:46 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+bool	argument_empty(char **arguments)
+{
+	if (ft_strcmp(arguments[0], "") == 0)
+	{
+		g_var = 0;
+		return (true);
+	}
+	return (false);
+}
 
 bool	parsing(char *input, t_struct **mshell)
 {
@@ -21,6 +30,8 @@ bool	parsing(char *input, t_struct **mshell)
 	(*mshell)->check_valid = true;
 	list = NULL;
 	arguments = ft_split_bash(input, ' ', '	');
+	if (argument_empty(arguments) == true)
+		return (false);
 	if (!arguments)
 	{
 		g_var = 1;

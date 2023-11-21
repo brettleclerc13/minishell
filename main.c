@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:39:24 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/16 10:17:39 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/21 14:40:28 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		}
 		if (parsing(input, &mshell) == false)
-			return (g_var);
+			continue ;
 		if (mshell->check_valid == false)
 			continue ;
 		ft_execute(mshell);

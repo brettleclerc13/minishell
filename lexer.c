@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 13:45:40 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/10 16:48:24 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/16 11:49:55 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static bool	lex_function(char **args, t_lex **list, int *i)
 	{
 		new = ft_lstnew_lex(args[*i], FUNCTION);
 		ft_lstadd_back_lex(list, new);
-		(*i)++; 
+		(*i)++;
 		return (true);
 	}
 	return (false);
@@ -68,18 +68,26 @@ static bool	lex_string(char **args, t_lex **list, int *i, int j)
 {
 	t_lex	*new;
 
-	while (args[*i][++j])
+	while (args[*i][j])
 	{
-		if (args[*i][j] == ' ' || args[*i][j] == '	')
+		if (args[*i][j] == '\"' || args[*i][j] == '\'')
 		{
-			if (!ft_split_word(args[*i], list))
-			{	
+			if (args[*i][j] == '\'')
+			{
+				args[*i][ft_strlen(args[*i]) - 1] = '\0';
+				new = ft_lstnew_lex(args[*i], SINGLE_QUOTE);
+				ft_lstadd_back_lex(list, new);
+			}
+			else if (args[*i][j] == '\"')
+			{
+				args[*i][ft_strlen(args[*i]) - 1] = '\0';
 				new = ft_lstnew_lex(args[*i], STRING);
 				ft_lstadd_back_lex(list, new);
 			}
 			(*i)++;
 			return (true);
 		}
+		j++;
 	}
 	return (false);
 }

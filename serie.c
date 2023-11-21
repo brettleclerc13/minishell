@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   serie.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 12:52:57 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/12 21:02:23 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/19 13:40:14 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ bool	serie_creation(t_lex *args, t_serie **series)
 	while (args)
 	{
 		if (args->token == PIPE)
-		{
+		{ 
 			if (serie_addition(series, tmp, count, true) == false)
 				return (false);
 			count = 1;
