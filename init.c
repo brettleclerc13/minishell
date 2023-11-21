@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 11:38:35 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/16 10:59:11 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/21 14:53:03 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	ft_update_shlvl(t_struct *mshell)
 
 	shlvl = ft_itoa(ft_atoi(get_env_value("SHLVL=", mshell->envp)) + 1);
 	update_env_value("SHLVL=", shlvl, mshell->envp);
-	free(shlvl);
 }
 
 char	**init_path(char **envp)

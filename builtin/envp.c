@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 17:01:46 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/21 14:46:26 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/21 14:52:39 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	update_env_value(char *var, char *new_value, char **envp)
 			else
 				envp[i] = ft_strjoin(tmp, new_value);
 			free(tmp);
-			free(new_value);
+			if (new_value)
+				free(new_value);
 			return ;
 		}
 	}
