@@ -12,21 +12,21 @@
 
 #include "minishell.h"
 
-bool	builtin_checker(char *args)
+bool	builtin_checker(char *arg)
 {
-	if (!ft_strcmp(args, "cd"))
+	if (!ft_strcmp(arg, "cd"))
 		return (true);
-	else if (!ft_strcmp(args, "echo"))
+	else if (!ft_strcmp(arg, "echo"))
 		return (true);
-	else if (!ft_strcmp(args, "env"))
+	else if (!ft_strcmp(arg, "env"))
 		return (true);
-	else if (!ft_strcmp(args, "exit"))
+	else if (!ft_strcmp(arg, "exit"))
 		return (true);
-	else if (!ft_strcmp(args, "export"))
+	else if (!ft_strcmp(arg, "export"))
 		return (true);
-	else if (!ft_strcmp(args, "pwd"))
+	else if (!ft_strcmp(arg, "pwd"))
 		return (true);
-	else if (!ft_strcmp(args, "unset"))
+	else if (!ft_strcmp(arg, "unset"))
 		return (true);
 	return (false);
 }
@@ -44,7 +44,7 @@ int	builtin_main(char **args, t_struct *mshell, int process)
 	else if (!ft_strcmp(args[0], "export"))
 		return (ft_export(args, mshell));
 	else if (!ft_strcmp(args[0], "pwd"))
-		return (ft_pwd());
+		return (ft_pwd(mshell));
 	else if (!ft_strcmp(args[0], "unset"))
 		return (ft_unset(args, mshell));
 	return (0);

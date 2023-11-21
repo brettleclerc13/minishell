@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/15 20:46:45 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/16 11:35:10 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ typedef struct	s_struct
 	int			pipe_count;
 	bool		check_valid;
 	int			tmp_fd;
+	char		*tmp_cwd;
 	t_count_red	redir;
 }				t_struct;
 
@@ -123,10 +124,11 @@ typedef struct	s_dollar
 	char	**array;
 } 			t_dollar;
 
-/* -- MINISHELL -- */
-bool		parsing(char *input, t_struct **mshell);
+/* -- INIT -- */
 t_struct	*before_loop_init(int argc, char **envp);
 char		**init_path(char **envp);
+bool		init_envp(t_struct *mshell, char **envp);
+void		init_oldpwd(t_struct *mshell);
 
 /* -- LEXER -- */
 t_lex	*lexer(char **args, t_lex **list);
@@ -136,6 +138,7 @@ void	ft_lstadd_back_lex(t_lex **lst, t_lex *new);
 int		ft_split_word(char *args, t_lex **list);
 
 /* -- PARSER -- */
+bool	parsing(char *input, t_struct **mshell);
 bool	parser(t_lex **list, char **envp);
 bool	check_dollar(t_lex **list, char **envp);
 
@@ -159,12 +162,11 @@ void	print_lst_serie(t_serie *series);
 int		builtin_main(char **args, t_struct *mshell, int process);
 bool	builtin_checker(char *args);
 int		ft_cd(char **args, t_struct *mshell);
-int		ft_cd_contd(char *dir, char *cwd, t_struct *mshell);
 int		ft_echo(char **args);
 int		ft_env(char **envp);
 void	ft_exit(char **args, pid_t child);
 int		ft_export(char **args, t_struct *mshell);
-int		ft_pwd(void);
+int		ft_pwd(t_struct *mshell);
 int		ft_unset(char **args, t_struct *mshell);
 
 /* -- PRINT EXPORT -- */
@@ -180,7 +182,6 @@ void	ft_update_shlvl(t_struct *mshell);
 char	**add_env_str(char *arg, char **envp);
 void	update_env(t_var *var, char *new_value, t_struct *mshell, bool is_equal);
 void	ft_add_to_envp(char *arg, t_struct *mshell);
-bool	init_envp(t_struct *mshell);
 
 /* -- ENV VARIABLE-- */
 char	*get_env_var(char *line);
@@ -214,9 +215,12 @@ void	ft_set_redirections(t_lex *tmp, t_serie **new);
 void    signals_types(char *input, bool isheredoc);
 void	ft_gvar_result(int process_result);
 
-/* -- FREE-- */
+/* -- FREE -- */
 void	ft_free_serie(t_serie *series);
 void	ft_free_lex(t_lex *lex);
 void	ft_free_serie_lex(t_serie *series, t_lex *args);
+
+/* -- ERROR -- */
+bool	bool_print_error(char *str);
 
 #endif

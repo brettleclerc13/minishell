@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/05 15:08:06 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/16 11:21:57 by brettlecler      ###   ########.fr       */
+/*   Created: 2023/11/16 10:24:05 by brettlecler       #+#    #+#             */
+/*   Updated: 2023/11/16 11:01:24 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_pwd(t_struct *mshell)
+bool	bool_print_error(char *str)
 {
-	char	pwd[PATH_MAX];
-
-	if (!getcwd(pwd, sizeof(pwd)))
-		printf("%s\n", mshell->tmp_cwd);
-	else
-		printf("%s\n", pwd);
-	return (0);
+	if (!ft_strcmp("cwd", str))
+	{
+		ft_putstr_fd("minishell: cwd: Cannot retrieve cwd\n", 2);
+		return (false);
+	}
+	if (!ft_strcmp("malloc", str))
+	{
+		ft_putstr_fd("minishell: malloc: cannot allocate memory\n", 2);
+		return (false);
+	}
+	return (true);
 }

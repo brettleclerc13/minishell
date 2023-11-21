@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 17:01:46 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/15 20:52:28 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/16 11:13:50 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	update_env_value(char *var, char *new_value, char **envp)
 
 void	update_env(t_var *var, char *new_value, t_struct *mshell, bool is_equal)
 {
-	int		i;
+	int	i;
 	
 	i = -1;
 	while (mshell->envp[++i])
@@ -60,10 +60,14 @@ void	update_env(t_var *var, char *new_value, t_struct *mshell, bool is_equal)
 					mshell->envp[i] = ft_varjoin(var->var, new_value);
 				else
 				{
-					var->var = ft_strjoin_path(var->var, "=", true);
-					mshell->envp[i] = ft_varjoin(var->var, new_value);
+					if (!new_value)
+						mshell->envp[i] = ft_strdup(var->var);
+					else
+					{
+						var->var = ft_strjoin_path(var->var, "=", true);
+						mshell->envp[i] = ft_varjoin(var->var, new_value);	
+					}
 				}
-				return ;
 			}
 		}
 	}
@@ -72,13 +76,13 @@ void	update_env(t_var *var, char *new_value, t_struct *mshell, bool is_equal)
 char	*get_env_value(char *var, char **envp)
 {
 	int	i;
-	int	strlen;
+	int	varlen;
 	
 	i = -1;
-	strlen = ft_strlen(var);
+	varlen = ft_strlen(var);
 	while (envp[++i])
-		if (!ft_strncmp(envp[i], var, strlen))
-			return (envp[i] + strlen);
+		if (!ft_strncmp(envp[i], var, varlen))
+			return (envp[i] + varlen);
 	return (NULL);
 }
 
@@ -87,7 +91,10 @@ char	**add_env_value(char *var, char *value, char **envp)
 	char	*tmp;
 	char	**new_envp;
 	
-	tmp = ft_strjoin(var, value);
+	if (!value)
+		tmp = ft_strdup(var);
+	else
+		tmp = ft_strjoin(var, value);
 	new_envp = ft_arrayadd(tmp, envp);
 	free(tmp);
 	return (new_envp);
