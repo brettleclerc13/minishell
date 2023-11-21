@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/16 11:35:10 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/21 12:58:13 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 #include <sys/wait.h>
 
 # include "Libft/libft.h"
+# include "Printf/ft_printf.h"
 
 extern int	g_var;
 

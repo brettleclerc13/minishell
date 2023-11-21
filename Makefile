@@ -1,5 +1,6 @@
 LIBFT_PATH	=	./Libft/
 BUILT_PATH	=	./builtin/
+PRINTF_PATH =	./Printf/
 
 OS := ${shell uname}
 
@@ -67,7 +68,8 @@ all:		$(NAME)
 
 $(NAME):	$(OBJ)
 			@${MAKE} -C ${LIBFT_PATH}
-			@$(CC) $(CFLAGS) $(OBJ) ${LIBFT_PATH}libft.a -L$(shell brew --prefix readline)/lib -lreadline -I $(HEADER) -o $(NAME)
+			@${MAKE} -C ${PRINTF_PATH}
+			@$(CC) $(CFLAGS) $(OBJ) ${LIBFT_PATH}libft.a ${PRINTF_PATH}libftprintf.a -L$(shell brew --prefix readline)/lib -lreadline -I $(HEADER) -o $(NAME)
 
 debug:
 	${MAKE} DEBUG=1
@@ -75,9 +77,10 @@ debug:
 clean:
 			@$(RM) $(OBJ)
 			@${MAKE} clean -C ${LIBFT_PATH}
+			@${MAKE} clean -C ${PRINTF_PATH}
 
 fclean: 	clean
-			@$(RM) $(NAME) ${LIBFT_PATH}libft.a
+			@$(RM) $(NAME) ${LIBFT_PATH}libft.a ${PRINTF_PATH}libftprintf.a
 
 re:			fclean all
 

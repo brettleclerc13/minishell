@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 20:33:16 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/13 12:08:59 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/21 13:51:54 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ void	ft_print_export(char **envp)
 	{
 		skip_var = ft_strchr(envp[i], '=');
 		if (!skip_var)
-			printf("declare -x %s\n", envp[i]);
+			ft_printf("declare -x %s\n", envp[i]);
 		else
 		{
 			var_length = (ft_strlen(envp[i]) - ft_strlen(skip_var)) + 1;
 			tmp = ft_substr(envp[i], 0, var_length);
-			printf("declare -x %s", tmp);
-			printf("\"%s\"\n", envp[i] + var_length);
+			ft_printf("declare -x %s", tmp);
+			ft_printf("\"%s\"\n", envp[i] + var_length);
 			free(tmp);
 		}
 	}
