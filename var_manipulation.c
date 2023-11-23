@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 17:11:30 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/15 19:58:41 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/22 16:15:22 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_varcmp_struct(t_var *var, char **envp)
 {
 	int		i;
 
-	i = 0;
+	i = -1;
 	while (envp[++i])
 	{
 		var->envp_var = get_env_var(envp[i]);

@@ -35,6 +35,7 @@ SRC_MAIN 	= 	./main.c \
 
 SRC_BUILTIN	=	${addprefix ${BUILT_PATH}, ./builtin_main.c \
 											./ft_cd.c \
+											./ft_cd_manipulation.c \
 											./envp.c \
 											./ft_env.c \
 											./ft_pwd.c \
