@@ -6,11 +6,18 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 16:55:51 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/24 09:17:08 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/24 15:26:17 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static bool	is_specialchar(char c)
+{
+	if (c == '$' || !ft_isalnum(c) || c == '_')
+		return (true);
+	return (false);
+}
 
 static int	ft_dollar_array_count(char *content)
 {
@@ -21,7 +28,7 @@ static int	ft_dollar_array_count(char *content)
 	count = 0;
 	while (content[i])
 	{
-		if (content[i] == '$') // && dol->i != char non bloquant
+		if (is_specialchar(content[i]))
 		{
 			if (content[i] == '$' && content[i + 1] == '$') 
 				i++;
@@ -45,19 +52,19 @@ static char **ft_dollar_array_continue(t_dollar *dol, char *content)
 				dol->array[dol->j] = ft_strdup("`PID'");
 				dol->i += 2;
 				dol->start = dol->i;
-				while(content[dol->i] && content[dol->i] != '$') // && dol->i != char non bloquant
+				while(content[dol->i] && !is_specialchar(content[dol->i])) // && dol->i != char non bloquant
 					dol->i++;
 				if (dol->start != dol->i)
-					dol->array[dol->j] = ft_strjoin_dollar(dol->array[dol->j], ft_substr(content, dol->start, dol->i - dol->start), true);
+					dol->array[dol->j] = ft_strjoin_dollar(dol->array[dol->j], ft_substr(content, dol->start, dol->i - dol->start), true); //free issue
 				dol->j++;
 				if (content[dol->i] == '$' && !content[dol->i + 1])
 					dol->array[dol->j++] = ft_strdup("$");
 			}
-			else if (content[dol->i + 1] && content[dol->i + 1] != '$') // && dol->i != char non bloquant
+			else if (content[dol->i + 1] && !is_specialchar(content[dol->i + 1])) // && dol->i != char non bloquant
 			{
 				dol->i++;
 				dol->start = dol->i;
-				while (content[dol->i] && content[dol->i] != '$')
+				while (content[dol->i] && !is_specialchar(content[dol->i]))
 					dol->i++;
 				dol->array[dol->j++] = ft_substr(content, dol->start, dol->i - dol->start);
 			}
