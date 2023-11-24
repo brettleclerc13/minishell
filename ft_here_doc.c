@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 19:03:33 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/21 16:33:18 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/24 10:25:03 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,17 @@ static void	print_heredoc(int nb_heredoc, t_serie **new, char *str)
 	}
 }
 
+static bool	end_of_heredoc(char *str)
+{
+	if (!str)
+	{
+		free(str);
+		g_var = 127;
+		return (true);
+	}
+	return (false);
+}
+
 void	ft_here_doc(t_lex *tmp, t_serie **new, int nb_heredoc)
 {
 	char	*str;
@@ -46,9 +57,15 @@ void	ft_here_doc(t_lex *tmp, t_serie **new, int nb_heredoc)
 		if (pipe((*new)->pipe_hd) == -1)
 			ft_error("here_doc pipe error\n"); // juste pour test
 	}
+	ft_termios(true);
+	heredoc_signals();
 	while (1)
 	{
+		if (g_var == 1)
+			break ;
 		str = readline("> ");
+		if (end_of_heredoc(str) == true)
+			break ;
 		if (ft_strcmp(str, tmp->content) == 0)
 		{
 			free(str);

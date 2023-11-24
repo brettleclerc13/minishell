@@ -74,8 +74,9 @@ pid_t	ft_execute_serie(t_serie *serie, int start, t_struct *mshell)
 		g_var = builtin_main(serie->cmd, mshell, 1);
 		return (-5);
 	}
-	else
-		return (ft_fork_execution(serie, mshell, start));
+	sig_in_command();
+	ft_termios(false);
+	return (ft_fork_execution(serie, mshell, start));
 }
 
 void	ft_execute(t_struct *mshell)
@@ -105,5 +106,3 @@ void	ft_execute(t_struct *mshell)
 	if (mshell->tmp_fd != STDIN_FILENO && mshell->tmp_fd != -1)
 		close(mshell->tmp_fd);
 }
-
-// ft_putstr_fd("check\n", 1);

@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 15:34:36 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/19 18:27:46 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/23 14:14:22 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,9 @@ bool	parsing(char *input, t_struct **mshell)
 	(*mshell)->check_valid = true;
 	list = NULL;
 	arguments = ft_split_bash(input, ' ', '	');
-	if (argument_empty(arguments) == true)
-		return (false);
-	if (!arguments)
+	if (!arguments || argument_empty(arguments) == true)
 	{
+		free(input);
 		g_var = 1;
 		return (false);
 	}

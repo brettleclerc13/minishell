@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/21 15:22:47 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/23 17:17:29 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # include <limits.h>
 # include <signal.h>
 # include <sys/wait.h>
+# include <termios.h>
 
 # include "Libft/libft.h"
 
@@ -78,6 +79,7 @@ typedef struct	s_serie
 	char			*hd_limiter;
 	bool			hd;
 	pid_t			pid;
+	void			*prev;
 	void			*next;
 }					t_serie;
 
@@ -215,8 +217,12 @@ void	ft_here_doc(t_lex *tmp, t_serie **serie, int nb_heredoc);
 int		ft_count_heredoc(t_lex *args);
 
 /* -- SIGNALS -- */
-void    signals_types(char *input, bool isheredoc);
+void    signals_types(void);
 void	ft_gvar_result(int process_result);
+void	heredoc_signals(void);
+void	ignore_signals(void);
+void	sig_in_command(void);
+void	ft_termios(bool set);
 
 /* -- FREE -- */
 void	ft_free_serie(t_serie *series);

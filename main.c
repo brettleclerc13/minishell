@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:39:24 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/21 14:40:28 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/23 17:53:35 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,32 @@
 
 int g_var = 0;
 
+void	end_of_file(char *input)
+{
+	if (!input)
+	{
+		free(input);
+		ft_putstr_fd("exit\n", STDOUT_FILENO);
+		g_var = 127;
+		exit(127);
+	}
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_struct	*mshell;
 	char		*input;
-	
+
 	(void)argv;
 	mshell = before_loop_init(argc, envp);
 	if (!mshell)
 		return (1);
 	while (1)
 	{
+		ft_termios(true);
+		signals_types();
 		input = readline("minishell$ ");
-		signals_types(input, false);
+		end_of_file(input);
 		if (*input == '\0')
 		{
 			free(input);

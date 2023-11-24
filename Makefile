@@ -1,5 +1,6 @@
 LIBFT_PATH	=	./Libft/
 BUILT_PATH	=	./builtin/
+SIG_PATH	=	./signals/
 
 OS := ${shell uname}
 
@@ -24,7 +25,6 @@ SRC_MAIN 	= 	./main.c \
 				./parser_dollar.c \
 				./serie.c \
 				./ft_lst_utils_serie.c \
-				./signals/main_signals.c \
 				./execve.c \
 				./exec_redir.c \
 				./exec_function.c \
@@ -32,7 +32,7 @@ SRC_MAIN 	= 	./main.c \
 				./error.c \
 				./ft_here_doc.c \
 
-SRC_BUILTIN	=	${addprefix ${BUILT_PATH}, ./builtin_main.c \
+SRC_BUILTIN	=	${addprefix ${BUILT_PATH},	./builtin_main.c \
 											./ft_cd.c \
 											./envp.c \
 											./ft_env.c \
@@ -43,7 +43,13 @@ SRC_BUILTIN	=	${addprefix ${BUILT_PATH}, ./builtin_main.c \
 											./ft_unset.c \
 											./ft_exit.c}
 
-SRC = ${SRC_MAIN} ${SRC_BUILTIN}
+SRC_SIGNALS	=	${addprefix ${SIG_PATH},	./heredoc_signals.c \
+											./output_results.c \
+											./ignore_signals.c \
+											./in_command_signals.c \
+											./main_signals.c}
+
+SRC = ${SRC_MAIN} ${SRC_BUILTIN} ${SRC_SIGNALS}
 
 OBJ		= ${SRC:.c=.o}
 
