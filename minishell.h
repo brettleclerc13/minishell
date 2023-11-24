@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/23 19:11:15 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/24 08:34:11 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,8 +168,8 @@ void	update_oldpwd(char *cwd, t_struct *mshell, bool is_cwd);
 bool	is_previous_levels(char *dir);
 char	*get_previous_level_dir(char *dir, char *cwd);
 char	*get_dir_path(char *dir, char *cwd, char *tmp);
-int		get_oldpwd(char *dir, char *cwd, t_struct *mshell, bool is_cwd);
-int		print_cd_error(char	*error);
+//int		get_oldpwd(char *dir, char *cwd, t_struct *mshell, bool is_cwd);
+int	print_cd_error(char	*error, char *dir);
 
 bool	builtin_checker(char *args);
 int		ft_echo(char **args);

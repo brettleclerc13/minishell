@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 18:20:03 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/23 19:12:54 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/24 08:42:45 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,16 +91,16 @@ bool	is_previous_levels(char *dir)
 	return (false);
 }
 
-int	get_oldpwd(char *dir, char *cwd, t_struct *mshell, bool is_cwd)
-{
-	if (!get_env_value("OLDPWD=", mshell->envp))
-		return (print_cd_error("!oldpwd"));
-	dir = ft_strdup(get_env_value("OLDPWD=", mshell->envp));
-	if (dir[0] == '\0')
-		ft_putstr_fd("\n", 1);
-	else
-		printf("%s\n", dir);
-	update_oldpwd(cwd, mshell, is_cwd);
-	update_pwd(dir, cwd, mshell, is_cwd);
-	return (0);
-}
+// int	get_oldpwd(char *dir, char *cwd, t_struct *mshell, bool is_cwd)
+// {
+// 	if (!get_env_value("OLDPWD=", mshell->envp))
+// 		return (print_cd_error("!oldpwd"));
+// 	dir = ft_strdup(get_env_value("OLDPWD=", mshell->envp));
+// 	if (dir[0] == '\0')
+// 		ft_putstr_fd("\n", 1);
+// 	else
+// 		printf("%s\n", dir);
+// 	update_oldpwd(cwd, mshell, is_cwd);
+// 	update_pwd(dir, cwd, mshell, is_cwd);
+// 	return (0);
+// }
