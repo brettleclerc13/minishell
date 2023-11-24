@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 16:55:51 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/21 14:41:34 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/24 09:17:08 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,8 @@ bool	check_dollar(t_lex **list, char **envp)
 
 	result = NULL;
 	i = -1;
-	if ((*list)->token != DOLLAR && (*list)->token != STRING && (*list)->token != WORD)
+	if ((*list)->token != DOLLAR && (*list)->token != STRING \
+		&& (*list)->token != WORD && (*list)->token == SINGLE_QUOTE) //check if single_quote token are allotted
 		return (true);
 	if (ft_dollar_array_count((*list)->content) == 0)
 		return (true);

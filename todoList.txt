@@ -4,7 +4,6 @@ Grand tâches:
 - DOLLAR	[-BRETT-]
 - SIMPLE QUOTES et DOUBLE QUOTES	[-EMILIEN-]
 - WHITE SPACE	[-BRETT-]
-- cd test within 3 folders	[-BRETT-]
 
 Petit tâches:
 - Open ended double quotes quits the program. Should not.	[-EMILIEN-]
@@ -28,7 +27,8 @@ TASKS DONE
 - File permission denied - program quits	[-BRETT-]
 - File permission denied + pipe - program should continue	[-BRETT-]
 - env -i ./minishell (initialise 4 vars: blank OLD_PWD, PWD with cwd, SHLVL, _)		[-BRETT-]
-
+- minishell$ env | grep SHLVL = grep: (standard input): Bad file descriptor	[-BRETT-]
+- cd test within 3 folders	[-BRETT-]
 
 
 

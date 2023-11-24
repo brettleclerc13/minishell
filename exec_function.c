@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:28:04 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/21 15:41:47 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/24 10:11:07 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ void	set_child_output(t_serie *serie, int pfd[])
 void	set_parent_io(int pfd[], t_struct *mshell)
 {
 	close(pfd[1]);
-	dup2(pfd[0], mshell->tmp_fd);
+	if (mshell->tmp_fd != STDIN_FILENO && mshell->tmp_fd != -1)
+		close (mshell->tmp_fd);
+	mshell->tmp_fd = dup(pfd[0]);
 	close(pfd[0]);
 }
-

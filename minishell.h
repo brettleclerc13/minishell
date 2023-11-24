@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/24 08:34:11 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/24 09:44:18 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,19 @@ extern int	g_var;
 
 enum	e_token
 {
-	DOUBLE_L_CHEV,
-	DOUBLE_R_CHEV,
-	LEFT_CHEV,
-	RIGHT_CHEV,
-	PIPE,
-	SINGLE_QUOTE,
-	DOUBLE_QUOTE,
-	WORD,
-	STRING,
-	FUNCTION,
-	DOLLAR,
-	ZERO,
-	END,
+	DOUBLE_L_CHEV,		// --> 0
+	DOUBLE_R_CHEV,		// --> 1
+	LEFT_CHEV,			// --> 2
+	RIGHT_CHEV,			// --> 3
+	PIPE,				// --> 4
+	SINGLE_QUOTE,		// --> 5
+	DOUBLE_QUOTE,		// --> 6
+	WORD,				// --> 7
+	STRING,				// --> 8
+	FUNCTION,			// --> 9
+	DOLLAR,				// --> 10
+	ZERO,				// --> 11
+	END,				// --> 12
 };
 
 extern void	rl_replace_line(const char *text, int clear_undo);
