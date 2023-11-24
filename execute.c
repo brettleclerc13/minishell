@@ -74,8 +74,9 @@ pid_t	ft_execute_serie(t_serie *serie, int start, t_struct *mshell)
 		g_var = builtin_main(serie->cmd, mshell, 1);
 		return (-5);
 	}
-	else
-		return (ft_fork_execution(serie, mshell, start));
+	sig_in_command();
+	ft_termios(false);
+	return (ft_fork_execution(serie, mshell, start));
 }
 
 void	ft_execute(t_struct *mshell)
@@ -90,7 +91,7 @@ void	ft_execute(t_struct *mshell)
 	if (serie_creation(mshell->args, &series) == false)
 		ft_free_serie_lex(series, mshell->args);
 	ft_free_lex(mshell->args);
-	print_lst_serie(series);
+	//print_lst_serie(series);
 	tmp_series = series;
 	original_io[0] = dup(STDIN_FILENO);
 	original_io[1] = dup(STDOUT_FILENO);

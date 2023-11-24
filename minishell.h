@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/24 09:44:18 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/24 10:32:48 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@
 # include <limits.h>
 # include <signal.h>
 # include <sys/wait.h>
+# include <termios.h>
 
 # include "Libft/libft.h"
-# include "Printf/ft_printf.h"
 
 extern int	g_var;
 
@@ -73,11 +73,13 @@ typedef struct	s_serie
 	enum e_token	fd_out_token;
 	enum e_token	cmd_token;
 	bool			is_pipe;
+	int				pipe_hd[2];
 	int				fd_in;
 	int				fd_out;
 	char			*hd_limiter;
 	bool			hd;
 	pid_t			pid;
+	void			*prev;
 	void			*next;
 }					t_serie;
 
@@ -224,8 +226,12 @@ void	ft_here_doc(t_lex *tmp, t_serie **serie, int nb_heredoc);
 int		ft_count_heredoc(t_lex *args);
 
 /* -- SIGNALS -- */
-void    signals_types(char *input, bool isheredoc);
+void    signals_types(void);
 void	ft_gvar_result(int process_result);
+void	heredoc_signals(void);
+void	ignore_signals(void);
+void	sig_in_command(void);
+void	ft_termios(bool set);
 
 /* -- FREE -- */
 void	ft_free_serie(t_serie *series);

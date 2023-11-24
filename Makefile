@@ -1,6 +1,6 @@
 LIBFT_PATH	=	./Libft/
 BUILT_PATH	=	./builtin/
-PRINTF_PATH =	./Printf/
+SIG_PATH	=	./signals/
 
 OS := ${shell uname}
 
@@ -25,7 +25,6 @@ SRC_MAIN 	= 	./main.c \
 				./parser_dollar.c \
 				./serie.c \
 				./ft_lst_utils_serie.c \
-				./signals/main_signals.c \
 				./execve.c \
 				./exec_redir.c \
 				./exec_function.c \
@@ -33,7 +32,7 @@ SRC_MAIN 	= 	./main.c \
 				./error.c \
 				./ft_here_doc.c \
 
-SRC_BUILTIN	=	${addprefix ${BUILT_PATH}, ./builtin_main.c \
+SRC_BUILTIN	=	${addprefix ${BUILT_PATH},	./builtin_main.c \
 											./ft_cd.c \
 											./ft_cd_manipulation.c \
 											./envp.c \
@@ -45,7 +44,13 @@ SRC_BUILTIN	=	${addprefix ${BUILT_PATH}, ./builtin_main.c \
 											./ft_unset.c \
 											./ft_exit.c}
 
-SRC = ${SRC_MAIN} ${SRC_BUILTIN}
+SRC_SIGNALS	=	${addprefix ${SIG_PATH},	./heredoc_signals.c \
+											./output_results.c \
+											./ignore_signals.c \
+											./in_command_signals.c \
+											./main_signals.c}
+
+SRC = ${SRC_MAIN} ${SRC_BUILTIN} ${SRC_SIGNALS}
 
 OBJ		= ${SRC:.c=.o}
 
@@ -70,8 +75,7 @@ all:		$(NAME)
 
 $(NAME):	$(OBJ)
 			@${MAKE} -C ${LIBFT_PATH}
-			@${MAKE} -C ${PRINTF_PATH}
-			@$(CC) $(CFLAGS) $(OBJ) ${LIBFT_PATH}libft.a ${PRINTF_PATH}libftprintf.a -L$(shell brew --prefix readline)/lib -lreadline -I $(HEADER) -o $(NAME)
+			@$(CC) $(CFLAGS) $(OBJ) ${LIBFT_PATH}libft.a -L$(shell brew --prefix readline)/lib -lreadline -I $(HEADER) -o $(NAME)
 
 debug:
 	${MAKE} DEBUG=1
@@ -79,10 +83,9 @@ debug:
 clean:
 			@$(RM) $(OBJ)
 			@${MAKE} clean -C ${LIBFT_PATH}
-			@${MAKE} clean -C ${PRINTF_PATH}
 
 fclean: 	clean
-			@$(RM) $(NAME) ${LIBFT_PATH}libft.a ${PRINTF_PATH}libftprintf.a
+			@$(RM) $(NAME) ${LIBFT_PATH}libft.a
 
 re:			fclean all
 

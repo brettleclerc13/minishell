@@ -1,39 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_signals.c                                     :+:      :+:    :+:   */
+/*   in_command_signals.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/29 16:32:36 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/13 11:0:20 by brettlecler      ###   ########.fr       */
+/*   Created: 2023/11/23 12:37:30 by ehouot            #+#    #+#             */
+/*   Updated: 2023/11/23 12:46:40 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	basic_sigint(int signal)
+static void	in_command_sigint(int signal)
 {
 	if (signal != SIGINT)
 		return ;
 	ft_putstr_fd("\n", STDOUT_FILENO);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-	g_var = 130;
 }
 
-static void	basic_sigquit(int signal)
+static void	in_command_sigquit(int signal)
 {
 	if (signal != SIGQUIT)
 		return ;
-	rl_on_new_line();
-	rl_redisplay();
-	g_var = 131;
+	ft_putstr_fd("Quit: 3\n", STDOUT_FILENO);
 }
 
-void    signals_types(void)
+void	sig_in_command(void)
 {
-	signal(SIGINT, basic_sigint);
-	signal(SIGQUIT, basic_sigquit);
+	signal(SIGINT, in_command_sigint);
+	signal(SIGQUIT, in_command_sigquit);
 }

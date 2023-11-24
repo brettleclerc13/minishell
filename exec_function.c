@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:28:04 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/24 10:11:07 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/24 10:32:34 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_waitpid(t_serie *series)
 	return_result = 0;
 	if (tmp->pid == -5 || tmp->pid == -1)
 		return ;
-	while (tmp)
+	while (tmp) // tmp->prev
 	{
 		waitpid(tmp->pid, &return_result, 0);
 		tmp = tmp->next;
