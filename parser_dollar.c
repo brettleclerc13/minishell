@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 16:55:51 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/28 12:51:33 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/28 18:02:16 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	d_lst_creation(t_dollar **d_lst, char *content)
 		increment = true;
 		if (content[i] == '$' || !content[i + 1])
 		{
-			if (start != i)
+			if (start != i || !content[i + 1])
 				d_lst_string(d_lst, content, &i, &start);
 			if (content[i] == '$' && (content[i + 1] == '$' || content[i + 1] == '?'))
 			{
@@ -104,9 +104,12 @@ bool	check_dollar(t_lex **list, char **envp)
 		free(d_lst);
 		d_lst = d_lst ->next;
 	}
-	// if (!result)
-	// 	return (false);
-	// 	result = ft_strdup("\0");
+	 if (!result)
+	 {
+	 	result = ft_strdup("\0");
+		if ((*list)->token != DOUBLE_QUOTE)
+			(*list)->token = SKIP;			//need to follow this up in series and exec
+	 }
 	free((*list)->content);
 	(*list)->content = result;
 	return (true);

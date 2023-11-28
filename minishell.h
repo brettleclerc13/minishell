@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/28 12:57:52 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/28 17:49:29 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,10 @@ enum	e_token
 	SINGLE_QUOTE,		// --> 5
 	DOUBLE_QUOTE,		// --> 6
 	WORD,				// --> 7
-	STRING,				// --> 8
-	FUNCTION,			// --> 9
-	DOLLAR,				// --> 10
-	ZERO,				// --> 11
-	END,				// --> 12
+	DOLLAR,				// --> 8
+	ZERO,				// --> 9
+	SKIP,				// --> 10
+	END,				// --> 11
 };
 
 extern void	rl_replace_line(const char *text, int clear_undo);
@@ -71,7 +70,6 @@ typedef struct	s_serie
 {
 	char			**cmd;
 	enum e_token	fd_out_token;
-	enum e_token	cmd_token;
 	bool			is_pipe;
 	int				pipe_hd[2];
 	int				fd_in;
@@ -134,7 +132,6 @@ void		init_oldpwd(t_struct *mshell);
 
 /* -- LEXER -- */
 t_lex	*lexer(char **args, t_lex **list);
-bool	lex_dollar(char **args, t_lex **list, int *i);
 t_lex	*ft_lstnew_lex(void *content, enum e_token token);
 void	ft_lstadd_back_lex(t_lex **lst, t_lex *new);
 int		ft_split_word(char *args, t_lex **list);

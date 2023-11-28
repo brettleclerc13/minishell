@@ -9,10 +9,6 @@ Petit tâches:
 - WAITPID inversé (liste double chaîné)	[-EMILIEN-]
 - '_' variable updated each time successful? execution is launched	[-BRETT-]
 
-Really small tasks to be done last:
-- rm cmd_token option in series, not needed		[-BRETT-]
-- rm get_env_value function, probably not needed		[-BRETT-]
-
 Pointers:
 - ps command for current pipes on diff terminal
 - character non-bloquant
@@ -29,6 +25,7 @@ TASKS DONE
 - Open ended double quotes quits the program. Should not.	[-EMILIEN-]
 - cat ; Ctrl+C : 2 minishell argv[0] shows up	[-EMILIEN-]
 - Ctrl / should not print (Termios)		[-EMILIEN-]
+- rm cmd_token option in series, not needed		[-BRETT-]
 
 
 

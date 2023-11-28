@@ -13,7 +13,6 @@ endif
 SRC_MAIN 	= 	./main.c \
 				./parsing.c \
 				./lexer.c \
-				./lexer_plus.c \
 				./ft_lst_utils_lex.c \
 				./help_function.c \
 				./parser.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lst_utils_lex.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 17:46:42 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/16 11:27:58 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/28 15:39:34 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_lex	*ft_lstnew_lex(void *content, enum e_token token)
 	new = malloc (sizeof(t_lex));
 	if (!new)
 		return (NULL);
-	if (token == SINGLE_QUOTE || token == STRING)
+	if (token == SINGLE_QUOTE || token == DOUBLE_QUOTE)
 		new->content = ft_strdup(content + 1);
 	else
 		new->content = ft_strdup(content);
