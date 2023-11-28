@@ -6,13 +6,13 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:09:31 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/28 12:17:15 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/28 12:52:49 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_dollar_lst	*ft_lstlast_dollar(t_dollar_lst *d_lst)
+static t_dollar	*ft_lstlast_dollar(t_dollar *d_lst)
 {
 	if (!d_lst)
 		return (d_lst);
@@ -21,9 +21,9 @@ static t_dollar_lst	*ft_lstlast_dollar(t_dollar_lst *d_lst)
 	return (d_lst);
 }
 
-static void	ft_lstadd_back_dollar(t_dollar_lst **d_lst, t_dollar_lst *new)
+static void	ft_lstadd_back_dollar(t_dollar **d_lst, t_dollar *new)
 {
-	t_dollar_lst	*tmp;
+	t_dollar	*tmp;
 
 	if (!(*d_lst))
 	{
@@ -34,11 +34,11 @@ static void	ft_lstadd_back_dollar(t_dollar_lst **d_lst, t_dollar_lst *new)
 	tmp-> next = new;
 }
 
-void	d_lst_var(t_dollar_lst **d_lst, char *content, int *i, int *start)
+void	d_lst_var(t_dollar **d_lst, char *content, int *i, int *start)
 {
-	t_dollar_lst	*new;
+	t_dollar	*new;
 	
-	new = malloc(sizeof(t_dollar_lst));
+	new = malloc(sizeof(t_dollar));
 	if (!new)
 	{
 		ft_putstr_fd("minishell: malloc: cannot allocate memory\n", 2);
@@ -54,11 +54,11 @@ void	d_lst_var(t_dollar_lst **d_lst, char *content, int *i, int *start)
 	*start = *i;
 }
 
-void	d_lst_lonedol(t_dollar_lst **d_lst, int *i, int *start)
+void	d_lst_lonedol(t_dollar **d_lst, int *i, int *start)
 {
-	t_dollar_lst	*new;
+	t_dollar	*new;
 	
-	new = malloc(sizeof(t_dollar_lst));
+	new = malloc(sizeof(t_dollar));
 	if (!new)
 	{
 		ft_putstr_fd("minishell: malloc: cannot allocate memory\n", 2);
@@ -70,11 +70,11 @@ void	d_lst_lonedol(t_dollar_lst **d_lst, int *i, int *start)
 	*start = *i;
 }
 
-void	d_lst_pid_exitstatus(t_dollar_lst **d_lst, char *content, int *i, int *start)
+void	d_lst_pid_exitstatus(t_dollar **d_lst, char *content, int *i, int *start)
 {
-	t_dollar_lst	*new;
+	t_dollar	*new;
 	
-	new = malloc(sizeof(t_dollar_lst));
+	new = malloc(sizeof(t_dollar));
 	if (!new)
 	{
 		ft_putstr_fd("minishell: malloc: cannot allocate memory\n", 2);
@@ -90,11 +90,11 @@ void	d_lst_pid_exitstatus(t_dollar_lst **d_lst, char *content, int *i, int *star
 	*start = *i;
 }
 
-void	d_lst_string(t_dollar_lst **d_lst, char *content, int *i, int *start)
+void	d_lst_string(t_dollar **d_lst, char *content, int *i, int *start)
 {
-	t_dollar_lst	*new;
+	t_dollar	*new;
 	
-	new = malloc(sizeof(t_dollar_lst));
+	new = malloc(sizeof(t_dollar));
 	if (!new)
 	{
 		ft_putstr_fd("minishell: malloc: cannot allocate memory\n", 2);

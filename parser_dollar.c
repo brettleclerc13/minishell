@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 16:55:51 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/28 12:45:57 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/28 12:51:33 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static bool	is_dollar(char *s)
 	return (false);
 }
 
-char	*d_lst_expansion(t_dollar_lst *d_lst, char **envp)
+char	*d_lst_expansion(t_dollar *d_lst, char **envp)
 {
 	char	*tmp;
 
@@ -55,7 +55,7 @@ char	*d_lst_expansion(t_dollar_lst *d_lst, char **envp)
 	return (tmp);
 }
 
-void	d_lst_creation(t_dollar_lst **d_lst, char *content)
+void	d_lst_creation(t_dollar **d_lst, char *content)
 {
 	int		i;
 	int		start;
@@ -91,7 +91,7 @@ void	d_lst_creation(t_dollar_lst **d_lst, char *content)
 bool	check_dollar(t_lex **list, char **envp)
 {
 	char			*result;
-	t_dollar_lst	*d_lst;
+	t_dollar	*d_lst;
 
 	result = NULL;
 	d_lst = NULL;

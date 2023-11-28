@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/27 16:56:24 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/28 12:57:52 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,18 +121,10 @@ typedef struct	s_var
 
 typedef struct	s_dollar
 {
-	int		i;
-	int		j;
-	int		start;
-	char	**array;
-} 			t_dollar;
-
-typedef struct	s_dollar_lst
-{
-	char				*content;
-	int					variable;
-	void				*next;
-}						t_dollar_lst;
+	char		*content;
+	int			variable;
+	void		*next;
+}				t_dollar;
 
 /* -- INIT -- */
 t_struct	*before_loop_init(int argc, char **envp);
@@ -153,13 +145,13 @@ bool	parser(t_lex **list, char **envp);
 
 /* -- DOLLAR PARSER -- */
 bool	check_dollar(t_lex **list, char **envp);
-void	d_lst_creation(t_dollar_lst **d_lst, char *content);
-char	*d_lst_expansion(t_dollar_lst *d_lst, char **envp);
+void	d_lst_creation(t_dollar **d_lst, char *content);
+char	*d_lst_expansion(t_dollar *d_lst, char **envp);
 bool	is_specialchar(char c);
-void	d_lst_string(t_dollar_lst **d_lst, char *content, int *i, int *start);
-void	d_lst_pid_exitstatus(t_dollar_lst **d_lst, char *content, int *i, int *start);
-void	d_lst_lonedol(t_dollar_lst **d_lst, int *i, int *start);
-void	d_lst_var(t_dollar_lst **d_lst, char *content, int *i, int *start);
+void	d_lst_string(t_dollar **d_lst, char *content, int *i, int *start);
+void	d_lst_pid_exitstatus(t_dollar **d_lst, char *content, int *i, int *start);
+void	d_lst_lonedol(t_dollar **d_lst, int *i, int *start);
+void	d_lst_var(t_dollar **d_lst, char *content, int *i, int *start);
 
 /* -- SERIES -- */
 bool	serie_creation(t_lex *args, t_serie **series);
