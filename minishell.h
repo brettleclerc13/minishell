@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/24 10:32:48 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/28 13:34:42 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,7 @@ void	print_string(char **tab);
 void	print_lst_tok(t_lex *list);
 void	print_array(char **array);
 void	print_lst_serie(t_serie *series);
+void	print_prev_serie(t_serie *series);
 
 /* -- BUILTINS -- */
 int		builtin_main(char **args, t_struct *mshell, int process);

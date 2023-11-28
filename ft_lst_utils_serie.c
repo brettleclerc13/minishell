@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 20:12:53 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/23 17:20:36 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/28 16:28:41 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	ft_lstadd_back_serie(t_serie **series, t_serie *new)
 		return ;
 	}
 	tmp = ft_lstlast_serie(*series);
+	new->prev = tmp;
 	tmp->next = new;
 }
 
@@ -77,10 +78,9 @@ t_serie	*ft_lstnew_serie(t_lex *args, int count, bool ispipe)
 	new = malloc(sizeof(t_serie));
 	if (!new)
 		return (print_serie_malloc_error());
+	new->fd_out_token = END;
 	if (ispipe == true)
 		new->fd_out_token = PIPE;
-	else
-		new->fd_out_token = END;
 	new->pipe_hd[0] = STDIN_FILENO;
 	new->pipe_hd[1] = STDOUT_FILENO;
 	new->fd_in = STDIN_FILENO;
@@ -95,6 +95,7 @@ t_serie	*ft_lstnew_serie(t_lex *args, int count, bool ispipe)
 		free(new);
 		return(NULL);
 	}
+	new->prev = NULL;
 	new->next = NULL;
 	return (new);
 }
