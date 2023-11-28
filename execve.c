@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 09:07:07 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/21 14:40:19 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/28 12:25:05 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,12 @@ int	ft_execve(char **cmd, char **envp)
 	char **path;
 
 	path = ft_extract_path(envp);
-	if (!cmd)
+	//print_array(cmd);
+	if (!cmd || !cmd[0])
+	{
+		ft_arrayfree(path);
 		exit(0);
+	}
 	execve(cmd[0], cmd, envp);
 	if (path == NULL)
 	{

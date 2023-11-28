@@ -31,6 +31,7 @@ SRC_MAIN 	= 	./main.c \
 				./free.c \
 				./error.c \
 				./ft_here_doc.c \
+				./ft_lst_utils_dollar.c \
 
 SRC_BUILTIN	=	${addprefix ${BUILT_PATH},	./builtin_main.c \
 											./ft_cd.c \

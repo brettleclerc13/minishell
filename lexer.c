@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 13:45:40 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/16 11:49:55 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/28 12:06:23 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,14 +105,21 @@ t_lex	*lexer(char **args, t_lex **list)
 		j = 0;
 		if (lex_string(args, list, &i, j) == true)
 			continue;
-		if (lex_function(args, list, &i) == true)
+		if (lex_function(args, list, &i) == true)	//do we need this?
 			continue;
 		if (lex_sign(args, list, &i, j) == true)
 			continue;
-		if (lex_dollar(args, list, &i) == true)
+		if (lex_dollar(args, list, &i) == true)		//does not reach over here I feel, always one of the above 3
 			continue;
 		lex_word(args, list, &i);
 	}
 	tmp = *list;
 	return (tmp);
 }
+
+// we should verify in the below order
+// SINGLE_QUOTE or DOUBLE_QUOTE
+// DOLLAR
+// STRING
+// SIGN
+// WORD

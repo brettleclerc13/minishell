@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 16:56:49 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/13 16:47:54 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/27 17:34:37 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*ft_strjoin_path(char *s1, char *s2, bool free_first_param)
 	return (dest);
 }
 
-char	*ft_strjoin_dollar(char *s1, char *s2, bool free_first_param)
+char	*ft_strjoin_dollar(char *s1, char *s2)
 {
 	size_t	i;
 	size_t	j;
@@ -61,7 +61,6 @@ char	*ft_strjoin_dollar(char *s1, char *s2, bool free_first_param)
 	while (s2 && j < lens2)
 		dest[i++] = s2[j++];
 	dest[i] = '\0';
-	if (free_first_param)
-		free(s1);
+	free(s1);
 	return (dest);
 }

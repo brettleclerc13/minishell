@@ -6,36 +6,36 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 18:10:35 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/25 15:03:33 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/27 14:30:52 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static bool is_newline(char **argv, int *i)
+static bool is_n_cmd(char **argv, int *i)
 {
-	bool	is_newline;
+	bool	n_cmd;
 	int		j;
 
-	is_newline = false;
+	n_cmd = false;
 	*i = 0;
 	while (argv[++(*i)] && argv[*i][0] == '-')
 	{
 		j = 0;
 		while (argv[*i][++j])
 			if (argv[*i][j] != 'n')
-				return (is_newline);
-		is_newline = true;
+				return (n_cmd);
+		n_cmd = true;
 	}
-	return (is_newline);
+	return (n_cmd);
 }
 
 int	ft_echo(char **args)
 {
-	bool	newline;
+	bool	n_cmd;
 	int		i;
 	
-	newline = is_newline(args, &i);
+	n_cmd = is_n_cmd(args, &i);
 	while (args[i])
 	{
 		printf("%s", args[i]);
@@ -43,7 +43,7 @@ int	ft_echo(char **args)
 			printf(" ");
 		i++;
 	}
-	if (newline == false)
+	if (!n_cmd)
 		printf("\n");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:53:41 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/24 08:39:14 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/28 12:46:16 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,45 +133,3 @@ int	ft_cd(char **args, t_struct *mshell)
 		return (1);
 	return (0);
 }
-
-
-// while (--i >= 0)
-// 	{
-// 		if (i == (int)ft_strlen(cwd) || cwd[i] == '/')
-// 		{
-// 			tmp = ft_substr(cwd, 0, i);
-// 			printf("tmp in dir path: %s\n", tmp);
-// 			tmp = ft_strjoin_path(tmp, dir, true);
-// 			if (!access(tmp, F_OK | X_OK))
-// 			{
-// 				free(dir);
-// 				return (tmp);
-// 			}
-// 			free(tmp);
-// 		}
-// 	}
-// 	return (dir);
-
-	// while (--i >= 0)
-	// {
-	// 	if (cwd[i] == '/' && (cwd[i - 1] == '.' && cwd[i - 2] == '.'))
-	// 		continue;
-	// 	if (cwd[i] == '/' && (cwd[i - 1] != '.' && cwd[i - 2] != '.'))
-	// 	{
-	// 		printf("entering here again\n");
-	// 		tmp = ft_substr(cwd, 0, i);
-	// 		if (!access(tmp, F_OK | X_OK))
-	// 		{
-	// 			printf("and again\n");
-	// 			free(dir);
-	// 			return (tmp);
-	// 		}
-	// 		free(tmp);
-	// 	}
-	// 	if (i - 1 == -1)
-	// 	{
-	// 		free(dir);
-	// 		return (ft_strdup("/"));
-	// 	}
-	// }
-	//return (dir);

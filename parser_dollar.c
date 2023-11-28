@@ -6,153 +6,108 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 16:55:51 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/24 15:26:17 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/28 12:45:57 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static bool	is_specialchar(char c)
+bool	is_specialchar(char c)
 {
-	if (c == '$' || !ft_isalnum(c) || c == '_')
+	if (!ft_isalnum(c) && c != '_')
 		return (true);
 	return (false);
 }
 
-static int	ft_dollar_array_count(char *content)
+static bool	is_dollar(char *s)
 {
 	int	i;
-	int	count;
 
-	i = 0;
-	count = 0;
-	while (content[i])
-	{
-		if (is_specialchar(content[i]))
-		{
-			if (content[i] == '$' && content[i + 1] == '$') 
-				i++;
-			count++;
-		}
-		i++;
-	}
-	return (count);
+	i = -1;
+	while (s[++i])
+		if (s[i] == '$')
+			return (true);
+	return (false);
 }
 
-static char **ft_dollar_array_continue(t_dollar *dol, char *content)
+char	*d_lst_expansion(t_dollar_lst *d_lst, char **envp)
 {
-	while (content[dol->i])
+	char	*tmp;
+
+	tmp = NULL;
+	while (d_lst)
 	{
-		if (content[dol->i] == '$')
+		if (d_lst->variable)
 		{
-			if (dol->start != dol->i)
-				dol->array[dol->j++] = ft_substr(content, dol->start, dol->i - dol->start);
-			if (content[dol->i + 1] && content[dol->i + 1] == '$')
+			if (ft_varcmp(d_lst->content, envp))
 			{
-				dol->array[dol->j] = ft_strdup("`PID'");
-				dol->i += 2;
-				dol->start = dol->i;
-				while(content[dol->i] && !is_specialchar(content[dol->i])) // && dol->i != char non bloquant
-					dol->i++;
-				if (dol->start != dol->i)
-					dol->array[dol->j] = ft_strjoin_dollar(dol->array[dol->j], ft_substr(content, dol->start, dol->i - dol->start), true); //free issue
-				dol->j++;
-				if (content[dol->i] == '$' && !content[dol->i + 1])
-					dol->array[dol->j++] = ft_strdup("$");
+				d_lst->content = ft_strjoin_dollar(d_lst->content, "=");
+				if (!get_env_value(d_lst->content, envp))
+ 				break ;
+ 				tmp = ft_strjoin_dollar(tmp, get_env_value(d_lst->content, envp));
 			}
-			else if (content[dol->i + 1] && !is_specialchar(content[dol->i + 1])) // && dol->i != char non bloquant
-			{
-				dol->i++;
-				dol->start = dol->i;
-				while (content[dol->i] && !is_specialchar(content[dol->i]))
-					dol->i++;
-				dol->array[dol->j++] = ft_substr(content, dol->start, dol->i - dol->start);
-			}
-			else
-				dol->array[dol->j++] = ft_strdup("$");
-			dol->start = dol->i;
-		}
-		if (content[dol->i] != '$' || !content[dol->i + 1])
-			dol->i++;
-	}
-	return(dol->array);
-}
-
-static char	**ft_dollar_array(char *content)
-{
-	t_dollar	dol;
-
-	dol.i = 0;
-	dol.j = 0;
-	dol.start = 0;
-	dol.array = ft_calloc(ft_dollar_array_count(content) + 2, sizeof(char *));
-	if (!dol.array)
-	{
-		ft_putstr_fd("minishell: malloc: cannot allocate memory\n", 2);
-		return (NULL);
-	}
-	return (ft_dollar_array_continue(&dol, content));
-}
-
-static char	*expand_dollar(char **char_dol, char *result, char **envp, int i)
-{
-	char	*g_var_value;
-
-	g_var_value = NULL;
-	while (char_dol[++i])
-	{
-		if (!ft_strncmp(char_dol[i], "$", 1))
-			result = ft_strjoin_dollar(result, "$", true);
-		else if (!ft_strncmp(char_dol[i], "?", 1))
-		{
-			g_var_value = ft_strjoin_dollar(ft_itoa(g_var), char_dol[i] + 1 ,true);
-			result = ft_strjoin_dollar(result, g_var_value, true);
-			free(g_var_value);
-		}
-		else if (!ft_strncmp(char_dol[i], "`PID'", 5))
-			result = ft_strjoin_dollar(result, char_dol[i], true);
-		else if (ft_varcmp(char_dol[i], envp) == true)
-		{
-			char_dol[i] = ft_strjoin_dollar(char_dol[i], "=", true);
-			if (!get_env_value(char_dol[i], envp))
-				break ;
-			result = ft_strjoin_dollar(result, get_env_value(char_dol[i], envp), true);
 		}
 		else
-			result = ft_strjoin_dollar(result, char_dol[i], true);
+			tmp = ft_strjoin_dollar(tmp, d_lst->content);
+		free(d_lst->content);
+		d_lst = d_lst->next;
 	}
-	return (result);
+	return (tmp);
+}
+
+void	d_lst_creation(t_dollar_lst **d_lst, char *content)
+{
+	int		i;
+	int		start;
+	bool	increment;
+
+	i = 0;
+	start = 0;
+	while (content[i])
+	{
+		increment = true;
+		if (content[i] == '$' || !content[i + 1])
+		{
+			if (start != i)
+				d_lst_string(d_lst, content, &i, &start);
+			if (content[i] == '$' && (content[i + 1] == '$' || content[i + 1] == '?'))
+			{
+				d_lst_pid_exitstatus(d_lst, content, &i, &start);
+				increment = false;
+			}
+			else if (content[i] == '$' && (!is_specialchar(content[i + 1])))
+			{
+				d_lst_var(d_lst, content, &i, &start);
+				increment = false;
+			}
+			else if (content[i] == '$')
+				d_lst_lonedol(d_lst, &i, &start);
+		}
+		if (increment)
+			i++;
+	}
 }
 
 bool	check_dollar(t_lex **list, char **envp)
 {
-	char	*result;
-	char	**char_dol;
-	int		i;
+	char			*result;
+	t_dollar_lst	*d_lst;
 
 	result = NULL;
-	i = -1;
-	if ((*list)->token != DOLLAR && (*list)->token != STRING \
-		&& (*list)->token != WORD && (*list)->token == SINGLE_QUOTE) //check if single_quote token are allotted
+	d_lst = NULL;
+	if (!is_dollar((*list)->content) || (*list)->token == SINGLE_QUOTE)
 		return (true);
-	if (ft_dollar_array_count((*list)->content) == 0)
-		return (true);
-	char_dol = ft_dollar_array((*list)->content);
-	if (!char_dol)
-		return (false);
-	result = expand_dollar(char_dol, result, envp, i);
-	if (!result)
+	d_lst_creation(&d_lst, (*list)->content);
+	result = d_lst_expansion(d_lst, envp);
+	while (d_lst)
 	{
-		ft_arrayfree(char_dol);
-		return (false);
+		free(d_lst);
+		d_lst = d_lst ->next;
 	}
-	ft_arrayfree(char_dol);
+	// if (!result)
+	// 	return (false);
+	// 	result = ft_strdup("\0");
 	free((*list)->content);
 	(*list)->content = result;
 	return (true);
 }
-
-
-	// dol->i = -1;
-	// while (dol->array[++dol->i])
-	// 	printf("%s\n", dol->array[dol->i]);

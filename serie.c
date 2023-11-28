@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   serie.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 12:52:57 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/19 13:40:14 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/27 13:13:13 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ bool	serie_creation(t_lex *args, t_serie **series)
 		{ 
 			if (serie_addition(series, tmp, count, true) == false)
 				return (false);
-			count = 1;
+			count = 0;
 			tmp = args->next;
 		}
 		else if (!args->next)
