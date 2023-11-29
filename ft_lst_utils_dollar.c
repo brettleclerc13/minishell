@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:09:31 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/29 11:51:20 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/29 12:17:56 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	d_lst_var(t_dollar **d_lst, char *content, int *i, int *start)
 		ft_putstr_fd("minishell: malloc: cannot allocate memory\n", 2);
 		return ;
 	}
+	new->next = NULL;
 	(*i)++;
 	new->variable = 1;
 	*start = *i;
@@ -64,6 +65,7 @@ void	d_lst_lonedol(t_dollar **d_lst, int *i, int *start)
 		ft_putstr_fd("minishell: malloc: cannot allocate memory\n", 2);
 		return ;
 	}
+	new->next = NULL;
 	new->variable = 0;
 	new->content = ft_strdup("$");
 	ft_lstadd_back_dollar(d_lst, new);
@@ -80,6 +82,7 @@ void	d_lst_pid_exitstatus(t_dollar **d_lst, char *content, int *i, int *start)
 		ft_putstr_fd("minishell: malloc: cannot allocate memory\n", 2);
 		return ;
 	}
+	new->next = NULL;
 	new->variable = 0;
 	if (content[*i + 1] == '$')
 		new->content = ft_strdup("`PID'");
@@ -100,6 +103,7 @@ void	d_lst_string(t_dollar **d_lst, char *content, int *i, int *start)
 		ft_putstr_fd("minishell: malloc: cannot allocate memory\n", 2);
 		return ;
 	}
+	new->next = NULL;
 	if (!content[*i + 1])
 		(*i)++;
 	new->variable = 0;
