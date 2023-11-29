@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 11:56:07 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/29 15:40:46 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/29 18:04:28 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static void	ft_remove_from_envp(char *arg, t_struct *mshell)
 		envp_var = get_env_var(mshell->envp[i]);
 		if (!ft_strncmp(arg, envp_var, ft_strlen(envp_var)))
 		{
-			printf("envp_var: %s\n", envp_var);
 			mshell->envp = ft_arrayremove(mshell->envp[i], mshell->envp);
 			free(envp_var);
 			return ;
