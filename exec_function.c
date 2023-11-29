@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_function.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:28:04 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/24 10:40:49 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/29 08:46:48 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ void	ft_waitpid(t_serie *series)
 	t_serie	*tmp;
 	int		return_result;
 
-	tmp = series;
+	tmp = ft_lstlast_serie(series);
 	return_result = 0;
 	if (tmp->pid == -5 || tmp->pid == -1)
 		return ;
-	while (tmp) // tmp->prev
+	while (tmp)
 	{
 		waitpid(tmp->pid, &return_result, 0);
-		tmp = tmp->next;
+		tmp = tmp->prev;
 	}
 	ft_gvar_result(return_result);
 }

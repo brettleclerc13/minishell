@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 16:55:51 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/29 10:33:24 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/29 12:04:23 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ bool	is_specialchar(char c)
 	return (false);
 }
 
-static bool	is_dollar(char *s)
+bool	is_dollar(char *s)
 {
 	int	i;
 
@@ -28,6 +28,48 @@ static bool	is_dollar(char *s)
 		if (s[i] == '$')
 			return (true);
 	return (false);
+}
+
+bool	is_single_quote(char *s)
+{
+	int	i;
+
+	i = -1;
+	while (s[++i])
+		if (s[i] == '\'')
+			return (true);
+	return (false);
+}
+
+bool	is_double_quote(char *s)
+{
+	int	i;
+
+	i = -1;
+	while (s[++i])
+		if (s[i] == '\"')
+			return (true);
+	return (false);
+}
+
+static char	*remove_double_quotes(char *content)
+{
+	char	**split;
+	char	*tmp;
+	int		i;
+
+	i = -1;
+	tmp = NULL;
+	split = NULL;
+	if (!content || !is_double_quote(content))
+		return (content);
+	split = ft_split(content, '\"');
+	i = -1;
+	while (split[++i])
+		tmp = ft_strjoin_dollar(tmp, split[i]);
+	ft_arrayfree(split);
+	free(content);
+	return (tmp);
 }
 
 char	*d_lst_expansion(t_dollar *d_lst, char **envp)
@@ -52,6 +94,7 @@ char	*d_lst_expansion(t_dollar *d_lst, char **envp)
 		free(d_lst->content);
 		d_lst = d_lst->next;
 	}
+	tmp = remove_double_quotes(tmp);
 	return (tmp);
 }
 
@@ -90,16 +133,19 @@ void	d_lst_creation(t_dollar **d_lst, char *content)
 
 bool	check_dollar(t_lex **list, char **envp)
 {
-	char			*result;
+	char		*result;
 	t_dollar	*d_lst;
+	bool		double_quote;
 
 	result = NULL;
 	d_lst = NULL;
-	if (!is_dollar((*list)->content) || (*list)->token == SINGLE_QUOTE)
+	double_quote = false;
+	if (!is_dollar((*list)->content) || is_single_quote((*list)->content))
 		return (true);
+	if (is_double_quote((*list)->content))
+		double_quote = true;
 	d_lst_creation(&d_lst, (*list)->content);
 	result = d_lst_expansion(d_lst, envp);
-	printf("result: %s\n", result);
 	while (d_lst)
 	{
 		free(d_lst);
@@ -108,7 +154,7 @@ bool	check_dollar(t_lex **list, char **envp)
 	 if (!result)
 	 {
 	 	result = ft_strdup("\0");
-		if ((*list)->token != DOUBLE_QUOTE)
+		if (double_quote == false)
 			(*list)->token = SKIP;			//need to follow this up in series and exec
 	 }
 	free((*list)->content);

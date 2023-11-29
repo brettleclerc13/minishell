@@ -91,7 +91,6 @@ void	ft_execute(t_struct *mshell)
 	if (serie_creation(mshell->args, &series) == false)
 		ft_free_serie_lex(series, mshell->args);
 	ft_free_lex(mshell->args);
-	//print_lst_serie(series);
 	tmp_series = series;
 	original_io[0] = dup(STDIN_FILENO);
 	original_io[1] = dup(STDOUT_FILENO);

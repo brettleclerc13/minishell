@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/28 17:49:29 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/29 10:55:31 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ void	d_lst_string(t_dollar **d_lst, char *content, int *i, int *start);
 void	d_lst_pid_exitstatus(t_dollar **d_lst, char *content, int *i, int *start);
 void	d_lst_lonedol(t_dollar **d_lst, int *i, int *start);
 void	d_lst_var(t_dollar **d_lst, char *content, int *i, int *start);
+bool	is_dollar(char *s);
 
 /* -- SERIES -- */
 bool	serie_creation(t_lex *args, t_serie **series);
@@ -165,6 +166,7 @@ void	print_string(char **tab);
 void	print_lst_tok(t_lex *list);
 void	print_array(char **array);
 void	print_lst_serie(t_serie *series);
+void	print_prev_serie(t_serie *series);
 
 /* -- BUILTINS -- */
 int		builtin_main(char **args, t_struct *mshell, int process);
