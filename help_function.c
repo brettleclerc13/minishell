@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 12:01:13 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/28 13:47:17 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/29 09:21:59 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,28 +37,6 @@ void	print_lst_tok(t_lex *list)
 		i++;
 		printf("list[%d] : %s (%d) \n", i, list->content, list->token);
 		list = list->next;
-	}
-}
-
-void	print_prev_serie(t_serie *series)
-{
-	int i;
-
-	i = -1;
-	while (series)
-	{
-		if (series->next == NULL)
-			break ;
-		i++;
-		printf("(NEXT) | serie[%d]: cmd: %d\n", i, series->cmd_token);
-		series = series->next;
-	}
-	printf("----------------\n");
-	while (series)
-	{
-		i--;
-		printf("(PREV) | serie[%d]: cmd: %d\n", i, series->cmd_token);
-		series = series->prev;
 	}
 }
 

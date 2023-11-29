@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_dollar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 16:55:51 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/28 18:02:16 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/29 10:55:16 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ bool	is_specialchar(char c)
 	return (false);
 }
 
-static bool	is_dollar(char *s)
+bool	is_dollar(char *s)
 {
 	int	i;
 

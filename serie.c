@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 12:52:57 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/29 08:47:15 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/29 09:22:21 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,5 @@ bool	serie_creation(t_lex *args, t_serie **series)
 		count++;
 		args = args->next;
 	}
-	print_prev_serie(*series);
 	return (true);
 }

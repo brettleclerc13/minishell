@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 15:34:36 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/29 08:52:10 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/29 10:36:46 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ bool	parsing(char *input, t_struct **mshell)
 		return (false);
 	}
 	list = lexer(arguments, &list);
+	// print_lst_tok(list);
 	ft_arrayfree(arguments);
 	(*mshell)->check_valid = parser(&list, (*mshell)->envp);
 	if ((*mshell)->check_valid == false)

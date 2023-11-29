@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 19:03:33 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/24 10:25:03 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/29 09:43:24 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_here_doc(t_lex *tmp, t_serie **new, int nb_heredoc)
 	if (nb_heredoc == 0)
 	{
 		if (pipe((*new)->pipe_hd) == -1)
-			ft_error("here_doc pipe error\n"); // juste pour test
+			ft_error("here_doc pipe error\n");
 	}
 	ft_termios(true);
 	heredoc_signals();

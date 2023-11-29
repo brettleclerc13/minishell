@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 13:45:40 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/28 16:38:31 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/29 11:00:16 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	lex_dollar(char **args, t_lex **list, int *i)
+{
+	t_lex	*new;
+
+	new =  ft_lstnew_lex(args[*i], DOLLAR);
+	ft_lstadd_back_lex(list, new);
+	(*i)++;
+}
 
 static bool	lex_sign(char **args, t_lex **list, int *i, int j)
 {
@@ -83,6 +92,11 @@ t_lex	*lexer(char **args, t_lex **list)
 	while (args[i])
 	{
 		j = 0;
+		if (is_dollar(args[i]) == true)
+		{
+			lex_dollar(args, list, &i);
+			continue;
+		}
 		if (lex_string(args, list, &i, j) == true)
 			continue;
 		if (lex_sign(args, list, &i, j) == true)
