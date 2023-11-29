@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 16:55:51 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/28 18:02:16 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/29 10:33:24 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ bool	check_dollar(t_lex **list, char **envp)
 		return (true);
 	d_lst_creation(&d_lst, (*list)->content);
 	result = d_lst_expansion(d_lst, envp);
+	printf("result: %s\n", result);
 	while (d_lst)
 	{
 		free(d_lst);
