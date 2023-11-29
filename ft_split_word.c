@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_word.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 16:09:16 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/16 08:29:15 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/29 14:43:07 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	new_node(char *char_tmp, t_lex **list, enum e_token type)
 {
 	t_lex	*new;
+
 	new = ft_lstnew_lex(char_tmp, type);
 	ft_lstadd_back_lex(list, new);
 }

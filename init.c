@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 11:38:35 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/22 16:41:35 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/29 14:25:24 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	**init_path(char **envp)
 bool	init_envp(t_struct *mshell, char **envp)
 {
 	char	cwd[PATH_MAX];
-	
+
 	mshell->envp = NULL;
 	mshell->tmp_cwd = NULL;
 	if (!getcwd(cwd, sizeof(cwd)))

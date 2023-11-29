@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:53:41 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/28 12:46:16 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/29 15:06:45 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	print_cd_error(char	*error, char *dir)
 
 static int	ft_cd_contd(char *dir, char *cwd, t_struct *mshell, bool is_cwd)
 {
-	bool oldpwd_cmd;
+	bool	oldpwd_cmd;
 
 	oldpwd_cmd = false;
 	if (dir[0] == '\0')

@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 13:45:40 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/29 11:27:14 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/29 14:45:38 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	lex_dollar(char **args, t_lex **list, int *i)
 {
 	t_lex	*new;
 
-	new =  ft_lstnew_lex(args[*i], DOLLAR);
+	new = ft_lstnew_lex(args[*i], DOLLAR);
 	ft_lstadd_back_lex(list, new);
 	(*i)++;
 }
@@ -95,12 +95,12 @@ t_lex	*lexer(char **args, t_lex **list)
 		if (is_dollar(args[i]) == true)
 		{
 			lex_dollar(args, list, &i);
-			continue;
+			continue ;
 		}
 		if (lex_string(args, list, &i, j) == true)
-			continue;
+			continue ;
 		if (lex_sign(args, list, &i, j) == true)
-			continue;
+			continue ;
 		lex_word(args, list, &i);
 	}
 	tmp = *list;

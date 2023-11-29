@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   help_function.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 12:01:13 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/29 09:21:59 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/29 14:44:50 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 // HELPING FUNCTION FOR DEBUGGING //
 
-void    print_list(t_lex *list)
+void	print_list(t_lex *list)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (list)
@@ -29,7 +29,7 @@ void    print_list(t_lex *list)
 
 void	print_lst_tok(t_lex *list)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (list)
@@ -42,7 +42,7 @@ void	print_lst_tok(t_lex *list)
 
 void	print_lst_serie(t_serie *series)
 {
-	int i;
+	int	i;
 	int	j;
 
 	i = -1;

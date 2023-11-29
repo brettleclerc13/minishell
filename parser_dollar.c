@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 16:55:51 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/29 12:04:23 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/29 14:37:12 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ char	*d_lst_expansion(t_dollar *d_lst, char **envp)
 			{
 				d_lst->content = ft_strjoin_dollar(d_lst->content, "=");
 				if (!get_env_value(d_lst->content, envp))
- 				break ;
- 				tmp = ft_strjoin_dollar(tmp, get_env_value(d_lst->content, envp));
+					break ;
+				tmp = ft_strjoin_dollar(tmp, get_env_value(d_lst->content, envp));
 			}
 		}
 		else
@@ -151,12 +151,12 @@ bool	check_dollar(t_lex **list, char **envp)
 		free(d_lst);
 		d_lst = d_lst ->next;
 	}
-	 if (!result)
-	 {
-	 	result = ft_strdup("\0");
+	if (!result)
+	{
+		result = ft_strdup("\0");
 		if (double_quote == false)
-			(*list)->token = SKIP;			//need to follow this up in series and exec
-	 }
+			(*list)->token = SKIP;
+	}
 	free((*list)->content);
 	(*list)->content = result;
 	return (true);

@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 17:11:30 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/22 16:15:22 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/29 14:57:06 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 char	*get_env_var(char *line)
 {
 	char	*skip_var;
-	
+
 	skip_var = NULL;
 	if (!ft_strchr(line, '='))
-		return(ft_strdup(line));
+		return (ft_strdup(line));
 	else
 	{
 		skip_var = ft_strchr(line, '=');
-		return(ft_substr(line, 0, ft_strlen(line) - ft_strlen(skip_var)));
+		return (ft_substr(line, 0, ft_strlen(line) - ft_strlen(skip_var)));
 	}
 }
 
@@ -69,21 +69,21 @@ void	ft_create_var(char *arg, t_var *var)
 
 bool	ft_varcmp(char *var, char **envp)
 {
-	char    *envp_var;
-	int      i;
+	char	*envp_var;
+	int		i;
 
-    i = -1;
-    while (envp[++i])
-    {
-        envp_var = get_env_var(envp[i]);
-        if (!ft_strcmp(var, envp_var))
-        {
-            free(envp_var);
-            return (true);
-        }
-        free(envp_var);
-    }
-    return (false);
+	i = -1;
+	while (envp[++i])
+	{
+		envp_var = get_env_var(envp[i]);
+		if (!ft_strcmp(var, envp_var))
+		{
+			free(envp_var);
+			return (true);
+		}
+		free(envp_var);
+	}
+	return (false);
 }
 
 char	*ft_varjoin(char *s1, char *s2)

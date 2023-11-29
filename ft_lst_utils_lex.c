@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 17:46:42 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/28 15:39:34 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/29 14:41:54 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_lex	*ft_lstnew_lex(void *content, enum e_token token)
 		new->content = ft_strdup(content + 1);
 	else
 		new->content = ft_strdup(content);
-    new->token = token;
+	new->token = token;
 	new->next = NULL;
 	return (new);
 }

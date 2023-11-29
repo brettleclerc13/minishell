@@ -6,13 +6,13 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 19:59:32 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/16 20:12:09 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/29 14:59:53 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_strcmp(const char *s1, const char *s2)
+int	ft_strcmp(const char *s1, const char *s2)
 {
 	int	i;
 

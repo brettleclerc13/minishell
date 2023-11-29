@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lst_utils_serie.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 20:12:53 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/29 08:46:55 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/29 14:42:32 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	**ft_serie_array(t_lex *args, t_serie **new, int count)
 	return (array);
 }
 
-static t_serie *print_serie_malloc_error(void)
+static t_serie	*print_serie_malloc_error(void)
 {
 	ft_putstr_fd("minishell: malloc: cannot allocate memory\n", 2);
 	return (NULL);
@@ -91,7 +91,7 @@ t_serie	*ft_lstnew_serie(t_lex *args, int count, bool ispipe)
 	if (!new->cmd)
 	{
 		free(new);
-		return(NULL);
+		return (NULL);
 	}
 	new->prev = NULL;
 	new->next = NULL;

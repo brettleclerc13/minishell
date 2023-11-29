@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_function.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:28:04 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/29 08:46:48 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/29 14:24:34 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	set_child_input(t_serie *serie, int pfd[], int previous_fd, int start)
 	else
 		close(pfd[0]);
 }
+
 void	set_child_output(t_serie *serie, int pfd[])
 {
 	if (serie->fd_out != STDOUT_FILENO)
@@ -74,6 +75,7 @@ void	set_child_output(t_serie *serie, int pfd[])
 	else
 		close(pfd[1]);
 }
+
 void	set_parent_io(int pfd[], t_struct *mshell)
 {
 	close(pfd[1]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 11:56:07 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/09 19:07:36 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/29 15:07:19 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	ft_remove_from_envp(char *arg, t_struct *mshell)
 {
 	char	*envp_var;
-	int	i;
+	int		i;
 
 	i = -1;
 	while (mshell->envp[++i])
@@ -60,7 +60,7 @@ int	ft_unset(char **args, t_struct *mshell)
 {
 	int	i;
 	int	result;
-	
+
 	i = 0;
 	mshell->envp = mshell->envp;
 	result = 0;

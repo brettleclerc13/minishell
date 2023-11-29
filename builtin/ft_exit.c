@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 17:26:36 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/13 11:05:28 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/29 15:08:26 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static long int ft_atol(char *str)
+static long int	ft_atol(char *str)
 {
-	int	i;
-	int	minus;
+	int			i;
+	int			minus;
 	long int	result;
 
 	i = 0;

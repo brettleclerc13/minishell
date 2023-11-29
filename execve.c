@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 09:07:07 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/29 08:53:01 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/29 14:24:47 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	ft_put_execve_error(char *arg)
 
 int	ft_execve(char **cmd, char **envp)
 {
-	char **path;
+	char	**path;
 
 	path = ft_extract_path(envp);
 	if (!cmd || !cmd[0])

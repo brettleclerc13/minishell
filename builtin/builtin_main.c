@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:51:29 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/13 126:56:54 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/29 15:06:22 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,3 @@ int	builtin_main(char **args, t_struct *mshell, int process)
 		return (ft_unset(args, mshell));
 	return (0);
 }
-

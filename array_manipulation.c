@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 20:01:37 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/10/23 17:13:57 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/29 14:40:21 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char	**ft_arrayremove(char *removeline, char **array)
 {
-	char **tmp;
-	int	i;
-	int	j;
+	char	**tmp;
+	int		i;
+	int		j;
 
 	if (!array)
 		return (NULL);
@@ -49,8 +49,8 @@ void	ft_arrayfree(char **array)
 
 char	**ft_arrayadd(char *newline, char **array)
 {
-	char **tmp;
-	int	i;
+	char	**tmp;
+	int		i;
 
 	if (!array)
 		return (NULL);
@@ -77,8 +77,8 @@ int	ft_arraylen(char **array)
 
 char	**ft_arraydup(char **array)
 {
-	char **tmp;
-	int	i;
+	char	**tmp;
+	int		i;
 
 	i = -1;
 	tmp = ft_calloc(ft_arraylen(array) + 1, sizeof(char *));

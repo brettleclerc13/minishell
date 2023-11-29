@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   output_results.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:26:46 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/23 17:55:47 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/29 15:12:27 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	ft_termios(bool set)
 {
-    struct termios	termios;
+	struct termios	termios;
+
 	tcgetattr(STDIN_FILENO, &termios);
 	if (set == true)
 		termios.c_lflag &= ~ECHOCTL;

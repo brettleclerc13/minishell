@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 16:17:25 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/13 12:08:59 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/29 15:07:37 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_env(char **envp)
 	while (envp[++i])
 	{
 		if (ft_strchr(envp[i], '='))
-		printf("%s\n", envp[i]);
+			printf("%s\n", envp[i]);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 17:01:46 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/22 16:20:06 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/29 15:10:00 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	update_env_value(char *var, char *new_value, char **envp)
 	char	*tmp;
 	int		i;
 	int		varlen;
-	
+
 	i = -1;
 	varlen = ft_strlen(var);
 	while (envp[++i])
@@ -49,7 +49,7 @@ void	update_env_value(char *var, char *new_value, char **envp)
 void	update_env(t_var *var, char *new_value, t_struct *mshell, bool is_equal)
 {
 	int	i;
-	
+
 	i = -1;
 	while (mshell->envp[++i])
 	{
@@ -67,7 +67,7 @@ void	update_env(t_var *var, char *new_value, t_struct *mshell, bool is_equal)
 					else
 					{
 						var->var = ft_strjoin_path(var->var, "=", true);
-						mshell->envp[i] = ft_varjoin(var->var, new_value);	
+						mshell->envp[i] = ft_varjoin(var->var, new_value);
 					}
 				}
 			}
@@ -79,7 +79,7 @@ char	*get_env_value(char *var, char **envp)
 {
 	int	i;
 	int	varlen;
-	
+
 	i = -1;
 	varlen = ft_strlen(var);
 	while (envp[++i])
@@ -92,7 +92,7 @@ char	**add_env_value(char *var, char *value, char **envp)
 {
 	char	*tmp;
 	char	**new_envp;
-	
+
 	if (!value)
 		tmp = ft_strdup(var);
 	else

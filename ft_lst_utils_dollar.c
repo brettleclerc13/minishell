@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:09:31 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/29 12:17:56 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/29 14:39:32 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ static void	ft_lstadd_back_dollar(t_dollar **d_lst, t_dollar *new)
 		return ;
 	}
 	tmp = ft_lstlast_dollar(*d_lst);
-	tmp-> next = new;
+	tmp->next = new;
 }
 
 void	d_lst_var(t_dollar **d_lst, char *content, int *i, int *start)
 {
 	t_dollar	*new;
-	
+
 	new = malloc(sizeof(t_dollar));
 	if (!new)
 	{
@@ -58,7 +58,7 @@ void	d_lst_var(t_dollar **d_lst, char *content, int *i, int *start)
 void	d_lst_lonedol(t_dollar **d_lst, int *i, int *start)
 {
 	t_dollar	*new;
-	
+
 	new = malloc(sizeof(t_dollar));
 	if (!new)
 	{
@@ -75,7 +75,7 @@ void	d_lst_lonedol(t_dollar **d_lst, int *i, int *start)
 void	d_lst_pid_exitstatus(t_dollar **d_lst, char *content, int *i, int *start)
 {
 	t_dollar	*new;
-	
+
 	new = malloc(sizeof(t_dollar));
 	if (!new)
 	{
@@ -96,7 +96,7 @@ void	d_lst_pid_exitstatus(t_dollar **d_lst, char *content, int *i, int *start)
 void	d_lst_string(t_dollar **d_lst, char *content, int *i, int *start)
 {
 	t_dollar	*new;
-	
+
 	new = malloc(sizeof(t_dollar));
 	if (!new)
 	{

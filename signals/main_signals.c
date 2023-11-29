@@ -32,7 +32,7 @@ static void	basic_sigquit(int signal)
 	g_var = 131;
 }
 
-void    signals_types(void)
+void	signals_types(void)
 {
 	signal(SIGINT, basic_sigint);
 	signal(SIGQUIT, basic_sigquit);

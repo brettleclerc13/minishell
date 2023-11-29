@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_bash.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:15:00 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/23 13:33:46 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/29 14:58:50 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char *quote_loop(char *dest, char const *s, t_split_count *fill)
+static char	*quote_loop(char *dest, char const *s, t_split_count *fill)
 {
-	char			quote;
+	char	quote;
 
 	quote = s[fill->index];
 	dest[fill->size++] = s[fill->index];
@@ -117,11 +117,12 @@ static int	ft_count(char const *s, char c1, char c2)
 
 char	**ft_split_bash(char const *s, char c1, char c2)
 {
-	char	**dest = NULL;
+	char	**dest;
 	int		i;
 	int		nb_words;
 	t_split	c;
 
+	dest = NULL;
 	c.c1 = c1;
 	c.c2 = c2;
 	i = 0;

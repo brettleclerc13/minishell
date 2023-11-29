@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 20:16:19 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/08 19:49:220 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/29 14:28:00 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static pid_t	ft_execute_error(char *message)
 
 pid_t	ft_fork_execution(t_serie *serie, t_struct *mshell, int start)
 {
-	int 	pfd[2];
+	int		pfd[2];
 	pid_t	pid;
 
 	if (pipe(pfd) == -1)
@@ -47,7 +47,7 @@ pid_t	ft_fork_execution(t_serie *serie, t_struct *mshell, int start)
 			g_var = builtin_main(serie->cmd, mshell, 0);
 		else
 			g_var = ft_execve(serie->cmd, mshell->envp);
-		exit (g_var);					//to be modified - set sig & free before exit
+		exit (g_var);
 	}
 	set_parent_io(pfd, mshell);
 	return (pid);
@@ -57,7 +57,8 @@ pid_t	ft_execute_serie(t_serie *serie, int start, t_struct *mshell)
 {
 	if (!serie->cmd[0])
 		return (0);
-	if (serie->fd_out_token == END && start == 0 && builtin_checker(serie->cmd[0]))
+	if (serie->fd_out_token == END && start == 0 \
+	&& builtin_checker(serie->cmd[0]))
 	{
 		if (serie->fd_in == -1 || serie->fd_out == -1)
 			return (-5);
@@ -82,7 +83,7 @@ pid_t	ft_execute_serie(t_serie *serie, int start, t_struct *mshell)
 void	ft_execute(t_struct *mshell)
 {
 	int		start;
-	t_serie *tmp_series;
+	t_serie	*tmp_series;
 	t_serie	*series;
 	int		original_io[2];
 
