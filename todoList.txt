@@ -6,19 +6,11 @@ Grand tâches:
 - WHITE SPACE	[-BRETT-]
 
 Petit tâches:
-- Open ended double quotes quits the program. Should not.	[-EMILIEN-]
 - WAITPID inversé (liste double chaîné)	[-EMILIEN-]
 - '_' variable updated each time successful? execution is launched	[-BRETT-]
-- OLD_PWD should not be initialised at the beginning	[-BRETT-]
-- Ctrl / should not print (Termios)		[-EMILIEN-]
-- cat ; Ctrl+C : 2 minishell argv[0] shows up	[-EMILIEN-]
-
-Really small tasks to be done last:
-- rm cmd_token option in series, not needed		[-BRETT-]
-- rm get_env_value function, probably not needed		[-BRETT-]
 
 Pointers:
-- ps command for current pipes on dif terminal
+- ps command for current pipes on diff terminal
 - character non-bloquant
 
 
@@ -29,6 +21,12 @@ TASKS DONE
 - env -i ./minishell (initialise 4 vars: blank OLD_PWD, PWD with cwd, SHLVL, _)		[-BRETT-]
 - minishell$ env | grep SHLVL = grep: (standard input): Bad file descriptor	[-BRETT-]
 - cd test within 3 folders	[-BRETT-]
+- OLD_PWD should not be initialised at the beginning	[-BRETT-]
+- Open ended double quotes quits the program. Should not.	[-EMILIEN-]
+- cat ; Ctrl+C : 2 minishell argv[0] shows up	[-EMILIEN-]
+- Ctrl / should not print (Termios)		[-EMILIEN-]
+- rm cmd_token option in series, not needed		[-BRETT-]
+
 
 
 

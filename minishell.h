@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/28 13:34:42 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/29 08:47:05 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,10 @@ enum	e_token
 	SINGLE_QUOTE,		// --> 5
 	DOUBLE_QUOTE,		// --> 6
 	WORD,				// --> 7
-	STRING,				// --> 8
-	FUNCTION,			// --> 9
-	DOLLAR,				// --> 10
-	ZERO,				// --> 11
-	END,				// --> 12
+	DOLLAR,				// --> 8
+	ZERO,				// --> 9
+	SKIP,				// --> 10
+	END,				// --> 11
 };
 
 extern void	rl_replace_line(const char *text, int clear_undo);
@@ -71,7 +70,6 @@ typedef struct	s_serie
 {
 	char			**cmd;
 	enum e_token	fd_out_token;
-	enum e_token	cmd_token;
 	bool			is_pipe;
 	int				pipe_hd[2];
 	int				fd_in;
@@ -121,11 +119,10 @@ typedef struct	s_var
 
 typedef struct	s_dollar
 {
-	int		i;
-	int		j;
-	int		start;
-	char	**array;
-} 			t_dollar;
+	char		*content;
+	int			variable;
+	void		*next;
+}				t_dollar;
 
 /* -- INIT -- */
 t_struct	*before_loop_init(int argc, char **envp);
@@ -135,7 +132,6 @@ void		init_oldpwd(t_struct *mshell);
 
 /* -- LEXER -- */
 t_lex	*lexer(char **args, t_lex **list);
-bool	lex_dollar(char **args, t_lex **list, int *i);
 t_lex	*ft_lstnew_lex(void *content, enum e_token token);
 void	ft_lstadd_back_lex(t_lex **lst, t_lex *new);
 int		ft_split_word(char *args, t_lex **list);
@@ -143,7 +139,16 @@ int		ft_split_word(char *args, t_lex **list);
 /* -- PARSER -- */
 bool	parsing(char *input, t_struct **mshell);
 bool	parser(t_lex **list, char **envp);
+
+/* -- DOLLAR PARSER -- */
 bool	check_dollar(t_lex **list, char **envp);
+void	d_lst_creation(t_dollar **d_lst, char *content);
+char	*d_lst_expansion(t_dollar *d_lst, char **envp);
+bool	is_specialchar(char c);
+void	d_lst_string(t_dollar **d_lst, char *content, int *i, int *start);
+void	d_lst_pid_exitstatus(t_dollar **d_lst, char *content, int *i, int *start);
+void	d_lst_lonedol(t_dollar **d_lst, int *i, int *start);
+void	d_lst_var(t_dollar **d_lst, char *content, int *i, int *start);
 
 /* -- SERIES -- */
 bool	serie_creation(t_lex *args, t_serie **series);

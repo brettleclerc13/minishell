@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 20:12:53 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/28 16:28:41 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/29 08:46:55 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ char	**ft_serie_array(t_lex *args, t_serie **new, int count)
 		return (NULL);
 	}
 	tmp = args;
-	(*new)->cmd_token = tmp->token;
 	ft_set_redirections(tmp, new);
 	while (tmp && tmp->token != 4)
 	{
@@ -86,7 +85,6 @@ t_serie	*ft_lstnew_serie(t_lex *args, int count, bool ispipe)
 	new->fd_in = STDIN_FILENO;
 	new->fd_out = STDOUT_FILENO;
 	new->pid = 0;
-	new->cmd_token = ZERO;
 	new->hd = false;
 	new->hd_limiter = NULL;
 	new->cmd = ft_serie_array(args, &new, count);

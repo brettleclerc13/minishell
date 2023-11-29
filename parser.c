@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:17:25 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/14 09:43:34 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/28 17:51:57 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ bool	parser(t_lex **list, char **envp)
 			return (false);
 		if (check_dollar(&tmp, envp) == false)
 			return (false);
-		if (tmp->content == NULL)
-			tmp->content = "\0";
+		//if (tmp->content == NULL)
+		//	tmp->content = "\0";
 		if (check_redir(&tmp, prev_tok) == false)
 			return (false);
 		prev_tok = tmp->token;

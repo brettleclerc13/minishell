@@ -13,7 +13,6 @@ endif
 SRC_MAIN 	= 	./main.c \
 				./parsing.c \
 				./lexer.c \
-				./lexer_plus.c \
 				./ft_lst_utils_lex.c \
 				./help_function.c \
 				./parser.c \
@@ -31,6 +30,7 @@ SRC_MAIN 	= 	./main.c \
 				./free.c \
 				./error.c \
 				./ft_here_doc.c \
+				./ft_lst_utils_dollar.c \
 
 SRC_BUILTIN	=	${addprefix ${BUILT_PATH},	./builtin_main.c \
 											./ft_cd.c \

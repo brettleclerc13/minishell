@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_count_quote.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 00:31:48 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/16 13:35:03 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/28 16:56:43 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ bool	ft_count_quote(char const *s)
 	res = ft_check_doublon(s);
 	if (res == '\"')
 	{
-		ft_putstr_fd("single \" is not supported\n", 2);
+		ft_putstr_fd("minishell: \": open-ended quotes are not supported\n", 2);
 		return (false);
 	}
 	if (res == '\'')
 	{
-		ft_putstr_fd("single \' is not supported\n", 2);
+		ft_putstr_fd("minishell: \': open-ended quotes are not supported\n", 2);
 		return (false);
 	}
 	return (true);

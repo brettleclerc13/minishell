@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:28:04 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/28 18:25:02 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/29 08:46:48 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	set_child_input(t_serie *serie, int pfd[], int previous_fd, int start)
 		dup2(serie->fd_in, STDIN_FILENO);
 		close(serie->fd_in);
 		close(pfd[0]);
-		if (previous_fd)
+		if (previous_fd != STDIN_FILENO && previous_fd != -1)
 			close(previous_fd);
 	}
 	else if (serie->fd_in == STDIN_FILENO && start != 0)

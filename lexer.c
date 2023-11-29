@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 13:45:40 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/16 11:49:55 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/28 16:38:31 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,26 +44,6 @@ static void	lex_word(char **args, t_lex **list, int *i)
 	(*i)++;
 }
 
-static bool	lex_function(char **args, t_lex **list, int *i)
-{
-	t_lex	*new;
-	
-	if (ft_strncmp(args[*i], "echo", 5) == 0
-		|| ft_strncmp(args[*i], "cd", 3) == 0
-		|| ft_strncmp(args[*i], "pwd", 4) == 0
-		|| ft_strncmp(args[*i], "export", 7) == 0
-		|| ft_strncmp(args[*i], "unset", 6) == 0
-		|| ft_strncmp(args[*i], "env", 4) == 0
-		|| ft_strncmp(args[*i], "exit", 5) == 0)
-	{
-		new = ft_lstnew_lex(args[*i], FUNCTION);
-		ft_lstadd_back_lex(list, new);
-		(*i)++;
-		return (true);
-	}
-	return (false);
-}
-
 static bool	lex_string(char **args, t_lex **list, int *i, int j)
 {
 	t_lex	*new;
@@ -81,7 +61,7 @@ static bool	lex_string(char **args, t_lex **list, int *i, int j)
 			else if (args[*i][j] == '\"')
 			{
 				args[*i][ft_strlen(args[*i]) - 1] = '\0';
-				new = ft_lstnew_lex(args[*i], STRING);
+				new = ft_lstnew_lex(args[*i], DOUBLE_QUOTE);
 				ft_lstadd_back_lex(list, new);
 			}
 			(*i)++;
@@ -105,11 +85,7 @@ t_lex	*lexer(char **args, t_lex **list)
 		j = 0;
 		if (lex_string(args, list, &i, j) == true)
 			continue;
-		if (lex_function(args, list, &i) == true)
-			continue;
 		if (lex_sign(args, list, &i, j) == true)
-			continue;
-		if (lex_dollar(args, list, &i) == true)
 			continue;
 		lex_word(args, list, &i);
 	}
