@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 17:11:30 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/29 14:57:06 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/30 09:12:10 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ bool	ft_varcmp(char *var, char **envp)
 	while (envp[++i])
 	{
 		envp_var = get_env_var(envp[i]);
-		if (!ft_strcmp(var, envp_var))
+		if (!ft_strncmp(var, envp_var, ft_strlen(envp_var)))
 		{
 			free(envp_var);
 			return (true);

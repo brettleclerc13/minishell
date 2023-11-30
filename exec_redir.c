@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:29:32 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/29 14:23:29 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/30 14:24:33 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ static void	check_permissions(char *file)
 
 static void	fd_in_redir(t_lex *tmp, t_serie **new, int nb_heredoc)
 {
+	if ((*new)->fd_in == -1)
+		return ;
 	if (tmp->token == LEFT_CHEV)
 	{
 		tmp = tmp->next;
@@ -68,6 +70,8 @@ static void	fd_in_redir(t_lex *tmp, t_serie **new, int nb_heredoc)
 
 static void	fd_out_redir(t_lex *tmp, t_serie **new)
 {
+	if ((*new)->fd_out == -1 || (*new)->fd_in == -1)
+		return ;
 	if (tmp->token == RIGHT_CHEV)
 	{
 		tmp = tmp->next;
