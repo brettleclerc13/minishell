@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:29:32 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/30 14:24:33 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/30 18:26:05 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	fd_in_redir(t_lex *tmp, t_serie **new, int nb_heredoc)
 	{
 		tmp = tmp->next;
 		ft_here_doc(tmp, new, nb_heredoc);
-		if ((*new)->fd_in == -1)
+		if ((*new)->fd_hd == -1)
 			ft_put_redir_error(tmp->content, true);
 	}
 	if ((*new)->fd_in == -1)
@@ -88,9 +88,23 @@ static void	fd_out_redir(t_lex *tmp, t_serie **new)
 
 void	ft_set_redirections(t_lex *tmp, t_serie **new)
 {
-	int	nb_heredoc;
+	t_lex	*tmp_hd;
+	int		nb_heredoc;
 
+	tmp_hd = tmp;
 	nb_heredoc = ft_count_heredoc(tmp);
+	if (nb_heredoc > 0)
+	{
+		while (tmp_hd && tmp_hd->token != 4)
+		{
+			if (tmp_hd->token == DOUBLE_L_CHEV)
+			{
+				nb_heredoc -= 1;
+				fd_in_redir(tmp_hd, new, nb_heredoc);
+			}
+			tmp_hd = tmp_hd->next;
+		}
+	}
 	while (tmp && tmp->token != 4)
 	{
 		if (tmp->token == RIGHT_CHEV || tmp->token == DOUBLE_R_CHEV)
@@ -98,10 +112,7 @@ void	ft_set_redirections(t_lex *tmp, t_serie **new)
 		else if (tmp->token == LEFT_CHEV)
 			fd_in_redir(tmp, new, 0);
 		else if (tmp->token == DOUBLE_L_CHEV)
-		{
-			nb_heredoc -= 1;
-			fd_in_redir(tmp, new, nb_heredoc);
-		}
+			(*new)->fd_in = (*new)->fd_hd;
 		tmp = tmp->next;
 	}
 }

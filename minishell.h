@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/30 10:59:59 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/30 18:24:05 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,12 @@ typedef struct s_serie
 {
 	char			**cmd;
 	enum e_token	fd_out_token;
-	enum e_token	first_arg_token;
+	enum e_token	first_arg_token;		//to be changed
 	bool			is_pipe;
 	int				pipe_hd[2];
 	int				fd_in;
 	int				fd_out;
-	char			*hd_limiter;
+	int				fd_hd;
 	bool			hd;
 	pid_t			pid;
 	void			*prev;

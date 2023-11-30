@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_here_doc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 19:03:33 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/29 09:43:24 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/11/30 18:24:44 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	ft_here_doc(t_lex *tmp, t_serie **new, int nb_heredoc)
 			free(str);
 			if (nb_heredoc == 0)
 			{
-				(*new)->fd_in = dup((*new)->pipe_hd[0]);
+				(*new)->fd_hd = dup((*new)->pipe_hd[0]);
 				close((*new)->pipe_hd[1]);
 				close((*new)->pipe_hd[0]);
 			}

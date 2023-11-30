@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 18:10:35 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/29 15:05:29 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/30 18:10:23 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_echo(char **args)
 	while (args[i])
 	{
 		printf("%s", args[i]);
-		if (args[i + 1])
+		if (args[i + 1] && args)		//SKIP or DOUBLE_QUOTE to be considered
 			printf(" ");
 		i++;
 	}

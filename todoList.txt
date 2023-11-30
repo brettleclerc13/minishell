@@ -1,17 +1,13 @@
 Grand tâches:
-- Gerer les here_doc	[-EMILIEN-]
 - Gerer les signaux (here_doc && ft_execve) + ignorer les signaux dans le parent quand (pid == 0)	[-EMILIEN-]
 - DOLLAR	[-BRETT-]
 - SIMPLE QUOTES et DOUBLE QUOTES	[-EMILIEN-]
 - WHITE SPACE	[-BRETT-]
 
 Petit tâches:
-- WAITPID inversé (liste double chaîné)	[-EMILIEN-]
 - '_' variable updated each time successful? execution is launched	[-BRETT-]
+- "redirection ambigue" & exit 1 for files with $test
 
-Pointers:
-- ps command for current pipes on diff terminal
-- character non-bloquant
 
 
 TASKS DONE
@@ -26,6 +22,10 @@ TASKS DONE
 - cat ; Ctrl+C : 2 minishell argv[0] shows up	[-EMILIEN-]
 - Ctrl / should not print (Termios)		[-EMILIEN-]
 - rm cmd_token option in series, not needed		[-BRETT-]
+- WAITPID inversé (liste double chaîné)	[-EMILIEN-]
+- priorité au here_doc avant des CHEVRON_GAUCHE
+- g_var to 2 or 258 when syntax error happens
+- Gerer les here_doc	[-EMILIEN-]
 
 
 

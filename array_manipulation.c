@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 20:01:37 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/29 15:41:39 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/30 16:13:19 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ char	**ft_arraydup(char **array)
 	int		i;
 
 	i = -1;
+	if (!array)
+		return (NULL);
 	tmp = ft_calloc(ft_arraylen(array) + 1, sizeof(char *));
 	if (!tmp)
 		return (NULL);

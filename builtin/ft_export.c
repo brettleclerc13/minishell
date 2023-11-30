@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 08:10:41 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/15 20:47:18 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/30 16:11:39 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,13 @@ static bool	ft_isvar(char *arg)
 
 int	ft_export(char **args, t_struct *mshell)
 {
-	int	i;
-	int	result;	
+	char	**tmp;
+	int		i;
+	int		result;	
 
 	i = 0;
 	result = 0;
+	tmp = ft_arraydup(mshell->envp);
 	while (args[++i])
 	{
 		if (!ft_isvar(args[i]))
@@ -70,6 +72,7 @@ int	ft_export(char **args, t_struct *mshell)
 		ft_add_to_envp(args[i], mshell);
 	}
 	if (i == 1)
-		ft_print_export(mshell->envp);
+		ft_print_export(tmp);
+	ft_arrayfree(tmp);
 	return (result);
 }

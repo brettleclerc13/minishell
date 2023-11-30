@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 20:12:53 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/30 12:31:20 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/30 18:26:43 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ t_serie	*ft_lstnew_serie(t_lex *args, int count, bool ispipe)
 	new->fd_out = STDOUT_FILENO;
 	new->pid = 0;
 	new->hd = false;
-	new->hd_limiter = NULL;
+	new->fd_hd = STDIN_FILENO;
 	new->first_arg_token = args->token;
 	new->cmd = ft_serie_array(args, &new, count);
 	if (!new->cmd)

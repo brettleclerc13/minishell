@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 15:34:36 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/29 11:27:30 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/30 17:51:26 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,7 @@ bool	parsing(char *input, t_struct **mshell)
 	ft_arrayfree(arguments);
 	(*mshell)->check_valid = parser(&list, (*mshell)->envp);
 	if ((*mshell)->check_valid == false)
-	{
-		g_var = 1;
 		ft_free_lex(list);
-	}
 	else
 		(*mshell)->args = list;
 	return (true);

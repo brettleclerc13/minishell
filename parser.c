@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:17:25 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/29 14:55:20 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/11/30 18:14:54 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static bool	ft_parser_error(char *pre_msg, char *post_msg, char *content)
 	return (false);
 }
 
-bool	check_redir(t_lex **list, enum e_token prev_tok)
+bool	check_redir(t_lex **list)
 {
 	t_lex	*tmp;
 
@@ -34,9 +34,6 @@ bool	check_redir(t_lex **list, enum e_token prev_tok)
 			return (false);
 		}
 		tmp = tmp->next;
-		if ((*list)->token == LEFT_CHEV && prev_tok == (enum e_token) - 1 \
-		&& (open(tmp->content, O_RDONLY) == -1))
-			return (ft_parser_error("minishell: ", ": No such file or directory\n", tmp->content));
 		if ((tmp->token >= 0 && tmp->token <= 4))
 			return (ft_parser_error("minishell: syntax error near unexpected token `", "'\n", tmp->content));
 	}
@@ -68,20 +65,21 @@ bool	check_double_pipe(t_lex **list)
 
 bool	parser(t_lex **list, char **envp)
 {
-	enum e_token	prev_tok;
 	t_lex			*tmp;
 
-	prev_tok = -1;
 	tmp = *list;
 	while (tmp)
 	{
-		if (check_double_pipe(&tmp) == false)
+		if (check_double_pipe(&tmp) == false || check_redir(&tmp) == false)
+		{
+			g_var = 2;
 			return (false);
+		}
 		if (check_dollar(&tmp, envp) == false)
+		{
+			g_var = 1;
 			return (false);
-		if (check_redir(&tmp, prev_tok) == false)
-			return (false);
-		prev_tok = tmp->token;
+		}
 		tmp = tmp->next;
 	}
 	return (true);
