@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_bash.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:15:00 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/29 14:58:50 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/01 10:57:38 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ static int	ft_count(char const *s, char c1, char c2)
 	{
 		if ((s[i] == c1 || s[i] == c2 || s[i] == '"' || s[i] == '\'') && s[i])
 			cpt++;
+		
 		if (s[i] == '"' || s[i] == '\'')
 		{
 			quote = s[i];
@@ -129,6 +130,7 @@ char	**ft_split_bash(char const *s, char c1, char c2)
 	if (ft_count_quote(s) == false)
 		return (NULL);
 	nb_words = ft_count(s, c1, c2);
+	printf("NB_WORD : %d\n", nb_words);
 	dest = malloc (sizeof(char *) * (nb_words + 1));
 	if (!dest)
 		return (ft_split_bash_error("minishell: malloc: cannot allocate memory\n", NULL));
