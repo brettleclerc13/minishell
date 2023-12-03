@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:17:25 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/30 18:14:54 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/03 10:55:47 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ bool	parser(t_lex **list, char **envp)
 			g_var = 2;
 			return (false);
 		}
-		if (check_dollar(&tmp, envp) == false)
+		if (check_dollar(&tmp->content, envp) == false)
 		{
 			g_var = 1;
 			return (false);

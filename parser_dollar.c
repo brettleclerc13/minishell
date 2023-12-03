@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_dollar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 16:55:51 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/29 14:37:12 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/03 10:58:54 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,20 +131,16 @@ void	d_lst_creation(t_dollar **d_lst, char *content)
 	}
 }
 
-bool	check_dollar(t_lex **list, char **envp)
+bool	check_dollar(char **content, char **envp)
 {
 	char		*result;
 	t_dollar	*d_lst;
-	bool		double_quote;
 
 	result = NULL;
 	d_lst = NULL;
-	double_quote = false;
-	if (!is_dollar((*list)->content) || is_single_quote((*list)->content))
+	if (!is_dollar(*content) || is_single_quote(*content))
 		return (true);
-	if (is_double_quote((*list)->content))
-		double_quote = true;
-	d_lst_creation(&d_lst, (*list)->content);
+	d_lst_creation(&d_lst, *content);
 	result = d_lst_expansion(d_lst, envp);
 	while (d_lst)
 	{
@@ -152,12 +148,9 @@ bool	check_dollar(t_lex **list, char **envp)
 		d_lst = d_lst ->next;
 	}
 	if (!result)
-	{
 		result = ft_strdup("\0");
-		if (double_quote == false)
-			(*list)->token = SKIP;
-	}
-	free((*list)->content);
-	(*list)->content = result;
+	free(*content);
+	*content = ft_strdup(result);
+	free(result);
 	return (true);
 }

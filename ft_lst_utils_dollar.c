@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lst_utils_dollar.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:09:31 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/29 14:39:32 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/03 10:28:23 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static t_dollar	*ft_lstlast_dollar(t_dollar *d_lst)
 {
-	if (!d_lst)
+	if (d_lst == NULL)
 		return (d_lst);
-	while (d_lst->next)
+	while (d_lst->next != NULL)
 		d_lst = d_lst->next;
 	return (d_lst);
 }

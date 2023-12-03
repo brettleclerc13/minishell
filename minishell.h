@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/30 18:24:05 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/03 10:55:35 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,12 @@ typedef struct s_lex
 	enum e_token	token;
 	void			*next;
 }					t_lex;
+
+typedef struct s_lex_var
+{
+	char			**args;
+	char			**envp;
+}				t_lex_var;
 
 typedef struct s_serie
 {
@@ -132,17 +138,17 @@ bool		init_envp(t_struct *mshell, char **envp);
 void		init_oldpwd(t_struct *mshell);
 
 /* -- LEXER -- */
-t_lex		*lexer(char **args, t_lex **list);
-t_lex		*ft_lstnew_lex(void *content, enum e_token token);
+t_lex		*lexer(t_lex_var *lex_var, t_lex **list);
+t_lex		*ft_lstnew_lex(t_lex_var *lex_var, void *content, enum e_token token);
 void		ft_lstadd_back_lex(t_lex **lst, t_lex *new);
-int			ft_split_word(char *args, t_lex **list);
+int			ft_split_word(t_lex_var *lex_var, char *args, t_lex **list);
 
 /* -- PARSER -- */
 bool		parsing(char *input, t_struct **mshell);
 bool		parser(t_lex **list, char **envp);
 
 /* -- DOLLAR PARSER -- */
-bool		check_dollar(t_lex **list, char **envp);
+bool		check_dollar(char **content, char **envp);
 void		d_lst_creation(t_dollar **d_lst, char *content);
 char		*d_lst_expansion(t_dollar *d_lst, char **envp);
 bool		is_specialchar(char c);

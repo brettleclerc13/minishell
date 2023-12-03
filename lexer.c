@@ -3,43 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 13:45:40 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/29 14:45:38 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/01 19:47:38 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	lex_dollar(char **args, t_lex **list, int *i)
+static void	lex_dollar(t_lex_var *lex_var, t_lex **list, int *i)
 {
 	t_lex	*new;
 
-	new = ft_lstnew_lex(args[*i], DOLLAR);
+	new = ft_lstnew_lex(lex_var, lex_var->args[*i], DOLLAR);
 	ft_lstadd_back_lex(list, new);
 	(*i)++;
 }
 
-static bool	lex_sign(char **args, t_lex **list, int *i, int j)
+static bool	lex_sign(t_lex_var *lex_var, t_lex **list, int *i, int j)
 {
 	t_lex			*new;
 	enum e_token	save_tok;
 
 	save_tok = -1;
-	if (args[*i][j] == '|' && !args[*i][j + 1])
+	if (lex_var->args[*i][j] == '|' && !lex_var->args[*i][j + 1])
 		save_tok = PIPE;
-	else if (args[*i][j] == '<' && !args[*i][j + 1])
+	else if (lex_var->args[*i][j] == '<' && !lex_var->args[*i][j + 1])
 		save_tok = LEFT_CHEV;
-	else if (args[*i][j] == '>' && !args[*i][j + 1])
+	else if (lex_var->args[*i][j] == '>' && !lex_var->args[*i][j + 1])
 		save_tok = RIGHT_CHEV;
-	else if (args[*i][j] == '<' && args[*i][j + 1] == '<' && !args[*i][j + 1])
+	else if (lex_var->args[*i][j] == '<' && lex_var->args[*i][j + 1] == '<' && !lex_var->args[*i][j + 1])
 		save_tok = DOUBLE_L_CHEV;
-	else if (args[*i][j] == '>' && args[*i][j + 1] == '>' && !args[*i][j + 1])
+	else if (lex_var->args[*i][j] == '>' && lex_var->args[*i][j + 1] == '>' && !lex_var->args[*i][j + 1])
 		save_tok = DOUBLE_R_CHEV;
 	if (save_tok >= 0 && save_tok <= 4)
 	{
-		new = ft_lstnew_lex(args[*i], save_tok);
+		new = ft_lstnew_lex(lex_var, lex_var->args[*i], save_tok);
 		ft_lstadd_back_lex(list, new);
 		(*i)++;
 		return (true);
@@ -47,30 +47,30 @@ static bool	lex_sign(char **args, t_lex **list, int *i, int j)
 	return (false);
 }
 
-static void	lex_word(char **args, t_lex **list, int *i)
+static void	lex_word(t_lex_var *lex_var, t_lex **list, int *i)
 {
-	ft_split_word(args[*i], list);
+	ft_split_word(lex_var, lex_var->args[*i], list);
 	(*i)++;
 }
 
-static bool	lex_string(char **args, t_lex **list, int *i, int j)
+static bool	lex_string(t_lex_var *lex_var, t_lex **list, int *i, int j)
 {
 	t_lex	*new;
 
-	while (args[*i][j])
+	while (lex_var->args[*i][j])
 	{
-		if (args[*i][j] == '\"' || args[*i][j] == '\'')
+		if (lex_var->args[*i][j] == '\"' || lex_var->args[*i][j] == '\'')
 		{
-			if (args[*i][j] == '\'')
+			if (lex_var->args[*i][j] == '\'')
 			{
-				args[*i][ft_strlen(args[*i]) - 1] = '\0';
-				new = ft_lstnew_lex(args[*i], SINGLE_QUOTE);
+				lex_var->args[*i][ft_strlen(lex_var->args[*i])] = '\0';
+				new = ft_lstnew_lex(lex_var, lex_var->args[*i], SINGLE_QUOTE);
 				ft_lstadd_back_lex(list, new);
 			}
-			else if (args[*i][j] == '\"')
+			else if (lex_var->args[*i][j] == '\"')
 			{
-				args[*i][ft_strlen(args[*i]) - 1] = '\0';
-				new = ft_lstnew_lex(args[*i], DOUBLE_QUOTE);
+				lex_var->args[*i][ft_strlen(lex_var->args[*i])] = '\0';
+				new = ft_lstnew_lex(lex_var, lex_var->args[*i], DOUBLE_QUOTE);
 				ft_lstadd_back_lex(list, new);
 			}
 			(*i)++;
@@ -81,7 +81,7 @@ static bool	lex_string(char **args, t_lex **list, int *i, int j)
 	return (false);
 }
 
-t_lex	*lexer(char **args, t_lex **list)
+t_lex	*lexer(t_lex_var *lex_var, t_lex **list)
 {
 	int		i;
 	int		j;
@@ -89,19 +89,19 @@ t_lex	*lexer(char **args, t_lex **list)
 
 	i = 0;
 	tmp = *list;
-	while (args[i])
+	while (lex_var->args[i])
 	{
 		j = 0;
-		if (is_dollar(args[i]) == true)
+		if (lex_string(lex_var, list, &i, j) == true)
+			continue ;
+		if (is_dollar(lex_var->args[i]) == true)
 		{
-			lex_dollar(args, list, &i);
+			lex_dollar(lex_var, list, &i);
 			continue ;
 		}
-		if (lex_string(args, list, &i, j) == true)
+		if (lex_sign(lex_var, list, &i, j) == true)
 			continue ;
-		if (lex_sign(args, list, &i, j) == true)
-			continue ;
-		lex_word(args, list, &i);
+		lex_word(lex_var, list, &i);
 	}
 	tmp = *list;
 	return (tmp);
