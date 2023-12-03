@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 16:55:51 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/03 10:58:54 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/12/03 11:38:31 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ bool	check_dollar(char **content, char **envp)
 
 	result = NULL;
 	d_lst = NULL;
-	if (!is_dollar(*content) || is_single_quote(*content))
+	if (!is_dollar(*content))
 		return (true);
 	d_lst_creation(&d_lst, *content);
 	result = d_lst_expansion(d_lst, envp);
