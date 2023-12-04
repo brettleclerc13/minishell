@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_here_doc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 19:03:33 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/30 18:24:44 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/04 20:15:20 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,36 +48,42 @@ static bool	end_of_heredoc(char *str)
 	return (false);
 }
 
-void	ft_here_doc(t_lex *tmp, t_serie **new, int nb_heredoc)
+pid_t	ft_here_doc(t_lex *tmp, t_serie **new, int nb_heredoc)
 {
 	char	*str;
+	pid_t	pid;
 
 	if (nb_heredoc == 0)
 	{
 		if (pipe((*new)->pipe_hd) == -1)
 			ft_error("here_doc pipe error\n");
 	}
-	ft_termios(true);
-	heredoc_signals();
-	while (1)
+	pid = fork();
+	if (pid < 0)
+		ft_execute_error("minishell: fork: resource temporarily unavailable\n");
+	if (pid == 0)
 	{
-		if (g_var == 1)
-			break ;
-		str = readline("> ");
-		if (end_of_heredoc(str) == true)
-			break ;
-		if (ft_strcmp(str, tmp->content) == 0)
+		ft_termios(false);
+		heredoc_signals();
+		while (1)
 		{
-			free(str);
-			if (nb_heredoc == 0)
+			str = readline("> ");
+			if (end_of_heredoc(str) == true)
+				exit(g_var) ;
+			if (ft_strcmp(str, tmp->content) == 0)
 			{
-				(*new)->fd_hd = dup((*new)->pipe_hd[0]);
-				close((*new)->pipe_hd[1]);
-				close((*new)->pipe_hd[0]);
+				free(str);
+				if (nb_heredoc == 0)
+				{
+					(*new)->fd_hd = dup((*new)->pipe_hd[0]);
+					close((*new)->pipe_hd[1]);
+					close((*new)->pipe_hd[0]);
+				}
+				exit(g_var);
 			}
-			break ;
+			print_heredoc(nb_heredoc, new, str);
+			free(str);
 		}
-		print_heredoc(nb_heredoc, new, str);
-		free(str);
 	}
+	return (pid);
 }

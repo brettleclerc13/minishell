@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:29:32 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/30 18:26:05 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/04 22:23:34 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,11 @@ static void	fd_in_redir(t_lex *tmp, t_serie **new, int nb_heredoc)
 	if (tmp->token == DOUBLE_L_CHEV)
 	{
 		tmp = tmp->next;
-		ft_here_doc(tmp, new, nb_heredoc);
+		ft_termios(false);
+		ignore_signals();
+		waitpid(ft_here_doc(tmp, new, nb_heredoc), &g_var, WUNTRACED);
+		ft_termios(true);
+		signals_types();
 		if ((*new)->fd_hd == -1)
 			ft_put_redir_error(tmp->content, true);
 	}

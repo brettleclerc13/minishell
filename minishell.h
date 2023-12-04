@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/03 10:55:35 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/12/04 15:58:40 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,6 +224,7 @@ char		**ft_arrayremove(char *removeline, char **array);
 
 /* -- EXECUTE -- */
 void		ft_execute(t_struct *mshell);
+pid_t		ft_execute_error(char *message);
 pid_t		ft_execute_serie(t_serie *serie, int start, t_struct *mshell);
 pid_t		ft_fork_execution(t_serie *serie, t_struct *mshell, int start);
 int			ft_execve(char **cmd, char **envp);
@@ -235,7 +236,7 @@ void		ft_waitpid(t_serie *series);
 /* -- REDIRECTION -- */
 int			ft_count_redir(t_lex *args);
 void		ft_set_redirections(t_lex *tmp, t_serie **new);
-void		ft_here_doc(t_lex *tmp, t_serie **serie, int nb_heredoc);
+pid_t		ft_here_doc(t_lex *tmp, t_serie **serie, int nb_heredoc);
 int			ft_count_heredoc(t_lex *args);
 
 /* -- SIGNALS -- */

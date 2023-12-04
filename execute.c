@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 20:16:19 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/30 14:29:10 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/04 15:41:36 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	reset_io(int original_io[])
 	close(original_io[1]);
 }
 
-static pid_t	ft_execute_error(char *message)
+pid_t	ft_execute_error(char *message)
 {
 	ft_putstr_fd(message, 2);
 	g_var = 1;

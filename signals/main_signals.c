@@ -16,10 +16,12 @@ static void	basic_sigint(int signal)
 {
 	if (signal != SIGINT)
 		return ;
+	// printf("MAIN");
 	ft_putstr_fd("\n", STDOUT_FILENO);
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
+	// printf("AFTER MAIN");
 	g_var = 130;
 }
 
