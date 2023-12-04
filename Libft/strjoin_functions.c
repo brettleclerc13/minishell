@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 16:56:49 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/27 17:34:37 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/04 10:29:04 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,32 @@ char	*ft_strjoin_dollar(char *s1, char *s2)
 		dest[i] = s1[i];
 	while (s2 && j < lens2)
 		dest[i++] = s2[j++];
+	dest[i] = '\0';
+	free(s1);
+	return (dest);
+}
+
+char	*ft_stradd_char(char *s1, char c)
+{
+	size_t	i;
+	char	*dest;
+
+	i = -1;
+	if (!s1)
+		dest = ft_calloc(2, sizeof(char *));
+	else
+		dest = ft_calloc(ft_strlen(s1) + 2, sizeof(char *));
+	if (!dest)
+		return (NULL);
+	if (!s1)
+	{
+		dest[0] = c;
+		dest[1] = '\0';
+		return (dest);
+	}
+	while (s1[++i])
+		dest[i] = s1[i];
+	dest[i++] = c;
 	dest[i] = '\0';
 	free(s1);
 	return (dest);

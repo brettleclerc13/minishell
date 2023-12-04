@@ -3,21 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 15:34:36 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/01 20:13:59 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/12/04 11:08:05 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool	argument_empty(char **arguments)
+bool	argument_empty(char **arguments, char *input)
 {
-	if (ft_strcmp(arguments[0], "") == 0)
+	if (!arguments || !arguments[0])
 	{
+		free(input);
 		g_var = 0;
-		return (true);
+	}
+	else if (!ft_strcmp(arguments[0], ""))
+	{
+		free(input);
+		g_var = 0;
 	}
 	return (false);
 }
@@ -34,12 +39,8 @@ bool	parsing(char *input, t_struct **mshell)
 	lex_var->envp = (*mshell)->envp;
 	list = NULL;
 	lex_var->args = ft_split_bash(input, ' ', '	');
-	if (!lex_var->args || argument_empty(lex_var->args) == true)
-	{
-		free(input);
-		g_var = 1;
-		return (false);
-	}
+	if (!lex_var->args || !lex_var->args[0] || !ft_strcmp(lex_var->args[0], ""))
+		return (argument_empty(lex_var->args, input));
 	list = lexer(lex_var, &list);
 	free(lex_var);
 	(*mshell)->check_valid = parser(&list, (*mshell)->envp);
@@ -47,6 +48,7 @@ bool	parsing(char *input, t_struct **mshell)
 		ft_free_lex(list);
 	else
 		(*mshell)->args = list;
+	print_lst_tok(list);
 	return (true);
 }
 

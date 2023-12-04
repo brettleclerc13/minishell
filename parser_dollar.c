@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_dollar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 16:55:51 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/03 11:38:31 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/12/04 10:24:38 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ bool	is_dollar(char *s)
 	int	i;
 
 	i = -1;
+	if (!s)
+		return (false);
 	while (s[++i])
 		if (s[i] == '$')
 			return (true);
@@ -150,7 +152,6 @@ bool	check_dollar(char **content, char **envp)
 	if (!result)
 		result = ft_strdup("\0");
 	free(*content);
-	*content = ft_strdup(result);
-	free(result);
+	*content = result;
 	return (true);
 }
