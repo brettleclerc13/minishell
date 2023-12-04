@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 17:46:42 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/04 10:27:38 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/04 13:03:24 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ char	*ft_if_quotes(t_lex_var *lex_var, char *content, char quote)
 	char	*tmp;
 	int		check_dol;
 
-	i = -1;
+	i = 0;
 	check_dol = -1;
 	tmp = NULL;
-	while (content[++i])
+	while (content[i])
 	{
 		if (content[i] == '\"' || content[i] == '\'')
 		{
@@ -60,7 +60,11 @@ char	*ft_if_quotes(t_lex_var *lex_var, char *content, char quote)
 				check_dollar(&tmp, lex_var->envp);
 			i++;
 		}
-		tmp = ft_stradd_char(tmp, content[i]);
+		if (content[i] != '\"' && content[i] != '\'')
+		{
+			tmp = ft_stradd_char(tmp, content[i]);
+			i++;
+		}
 	}
 	return (tmp);
 }

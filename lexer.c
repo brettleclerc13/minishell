@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 13:45:40 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/01 19:47:38 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/12/04 13:48:01 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	lex_dollar(t_lex_var *lex_var, t_lex **list, int *i)
-{
-	t_lex	*new;
+// static void	lex_dollar(t_lex_var *lex_var, t_lex **list, int *i)
+// {
+// 	t_lex	*new;
 
-	new = ft_lstnew_lex(lex_var, lex_var->args[*i], DOLLAR);
-	ft_lstadd_back_lex(list, new);
-	(*i)++;
-}
+// 	new = ft_lstnew_lex(lex_var, lex_var->args[*i], DOLLAR);
+// 	ft_lstadd_back_lex(list, new);
+// 	(*i)++;
+// }
 
 static bool	lex_sign(t_lex_var *lex_var, t_lex **list, int *i, int j)
 {
@@ -94,11 +94,11 @@ t_lex	*lexer(t_lex_var *lex_var, t_lex **list)
 		j = 0;
 		if (lex_string(lex_var, list, &i, j) == true)
 			continue ;
-		if (is_dollar(lex_var->args[i]) == true)
-		{
-			lex_dollar(lex_var, list, &i);
-			continue ;
-		}
+		// if (is_dollar(lex_var->args[i]) == true)
+		// {
+		// 	lex_dollar(lex_var, list, &i);
+		// 	continue ;
+		// }
 		if (lex_sign(lex_var, list, &i, j) == true)
 			continue ;
 		lex_word(lex_var, list, &i);

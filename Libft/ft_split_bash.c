@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_bash.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:15:00 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/03 10:58:29 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/12/04 12:58:33 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,24 @@
 static char	*ft_fill(char *dest, char const *s, t_split c, int i)
 {
 	t_split_count	fill;
-	// char			quote;
 
 	fill.char_num = -1;
 	fill.size = 0;
 	fill.index = 0;
+	fill.quote = '\0';
 	while (s[fill.index] && ++fill.char_num <= i)
 	{
 		while (s[fill.index] && (s[fill.index] == c.c1 || s[fill.index] == c.c2))
 			fill.index++;
 		while (s[fill.index] && (s[fill.index] != c.c1 && s[fill.index] != c.c2))
 		{
-			// if ((s[fill.index] == '\"' || s[fill.index] == '\'') && fill.char_num == i)
-			// 	quote_loop(dest, s, &fill);
-			// else if (s[fill.index] == '\"' || s[fill.index] == '\'')
-			// {
-			// 	quote = s[fill.index];
-			// 	while (s[++fill.index] != quote)
-			// 		;
-			// }
+			if ((s[fill.index] == '\"' || s[fill.index] == '\'') && fill.char_num == i)
+			{
+				fill.quote = s[fill.index];
+				dest[fill.size++] = s[fill.index++];
+				while (s[fill.index] && s[fill.index] != fill.quote)
+					dest[fill.size++] = s[fill.index++];
+			}
 			if (fill.char_num == i)
 				dest[fill.size++] = s[fill.index];
 			fill.index++;
@@ -59,30 +58,24 @@ static char	*ft_fill(char *dest, char const *s, t_split c, int i)
 static int	ft_count_size(char const *s, char c1, char c2, int i)
 {
 	t_split_count	count;
-	// char			quote;
 
 	count.char_num = -1;
 	count.size = 0;
 	count.index = 0;
+	count.quote = '\0';
 	while (s[count.index] && ++count.char_num <= i)
 	{
 		while (s[count.index] && (s[count.index] == c1 || s[count.index] == c2))
 			count.index++;
 		while (s[count.index] && (s[count.index] != c1 && s[count.index] != c2))
 		{
-			// if ((s[count.index] == '\"' || s[count.index] == '\'') && count.char_num == i)
-			// {
-			// 	quote = s[count.index];
-			// 	while (s[++count.index] != quote && s[count.index])
-			// 		count.size++;
-			// 	return (count.size + 1);
-			// }
-			// else if (s[count.index] == '\"' || s[count.index] == '\'')
-			// {
-			// 	quote = s[count.index];
-			// 	while (s[++count.index] != quote)
-			// 		;
-			// }
+			if ((s[count.index] == '\"' || s[count.index] == '\'') && count.char_num == i)
+			{
+				count.quote = s[count.index];
+				count.size++;
+				while (s[++count.index] && s[count.index] != count.quote)
+					count.size++;
+			}
 			if (count.char_num == i)
 				count.size++;
 			count.index++;
@@ -95,9 +88,11 @@ static int	ft_count(char const *s, char c1, char c2)
 {
 	int		i;
 	int		cpt;
+	char	quote;
 
 	cpt = 0;
 	i = -1;
+	quote = '\0';
 	while (s[++i])
 	{
 		while ((s[i] == c1 || s[i] == c2) && s[i])
@@ -105,9 +100,26 @@ static int	ft_count(char const *s, char c1, char c2)
 		if ((s[i] != c1 && s[i] != c2) && s[i])
 			cpt++;
 		while ((s[i] != c1 && s[i] != c2) && s[i])
+		{
+			if (s[i] == '\"' || s[i] == '\'')
+			{
+				quote = s[i++];
+				while (s[i] && s[i] != quote)
+					i++;
+			}
 			i++;
+		}
 	}
 	return (cpt);
+}
+
+void	ft_print_sb_array(char **array)
+{
+	int	i;
+
+	i = -1;
+	while (array[++i])
+		printf("SB array[%i] : %s\n", i, array[i]);
 }
 
 char	**ft_split_bash(char const *s, char c1, char c2)
@@ -136,5 +148,6 @@ char	**ft_split_bash(char const *s, char c1, char c2)
 		i++;
 	}
 	dest[i] = NULL;
+	ft_print_sb_array(dest);
 	return (dest);
 }

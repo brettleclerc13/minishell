@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 14:44:49 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/04 10:02:51 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/04 12:18:57 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,16 @@ typedef struct s_list
 
 typedef struct s_split
 {
-	char	c1;
-	char	c2;
+	char		c1;
+	char		c2;
 }				t_split;
 
 typedef struct s_split_count
 {
-	int	char_num;
-	int	size;
-	int	index;
+	int			char_num;
+	int			size;
+	int			index;
+	char		quote;
 }				t_split_count;
 
 int		ft_isalpha(int c);
