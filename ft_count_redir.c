@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc_signals.c                                  :+:      :+:    :+:   */
+/*   ft_count_redir.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/23 12:09:12 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/04 22:35:04 by ehouot           ###   ########.fr       */
+/*   Created: 2023/12/04 23:16:15 by ehouot            #+#    #+#             */
+/*   Updated: 2023/12/04 23:16:46 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	heredoc_sigint(int signal)
+int	ft_count_redir(t_lex *args)
 {
-	if (signal != SIGINT)
-		return ;
-	rl_on_new_line();
-	rl_redisplay();
-	ft_putstr_fd("\n", STDOUT_FILENO);
-	exit(1);
-}
+	int		nb_red;
+	t_lex	*tmp;
 
-void	heredoc_signals(void)
-{
-	signal(SIGINT, heredoc_sigint);
+	nb_red = 0;
+	tmp = args;
+	while (tmp)
+	{
+		if (tmp->token == RIGHT_CHEV
+			|| tmp->token == LEFT_CHEV
+			|| tmp->token == DOUBLE_R_CHEV
+			|| tmp->token == DOUBLE_L_CHEV)
+			nb_red++;
+		tmp = tmp->next;
+	}
+	return (nb_red);
 }

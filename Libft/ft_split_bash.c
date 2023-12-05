@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_bash.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:15:00 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/04 12:58:33 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/04 23:58:36 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,14 +113,14 @@ static int	ft_count(char const *s, char c1, char c2)
 	return (cpt);
 }
 
-void	ft_print_sb_array(char **array)
-{
-	int	i;
+// void	ft_print_sb_array(char **array)
+// {
+// 	int	i;
 
-	i = -1;
-	while (array[++i])
-		printf("SB array[%i] : %s\n", i, array[i]);
-}
+// 	i = -1;
+// 	while (array[++i])
+// 		printf("SB array[%i] : %s\n", i, array[i]);
+// }
 
 char	**ft_split_bash(char const *s, char c1, char c2)
 {
@@ -148,6 +148,5 @@ char	**ft_split_bash(char const *s, char c1, char c2)
 		i++;
 	}
 	dest[i] = NULL;
-	ft_print_sb_array(dest);
 	return (dest);
 }

@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:29:32 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/04 22:23:34 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/12/04 23:40:28 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ static void	fd_in_redir(t_lex *tmp, t_serie **new, int nb_heredoc)
 	if (tmp->token == DOUBLE_L_CHEV)
 	{
 		tmp = tmp->next;
-		ft_termios(false);
-		ignore_signals();
 		waitpid(ft_here_doc(tmp, new, nb_heredoc), &g_var, WUNTRACED);
 		ft_termios(true);
 		signals_types();
@@ -119,23 +117,4 @@ void	ft_set_redirections(t_lex *tmp, t_serie **new)
 			(*new)->fd_in = (*new)->fd_hd;
 		tmp = tmp->next;
 	}
-}
-
-int	ft_count_redir(t_lex *args)
-{
-	int		nb_red;
-	t_lex	*tmp;
-
-	nb_red = 0;
-	tmp = args;
-	while (tmp)
-	{
-		if (tmp->token == RIGHT_CHEV
-			|| tmp->token == DOUBLE_R_CHEV
-			|| tmp->token == LEFT_CHEV
-			|| tmp->token == DOUBLE_L_CHEV)
-			nb_red++;
-		tmp = tmp->next;
-	}
-	return (nb_red);
 }
