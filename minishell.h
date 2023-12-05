@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/05 11:21:07 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/12/05 15:36:38 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ bool		parsing(char *input, t_struct **mshell);
 bool		parser(t_lex **list, char **envp);
 
 /* -- DOLLAR PARSER -- */
-bool		check_dollar(char **content, char **envp);
+bool		check_dollar(char **content, char **envp, enum e_token token);
 void		d_lst_creation(t_dollar **d_lst, char *content);
 char		*d_lst_expansion(t_dollar *d_lst, char **envp);
 bool		is_specialchar(char c);
