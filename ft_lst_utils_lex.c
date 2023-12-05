@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 17:46:42 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/04 15:12:33 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/05 10:51:19 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*ft_if_quotes(t_lex_var *lex_var, char *content, char quote, char *tmp)
 				tmp = ft_stradd_char(tmp, content[i]);
 			}
 			if (check_dol != -1)
-				check_dollar(&tmp, lex_var->envp);
+				check_dollar(&tmp, lex_var->envp, ZERO);
 			i++;
 		}
 		if (content[i] != '\"' && content[i] != '\'')

@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 16:55:51 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/04 14:02:19 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/05 10:50:31 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ bool	is_double_quote(char *s)
 	return (false);
 }
 
-static char	*remove_double_quotes(char *content)
+static char	*remove_white_space(char *content)
 {
 	char	**split;
 	char	*tmp;
@@ -63,14 +63,19 @@ static char	*remove_double_quotes(char *content)
 	i = -1;
 	tmp = NULL;
 	split = NULL;
-	if (!content || !is_double_quote(content))
+	if (!content)
 		return (content);
-	split = ft_split(content, '\"');
+	split = ft_split(content, ' ');
 	i = -1;
 	while (split[++i])
+	{
 		tmp = ft_strjoin_dollar(tmp, split[i]);
+		if (split[i + 1])
+			tmp = ft_strjoin_dollar(tmp, " ");
+	}
 	ft_arrayfree(split);
 	free(content);
+	printf("result=%s\n", tmp);
 	return (tmp);
 }
 
@@ -96,7 +101,6 @@ char	*d_lst_expansion(t_dollar *d_lst, char **envp)
 		free(d_lst->content);
 		d_lst = d_lst->next;
 	}
-	tmp = remove_double_quotes(tmp);
 	return (tmp);
 }
 
@@ -133,7 +137,7 @@ void	d_lst_creation(t_dollar **d_lst, char *content)
 	}
 }
 
-bool	check_dollar(char **content, char **envp)
+bool	check_dollar(char **content, char **envp, enum e_token token)
 {
 	char		*result;
 	t_dollar	*d_lst;
@@ -149,6 +153,8 @@ bool	check_dollar(char **content, char **envp)
 		free(d_lst);
 		d_lst = d_lst ->next;
 	}
+	if (token == WORD)
+		result = remove_white_space(result);
 	if (!result)
 		result = ft_strdup("\0");
 	free(*content);

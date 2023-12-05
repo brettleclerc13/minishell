@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:17:25 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/03 11:38:46 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/12/05 10:43:15 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ bool	check_double_pipe(t_lex **list)
 
 bool	parser(t_lex **list, char **envp)
 {
-	t_lex			*tmp;
+	t_lex	*tmp;
 
 	tmp = *list;
 	while (tmp)
@@ -77,7 +77,7 @@ bool	parser(t_lex **list, char **envp)
 		}
 		if (tmp->token != SINGLE_QUOTE)
 		{
-			if (check_dollar(&tmp->content, envp) == false)
+			if (check_dollar(&tmp->content, envp, tmp->token) == false)
 			{
 				g_var = 1;
 				return (false);
