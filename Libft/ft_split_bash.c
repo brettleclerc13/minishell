@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:15:00 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/05 10:21:00 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/12/05 10:22:35 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,15 +103,6 @@ static int	ft_count(char const *s, char c1, char c2)
 	}
 	return (cpt);
 }
-
-// void	ft_print_sb_array(char **array)
-// {
-// 	int	i;
-
-// 	i = -1;
-// 	while (array[++i])
-// 		printf("SB array[%i] : %s\n", i, array[i]);
-// }
 
 char	**ft_split_bash(char const *s, char c1, char c2)
 {
