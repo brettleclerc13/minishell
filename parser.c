@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:17:25 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/05 10:43:15 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/05 11:04:29 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ bool	parser(t_lex **list, char **envp)
 				g_var = 1;
 				return (false);
 			}
+			if (!tmp->content[0] && tmp->token != DOUBLE_QUOTE)
+				tmp->token = SKIP;
 		}
 		tmp = tmp->next;
 	}

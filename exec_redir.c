@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:29:32 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/04 23:40:28 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/12/05 11:08:32 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,16 @@ static void	ft_put_redir_error(char *file, bool is_dir)
 	free(tmp);
 }
 
-static void	check_permissions(char *file)
+static void	check_permissions(char *file, enum e_token token)
 {
+	if (!file[0] && token != DOUBLE_QUOTE)
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(file, 2);
+		ft_putstr_fd(": ambiguous redirect\n", 2);
+		g_var = 1;
+		return ;
+	}
 	if (access(file, X_OK) == -1)
 	{
 		if (errno == EACCES)
@@ -67,7 +75,7 @@ static void	fd_in_redir(t_lex *tmp, t_serie **new, int nb_heredoc)
 			ft_put_redir_error(tmp->content, true);
 	}
 	if ((*new)->fd_in == -1)
-		check_permissions(tmp->content);
+		check_permissions(tmp->content, tmp->token);
 }
 
 static void	fd_out_redir(t_lex *tmp, t_serie **new)
@@ -85,7 +93,7 @@ static void	fd_out_redir(t_lex *tmp, t_serie **new)
 		(*new)->fd_out = open(tmp->content, O_RDWR | O_APPEND | O_CREAT, 0644);
 	}
 	if ((*new)->fd_out == -1)
-		check_permissions(tmp->content);
+		check_permissions(tmp->content, tmp->token);
 }
 
 void	ft_set_redirections(t_lex *tmp, t_serie **new)
