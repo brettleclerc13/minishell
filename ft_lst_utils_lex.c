@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 17:46:42 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/04 13:03:24 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/04 15:12:33 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,13 @@ void	ft_lstadd_back_lex(t_lex **lst, t_lex *new)
 	tmp->next = new;
 }
 
-char	*ft_if_quotes(t_lex_var *lex_var, char *content, char quote)
+char	*ft_if_quotes(t_lex_var *lex_var, char *content, char quote, char *tmp)
 {
 	int		i;
-	char	*tmp;
 	int		check_dol;
 
 	i = 0;
 	check_dol = -1;
-	tmp = NULL;
 	while (content[i])
 	{
 		if (content[i] == '\"' || content[i] == '\'')
@@ -61,10 +59,7 @@ char	*ft_if_quotes(t_lex_var *lex_var, char *content, char quote)
 			i++;
 		}
 		if (content[i] != '\"' && content[i] != '\'')
-		{
-			tmp = ft_stradd_char(tmp, content[i]);
-			i++;
-		}
+			tmp = ft_stradd_char(tmp, content[i++]);
 	}
 	return (tmp);
 }
@@ -73,13 +68,15 @@ t_lex	*ft_lstnew_lex(t_lex_var *lex_var, void *content, enum e_token token)
 {
 	t_lex	*new;
 	char	quote;
+	char	*tmp;
 
 	quote = '\0';
+	tmp = NULL;
 	new = malloc (sizeof(t_lex));
 	if (!new)
 		return (NULL);
 	if (token == SINGLE_QUOTE || token == DOUBLE_QUOTE)
-		new->content = ft_if_quotes(lex_var, (char*)content, quote);
+		new->content = ft_if_quotes(lex_var, (char*)content, quote, tmp);
 	else
 		new->content = ft_strdup(content);
 	new->token = token;

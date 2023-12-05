@@ -6,24 +6,20 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:15:00 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/04 23:58:36 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/12/05 10:21:00 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// static char	*quote_loop(char *dest, char const *s, t_split_count *fill)
-// {
-// 	char	quote;
-
-// 	quote = s[fill->index];
-// 	dest[fill->size++] = s[fill->index];
-// 	while (s[++fill->index] != quote && s[fill->index])
-// 		dest[fill->size++] = s[fill->index];
-// 	dest[fill->size++] = s[fill->index];
-// 	dest[fill->size] = '\0';
-// 	return (dest);
-// }
+static char	*quote_loop(char *dest, char const *s, t_split_count *fill)
+{
+	fill->quote = s[fill->index];
+	dest[fill->size++] = s[fill->index++];
+	while (s[fill->index] && s[fill->index] != fill->quote)
+		dest[fill->size++] = s[fill->index++];
+	return (dest);
+}
 
 static char	*ft_fill(char *dest, char const *s, t_split c, int i)
 {
@@ -40,12 +36,7 @@ static char	*ft_fill(char *dest, char const *s, t_split c, int i)
 		while (s[fill.index] && (s[fill.index] != c.c1 && s[fill.index] != c.c2))
 		{
 			if ((s[fill.index] == '\"' || s[fill.index] == '\'') && fill.char_num == i)
-			{
-				fill.quote = s[fill.index];
-				dest[fill.size++] = s[fill.index++];
-				while (s[fill.index] && s[fill.index] != fill.quote)
-					dest[fill.size++] = s[fill.index++];
-			}
+				dest = quote_loop(dest, s, &fill);
 			if (fill.char_num == i)
 				dest[fill.size++] = s[fill.index];
 			fill.index++;
