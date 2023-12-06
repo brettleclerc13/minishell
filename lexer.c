@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 13:45:40 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/04 13:48:01 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/06 10:22:21 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,13 @@ static bool	lex_string(t_lex_var *lex_var, t_lex **list, int *i, int j)
 			{
 				lex_var->args[*i][ft_strlen(lex_var->args[*i])] = '\0';
 				new = ft_lstnew_lex(lex_var, lex_var->args[*i], SINGLE_QUOTE);
-				ft_lstadd_back_lex(list, new);
+				ft_split_string(new->content, list, SINGLE_QUOTE);
 			}
 			else if (lex_var->args[*i][j] == '\"')
 			{
 				lex_var->args[*i][ft_strlen(lex_var->args[*i])] = '\0';
 				new = ft_lstnew_lex(lex_var, lex_var->args[*i], DOUBLE_QUOTE);
-				ft_lstadd_back_lex(list, new);
+				ft_split_string(new->content, list, DOUBLE_QUOTE);
 			}
 			(*i)++;
 			return (true);

@@ -6,11 +6,37 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 17:46:42 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/05 10:51:19 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/06 10:22:36 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// bool	is_sep(char *s)
+// {
+// 	static t_sep	type[] = {{"<<", 2}, {">>", 2}, {"<", 1}, \
+// 					{">", 1}, {"|", 1}};
+// 	int				i;
+// 	int				index;
+
+// 	i = -1;
+// 	index = -1;
+// 	if (!s)
+// 		return (false);
+// 	while (s[++i])
+// 	{
+// 		while (++index < 5)
+// 		{
+// 			if (!ft_strncmp((s + i), type[index].str, type[index].num))
+// 			{
+// 				if (i > 0)
+// 					return (false);
+// 				return (true);
+// 			}
+// 		}
+// 	}
+// 	return (false);
+// }
 
 static t_lex	*ft_lstlast_lex(t_lex *lst)
 {

@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 16:55:51 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/05 11:03:22 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/06 10:37:55 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ static char	*remove_white_space(char *content)
 	}
 	ft_arrayfree(split);
 	free(content);
-	printf("result=%s\n", tmp);
 	return (tmp);
 }
 

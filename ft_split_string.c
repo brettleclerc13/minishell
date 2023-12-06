@@ -1,26 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split_word.c                                    :+:      :+:    :+:   */
+/*   ft_split_string.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/06 16:09:16 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/06 10:20:36 by brettlecler      ###   ########.fr       */
+/*   Created: 2023/12/06 08:21:30 by brettlecler       #+#    #+#             */
+/*   Updated: 2023/12/06 10:12:56 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	new_node(t_lex_var *lex_var, char *char_tmp, t_lex **list, enum e_token type)
+t_lex	*ft_lstnew_lex_str(void *content, enum e_token token)
 {
 	t_lex	*new;
 
-	new = ft_lstnew_lex(lex_var, char_tmp, type);
+	new = malloc (sizeof(t_lex));
+	if (!new)
+		return (NULL);
+	new->content = ft_strdup(content);
+	new->token = token;
+	new->next = NULL;
+	return (new);
+}
+
+void	new_node_str(char *char_tmp, t_lex **list, enum e_token type)
+{
+	t_lex	*new;
+
+	new = ft_lstnew_lex_str(char_tmp, type);
 	ft_lstadd_back_lex(list, new);
 }
 
-void	create_token(t_lex_var *lex_var, char *args, t_lex **list, t_sp_wd **vars)
+void	create_token_str(char *args, t_lex **list, t_sp_wd **vars)
 {
 	char	*char_token;
 
@@ -28,11 +41,11 @@ void	create_token(t_lex_var *lex_var, char *args, t_lex **list, t_sp_wd **vars)
 	if (!char_token)
 		return ;
 	if (*char_token)
-		new_node(lex_var, char_token, list, (*vars)->type);
+		new_node_str(char_token, list, (*vars)->type);
 	free(char_token);
 }
 
-static enum e_token	is_sep_word(char *c, int *i)
+static enum e_token	is_sep_str(char *c, int *i, enum e_token token)
 {
 	static t_sep	type[] = {{"<<", 2}, {">>", 2}, {"<", 1}, \
 					{">", 1}, {"|", 1}};
@@ -50,7 +63,7 @@ static enum e_token	is_sep_word(char *c, int *i)
 			if (!ft_strncmp((c + len_word), type[index].str, type[index].num))
 			{
 				if (len_word > 0)
-					return (7);
+					return (token);
 				*i += type[index].num;
 				return (index);
 			}
@@ -58,12 +71,12 @@ static enum e_token	is_sep_word(char *c, int *i)
 		len_word++;
 		(*i)++;
 	}
-	return (7);
+	return (token);
 }
 
-int	ft_split_word(t_lex_var *lex_var, char *args, t_lex **list)
+int	ft_split_string(char *args, t_lex **list, enum e_token token)
 {
-	t_sp_wd	*vars = NULL;
+	t_sp_wd	*vars;
 	int		check_sep;
 
 	vars = malloc(sizeof(t_sp_wd));
@@ -71,16 +84,16 @@ int	ft_split_word(t_lex_var *lex_var, char *args, t_lex **list)
 		return (-1);
 	vars->i = 0;
 	vars->start = 0;
-	vars->type = WORD;
+	vars->type = token;
 	check_sep = 0;
 	while (args[vars->start])
 	{
 		if (check_sep == 1)
 			vars->start = vars->i;
-		vars->type = is_sep_word(&args[vars->i], &vars->i);
+		vars->type = is_sep_str(&args[vars->i], &vars->i, token);
 		if (args[vars->start])
 		{
-			create_token(lex_var, args, list, &vars);
+			create_token_str(args, list, &vars);
 			check_sep = 1;
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:29:32 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/05 11:08:32 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/06 10:32:24 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,19 @@ static void	ft_put_redir_error(char *file, bool is_dir)
 	free(tmp);
 }
 
+static void	ft_put_ambiguous_error(char *file)
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(file, 2);
+	ft_putstr_fd(": ambiguous redirect\n", 2);
+	g_var = 1;
+}
+
 static void	check_permissions(char *file, enum e_token token)
 {
 	if (!file[0] && token != DOUBLE_QUOTE)
 	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(file, 2);
-		ft_putstr_fd(": ambiguous redirect\n", 2);
-		g_var = 1;
+		ft_put_ambiguous_error(file);
 		return ;
 	}
 	if (access(file, X_OK) == -1)
@@ -57,6 +62,12 @@ static void	fd_in_redir(t_lex *tmp, t_serie **new, int nb_heredoc)
 	if (tmp->token == LEFT_CHEV)
 	{
 		tmp = tmp->next;
+		if (tmp->token == DOLLAR)
+		{
+			ft_put_ambiguous_error(tmp->content);
+			(*new)->fd_in = -1;
+			return ;
+		}
 		if (open(tmp->content, O_DIRECTORY) != -1)
 		{
 			ft_put_redir_error(tmp->content, true);
@@ -85,11 +96,23 @@ static void	fd_out_redir(t_lex *tmp, t_serie **new)
 	if (tmp->token == RIGHT_CHEV)
 	{
 		tmp = tmp->next;
+		if (tmp->token == DOLLAR)
+		{
+			ft_put_ambiguous_error(tmp->content);
+			(*new)->fd_out = -1;
+			return ;
+		}
 		(*new)->fd_out = open(tmp->content, O_RDWR | O_TRUNC | O_CREAT, 0644);
 	}
 	if (tmp->token == DOUBLE_R_CHEV)
 	{
 		tmp = tmp->next;
+		if (tmp->token == DOLLAR)
+		{
+			ft_put_ambiguous_error(tmp->content);
+			(*new)->fd_out = -1;
+			return ;
+		}
 		(*new)->fd_out = open(tmp->content, O_RDWR | O_APPEND | O_CREAT, 0644);
 	}
 	if ((*new)->fd_out == -1)
