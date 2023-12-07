@@ -17,6 +17,7 @@ SRC_MAIN 	= 	./main.c \
 				./help_function.c \
 				./parser.c \
 				./ft_split_word.c \
+				./ft_split_string.c \
 				./array_manipulation.c \
 				./var_manipulation.c \
 				./init.c \

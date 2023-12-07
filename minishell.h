@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/05 15:36:38 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/12/07 18:29:49 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,10 @@ t_lex		*lexer(t_lex_var *lex_var, t_lex **list);
 t_lex		*ft_lstnew_lex(t_lex_var *lex_var, void *content, enum e_token token);
 void		ft_lstadd_back_lex(t_lex **lst, t_lex *new);
 int			ft_split_word(t_lex_var *lex_var, char *args, t_lex **list);
+int			ft_split_string(char *args, t_lex **list, enum e_token token);
+void		create_token(t_lex_var *lex_var, char *args, t_lex **list, t_sp_wd **vars);
+void		new_node(t_lex_var *lex_var, char *char_tmp, t_lex **list, enum e_token type);
+//bool		is_sep(char *s);
 
 /* -- PARSER -- */
 bool		parsing(char *input, t_struct **mshell);

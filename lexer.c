@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 13:45:40 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/04 13:48:01 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/07 17:46:05 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// static void	lex_dollar(t_lex_var *lex_var, t_lex **list, int *i)
-// {
-// 	t_lex	*new;
-
-// 	new = ft_lstnew_lex(lex_var, lex_var->args[*i], DOLLAR);
-// 	ft_lstadd_back_lex(list, new);
-// 	(*i)++;
-// }
 
 static bool	lex_sign(t_lex_var *lex_var, t_lex **list, int *i, int j)
 {
@@ -53,6 +44,14 @@ static void	lex_word(t_lex_var *lex_var, t_lex **list, int *i)
 	(*i)++;
 }
 
+static void	lex_add_string(t_lex **list, enum e_token token, t_lex **new)
+{
+	if (!(*new)->content || (*new)->content[0] == '\0')
+		ft_lstadd_back_lex(list, *new);
+	else
+		ft_split_string((*new)->content, list, token);
+}
+
 static bool	lex_string(t_lex_var *lex_var, t_lex **list, int *i, int j)
 {
 	t_lex	*new;
@@ -65,13 +64,13 @@ static bool	lex_string(t_lex_var *lex_var, t_lex **list, int *i, int j)
 			{
 				lex_var->args[*i][ft_strlen(lex_var->args[*i])] = '\0';
 				new = ft_lstnew_lex(lex_var, lex_var->args[*i], SINGLE_QUOTE);
-				ft_lstadd_back_lex(list, new);
+				lex_add_string(list, SINGLE_QUOTE, &new);
 			}
 			else if (lex_var->args[*i][j] == '\"')
 			{
 				lex_var->args[*i][ft_strlen(lex_var->args[*i])] = '\0';
 				new = ft_lstnew_lex(lex_var, lex_var->args[*i], DOUBLE_QUOTE);
-				ft_lstadd_back_lex(list, new);
+				lex_add_string(list, DOUBLE_QUOTE, &new);
 			}
 			(*i)++;
 			return (true);
@@ -94,11 +93,6 @@ t_lex	*lexer(t_lex_var *lex_var, t_lex **list)
 		j = 0;
 		if (lex_string(lex_var, list, &i, j) == true)
 			continue ;
-		// if (is_dollar(lex_var->args[i]) == true)
-		// {
-		// 	lex_dollar(lex_var, list, &i);
-		// 	continue ;
-		// }
 		if (lex_sign(lex_var, list, &i, j) == true)
 			continue ;
 		lex_word(lex_var, list, &i);

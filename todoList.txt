@@ -1,13 +1,8 @@
 Grand tâches:
-- Gerer les signaux (here_doc && ft_execve) + ignorer les signaux dans le parent quand (pid == 0)	[-EMILIEN-]
-- DOLLAR	[-BRETT-]
-- SIMPLE QUOTES et DOUBLE QUOTES	[-EMILIEN-]
-- WHITE SPACE	[-BRETT-]
 
 Petit tâches:
 - '_' variable updated each time successful? execution is launched	[-BRETT-]
-- "redirection ambigue" & exit 1 for files with $test
-
+- env variable should accept only one arg?
 
 
 TASKS DONE
@@ -26,6 +21,11 @@ TASKS DONE
 - priorité au here_doc avant des CHEVRON_GAUCHE
 - g_var to 2 or 258 when syntax error happens
 - Gerer les here_doc	[-EMILIEN-]
+- Gerer les signaux (here_doc && ft_execve) + ignorer les signaux dans le parent quand (pid == 0)	[-EMILIEN-]
+- DOLLAR	[-BRETT-]
+- SIMPLE QUOTES et DOUBLE QUOTES	[-EMILIEN-]
+- WHITE SPACE	[-BRETT-]
+- "redirection ambigue" & exit 1 for files with $test
 
 
 
