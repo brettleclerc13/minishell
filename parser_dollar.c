@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 16:55:51 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/06 10:37:55 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/07 12:17:16 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ static char	*remove_white_space(char *content)
 	if (!content)
 		return (content);
 	split = ft_split(content, ' ');
+	free(content);
 	i = -1;
 	while (split[++i])
 	{
@@ -74,7 +75,6 @@ static char	*remove_white_space(char *content)
 			tmp = ft_strjoin_dollar(tmp, " ");
 	}
 	ft_arrayfree(split);
-	free(content);
 	return (tmp);
 }
 
@@ -144,7 +144,7 @@ bool	check_dollar(char **content, char **envp, enum e_token token)
 	result = NULL;
 	d_lst = NULL;
 	if (!is_dollar(*content))
-		return (true);
+		return (false);
 	d_lst_creation(&d_lst, *content);
 	result = d_lst_expansion(d_lst, envp);
 	while (d_lst)
