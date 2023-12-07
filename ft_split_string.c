@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_string.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 08:21:30 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/12/06 10:12:56 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/07 17:19:51 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

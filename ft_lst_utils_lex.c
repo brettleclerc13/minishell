@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lst_utils_lex.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 17:46:42 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/07 11:57:00 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/07 17:18:08 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char	*ft_if_quotes(t_lex_var *lex_var, char *content, char quote, char *tmp)
 				check_dollar(&tmp, lex_var->envp, ZERO);
 			i++;
 		}
-		if (content[i] != '\"' && content[i] != '\'')
+		if (content[i] && content[i] != '\"' && content[i] != '\'')
 			tmp = ft_stradd_char(tmp, content[i++]);
 	}
 	return (tmp);

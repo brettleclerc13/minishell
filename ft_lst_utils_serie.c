@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lst_utils_serie.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 20:12:53 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/30 18:26:43 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/07 17:29:03 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,10 @@ char	**ft_serie_array(t_lex *args, t_serie **new, int count)
 		if (tmp->token == RIGHT_CHEV || tmp->token == DOUBLE_R_CHEV \
 			|| tmp->token == LEFT_CHEV || tmp->token == DOUBLE_L_CHEV)
 			tmp = tmp->next;
-		else
+		else if (tmp->content)
 			array[++j] = ft_strdup(tmp->content);
+		else
+			array[++j] = ft_strdup("\0");
 		tmp = tmp->next;
 	}
 	return (array);
