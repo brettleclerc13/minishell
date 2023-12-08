@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:29:32 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/06 10:32:24 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/08 10:29:18 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,11 @@ static void	fd_in_redir(t_lex *tmp, t_serie **new, int nb_heredoc)
 {
 	if ((*new)->fd_in == -1)
 		return ;
+	if ((*new)->fd_in != STDIN_FILENO)
+	{
+		close((*new)->fd_in);
+		(*new)->fd_in = STDIN_FILENO;
+	}
 	if (tmp->token == LEFT_CHEV)
 	{
 		tmp = tmp->next;
@@ -91,6 +96,11 @@ static void	fd_in_redir(t_lex *tmp, t_serie **new, int nb_heredoc)
 
 static void	fd_out_redir(t_lex *tmp, t_serie **new)
 {
+	if ((*new)->fd_out != STDOUT_FILENO && (*new)->fd_out != -1)
+	{
+		close((*new)->fd_out);
+		(*new)->fd_out = STDOUT_FILENO;
+	}
 	if ((*new)->fd_out == -1 || (*new)->fd_in == -1)
 		return ;
 	if (tmp->token == RIGHT_CHEV)

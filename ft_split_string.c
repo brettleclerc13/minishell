@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_string.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 08:21:30 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/12/07 17:19:51 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/12/08 12:01:50 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ t_lex	*ft_lstnew_lex_str(void *content, enum e_token token)
 	new = malloc (sizeof(t_lex));
 	if (!new)
 		return (NULL);
-	new->content = ft_strdup(content);
+	if (content)
+		new->content = ft_strdup(content);
+	else
+		new->content = ft_strdup("\0");
 	new->token = token;
 	new->next = NULL;
 	return (new);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 13:45:40 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/07 17:46:05 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/12/08 08:18:25 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static bool	lex_sign(t_lex_var *lex_var, t_lex **list, int *i, int j)
 		save_tok = DOUBLE_R_CHEV;
 	if (save_tok >= 0 && save_tok <= 4)
 	{
-		new = ft_lstnew_lex(lex_var, lex_var->args[*i], save_tok);
+		new = ft_lstnew_lex(lex_var, lex_var->args[*i], list, save_tok);
 		ft_lstadd_back_lex(list, new);
 		(*i)++;
 		return (true);
@@ -63,13 +63,13 @@ static bool	lex_string(t_lex_var *lex_var, t_lex **list, int *i, int j)
 			if (lex_var->args[*i][j] == '\'')
 			{
 				lex_var->args[*i][ft_strlen(lex_var->args[*i])] = '\0';
-				new = ft_lstnew_lex(lex_var, lex_var->args[*i], SINGLE_QUOTE);
+				new = ft_lstnew_lex(lex_var, lex_var->args[*i], list, SINGLE_QUOTE);
 				lex_add_string(list, SINGLE_QUOTE, &new);
 			}
 			else if (lex_var->args[*i][j] == '\"')
 			{
 				lex_var->args[*i][ft_strlen(lex_var->args[*i])] = '\0';
-				new = ft_lstnew_lex(lex_var, lex_var->args[*i], DOUBLE_QUOTE);
+				new = ft_lstnew_lex(lex_var, lex_var->args[*i], list, DOUBLE_QUOTE);
 				lex_add_string(list, DOUBLE_QUOTE, &new);
 			}
 			(*i)++;

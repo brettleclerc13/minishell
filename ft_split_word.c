@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 16:09:16 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/06 10:20:36 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/07 18:14:21 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	new_node(t_lex_var *lex_var, char *char_tmp, t_lex **list, enum e_token typ
 {
 	t_lex	*new;
 
-	new = ft_lstnew_lex(lex_var, char_tmp, type);
+	new = ft_lstnew_lex(lex_var, char_tmp, list, type);
 	ft_lstadd_back_lex(list, new);
 }
 
