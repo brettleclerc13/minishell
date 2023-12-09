@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:29:32 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/09 01:31:13 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/09 12:54:32 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void	ft_set_redirections(t_lex *tmp, t_serie **new)
 			fd_in_redir(tmp, new, 0);
 		else if (tmp->token == DOUBLE_L_CHEV)
 		{
+			if ((*new)->fd_in == -1)
+				return ;
 			if ((*new)->fd_in != STDIN_FILENO && (*new)->fd_in != -1)
 				close((*new)->fd_in);
 			(*new)->fd_in = dup((*new)->fd_hd);

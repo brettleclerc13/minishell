@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 22:41:55 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/12/08 23:54:53 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/09 12:53:43 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ static void	pre_check_fd_in(t_serie **new)
 		close((*new)->fd_in);
 		(*new)->fd_in = STDIN_FILENO;
 	}
-	// if ((*new)->fd_hd != STDIN_FILENO)
-	// 	return ;
 }
 
 static void	double_l_chev(t_lex *tmp, t_serie **new, int nb_heredoc)
