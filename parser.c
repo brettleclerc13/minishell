@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:17:25 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/07 12:15:16 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/08 21:21:08 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 static bool	ft_parser_error(char *pre_msg, char *post_msg, char *content)
 {
-	ft_putstr_fd(pre_msg, 2);
+	if (!ft_strcmp(pre_msg, "syntax"))
+		ft_putstr_fd("minishell: syntax error near unexpected token `", 2);
+	else
+		ft_putstr_fd(pre_msg, 2);
 	ft_putstr_fd(content, 2);
 	ft_putstr_fd(post_msg, 2);
 	return (false);
@@ -35,7 +38,7 @@ bool	check_redir(t_lex **list)
 		}
 		tmp = tmp->next;
 		if ((tmp->token >= 0 && tmp->token <= 4))
-			return (ft_parser_error("minishell: syntax error near unexpected token `", "'\n", tmp->content));
+			return (ft_parser_error("syntax", "'\n", tmp->content));
 	}
 	return (true);
 }

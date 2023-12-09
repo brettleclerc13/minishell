@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_bash_error.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:39:50 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/13 12:09:00 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/12/08 21:15:43 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@ static void	ft_freearray(char **array)
 	free(array);
 }
 
-char	**ft_split_bash_error(char *message, char **dest)
+char	**ft_split_bash_error(char *error, char **dest)
 {
+	if (!ft_strcmp(error, "malloc"))
+		ft_putstr_fd("minishell: malloc: cannot allocate memory\n", 2);
 	ft_freearray(dest);
-	perror(message);
 	return (NULL);
 }

@@ -23,16 +23,18 @@ SRC_MAIN 	= 	./main.c \
 				./init.c \
 				./execute.c \
 				./parser_dollar.c \
+				./parser_d_lst.c \
 				./serie.c \
 				./ft_lst_utils_serie.c \
 				./execve.c \
 				./exec_redir.c \
+				./in_out_redir.c \
 				./exec_function.c \
 				./free.c \
 				./error.c \
 				./ft_here_doc.c \
 				./ft_lst_utils_dollar.c \
-				./ft_count_redir.c \
+				./ft_count_redir.c
 
 SRC_BUILTIN	=	${addprefix ${BUILT_PATH},	./builtin_main.c \
 											./ft_cd.c \

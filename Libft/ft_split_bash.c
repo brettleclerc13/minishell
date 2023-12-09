@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_bash.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:15:00 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/05 10:21:00 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/12/08 21:15:55 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,14 @@ static char	*ft_fill(char *dest, char const *s, t_split c, int i)
 	fill.quote = '\0';
 	while (s[fill.index] && ++fill.char_num <= i)
 	{
-		while (s[fill.index] && (s[fill.index] == c.c1 || s[fill.index] == c.c2))
+		while (s[fill.index] \
+			&& (s[fill.index] == c.c1 || s[fill.index] == c.c2))
 			fill.index++;
-		while (s[fill.index] && (s[fill.index] != c.c1 && s[fill.index] != c.c2))
+		while (s[fill.index] \
+			&& (s[fill.index] != c.c1 && s[fill.index] != c.c2))
 		{
-			if ((s[fill.index] == '\"' || s[fill.index] == '\'') && fill.char_num == i)
+			if ((s[fill.index] == '\"' || s[fill.index] == '\'') \
+				&& fill.char_num == i)
 				dest = quote_loop(dest, s, &fill);
 			if (fill.char_num == i)
 				dest[fill.size++] = s[fill.index];
@@ -48,31 +51,31 @@ static char	*ft_fill(char *dest, char const *s, t_split c, int i)
 
 static int	ft_count_size(char const *s, char c1, char c2, int i)
 {
-	t_split_count	count;
+	t_split_count	c;
 
-	count.char_num = -1;
-	count.size = 0;
-	count.index = 0;
-	count.quote = '\0';
-	while (s[count.index] && ++count.char_num <= i)
+	c.char_num = -1;
+	c.size = 0;
+	c.index = 0;
+	c.quote = '\0';
+	while (s[c.index] && ++c.char_num <= i)
 	{
-		while (s[count.index] && (s[count.index] == c1 || s[count.index] == c2))
-			count.index++;
-		while (s[count.index] && (s[count.index] != c1 && s[count.index] != c2))
+		while (s[c.index] && (s[c.index] == c1 || s[c.index] == c2))
+			c.index++;
+		while (s[c.index] && (s[c.index] != c1 && s[c.index] != c2))
 		{
-			if ((s[count.index] == '\"' || s[count.index] == '\'') && count.char_num == i)
+			if ((s[c.index] == '\"' || s[c.index] == '\'') && c.char_num == i)
 			{
-				count.quote = s[count.index];
-				count.size++;
-				while (s[++count.index] && s[count.index] != count.quote)
-					count.size++;
+				c.quote = s[c.index];
+				c.size++;
+				while (s[++c.index] && s[c.index] != c.quote)
+					c.size++;
 			}
-			if (count.char_num == i)
-				count.size++;
-			count.index++;
+			if (c.char_num == i)
+				c.size++;
+			c.index++;
 		}
 	}
-	return (count.size);
+	return (c.size);
 }
 
 static int	ft_count(char const *s, char c1, char c2)
@@ -104,15 +107,6 @@ static int	ft_count(char const *s, char c1, char c2)
 	return (cpt);
 }
 
-// void	ft_print_sb_array(char **array)
-// {
-// 	int	i;
-
-// 	i = -1;
-// 	while (array[++i])
-// 		printf("SB array[%i] : %s\n", i, array[i]);
-// }
-
 char	**ft_split_bash(char const *s, char c1, char c2)
 {
 	char	**dest;
@@ -129,12 +123,12 @@ char	**ft_split_bash(char const *s, char c1, char c2)
 	nb_words = ft_count(s, c1, c2);
 	dest = malloc (sizeof(char *) * (nb_words + 1));
 	if (!dest)
-		return (ft_split_bash_error("minishell: malloc: cannot allocate memory\n", NULL));
+		return (ft_split_bash_error("malloc", dest));
 	while (i < nb_words)
 	{
 		dest[i] = malloc (ft_count_size(s, c1, c2, i) + 1);
 		if (!dest[i])
-			return (ft_split_bash_error("minishell: malloc: cannot allocate memory\n", NULL));
+			return (ft_split_bash_error("malloc", dest));
 		dest[i] = ft_fill(dest[i], s, c, i);
 		i++;
 	}

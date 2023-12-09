@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:28:04 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/30 14:28:36 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/09 00:04:10 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_waitpid(t_serie *series)
 	ft_gvar_result(last_cmd_status);
 }
 
-void	set_child_input(t_serie *serie, int pfd[], int previous_fd, int start)
+void	child_input(t_serie *serie, int pfd[], int previous_fd, int start)
 {
 	if (serie->fd_in != STDIN_FILENO)
 	{
@@ -53,7 +53,7 @@ void	set_child_input(t_serie *serie, int pfd[], int previous_fd, int start)
 		close(pfd[0]);
 }
 
-void	set_child_output(t_serie *serie, int pfd[])
+void	child_output(t_serie *serie, int pfd[])
 {
 	if (serie->fd_out != STDOUT_FILENO)
 	{

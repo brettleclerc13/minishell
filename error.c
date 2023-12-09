@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:24:05 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/16 11:01:24 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/08 22:26:21 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,30 @@ bool	bool_print_error(char *str)
 		return (false);
 	}
 	return (true);
+}
+
+void	ft_put_redir_error(char *file, bool is_dir)
+{
+	char	*tmp;
+
+	tmp = NULL;
+	if (is_dir)
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(file, 2);
+		ft_putstr_fd(": is a directory\n", 2);
+		g_var = 1;
+		return ;
+	}
+	tmp = ft_strjoin("minishell: ", file);
+	perror(tmp);
+	free(tmp);
+}
+
+void	ft_put_ambiguous_error(char *file)
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(file, 2);
+	ft_putstr_fd(": ambiguous redirect\n", 2);
+	g_var = 1;
 }

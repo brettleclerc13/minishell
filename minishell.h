@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/07 18:11:03 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/08 22:52:36 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ typedef struct s_serie
 {
 	char			**cmd;
 	enum e_token	fd_out_token;
-	enum e_token	first_arg_token;		//to be changed
+	enum e_token	first_arg_token;
 	bool			is_pipe;
 	int				pipe_hd[2];
 	int				fd_in;
@@ -131,22 +131,28 @@ typedef struct s_dollar
 	void		*next;
 }				t_dollar;
 
+typedef struct s_dol_var
+{
+	int		i;
+	int		start;
+	bool	increment;
+}			t_dol_var;
+
 /* -- INIT -- */
 t_struct	*before_loop_init(int argc, char **envp);
-char		**init_path(char **envp);
 bool		init_envp(t_struct *mshell, char **envp);
 void		init_oldpwd(t_struct *mshell);
 
 /* -- LEXER -- */
 t_lex		*lexer(t_lex_var *lex_var, t_lex **list);
-t_lex		*ft_lstnew_lex(t_lex_var *lex_var, void *content, t_lex **list, enum e_token token);
+t_lex		*ft_lstnew_lex(void *content, enum e_token token);
 void		ft_lstadd_back_lex(t_lex **lst, t_lex *new);
-int			ft_split_word(t_lex_var *lex_var, char *args, t_lex **list);
+int			ft_split_word(char *args, t_lex **list);
 int			ft_split_string(char *args, t_lex **list, enum e_token token);
-void		create_token(t_lex_var *lex_var, char *args, t_lex **list, t_sp_wd **vars);
-void		new_node(t_lex_var *lex_var, char *char_tmp, t_lex **list, enum e_token type);
-void		new_node_str(char *char_tmp, t_lex **list, enum e_token type);
-//bool		is_sep(char *s);
+void		create_token(char *args, t_lex **list, t_sp_wd **vars);
+void		new_node(char *char_tmp, t_lex **list, enum e_token type);
+char		*quotes(t_lex_var *lex_var, char *content, char quote, char *tmp);
+bool		contains_quotes(char *s);
 
 /* -- PARSER -- */
 bool		parsing(char *input, t_struct **mshell);
@@ -158,14 +164,15 @@ void		d_lst_creation(t_dollar **d_lst, char *content);
 char		*d_lst_expansion(t_dollar *d_lst, char **envp);
 bool		is_specialchar(char c);
 void		d_lst_string(t_dollar **d_lst, char *content, int *i, int *start);
-void		d_lst_pid_exitstatus(t_dollar **d_lst, char *content, int *i, int *start);
+void		d_lst_status(t_dollar **d_lst, char *content, int *i, int *start);
 void		d_lst_lonedol(t_dollar **d_lst, int *i, int *start);
 void		d_lst_var(t_dollar **d_lst, char *content, int *i, int *start);
-bool		is_dollar(char *s);
+t_dollar	*ft_lstlast_dollar(t_dollar *d_lst);
+void		ft_lstadd_back_dollar(t_dollar **d_lst, t_dollar *new);
 
 /* -- SERIES -- */
 bool		serie_creation(t_lex *args, t_serie **series);
-bool		serie_addition(t_serie **series, t_lex *args, int count, bool ispipe);
+bool		serie_add(t_serie **series, t_lex *args, int count, bool ispipe);
 t_serie		*ft_lstnew_serie(t_lex *args, int count, bool ispipe);
 char		**ft_serie_array(t_lex *args, t_serie **new, int count);
 void		ft_lstadd_back_serie(t_serie **series, t_serie *new);
@@ -210,12 +217,12 @@ char		*get_env_value(char *var, char **envp);
 void		update_env_value(char *var, char *new_value, char **envp);
 void		ft_update_shlvl(t_struct *mshell);
 char		**add_env_str(char *arg, char **envp);
-void		update_env(t_var *var, char *new_value, t_struct *mshell, bool is_equal);
+void		update_env(t_var *var, char *new, t_struct *mshell, bool is_equal);
 void		ft_add_to_envp(char *arg, t_struct *mshell);
 
 /* -- ENV VARIABLE-- */
 char		*get_env_var(char *line);
-int			ft_varcmp_struct(t_var *var, char **envp);
+int			ft_varcmp_envpline(t_var *var, char *envp_line);
 void		ft_create_var(char *arg, t_var *var);
 char		*ft_varjoin(char *s1, char *s2);
 bool		ft_varcmp(char *var, char **envp);
@@ -233,16 +240,19 @@ pid_t		ft_execute_error(char *message);
 pid_t		ft_execute_serie(t_serie *serie, int start, t_struct *mshell);
 pid_t		ft_fork_execution(t_serie *serie, t_struct *mshell, int start);
 int			ft_execve(char **cmd, char **envp);
-void		set_child_input(t_serie *serie, int pfd[], int previous_fd, int start);
-void		set_child_output(t_serie *serie, int pfd[]);
+void		child_input(t_serie *serie, int pfd[], int previous_fd, int start);
+void		child_output(t_serie *serie, int pfd[]);
 void		set_parent_io(int pfd[], t_struct *mshell);
 void		ft_waitpid(t_serie *series);
 
 /* -- REDIRECTION -- */
-int			ft_count_redir(t_lex *args);
 void		ft_set_redirections(t_lex *tmp, t_serie **new);
-pid_t		ft_here_doc(t_lex *tmp, t_serie **serie, int nb_heredoc);
+int			ft_count_redir(t_lex *args);
+pid_t		ft_here_doc(t_lex *tmp, t_serie **new, int nb_heredoc);
 int			ft_count_heredoc(t_lex *args);
+void		fd_in_redir(t_lex *tmp, t_serie **new, int nb_heredoc);
+void		fd_out_redir(t_lex *tmp, t_serie **new);
+void		check_permissions(char *file, enum e_token token);
 
 /* -- SIGNALS -- */
 void		signals_types(void);
@@ -259,5 +269,7 @@ void		ft_free_serie_lex(t_serie *series, t_lex *args);
 
 /* -- ERROR -- */
 bool		bool_print_error(char *str);
+void		ft_put_redir_error(char *file, bool is_dir);
+void		ft_put_ambiguous_error(char *file);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_here_doc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 19:03:33 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/04 23:41:09 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/12/09 00:37:19 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	print_heredoc(int nb_heredoc, t_serie **new, char *str)
 {
 	if (nb_heredoc == 0)
 	{
-		write((*new)->pipe_hd[1], str, ft_strlen(str) + 1);
+		write((*new)->pipe_hd[1], str, ft_strlen(str));
 		write((*new)->pipe_hd[1], "\n", 1);
 	}
 }
@@ -56,16 +56,16 @@ static void	hd_loop(t_lex *tmp, t_serie **new, int nb_heredoc)
 	{
 		str = readline("> ");
 		if (end_of_heredoc(str) == true)
-			exit(g_var) ;
+			exit(g_var);
 		if (ft_strcmp(str, tmp->content) == 0)
 		{
 			free(str);
-			if (nb_heredoc == 0)
-			{
-				(*new)->fd_hd = dup((*new)->pipe_hd[0]);
-				close((*new)->pipe_hd[1]);
-				close((*new)->pipe_hd[0]);
-			}
+			// if (nb_heredoc == 0)
+			// {
+			// 	(*new)->fd_hd = dup((*new)->pipe_hd[0]);
+			// 	close((*new)->pipe_hd[1]);
+			// 	close((*new)->pipe_hd[0]);
+			// }
 			exit(g_var);
 		}
 		print_heredoc(nb_heredoc, new, str);
@@ -82,7 +82,7 @@ pid_t	ft_here_doc(t_lex *tmp, t_serie **new, int nb_heredoc)
 	if (nb_heredoc == 0)
 	{
 		if (pipe((*new)->pipe_hd) == -1)
-			ft_error("here_doc pipe error\n");
+			ft_execute_error("minishell: broken pipe\n");
 	}
 	pid = fork();
 	if (pid < 0)
@@ -92,6 +92,12 @@ pid_t	ft_here_doc(t_lex *tmp, t_serie **new, int nb_heredoc)
 		ft_termios(false);
 		heredoc_signals();
 		hd_loop(tmp, new, nb_heredoc);
+	}
+	if (nb_heredoc == 0)
+	{
+		close((*new)->pipe_hd[1]);
+		(*new)->fd_hd = dup((*new)->pipe_hd[0]);
+		close((*new)->pipe_hd[0]);
 	}
 	return (pid);
 }
