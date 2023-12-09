@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 11:38:35 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/12/08 20:42:54 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/09 14:41:07 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ t_struct	*before_loop_init(int argc, char **envp)
 		return (NULL);
 	}
 	mshell->args = NULL;
-	mshell->series = NULL;
 	mshell->pipe_count = 0;
 	mshell->tmp_fd = STDIN_FILENO;
 	if (!init_envp(mshell, envp))

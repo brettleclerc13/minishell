@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 20:16:19 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/12/09 00:08:38 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/09 15:32:40 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,9 @@ void	ft_execute(t_struct *mshell)
 
 	series = NULL;
 	start = 0;
-	if (serie_creation(mshell->args, &series) == false)
-		ft_free_serie_lex(series, mshell->args);
+	if (!serie_creation(mshell->args, &series))
+		ft_free_exit(series, mshell);
 	ft_free_lex(mshell->args);
-	print_lst_serie(series);
 	tmp_series = series;
 	original_io[0] = dup(STDIN_FILENO);
 	original_io[1] = dup(STDOUT_FILENO);

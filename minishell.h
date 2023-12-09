@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/08 22:52:36 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/09 14:56:06 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ typedef struct s_struct
 {
 	char		**envp;
 	t_lex		*args;
-	t_serie		*series;
 	int			pipe_count;
 	bool		check_valid;
 	int			tmp_fd;
@@ -265,7 +264,9 @@ void		ft_termios(bool set);
 /* -- FREE -- */
 void		ft_free_serie(t_serie *series);
 void		ft_free_lex(t_lex *lex);
-void		ft_free_serie_lex(t_serie *series, t_lex *args);
+void		ft_free_exit(t_serie *series, t_struct *mshell);
+void		ft_free_mshell(t_struct *mshell);
+void		ft_free_lex_var(t_lex_var *lex_var);
 
 /* -- ERROR -- */
 bool		bool_print_error(char *str);
