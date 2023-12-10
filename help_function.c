@@ -6,24 +6,26 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 12:01:13 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/29 14:44:50 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/08 21:27:32 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// HELPING FUNCTION FOR DEBUGGING //
+// FUNCTIONS THAT HELP TO DEBUG //
 
 void	print_list(t_lex *list)
 {
-	int	i;
+	t_lex	*tmp_list;
+	int		i;
 
 	i = -1;
-	while (list)
+	tmp_list = list;
+	while (tmp_list)
 	{
 		i++;
-		printf("list[%d] : %s \n", i, list->content);
-		list = list->next;
+		printf("list[%d] : %s \n", i, tmp_list->content);
+		tmp_list = tmp_list->next;
 	}
 }
 

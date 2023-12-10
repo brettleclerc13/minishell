@@ -6,46 +6,27 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 08:21:30 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/12/08 12:01:50 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/08 21:52:01 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_lex	*ft_lstnew_lex_str(void *content, enum e_token token)
+static void	ft_quote_forwarding(char *c, int *len_word, int *i)
 {
-	t_lex	*new;
+	char	quote;
 
-	new = malloc (sizeof(t_lex));
-	if (!new)
-		return (NULL);
-	if (content)
-		new->content = ft_strdup(content);
-	else
-		new->content = ft_strdup("\0");
-	new->token = token;
-	new->next = NULL;
-	return (new);
-}
-
-void	new_node_str(char *char_tmp, t_lex **list, enum e_token type)
-{
-	t_lex	*new;
-
-	new = ft_lstnew_lex_str(char_tmp, type);
-	ft_lstadd_back_lex(list, new);
-}
-
-void	create_token_str(char *args, t_lex **list, t_sp_wd **vars)
-{
-	char	*char_token;
-
-	char_token = ft_substr(args, (*vars)->start, (*vars)->i - (*vars)->start);
-	if (!char_token)
-		return ;
-	if (*char_token)
-		new_node_str(char_token, list, (*vars)->type);
-	free(char_token);
+	quote = '\0';
+	if (c[*len_word] == '\"' || c[*len_word] == '\'')
+	{
+		quote = c[(*len_word)++];
+		(*i)++;
+		while (c[*len_word] && c[*len_word] != quote)
+		{
+			(*len_word)++;
+			(*i)++;
+		}
+	}
 }
 
 static enum e_token	is_sep_str(char *c, int *i, enum e_token token)
@@ -56,10 +37,10 @@ static enum e_token	is_sep_str(char *c, int *i, enum e_token token)
 	int				len_word;
 
 	len_word = 0;
-	if (!c)
-		return (-1);
 	while (c[len_word])
 	{
+		if (c[len_word] == '\"' || c[len_word] == '\'')
+			ft_quote_forwarding(c, &len_word, i);
 		index = -1;
 		while (++index < 5)
 		{
@@ -93,10 +74,11 @@ int	ft_split_string(char *args, t_lex **list, enum e_token token)
 	{
 		if (check_sep == 1)
 			vars->start = vars->i;
-		vars->type = is_sep_str(&args[vars->i], &vars->i, token);
+		if (args[vars->i])
+			vars->type = is_sep_str(&args[vars->i], &vars->i, token);
 		if (args[vars->start])
 		{
-			create_token_str(args, list, &vars);
+			create_token(args, list, &vars);
 			check_sep = 1;
 		}
 	}

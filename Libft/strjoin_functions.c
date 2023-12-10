@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 16:56:49 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/04 10:29:04 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/08 21:59:25 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*ft_strjoin_path(char *s1, char *s2, bool free_first_param)
 	return (dest);
 }
 
-char	*ft_strjoin_dollar(char *s1, char *s2)
+char	*ft_strjoin_dol(char *s1, char *s2)
 {
 	size_t	i;
 	size_t	j;

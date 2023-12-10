@@ -6,21 +6,21 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 16:09:16 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/07 18:14:21 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/08 21:36:13 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	new_node(t_lex_var *lex_var, char *char_tmp, t_lex **list, enum e_token type)
+void	new_node(char *char_tmp, t_lex **list, enum e_token type)
 {
 	t_lex	*new;
 
-	new = ft_lstnew_lex(lex_var, char_tmp, list, type);
+	new = ft_lstnew_lex(char_tmp, type);
 	ft_lstadd_back_lex(list, new);
 }
 
-void	create_token(t_lex_var *lex_var, char *args, t_lex **list, t_sp_wd **vars)
+void	create_token(char *args, t_lex **list, t_sp_wd **vars)
 {
 	char	*char_token;
 
@@ -28,7 +28,7 @@ void	create_token(t_lex_var *lex_var, char *args, t_lex **list, t_sp_wd **vars)
 	if (!char_token)
 		return ;
 	if (*char_token)
-		new_node(lex_var, char_token, list, (*vars)->type);
+		new_node(char_token, list, (*vars)->type);
 	free(char_token);
 }
 
@@ -61,9 +61,9 @@ static enum e_token	is_sep_word(char *c, int *i)
 	return (7);
 }
 
-int	ft_split_word(t_lex_var *lex_var, char *args, t_lex **list)
+int	ft_split_word(char *args, t_lex **list)
 {
-	t_sp_wd	*vars = NULL;
+	t_sp_wd	*vars;
 	int		check_sep;
 
 	vars = malloc(sizeof(t_sp_wd));
@@ -80,7 +80,7 @@ int	ft_split_word(t_lex_var *lex_var, char *args, t_lex **list)
 		vars->type = is_sep_word(&args[vars->i], &vars->i);
 		if (args[vars->start])
 		{
-			create_token(lex_var, args, list, &vars);
+			create_token(args, list, &vars);
 			check_sep = 1;
 		}
 	}

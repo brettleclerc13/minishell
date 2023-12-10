@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 20:16:19 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/12/08 12:08:34 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/09 15:32:40 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,11 @@ pid_t	ft_fork_execution(t_serie *serie, t_struct *mshell, int start)
 		ft_execute_error("minishell: fork: resource temporarily unavailable\n");
 	if (pid == 0)
 	{
-		if (serie->fd_in == -1 || serie->fd_out == -1 || serie->first_arg_token == SKIP)
+		if (serie->fd_in == -1 || serie->fd_out == -1 \
+			|| serie->first_arg_token == SKIP)
 			exit (g_var);
-		set_child_input(serie, pfd, mshell->tmp_fd, start);
-		set_child_output(serie, pfd);
+		child_input(serie, pfd, mshell->tmp_fd, start);
+		child_output(serie, pfd);
 		if (builtin_checker(serie->cmd[0]))
 			g_var = builtin_main(serie->cmd, mshell, 0);
 		else
@@ -60,7 +61,8 @@ pid_t	ft_execute_serie(t_serie *serie, int start, t_struct *mshell)
 	if (serie->fd_out_token == END && start == 0 \
 	&& builtin_checker(serie->cmd[0]))
 	{
-		if (serie->fd_in == -1 || serie->fd_out == -1 || serie->first_arg_token == SKIP)
+		if (serie->fd_in == -1 || serie->fd_out == -1 \
+			|| serie->first_arg_token == SKIP)
 			return (-5);
 		if (serie->fd_in != STDIN_FILENO)
 		{
@@ -89,8 +91,8 @@ void	ft_execute(t_struct *mshell)
 
 	series = NULL;
 	start = 0;
-	if (serie_creation(mshell->args, &series) == false)
-		ft_free_serie_lex(series, mshell->args);
+	if (!serie_creation(mshell->args, &series))
+		ft_free_exit(series, mshell);
 	ft_free_lex(mshell->args);
 	tmp_series = series;
 	original_io[0] = dup(STDIN_FILENO);

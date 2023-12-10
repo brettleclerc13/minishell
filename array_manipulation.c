@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 20:01:37 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/30 16:13:19 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/08 20:33:13 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	**ft_arrayremove(char *removeline, char **array)
 		return (NULL);
 	while (array[++i])
 	{
-		if (!ft_strncmp(removeline, array[i], ft_strlen(array[i])))
+		if (!ft_strncmp(removeline, array[i], ft_strlen(array[i]) + 1))
 			continue ;
 		tmp[++j] = ft_strdup(array[i]);
 	}
