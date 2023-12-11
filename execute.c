@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 20:16:19 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/12/09 15:32:40 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/11 09:29:22 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ pid_t	ft_execute_serie(t_serie *serie, int start, t_struct *mshell)
 {
 	if (!serie->cmd[0])
 		return (0);
+	update_underscore(serie, mshell, start);
 	if (serie->fd_out_token == END && start == 0 \
 	&& builtin_checker(serie->cmd[0]))
 	{

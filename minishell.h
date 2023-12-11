@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/09 14:56:06 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/11 09:34:39 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,6 +242,7 @@ int			ft_execve(char **cmd, char **envp);
 void		child_input(t_serie *serie, int pfd[], int previous_fd, int start);
 void		child_output(t_serie *serie, int pfd[]);
 void		set_parent_io(int pfd[], t_struct *mshell);
+void		update_underscore(t_serie *serie, t_struct *mshell, int start);
 void		ft_waitpid(t_serie *series);
 
 /* -- REDIRECTION -- */
