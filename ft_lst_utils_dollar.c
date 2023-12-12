@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:09:31 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/12/08 21:34:31 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/11 15:24:40 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	d_lst_status(t_dollar **d_lst, char *content, int *i, int *start)
 	*start = *i;
 }
 
-void	d_lst_string(t_dollar **d_lst, char *content, int *i, int *start)
+void	d_lst_string(t_dollar **d_lst, char *content, t_dol_var *dol)
 {
 	t_dollar	*new;
 
@@ -82,10 +82,11 @@ void	d_lst_string(t_dollar **d_lst, char *content, int *i, int *start)
 		return ;
 	}
 	new->next = NULL;
-	if (!content[*i + 1])
-		(*i)++;
+	if (!content[dol->i + 1])
+		(dol->i)++;
 	new->variable = 0;
-	new->content = ft_substr(content, *start, *i - *start);
+	new->content = ft_substr(content, dol->start, dol->i - dol->start);
 	ft_lstadd_back_dollar(d_lst, new);
-	*start = *i;
+	dol->start = dol->i;
+	dol->increment = false;
 }

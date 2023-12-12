@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/11 09:34:39 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/11 16:50:22 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ bool		check_dollar(char **content, char **envp, enum e_token token);
 void		d_lst_creation(t_dollar **d_lst, char *content);
 char		*d_lst_expansion(t_dollar *d_lst, char **envp);
 bool		is_specialchar(char c);
-void		d_lst_string(t_dollar **d_lst, char *content, int *i, int *start);
+void		d_lst_string(t_dollar **d_lst, char *content, t_dol_var *dol);
 void		d_lst_status(t_dollar **d_lst, char *content, int *i, int *start);
 void		d_lst_lonedol(t_dollar **d_lst, int *i, int *start);
 void		d_lst_var(t_dollar **d_lst, char *content, int *i, int *start);
@@ -273,5 +273,6 @@ void		ft_free_lex_var(t_lex_var *lex_var);
 bool		bool_print_error(char *str);
 void		ft_put_redir_error(char *file, bool is_dir);
 void		ft_put_ambiguous_error(char *file);
+void		amb_error_minus_one(char *file, t_serie **new, bool fd_in);
 
 #endif

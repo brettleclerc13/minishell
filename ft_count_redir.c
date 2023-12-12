@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_count_redir.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 23:16:15 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/04 23:16:46 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/12/12 12:18:18 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_count_redir(t_lex *args)
 
 	nb_red = 0;
 	tmp = args;
-	while (tmp)
+	while (tmp && tmp->token != PIPE)
 	{
 		if (tmp->token == RIGHT_CHEV
 			|| tmp->token == LEFT_CHEV

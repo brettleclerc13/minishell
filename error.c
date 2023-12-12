@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:24:05 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/12/08 22:26:21 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/11 16:50:39 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,16 @@ void	ft_put_ambiguous_error(char *file)
 	ft_putstr_fd(file, 2);
 	ft_putstr_fd(": ambiguous redirect\n", 2);
 	g_var = 1;
+}
+
+void	amb_error_minus_one(char *file, t_serie **new, bool fd_in)
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(file, 2);
+	ft_putstr_fd(": ambiguous redirect\n", 2);
+	g_var = 1;
+	if (fd_in)
+		(*new)->fd_in = -1;
+	else
+		(*new)->fd_out = -1;
 }

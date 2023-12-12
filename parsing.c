@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 15:34:36 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/09 15:27:10 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/11 11:51:49 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ bool	parsing(char *input, t_struct **mshell)
 	lex_var->envp = ft_arraydup((*mshell)->envp);
 	list = NULL;
 	lex_var->args = ft_split_bash(input, ' ', '	');
-	if (!lex_var->args || !lex_var->args[0])
+	if (!lex_var->args || !lex_var->args[0] || !ft_strcmp(*lex_var->args, ""))
 		return (argument_empty(input, lex_var));
 	list = lexer(lex_var, &list);
 	ft_free_lex_var(lex_var);

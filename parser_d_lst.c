@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 21:29:03 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/12/08 22:23:13 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/11 15:22:51 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	d_lst_creation(t_dollar **d_lst, char *str)
 		if (str[dol.i] == '$' || !str[dol.i + 1])
 		{
 			if (dol.start != dol.i || !str[dol.i + 1])
-				d_lst_string(d_lst, str, &dol.i, &dol.start);
+				d_lst_string(d_lst, str, &dol);
 			if (str[dol.i] == '$' && (str[dol.i + 1] == '$' \
 				|| str[dol.i + 1] == '?'))
 				d_lst_contd(&dol, d_lst, str, false);

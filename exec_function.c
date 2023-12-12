@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:28:04 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/12/11 10:07:37 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/12 13:09:05 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	ft_waitpid(t_serie *series)
 		return ;
 	while (tmp)
 	{
-		waitpid(tmp->pid, &return_result, WUNTRACED);
+		waitpid(tmp->pid, &return_result, 0);	//WUNTRACED
+		printf("check waitpid\n");
 		if (!tmp->next)
 			last_cmd_status = return_result;
 		tmp = tmp->prev;
@@ -35,8 +36,9 @@ void	ft_waitpid(t_serie *series)
 
 void	child_input(t_serie *serie, int pfd[], int previous_fd, int start)
 {
-	if (serie->fd_in != STDIN_FILENO)
+	if (serie->fd_in != STDIN_FILENO && serie->fd_in != -1)
 	{
+		printf("in_child 1, start == %d\n", start);
 		dup2(serie->fd_in, STDIN_FILENO);
 		close(serie->fd_in);
 		close(pfd[0]);
@@ -48,17 +50,22 @@ void	child_input(t_serie *serie, int pfd[], int previous_fd, int start)
 		dup2(previous_fd, STDIN_FILENO);
 		close(previous_fd);
 		close(pfd[0]);
+		printf("in_child 2, start == %d\n", start);
 	}
 	else
+	{
+		printf("in_child 3, start == %d\n", start);
 		close(pfd[0]);
+	}
 }
 
 void	child_output(t_serie *serie, int pfd[])
 {
-	if (serie->fd_out != STDOUT_FILENO)
+	if (serie->fd_out != STDOUT_FILENO && serie->fd_out != -1)
 	{
 		if (serie->fd_out_token != END)
 		{
+			printf("out_child 1, fd_out_tok == %d\n", serie->fd_out_token);
 			dup2(serie->fd_out, pfd[1]);
 			close(serie->fd_out);
 			dup2(pfd[1], STDOUT_FILENO);
@@ -66,6 +73,7 @@ void	child_output(t_serie *serie, int pfd[])
 		}
 		else
 		{
+			printf("out_child 2, fd_out_tok == %d\n", serie->fd_out_token);
 			dup2(serie->fd_out, STDOUT_FILENO);
 			close(serie->fd_out);
 			close(pfd[1]);
@@ -73,11 +81,15 @@ void	child_output(t_serie *serie, int pfd[])
 	}
 	else if (serie->fd_out == STDOUT_FILENO && serie->fd_out_token != END)
 	{
+		printf("out_child 3, fd_out_tok == %d\n", serie->fd_out_token);
 		dup2(pfd[1], STDOUT_FILENO);
 		close(pfd[1]);
 	}
 	else
+	{
+		printf("out_child 4, fd_out_tok == %d\n", serie->fd_out_token);
 		close(pfd[1]);
+	}
 }
 
 void	set_parent_io(int pfd[], t_struct *mshell)
@@ -87,4 +99,5 @@ void	set_parent_io(int pfd[], t_struct *mshell)
 		close (mshell->tmp_fd);
 	mshell->tmp_fd = dup(pfd[0]);
 	close(pfd[0]);
+	printf("check parent_io\n");
 }

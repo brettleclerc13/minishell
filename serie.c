@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 12:52:57 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/09 14:57:39 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/12 11:34:16 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ bool	serie_creation(t_lex *args, t_serie **series)
 		}
 		else if (!args->next)
 		{
+			count += 1;
 			if (serie_add(series, tmp, count, false) == false)
 				return (false);
 		}

@@ -6,13 +6,13 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 22:41:55 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/12/09 12:53:43 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/12 12:23:43 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	pre_check_fd_out(t_serie **new)
+static bool	pre_check_fd_out(t_serie **new)
 {
 	if ((*new)->fd_out != STDOUT_FILENO && (*new)->fd_out != -1)
 	{
@@ -20,18 +20,20 @@ static void	pre_check_fd_out(t_serie **new)
 		(*new)->fd_out = STDOUT_FILENO;
 	}
 	if ((*new)->fd_out == -1 || (*new)->fd_in == -1 || (*new)->fd_hd == -1)
-		return ;
+		return (false);
+	return (true);
 }
 
-static void	pre_check_fd_in(t_serie **new)
+static bool	pre_check_fd_in(t_serie **new)
 {
 	if ((*new)->fd_in == -1 || (*new)->fd_hd == -1)
-		return ;
+		return (false);
 	if ((*new)->fd_in != STDIN_FILENO)
 	{
 		close((*new)->fd_in);
 		(*new)->fd_in = STDIN_FILENO;
 	}
+	return (true);
 }
 
 static void	double_l_chev(t_lex *tmp, t_serie **new, int nb_heredoc)
@@ -46,14 +48,14 @@ static void	double_l_chev(t_lex *tmp, t_serie **new, int nb_heredoc)
 
 void	fd_in_redir(t_lex *tmp, t_serie **new, int nb_heredoc)
 {
-	pre_check_fd_in(new);
+	if (!pre_check_fd_in(new))
+		return ;
 	if (tmp->token == LEFT_CHEV)
 	{
 		tmp = tmp->next;
 		if (tmp->token == DOLLAR)
 		{
-			ft_put_ambiguous_error(tmp->content);
-			(*new)->fd_in = -1;
+			amb_error_minus_one(tmp->content, new, true);
 			return ;
 		}
 		if (open(tmp->content, O_DIRECTORY) != -1)
@@ -72,14 +74,14 @@ void	fd_in_redir(t_lex *tmp, t_serie **new, int nb_heredoc)
 
 void	fd_out_redir(t_lex *tmp, t_serie **new)
 {
-	pre_check_fd_out(new);
+	if (!pre_check_fd_out(new))
+		return ;
 	if (tmp->token == RIGHT_CHEV)
 	{
 		tmp = tmp->next;
 		if (tmp->token == DOLLAR)
 		{
-			ft_put_ambiguous_error(tmp->content);
-			(*new)->fd_out = -1;
+			amb_error_minus_one(tmp->content, new, false);
 			return ;
 		}
 		(*new)->fd_out = open(tmp->content, O_RDWR | O_TRUNC | O_CREAT, 0644);
@@ -89,8 +91,7 @@ void	fd_out_redir(t_lex *tmp, t_serie **new)
 		tmp = tmp->next;
 		if (tmp->token == DOLLAR)
 		{
-			ft_put_ambiguous_error(tmp->content);
-			(*new)->fd_out = -1;
+			amb_error_minus_one(tmp->content, new, false);
 			return ;
 		}
 		(*new)->fd_out = open(tmp->content, O_RDWR | O_APPEND | O_CREAT, 0644);
