@@ -1,0 +1,26 @@
+// void read_file(int file, char *source)
+// {
+// 	char	buf[PATH_MAX];
+// 	int		status;
+// 	int		read_file;
+
+// 	read_file = dup(file);
+// 	if (file == STDIN_FILENO)
+// 	{
+// 		printf("%s file is STDIN_FILENO\n", source);
+// 		return ;
+// 	}
+// 	status = read(read_file, buf, sizeof(buf));
+// 	if (!status)
+// 	{
+// 		printf("EMPTY PIPE IN %s\n", source);
+// 		ft_close(read_file, "READ_FUNCTION");
+// 		return ;
+// 	}
+// 	printf("READ_FILE FROM %s\n%s\n", source, buf);
+// 	printf("___content size___: %i\n", status);	
+// 	close(read_file);
+// }
+
+
+// printf("serie[%i]->pid : %jd\n", i++, (intmax_t)tmp->pid);

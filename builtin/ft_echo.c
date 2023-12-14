@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 18:10:35 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/12/08 18:33:30 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/13 09:53:33 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static bool	is_n_cmd(char **argv, int *i)
 	while (argv[++(*i)] && argv[*i][0] == '-')
 	{
 		j = 0;
+		if (!argv[*i][j + 1])
+			return (n_cmd);
 		while (argv[*i][++j])
 			if (argv[*i][j] != 'n')
 				return (n_cmd);

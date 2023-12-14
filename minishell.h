@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/12/08 12:20:14 by ehouot           ###   ########.fr       */
-=======
-/*   Updated: 2023/12/09 14:56:06 by brettlecler      ###   ########.fr       */
->>>>>>> brett
+/*   Updated: 2023/12/13 19:34:26 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +82,6 @@ typedef struct s_serie
 	int				fd_in;
 	int				fd_out;
 	int				fd_hd;
-	bool			hd;
 	pid_t			pid;
 	void			*prev;
 	void			*next;
@@ -105,8 +100,8 @@ typedef struct s_struct
 	char		**envp;
 	t_lex		*args;
 	int			pipe_count;
+	int			pipe_fd;
 	bool		check_valid;
-	int			tmp_fd;
 	char		*tmp_cwd;
 	t_count_red	redir;
 }				t_struct;
@@ -166,7 +161,7 @@ bool		check_dollar(char **content, char **envp, enum e_token token);
 void		d_lst_creation(t_dollar **d_lst, char *content);
 char		*d_lst_expansion(t_dollar *d_lst, char **envp);
 bool		is_specialchar(char c);
-void		d_lst_string(t_dollar **d_lst, char *content, int *i, int *start);
+void		d_lst_string(t_dollar **d_lst, char *content, t_dol_var *dol);
 void		d_lst_status(t_dollar **d_lst, char *content, int *i, int *start);
 void		d_lst_lonedol(t_dollar **d_lst, int *i, int *start);
 void		d_lst_var(t_dollar **d_lst, char *content, int *i, int *start);
@@ -188,7 +183,7 @@ void		print_string(char **tab);
 void		print_lst_tok(t_lex *list);
 void		print_array(char **array);
 void		print_lst_serie(t_serie *series);
-void		print_prev_serie(t_serie *series);
+void 		read_file(int file, char *source);
 
 /* -- BUILTINS -- */
 int			builtin_main(char **args, t_struct *mshell, int process);
@@ -242,10 +237,11 @@ void		ft_execute(t_struct *mshell);
 pid_t		ft_execute_error(char *message);
 pid_t		ft_execute_serie(t_serie *serie, int start, t_struct *mshell);
 pid_t		ft_fork_execution(t_serie *serie, t_struct *mshell, int start);
-int			ft_execve(char **cmd, char **envp);
-void		child_input(t_serie *serie, int pfd[], int previous_fd, int start);
+int			ft_execve(t_serie *serie, char **cmd, char **envp);
+void		child_input(t_serie *serie, int pfd[], int start, t_struct *mshell);
 void		child_output(t_serie *serie, int pfd[]);
 void		set_parent_io(int pfd[], t_struct *mshell);
+void		update_underscore(t_serie *serie, t_struct *mshell, int start);
 void		ft_waitpid(t_serie *series);
 
 /* -- REDIRECTION -- */
@@ -276,5 +272,6 @@ void		ft_free_lex_var(t_lex_var *lex_var);
 bool		bool_print_error(char *str);
 void		ft_put_redir_error(char *file, bool is_dir);
 void		ft_put_ambiguous_error(char *file);
-
+void		amb_error_minus_one(char *file, t_serie **new, bool fd_in);
+void		ft_close(int file, char *source);
 #endif

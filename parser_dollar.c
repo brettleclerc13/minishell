@@ -6,11 +6,24 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 16:55:51 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/09 15:32:28 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/11 15:19:30 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	free_dollar_list(t_dollar *d_lst)
+{
+	t_dollar	*tmp;
+
+	tmp = d_lst;
+	while (d_lst)
+	{
+		tmp = d_lst;
+		d_lst = d_lst->next;
+		free(tmp);
+	}
+}
 
 bool	is_specialchar(char c)
 {
@@ -67,11 +80,7 @@ bool	check_dollar(char **content, char **envp, enum e_token token)
 		return (false);
 	d_lst_creation(&d_lst, *content);
 	result = d_lst_expansion(d_lst, envp);
-	while (d_lst)
-	{
-		free(d_lst);
-		d_lst = d_lst ->next;
-	}
+	free_dollar_list(d_lst);
 	if (token == WORD)
 		result = remove_white_space(result);
 	if (!result)
