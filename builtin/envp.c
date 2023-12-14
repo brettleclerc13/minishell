@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 17:01:46 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/29 15:10:00 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/08 21:50:07 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,29 +46,26 @@ void	update_env_value(char *var, char *new_value, char **envp)
 	}
 }
 
-void	update_env(t_var *var, char *new_value, t_struct *mshell, bool is_equal)
+void	update_env(t_var *var, char *new, t_struct *mshell, bool is_equal)
 {
 	int	i;
 
 	i = -1;
 	while (mshell->envp[++i])
 	{
-		if (!ft_strncmp(mshell->envp[i], var->var, var->varlen))
+		if (ft_varcmp_envpline(var, mshell->envp[i]))
 		{
-			if (!ft_strcmp(var->var, var->envp_var))
+			free(mshell->envp[i]);
+			if (is_equal)
+				mshell->envp[i] = ft_varjoin(var->var, new);
+			else
 			{
-				free(mshell->envp[i]);
-				if (is_equal)
-					mshell->envp[i] = ft_varjoin(var->var, new_value);
+				if (!new)
+					mshell->envp[i] = ft_strdup(var->var);
 				else
 				{
-					if (!new_value)
-						mshell->envp[i] = ft_strdup(var->var);
-					else
-					{
-						var->var = ft_strjoin_path(var->var, "=", true);
-						mshell->envp[i] = ft_varjoin(var->var, new_value);
-					}
+					var->var = ft_strjoin_path(var->var, "=", true);
+					mshell->envp[i] = ft_varjoin(var->var, new);
 				}
 			}
 		}

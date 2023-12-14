@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 11:38:35 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/29 14:25:24 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/09 14:41:07 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,10 @@ void	init_oldpwd(t_struct *mshell)
 	t_var	var;
 
 	ft_create_var("OLDPWD", &var);
-	if (!ft_varcmp_struct(&var, mshell->envp))
+	if (!ft_varcmp(var.var, mshell->envp))
 		mshell->envp = add_env_str("OLDPWD", mshell->envp);
 	else
-	{
 		update_env(&var, NULL, mshell, false);
-		free(var.envp_var);
-	}
 	free(var.var);
 }
 
@@ -33,23 +30,6 @@ void	ft_update_shlvl(t_struct *mshell)
 
 	shlvl = ft_itoa(ft_atoi(get_env_value("SHLVL=", mshell->envp)) + 1);
 	update_env_value("SHLVL=", shlvl, mshell->envp);
-}
-
-char	**init_path(char **envp)
-{
-	char	**path;
-	int		i;
-
-	i = 0;
-	while (envp[i] && ft_strncmp(envp[i], "PATH=", 5) != 0)
-		i++;
-	if (envp[i] == NULL)
-	{
-		ft_putstr_fd("path/env not found in env", 2);
-		return (NULL);
-	}
-	path = ft_split(ft_strchr(envp[i], '=') + 1, ':');
-	return (path);
 }
 
 bool	init_envp(t_struct *mshell, char **envp)
@@ -96,7 +76,6 @@ t_struct	*before_loop_init(int argc, char **envp)
 		return (NULL);
 	}
 	mshell->args = NULL;
-	mshell->series = NULL;
 	mshell->pipe_count = 0;
 	mshell->tmp_fd = STDIN_FILENO;
 	if (!init_envp(mshell, envp))

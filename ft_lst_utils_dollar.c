@@ -3,36 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lst_utils_dollar.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:09:31 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/12/03 10:28:23 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/12/11 15:24:40 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static t_dollar	*ft_lstlast_dollar(t_dollar *d_lst)
-{
-	if (d_lst == NULL)
-		return (d_lst);
-	while (d_lst->next != NULL)
-		d_lst = d_lst->next;
-	return (d_lst);
-}
-
-static void	ft_lstadd_back_dollar(t_dollar **d_lst, t_dollar *new)
-{
-	t_dollar	*tmp;
-
-	if (!(*d_lst))
-	{
-		(*d_lst) = new;
-		return ;
-	}
-	tmp = ft_lstlast_dollar(*d_lst);
-	tmp->next = new;
-}
 
 void	d_lst_var(t_dollar **d_lst, char *content, int *i, int *start)
 {
@@ -72,7 +50,7 @@ void	d_lst_lonedol(t_dollar **d_lst, int *i, int *start)
 	*start = *i;
 }
 
-void	d_lst_pid_exitstatus(t_dollar **d_lst, char *content, int *i, int *start)
+void	d_lst_status(t_dollar **d_lst, char *content, int *i, int *start)
 {
 	t_dollar	*new;
 
@@ -93,7 +71,7 @@ void	d_lst_pid_exitstatus(t_dollar **d_lst, char *content, int *i, int *start)
 	*start = *i;
 }
 
-void	d_lst_string(t_dollar **d_lst, char *content, int *i, int *start)
+void	d_lst_string(t_dollar **d_lst, char *content, t_dol_var *dol)
 {
 	t_dollar	*new;
 
@@ -104,10 +82,11 @@ void	d_lst_string(t_dollar **d_lst, char *content, int *i, int *start)
 		return ;
 	}
 	new->next = NULL;
-	if (!content[*i + 1])
-		(*i)++;
+	if (!content[dol->i + 1])
+		(dol->i)++;
 	new->variable = 0;
-	new->content = ft_substr(content, *start, *i - *start);
+	new->content = ft_substr(content, dol->start, dol->i - dol->start);
 	ft_lstadd_back_dollar(d_lst, new);
-	*start = *i;
+	dol->start = dol->i;
+	dol->increment = false;
 }

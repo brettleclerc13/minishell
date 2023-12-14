@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 14:44:49 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/04 12:18:57 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/08 21:59:21 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	ft_error(char *message);
 char	**ft_split_bash(char const *s, char c1, char c2);
 bool	ft_count_quote(char const *s);
 char	*ft_strjoin_path(char *s1, char *s2, bool free_first_param);
-char	*ft_strjoin_dollar(char *s1, char *s2);
+char	*ft_strjoin_dol(char *s1, char *s2);
 char	**ft_split_bash_error(char *message, char **dest);
 char	*ft_stradd_char(char *s1, char c);
 

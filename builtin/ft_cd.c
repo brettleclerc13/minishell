@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:53:41 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/29 18:36:31 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/08 20:08:46 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,8 @@ void	update_pwd(char *dir, char *cwd, t_struct *mshell, bool is_cwd)
 	else
 		dir = get_dir_path(dir, mshell->tmp_cwd, tmp);
 	ft_create_var("PWD", &var);
-	if (ft_varcmp_struct(&var, mshell->envp))
-	{
+	if (ft_varcmp(var.var, mshell->envp))
 		update_env(&var, dir, mshell, false);
-		free(var.envp_var);
-	}
 	free(mshell->tmp_cwd);
 	mshell->tmp_cwd = ft_strdup(dir);
 	free(var.var);
@@ -43,13 +40,12 @@ void	update_oldpwd(char *cwd, t_struct *mshell, bool is_cwd)
 	t_var	var;
 
 	ft_create_var("OLDPWD", &var);
-	if (ft_varcmp_struct(&var, mshell->envp))
+	if (ft_varcmp(var.var, mshell->envp))
 	{
 		if (is_cwd)
 			update_env(&var, cwd, mshell, false);
 		else
 			update_env(&var, mshell->tmp_cwd, mshell, false);
-		free(var.envp_var);
 	}
 	free(var.var);
 }

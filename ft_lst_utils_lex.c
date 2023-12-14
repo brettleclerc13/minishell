@@ -3,40 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lst_utils_lex.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 17:46:42 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/07 17:18:08 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/12/08 21:38:33 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// bool	is_sep(char *s)
-// {
-// 	static t_sep	type[] = {{"<<", 2}, {">>", 2}, {"<", 1}, \
-// 					{">", 1}, {"|", 1}};
-// 	int				i;
-// 	int				index;
+bool	contains_quotes(char *s)
+{
+	int	i;
 
-// 	i = -1;
-// 	index = -1;
-// 	if (!s)
-// 		return (false);
-// 	while (s[++i])
-// 	{
-// 		while (++index < 5)
-// 		{
-// 			if (!ft_strncmp((s + i), type[index].str, type[index].num))
-// 			{
-// 				if (i > 0)
-// 					return (false);
-// 				return (true);
-// 			}
-// 		}
-// 	}
-// 	return (false);
-// }
+	i = -1;
+	while (s[++i])
+		if (s[i] == '\"' || s[i] == '\'')
+			return (true);
+	return (false);
+}
 
 static t_lex	*ft_lstlast_lex(t_lex *lst)
 {
@@ -62,7 +47,7 @@ void	ft_lstadd_back_lex(t_lex **lst, t_lex *new)
 	tmp->next = new;
 }
 
-char	*ft_if_quotes(t_lex_var *lex_var, char *content, char quote, char *tmp)
+char	*quotes(t_lex_var *lex_var, char *content, char quote, char *tmp)
 {
 	int		i;
 	int		check_dol;
@@ -90,21 +75,17 @@ char	*ft_if_quotes(t_lex_var *lex_var, char *content, char quote, char *tmp)
 	return (tmp);
 }
 
-t_lex	*ft_lstnew_lex(t_lex_var *lex_var, void *content, enum e_token token)
+t_lex	*ft_lstnew_lex(void *content, enum e_token token)
 {
 	t_lex	*new;
-	char	quote;
-	char	*tmp;
 
-	quote = '\0';
-	tmp = NULL;
 	new = malloc (sizeof(t_lex));
 	if (!new)
 		return (NULL);
-	if (token == SINGLE_QUOTE || token == DOUBLE_QUOTE)
-		new->content = ft_if_quotes(lex_var, (char*)content, quote, tmp);
-	else
+	if (content)
 		new->content = ft_strdup(content);
+	else
+		new->content = ft_strdup("\0");
 	new->token = token;
 	new->next = NULL;
 	return (new);

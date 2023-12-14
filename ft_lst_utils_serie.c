@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lst_utils_serie.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 20:12:53 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/12/07 17:29:03 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/12/12 12:01:49 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	**ft_serie_array(t_lex *args, t_serie **new, int count)
 	int		j;
 
 	j = -1;
-	array = ft_calloc((count + 1) - ft_count_redir(args) * 2, sizeof(char *));
+	array = ft_calloc((count + 1) - (ft_count_redir(args) * 2), sizeof(char *));
 	if (!array)
 	{
 		ft_putstr_fd("minishell: malloc: cannot allocate memory\n", 2);
@@ -52,6 +52,7 @@ char	**ft_serie_array(t_lex *args, t_serie **new, int count)
 	}
 	tmp = args;
 	ft_set_redirections(tmp, new);
+	tmp = args;
 	while (tmp && tmp->token != 4)
 	{
 		if (tmp->token == RIGHT_CHEV || tmp->token == DOUBLE_R_CHEV \

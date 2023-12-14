@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 09:07:07 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/30 12:24:27 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/12 12:28:42 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,7 @@ char	*ft_add_path(char *cmd, char **path)
 void	ft_put_execve_error(char *arg)
 {
 	ft_putstr_fd("minishell: ", 2);
-	if (ft_strcmp(arg, "") == 0)
-		ft_putstr_fd("", 2);
-	else
-		ft_putstr_fd(arg, 2);
+	ft_putstr_fd(arg, 2);
 	ft_putstr_fd(": command not found\n", 2);
 }
 

@@ -6,11 +6,24 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 16:55:51 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/07 12:17:16 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/11 15:19:30 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	free_dollar_list(t_dollar *d_lst)
+{
+	t_dollar	*tmp;
+
+	tmp = d_lst;
+	while (d_lst)
+	{
+		tmp = d_lst;
+		d_lst = d_lst->next;
+		free(tmp);
+	}
+}
 
 bool	is_specialchar(char c)
 {
@@ -19,7 +32,7 @@ bool	is_specialchar(char c)
 	return (false);
 }
 
-bool	is_dollar(char *s)
+static bool	is_dollar(char *s)
 {
 	int	i;
 
@@ -28,28 +41,6 @@ bool	is_dollar(char *s)
 		return (false);
 	while (s[++i])
 		if (s[i] == '$')
-			return (true);
-	return (false);
-}
-
-bool	is_single_quote(char *s)
-{
-	int	i;
-
-	i = -1;
-	while (s[++i])
-		if (s[i] == '\'')
-			return (true);
-	return (false);
-}
-
-bool	is_double_quote(char *s)
-{
-	int	i;
-
-	i = -1;
-	while (s[++i])
-		if (s[i] == '\"')
 			return (true);
 	return (false);
 }
@@ -70,70 +61,12 @@ static char	*remove_white_space(char *content)
 	i = -1;
 	while (split[++i])
 	{
-		tmp = ft_strjoin_dollar(tmp, split[i]);
+		tmp = ft_strjoin_dol(tmp, split[i]);
 		if (split[i + 1])
-			tmp = ft_strjoin_dollar(tmp, " ");
+			tmp = ft_strjoin_dol(tmp, " ");
 	}
 	ft_arrayfree(split);
 	return (tmp);
-}
-
-char	*d_lst_expansion(t_dollar *d_lst, char **envp)
-{
-	char	*tmp;
-
-	tmp = NULL;
-	while (d_lst)
-	{
-		if (d_lst->variable)
-		{
-			if (ft_varcmp(d_lst->content, envp))
-			{
-				d_lst->content = ft_strjoin_dollar(d_lst->content, "=");
-				if (!get_env_value(d_lst->content, envp))
-					break ;
-				tmp = ft_strjoin_dollar(tmp, get_env_value(d_lst->content, envp));
-			}
-		}
-		else
-			tmp = ft_strjoin_dollar(tmp, d_lst->content);
-		free(d_lst->content);
-		d_lst = d_lst->next;
-	}
-	return (tmp);
-}
-
-void	d_lst_creation(t_dollar **d_lst, char *content)
-{
-	int		i;
-	int		start;
-	bool	increment;
-
-	i = 0;
-	start = 0;
-	while (content[i])
-	{
-		increment = true;
-		if (content[i] == '$' || !content[i + 1])
-		{
-			if (start != i || !content[i + 1])
-				d_lst_string(d_lst, content, &i, &start);
-			if (content[i] == '$' && (content[i + 1] == '$' || content[i + 1] == '?'))
-			{
-				d_lst_pid_exitstatus(d_lst, content, &i, &start);
-				increment = false;
-			}
-			else if (content[i] == '$' && (!is_specialchar(content[i + 1])))
-			{
-				d_lst_var(d_lst, content, &i, &start);
-				increment = false;
-			}
-			else if (content[i] == '$')
-				d_lst_lonedol(d_lst, &i, &start);
-		}
-		if (increment)
-			i++;
-	}
 }
 
 bool	check_dollar(char **content, char **envp, enum e_token token)
@@ -147,11 +80,7 @@ bool	check_dollar(char **content, char **envp, enum e_token token)
 		return (false);
 	d_lst_creation(&d_lst, *content);
 	result = d_lst_expansion(d_lst, envp);
-	while (d_lst)
-	{
-		free(d_lst);
-		d_lst = d_lst ->next;
-	}
+	free_dollar_list(d_lst);
 	if (token == WORD)
 		result = remove_white_space(result);
 	if (!result)

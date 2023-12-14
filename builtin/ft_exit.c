@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 17:26:36 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/29 15:08:26 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/09 14:59:28 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,7 @@ void	ft_exit(char **args, pid_t child)
 		exit(ft_atol(args[1]) % 256);
 	}
 	else
+	{
 		exit (0);
+	}
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   serie.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 12:52:57 by ehouot            #+#    #+#             */
-/*   Updated: 2023/11/29 09:22:21 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/12/12 11:34:16 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool	serie_addition(t_serie **series, t_lex *args, int count, bool ispipe)
+bool	serie_add(t_serie **series, t_lex *args, int count, bool ispipe)
 {
 	t_serie	*new;
 
@@ -35,14 +35,15 @@ bool	serie_creation(t_lex *args, t_serie **series)
 	{
 		if (args->token == PIPE)
 		{
-			if (serie_addition(series, tmp, count, true) == false)
+			if (serie_add(series, tmp, count, true) == false)
 				return (false);
 			count = 0;
 			tmp = args->next;
 		}
 		else if (!args->next)
 		{
-			if (serie_addition(series, tmp, count, false) == false)
+			count += 1;
+			if (serie_add(series, tmp, count, false) == false)
 				return (false);
 		}
 		count++;

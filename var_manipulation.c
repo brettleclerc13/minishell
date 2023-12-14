@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 17:11:30 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/30 09:12:10 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/08 20:59:16 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,15 @@ char	*get_env_var(char *line)
 	}
 }
 
-int	ft_varcmp_struct(t_var *var, char **envp)
+int	ft_varcmp_envpline(t_var *var, char *envp_line)
 {
-	int		i;
-
-	i = -1;
-	while (envp[++i])
+	var->envp_var = get_env_var(envp_line);
+	if (!ft_strncmp(var->var, var->envp_var, ft_strlen(var->envp_var) + 1))
 	{
-		var->envp_var = get_env_var(envp[i]);
-		if (!ft_strcmp(var->var, var->envp_var))
-			return (1);
 		free(var->envp_var);
+		return (1);
 	}
+	free(var->envp_var);
 	return (0);
 }
 
@@ -76,7 +73,7 @@ bool	ft_varcmp(char *var, char **envp)
 	while (envp[++i])
 	{
 		envp_var = get_env_var(envp[i]);
-		if (!ft_strncmp(var, envp_var, ft_strlen(envp_var)))
+		if (!ft_strncmp(var, envp_var, ft_strlen(envp_var) + 1))
 		{
 			free(envp_var);
 			return (true);
