@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 12:01:13 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/12 11:50:51 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/15 08:51:15 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	print_list(t_lex *list)
 
 void	print_lst_tok(t_lex *list)
 {
-	t_lex *tmp;
-	int	i;
+	t_lex	*tmp;
+	int		i;
 
 	i = -1;
 	tmp = list;
@@ -46,9 +46,9 @@ void	print_lst_tok(t_lex *list)
 
 void	print_lst_serie(t_serie *series)
 {
-	t_serie *tmp_series;
-	int	i;
-	int	j;
+	t_serie	*tmp_series;
+	int		i;
+	int		j;
 
 	i = -1;
 	j = -1;
@@ -59,7 +59,7 @@ void	print_lst_serie(t_serie *series)
 		while (tmp_series->cmd[++j])
 			printf("serie[%d]: cmd[%d]: %s\n", i, j, tmp_series->cmd[j]);
 		printf("FD_OUT_TOKEN: %d\n", tmp_series->fd_out_token);
-		printf("FD_IN: %i, FD_OUT: %i\n", tmp_series->fd_in, tmp_series->fd_out);
+		printf("IN: %i, OUT: %i\n", tmp_series->fd_in, tmp_series->fd_out);
 		printf("-------------\n\n");
 		j = -1;
 		tmp_series = tmp_series->next;

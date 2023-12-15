@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/15 08:20:45 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/15 09:11:38 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,6 @@ void		print_string(char **tab);
 void		print_lst_tok(t_lex *list);
 void		print_array(char **array);
 void		print_lst_serie(t_serie *series);
-void 		read_file(int file, char *source);
 
 /* -- BUILTINS -- */
 int			builtin_main(char **args, t_struct *mshell, int process);
@@ -244,6 +243,10 @@ void		set_parent_io(int pfd[], t_struct *mshell);
 void		update_underscore(t_serie *serie, t_struct *mshell, int start);
 void		ft_waitpid(t_serie *series);
 
+/* -- PATH -- */
+char		*ft_add_path(char *cmd, char **path);
+char		**ft_extract_path(char **envp);
+
 /* -- REDIRECTION -- */
 void		ft_set_redirections(t_lex *tmp, t_serie **new);
 int			ft_count_redir(t_lex *args);
@@ -269,6 +272,7 @@ void		ft_free_mshell(t_struct *mshell);
 void		ft_free_lex_var(t_lex_var *lex_var);
 
 /* -- ERROR -- */
+char		**print_array_malloc_error(void);
 bool		bool_print_error(char *str);
 void		ft_put_redir_error(char *file, bool is_dir);
 void		ft_put_ambiguous_error(char *file);

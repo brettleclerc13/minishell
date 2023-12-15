@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 20:12:53 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/12/15 08:20:08 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/15 08:59:29 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,7 @@ char	**ft_serie_array(t_lex *args, t_serie **new, int count)
 	j = -1;
 	array = ft_calloc((count - (ft_count_redir(args) * 2)) + 1, sizeof(char *));
 	if (!array)
-	{
-		ft_putstr_fd("minishell: malloc: cannot allocate memory\n", 2);
-		return (NULL);
-	}
+		return (print_array_malloc_error());
 	tmp = args;
 	ft_set_redirections(tmp, new);
 	tmp = args;

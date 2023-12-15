@@ -6,11 +6,17 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:24:05 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/12/15 08:18:28 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/15 08:59:06 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	**print_array_malloc_error(void)
+{
+	ft_putstr_fd("minishell: malloc: cannot allocate memory\n", 2);
+	return (NULL);
+}
 
 bool	bool_print_error(char *str)
 {

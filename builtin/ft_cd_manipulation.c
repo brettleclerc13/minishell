@@ -6,11 +6,39 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 18:20:03 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/11/29 15:03:17 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/15 08:30:02 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	print_cd_error(char	*error, char *dir)
+{
+	if (!ft_strcmp(error, ">args"))
+	{
+		ft_putstr_fd("minishell: cd: too many arguments\n", 2);
+		return (1);
+	}
+	if (!ft_strcmp(error, "!home"))
+	{
+		ft_putstr_fd("minishell: cd: HOME not set\n", 2);
+		return (1);
+	}
+	if (!ft_strcmp(error, "!oldpwd"))
+	{
+		ft_putstr_fd("minishell: cd: OLDPWD not set\n", 2);
+		free(dir);
+		return (1);
+	}
+	if (!ft_strcmp(error, "!chdir"))
+	{
+		ft_putstr_fd("minishell: cd: ", 2);
+		perror(dir);
+		free(dir);
+		return (1);
+	}
+	return (0);
+}
 
 static char	*dir_update(char *dir, char *tmp, char *cwd, bool start_slash)
 {

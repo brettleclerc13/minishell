@@ -20,6 +20,7 @@ SRC_MAIN 	= 	./main.c \
 				./ft_split_string.c \
 				./array_manipulation.c \
 				./var_manipulation.c \
+				./path_manipulation.c \
 				./init.c \
 				./execute.c \
 				./parser_dollar.c \

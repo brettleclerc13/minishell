@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:53:41 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/12/14 17:57:41 by ehouot           ###   ########.fr       */
+/*   Updated: 2023/12/15 08:46:07 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,39 +50,27 @@ void	update_oldpwd(char *cwd, t_struct *mshell, bool is_cwd)
 	free(var.var);
 }
 
-int	print_cd_error(char	*error, char *dir)
+static int	cd_hyphen(char **dir, char *cwd, t_struct *mshell, bool is_cwd)
 {
-	if (!ft_strcmp(error, ">args"))
+	if (!get_env_value("OLDPWD=", mshell->envp))
+		return (print_cd_error("!oldpwd", *dir));
+	free(*dir);
+	*dir = ft_strdup(get_env_value("OLDPWD=", mshell->envp));
+	if (*dir[0] == '\0')
 	{
-		ft_putstr_fd("minishell: cd: too many arguments\n", 2);
-		return (1);
+		ft_putstr_fd("\n", 1);
+		update_oldpwd(cwd, mshell, is_cwd);
+		free(*dir);
+		return (0);
 	}
-	if (!ft_strcmp(error, "!home"))
-	{
-		ft_putstr_fd("minishell: cd: HOME not set\n", 2);
-		return (1);
-	}
-	if (!ft_strcmp(error, "!oldpwd"))
-	{
-		ft_putstr_fd("minishell: cd: OLDPWD not set\n", 2);
-		free(dir);
-		return (1);
-	}
-	if (!ft_strcmp(error, "!chdir"))
-	{
-		ft_putstr_fd("minishell: cd: ", 2);
-		perror(dir);
-		free(dir);
-		return (1);
-	}
-	return (0);
+	return (5);
 }
 
 static int	ft_cd_contd(char *dir, char *cwd, t_struct *mshell, bool is_cwd)
 {
-	bool	oldpwd_cmd;
+	int	cd_hyphen_ret;
 
-	oldpwd_cmd = false;
+	cd_hyphen_ret = 0;
 	if (dir[0] == '\0')
 	{
 		free(dir);
@@ -90,23 +78,14 @@ static int	ft_cd_contd(char *dir, char *cwd, t_struct *mshell, bool is_cwd)
 	}
 	if (!ft_strncmp(dir, "-", 2))
 	{
-		if (!get_env_value("OLDPWD=", mshell->envp))
-			return (print_cd_error("!oldpwd", dir));
-		free(dir);
-		dir = ft_strdup(get_env_value("OLDPWD=", mshell->envp));
-		oldpwd_cmd = true;
-		if (dir[0] == '\0')
-		{
-			ft_putstr_fd("\n", 1);
-			update_oldpwd(cwd, mshell, is_cwd);
-			free(dir);
-			return (0);
-		}
+		cd_hyphen_ret = cd_hyphen(&dir, cwd, mshell, is_cwd);
+		if (cd_hyphen_ret == 5)
+			printf("%s\n", dir);
+		else
+			return (cd_hyphen_ret);
 	}
 	if (chdir(dir))
 		return (print_cd_error("!chdir", dir));
-	if (oldpwd_cmd)
-		printf("%s\n", dir);
 	update_oldpwd(cwd, mshell, is_cwd);
 	update_pwd(dir, cwd, mshell, is_cwd);
 	return (0);
