@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 20:16:19 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/12/15 08:19:03 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/15 10:10:15 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ pid_t	ft_fork_execution(t_serie *serie, t_struct *mshell, int start)
 	{
 		child_input(serie, pfd, start, mshell);
 		child_output(serie, pfd);
+		if ((serie->fd_in == -1 || serie->fd_out == -1))
+			exit(g_var);
 		if (builtin_checker(serie->cmd[0]))
 			g_var = builtin_main(serie->cmd, mshell, 0);
 		else

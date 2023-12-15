@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 18:20:03 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/12/15 08:30:02 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/15 12:02:58 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,13 +109,18 @@ char	*get_previous_level_dir(char *dir, char *cwd)
 
 bool	is_previous_levels(char *dir)
 {
+	int	dir_len;
+
+	dir_len = ft_strlen(dir);
 	if (!ft_strncmp(dir, "..", 3))
 		return (true);
-	else if (dir[ft_strlen(dir) - 1] == '.' && dir[ft_strlen(dir) - 2] == '.' \
-		&& dir[ft_strlen(dir) - 3] == '/')
-		return (true);
-	else if (dir[ft_strlen(dir) - 1] == '/' && dir[ft_strlen(dir) - 2] == '.' \
-		&& dir[ft_strlen(dir) - 3] == '.' && dir[ft_strlen(dir) - 4] == '/')
-		return (true);
+	if (dir_len >= 3)
+		if (dir[dir_len - 1] == '.' && dir[dir_len - 2] == '.' \
+			&& dir[dir_len - 3] == '/')
+			return (true);
+	if (dir_len >= 4)
+		if (dir[dir_len - 1] == '/' && dir[dir_len - 2] == '.' \
+			&& dir[dir_len - 3] == '.' && dir[dir_len - 4] == '/')
+			return (true);
 	return (false);
 }
