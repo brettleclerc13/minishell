@@ -6,7 +6,7 @@
 #    By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 20:15:35 by ehouot            #+#    #+#              #
-#    Updated: 2023/11/14 11:02:13 by brettlecler      ###   ########.fr        #
+#    Updated: 2023/12/15 16:33:05 by brettlecler      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,7 @@ OBJ_BONUS	= $(SRC_BONUS:.c=.o)
 
 OBJ_ADD		= $(SRC_ADD:.c=.o)
 
-CC 			= clang
+CC 			= cc
 
 RM 			= rm -f
 

@@ -62,7 +62,7 @@ OBJ		= ${SRC:.c=.o}
 
 HEADER		= ./
 
-CC 			= clang
+CC 			= cc
 
 RM 			= rm -f
 
