@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 09:50:54 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/12/11 15:19:05 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/15 08:19:53 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ void	ft_free_mshell(t_struct *mshell)
 		return ;
 	if (mshell->envp)
 		ft_arrayfree(mshell->envp);
-	if (mshell->tmp_fd != STDIN_FILENO && mshell->tmp_fd != -1)
-		close(mshell->tmp_fd);
 	if (mshell->tmp_cwd)
 		free(mshell->tmp_cwd);
 	free(mshell);

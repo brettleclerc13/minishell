@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:37:10 by ehouot            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/12/07 18:29:49 by ehouot           ###   ########.fr       */
-=======
-/*   Updated: 2023/12/11 16:50:22 by brettlecler      ###   ########.fr       */
->>>>>>> b7b2fde65f26c506de35e7e9303a0348bafcaf1f
+/*   Updated: 2023/12/15 08:20:45 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +82,6 @@ typedef struct s_serie
 	int				fd_in;
 	int				fd_out;
 	int				fd_hd;
-	bool			hd;
 	pid_t			pid;
 	void			*prev;
 	void			*next;
@@ -105,8 +100,8 @@ typedef struct s_struct
 	char		**envp;
 	t_lex		*args;
 	int			pipe_count;
+	int			pipe_fd;
 	bool		check_valid;
-	int			tmp_fd;
 	char		*tmp_cwd;
 	t_count_red	redir;
 }				t_struct;
@@ -188,7 +183,7 @@ void		print_string(char **tab);
 void		print_lst_tok(t_lex *list);
 void		print_array(char **array);
 void		print_lst_serie(t_serie *series);
-void		print_prev_serie(t_serie *series);
+void 		read_file(int file, char *source);
 
 /* -- BUILTINS -- */
 int			builtin_main(char **args, t_struct *mshell, int process);
@@ -242,8 +237,8 @@ void		ft_execute(t_struct *mshell);
 pid_t		ft_execute_error(char *message);
 pid_t		ft_execute_serie(t_serie *serie, int start, t_struct *mshell);
 pid_t		ft_fork_execution(t_serie *serie, t_struct *mshell, int start);
-int			ft_execve(char **cmd, char **envp);
-void		child_input(t_serie *serie, int pfd[], int previous_fd, int start);
+int			ft_execve(t_serie *serie, char **cmd, char **envp);
+void		child_input(t_serie *serie, int pfd[], int start, t_struct *mshell);
 void		child_output(t_serie *serie, int pfd[]);
 void		set_parent_io(int pfd[], t_struct *mshell);
 void		update_underscore(t_serie *serie, t_struct *mshell, int start);
@@ -278,5 +273,5 @@ bool		bool_print_error(char *str);
 void		ft_put_redir_error(char *file, bool is_dir);
 void		ft_put_ambiguous_error(char *file);
 void		amb_error_minus_one(char *file, t_serie **new, bool fd_in);
-
+void		ft_close(int file, char *source);
 #endif

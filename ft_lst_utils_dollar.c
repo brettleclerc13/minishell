@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:09:31 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/12/11 15:24:40 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/15 08:19:13 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	d_lst_lonedol(t_dollar **d_lst, int *i, int *start)
 	new->variable = 0;
 	new->content = ft_strdup("$");
 	ft_lstadd_back_dollar(d_lst, new);
-	*start = *i;
+	*start = *i + 1;
 }
 
 void	d_lst_status(t_dollar **d_lst, char *content, int *i, int *start)

@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 20:16:19 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/12/12 12:47:14 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/15 08:19:03 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,18 @@ pid_t	ft_execute_error(char *message)
 	return (-1);
 }
 
+// static void	random_function(t_struct *mshell)
+// {
+// 	read_file(mshell->pipe_fd, "INSIDE RANDOM FUNCTION");
+// }
+
 pid_t	ft_fork_execution(t_serie *serie, t_struct *mshell, int start)
 {
 	int		pfd[2];
 	pid_t	pid;
 
+	if (serie->first_arg_token == SKIP && serie->fd_out_token == END)
+		return (-1);
 	if (pipe(pfd) == -1)
 		ft_execute_error("minishell: broken pipe\n");
 	pid = fork();
@@ -39,15 +46,12 @@ pid_t	ft_fork_execution(t_serie *serie, t_struct *mshell, int start)
 		ft_execute_error("minishell: fork: resource temporarily unavailable\n");
 	if (pid == 0)
 	{
-		if (serie->fd_in == -1 || serie->fd_out == -1 \
-			|| serie->first_arg_token == SKIP)
-			exit (g_var);
-		child_input(serie, pfd, mshell->tmp_fd, start);
+		child_input(serie, pfd, start, mshell);
 		child_output(serie, pfd);
 		if (builtin_checker(serie->cmd[0]))
 			g_var = builtin_main(serie->cmd, mshell, 0);
 		else
-			g_var = ft_execve(serie->cmd, mshell->envp);
+			g_var = ft_execve(serie, serie->cmd, mshell->envp);
 		exit (g_var);
 	}
 	set_parent_io(pfd, mshell);
@@ -56,7 +60,7 @@ pid_t	ft_fork_execution(t_serie *serie, t_struct *mshell, int start)
 
 pid_t	ft_execute_serie(t_serie *serie, int start, t_struct *mshell)
 {
-	if (!serie->cmd[0])
+	if (!serie->cmd[0] && serie->fd_out_token == END)
 		return (0);
 	update_underscore(serie, mshell, start);
 	if (serie->fd_out_token == END && start == 0 \
@@ -103,10 +107,12 @@ void	ft_execute(t_struct *mshell)
 		tmp_series->pid = ft_execute_serie(tmp_series, start++, mshell);
 		tmp_series = tmp_series->next;
 	}
-	if (mshell->tmp_fd != STDIN_FILENO && mshell->tmp_fd != -1)
-		close(mshell->tmp_fd);
 	reset_io(original_io);
 	tmp_series = series;
 	ft_waitpid(tmp_series);
 	ft_free_serie(series);
 }
+
+// ft_free_mshell(mshell);
+// system("leaks minishell");
+// exit(0);

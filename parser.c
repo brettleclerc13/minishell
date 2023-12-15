@@ -6,11 +6,33 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:17:25 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/08 21:21:08 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/13 12:44:43 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static bool	check_start_pipe(t_lex *list)
+{
+	t_lex	*tmp;
+	int		i;
+
+	tmp = list;
+	i = 0;
+	while (tmp)
+	{
+		if (tmp->token == PIPE && i == 0)
+		{
+			ft_putstr_fd("minishell: ", 2);
+			ft_putstr_fd("syntax error near unexpected token `|'\n", 2);
+			g_var = 2;
+			return (false);
+		}
+		tmp = tmp->next;
+		i++;
+	}
+	return (true);
+}
 
 static bool	ft_parser_error(char *pre_msg, char *post_msg, char *content)
 {
@@ -71,6 +93,8 @@ bool	parser(t_lex **list, char **envp)
 	t_lex	*tmp;
 
 	tmp = *list;
+	if (check_start_pipe(tmp) == false)
+		return (false);
 	while (tmp)
 	{
 		if (check_double_pipe(&tmp) == false || check_redir(&tmp) == false)

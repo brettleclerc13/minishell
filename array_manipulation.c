@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   array_manipulation.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 20:01:37 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/12/08 20:33:13 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/14 15:44:24 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,17 @@ void	ft_arrayfree(char **array)
 	if (!array)
 		return ;
 	i = -1;
+	if (array[0] == NULL)
+	{
+		free(array);
+		return ;
+	}
+	else if (!ft_strcmp(array[0], ""))
+	{
+		free(array[0]);
+		free(array);
+		return ;
+	}
 	while (array[++i])
 		free(array[i]);
 	free(array);

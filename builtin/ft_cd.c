@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:53:41 by brettlecler       #+#    #+#             */
-/*   Updated: 2023/12/08 20:08:46 by brettlecler      ###   ########.fr       */
+/*   Updated: 2023/12/14 17:57:41 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	print_cd_error(char	*error, char *dir)
 	if (!ft_strcmp(error, "!oldpwd"))
 	{
 		ft_putstr_fd("minishell: cd: OLDPWD not set\n", 2);
+		free(dir);
 		return (1);
 	}
 	if (!ft_strcmp(error, "!chdir"))
@@ -83,17 +84,22 @@ static int	ft_cd_contd(char *dir, char *cwd, t_struct *mshell, bool is_cwd)
 
 	oldpwd_cmd = false;
 	if (dir[0] == '\0')
+	{
+		free(dir);
 		return (0);
+	}
 	if (!ft_strncmp(dir, "-", 2))
 	{
 		if (!get_env_value("OLDPWD=", mshell->envp))
-			return (print_cd_error("!oldpwd", NULL));
+			return (print_cd_error("!oldpwd", dir));
+		free(dir);
 		dir = ft_strdup(get_env_value("OLDPWD=", mshell->envp));
 		oldpwd_cmd = true;
 		if (dir[0] == '\0')
 		{
 			ft_putstr_fd("\n", 1);
 			update_oldpwd(cwd, mshell, is_cwd);
+			free(dir);
 			return (0);
 		}
 	}
